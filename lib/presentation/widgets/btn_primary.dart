@@ -9,6 +9,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final bool? isLeading;
+  final Color borderColor;
 
   const PrimaryButton({
     super.key,
@@ -18,13 +19,18 @@ class PrimaryButton extends StatelessWidget {
     this.backgroundColor = MyColors.whiteColor,
     this.textColor = MyColors.blackColor,
     this.isLeading = false,
+    this.borderColor = MyColors.blackColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       fillColor: backgroundColor,
-      shape: const RoundedRectangleBorder(),
+      elevation: 0.0,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: MyColors.blackColor),
+        borderRadius: BorderRadius.circular(2.0),
+      ),
       onPressed: onPressed,
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
@@ -32,7 +38,10 @@ class PrimaryButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         child: Text(
           title,
-          style: TextStyle(color: textColor, fontSize: titleSize),
+          style: TextStyle(
+              color: textColor,
+              fontFamily:'Open Sance',
+              fontSize: titleSize,fontWeight: FontWeight.w500),
         ),
       ),
     );

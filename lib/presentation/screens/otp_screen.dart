@@ -1,5 +1,5 @@
 import 'package:fit_tech/presentation/screens/create_account_screen.dart';
-import 'package:fit_tech/presentation/screens/recover_password_screen.dart';
+import 'package:fit_tech/presentation/screens/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
@@ -7,10 +7,10 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class OTPScreen extends StatelessWidget {
+  const OTPScreen({super.key});
 
-  static const String tag = "login_screen";
+  static const String tag = "otp_screen";
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    Constants.titleLoginScreen,
+                    Constants.titleOtpScreen,
                     style: TextStyle(
                         fontFamily: 'Anton',
                         color: MyColors.blackColor,
@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                     height: 10.0,
                   ),
                   const Text(
-                    Constants.loginInfo,
+                    Constants.otpInfo,
                     style: TextStyle(
                         fontFamily: 'Open Sance',
                         color: MyColors.blackColor,
@@ -60,96 +60,52 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const TextFieldPrimary(
                       isLabelRequired: true,
-                      title: Constants.emailLabel,
+                      title: Constants.codeLabel,
                       isObscure: false,
-                      keyboardType: TextInputType.emailAddress),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  const TextFieldPrimary(
-                      isLabelRequired: true,
-                      title: Constants.passwordLabel,
-                      isObscure: false,
-                      keyboardType: TextInputType.emailAddress),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      title: Constants.signIn,
-                      textColor: MyColors.whiteColor,
-                      backgroundColor: MyColors.blackColor,
-                    ),
-                  ),
+                      keyboardType: TextInputType.text),
                   const SizedBox(
                     height: 30.0,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: PrimaryButton(
-                      title: Constants.createAccountTitle,
-                      textColor: MyColors.blackColor,
-                      backgroundColor: MyColors.whiteColor,
+                      title: Constants.verifyLabel,
+                      textColor: MyColors.whiteColor,
+                      backgroundColor: MyColors.blackColor,
                       onPressed: (){
-                        Navigator.pushNamed(context, CreateAccountScreen.tag);
+                        Navigator.pushNamed(context, LoginWelcomeScreen.tag);
                       },
                     ),
                   ),
                   const SizedBox(
-                    height: 30.0,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                          child: Container(
-                        height: 1,
-                        color: Colors.black,
-                      )),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          Constants.or,
-                          style: TextStyle(
-                              color: MyColors.blackColor, fontSize: 15.0),
-                        ),
-                      ),
-                      Expanded(
-                          child: Container(
-                        height: 1,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  const SizedBox(
                     height: 20.0,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: double.infinity,
-                    child: SecondaryButton(
-                      title: Constants.loginWithGoogle,
-                      image: 'assets/images/icon_google.png',
+                    child: PrimaryButton(
+                      title: Constants.resendLabel,
                       textColor: MyColors.blackColor,
+                      backgroundColor: MyColors.whiteColor,
+                      onPressed: () {
+                      },
                     ),
                   ),
                   const SizedBox(
-                    height: 40.0,
+                    height: 50.0,
                   ),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.popAndPushNamed(context, RecoverPasswordScreen.tag);
-                    },
-                    child: const SizedBox(
-                      width: double.infinity,
+
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal:20.0),
                       child: Text(
-                        Constants.forgotPassword,
+                        Constants.resendTimerInfo,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'Open Sance',
                             color: MyColors.blackColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18.0),
+                            fontSize: 15.0),
                       ),
                     ),
                   ),

@@ -24,9 +24,10 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       fillColor: backgroundColor,
+      elevation: 0.0,
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: MyColors.blackColor),
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(2.0),
       ),
       onPressed: onPressed,
       padding: const EdgeInsets.all( 5.0),
@@ -42,7 +43,10 @@ class SecondaryButton extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(color: textColor, fontSize: titleSize),
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily:'Open Sance',
+                color: textColor, fontSize: titleSize,),
             ),
           ),
           const SizedBox(

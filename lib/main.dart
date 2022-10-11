@@ -1,7 +1,11 @@
 import 'package:fit_tech/presentation/router/app_routes.dart';
-import 'package:fit_tech/presentation/screens/create_account_screen.dart';
+import 'package:fit_tech/presentation/screens/intro_screen.dart';
+import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
 import 'package:fit_tech/presentation/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'presentation/screens/recover_password_screen.dart';
+import 'presentation/screens/test_incomplete_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: WelcomeScreen.tag,
+      initialRoute: IntroScreen.tag,
       onGenerateRoute: appRoute.onGenerateRoute,
     );
   }

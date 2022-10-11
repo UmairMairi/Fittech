@@ -1,4 +1,5 @@
 import 'package:fit_tech/presentation/screens/create_account_screen.dart';
+import 'package:fit_tech/presentation/screens/login_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -36,7 +37,9 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: PrimaryButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.tag);
+                  },
                   title: Constants.login,
                   backgroundColor: MyColors.blackColor,
                   textColor: MyColors.whiteColor,

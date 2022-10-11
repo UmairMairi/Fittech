@@ -1,3 +1,4 @@
+import 'package:fit_tech/presentation/screens/register_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -54,12 +55,15 @@ class CreateAccountScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30.0,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: SecondaryButton(
                         title: Constants.registerWithEmail,
                         image: 'assets/images/icon_mail.png',
                         textColor: MyColors.blackColor,
+                        onPressed: () {
+                          Navigator.pushNamed(context, RegisterScreen.tag);
+                        },
                       ),
                     ),
                     const SizedBox(
