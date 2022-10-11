@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: IntroScreen.tag,
+      initialRoute: WelcomeScreen.tag,
       onGenerateRoute: appRoute.onGenerateRoute,
     );
   }
