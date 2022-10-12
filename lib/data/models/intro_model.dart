@@ -1,6 +1,7 @@
 class IntroModel {
 
-  IntroModel({required this.title,required this.info});
-  String? title;
-  String? info;
+  IntroModel({required this.image,required this.title,required this.info});
+  String image;
+  String title;
+  String info;
 }

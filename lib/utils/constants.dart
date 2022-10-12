@@ -62,11 +62,24 @@ class Constants{
   //SubscribePlanScreen screen
 
   static const String titleSubscribePlanScreen = "Elige tu plan ideal";
+  static const String subscribePlanScreenInfo = "Los usuarios de Fittech+ tienen 3 veces más probabilidades de alcanzar sus objetivos.";
   static const String subscribePlanScreenInfo1 = "Entrenamientos adaptados a tus objetivos fitness.";
   static const String subscribePlanScreenInfo2 = "Variedad ilimitada de entrenamientos, con o sin equipamiento.";
   static const String subscribePlanScreenInfo3 = "Funciones para mejorar tu experiencia de entrenamiento.";
   static const String subscribePlanScreenInfo4 = "Planes de nutrición adaptados a medida.";
+
+  static const String subscribePlanScreenTileTitle1 = "Plan de entrenamiento personalizado.";
+  static const String subscribePlanScreenTileTitle2 = "Plan de nutrición personalizado.";
+  static const String subscribePlanScreenTileTitle3 = "Mas de 1000 workouts diferentes.";
+  static const String subscribePlanScreenTileTitle4 = "Mas de 700 ejercicios seleccionables.";
+  static const String subscribePlanScreenTileTitle5 = "Registro y control de fotos de antes y después.";
+  static const String subscribePlanScreenTileTitle6 = "Registro y comparativo de medidas.";
+  static const String subscribePlanScreenTileTitle7 = "Calculo objetivo de tu metabolismo y plan calórico.";
+  static const String subscribePlanScreenTileTitle8 = "Adecuación de macros según el objetivo.";
+  static const String subscribePlanScreenTileTitle9 = "Descuentos especiales en nuestra tienda.";
+
   static const String subscribePlanLabel = "Conseguir Plan";
+  static const String gratisLabel = "Continuar Gratis";
   static const String couponLabel = "Tengo un cupón";
   static const String bestOfferLabel = "MEJOR OFERTA";
 
@@ -107,4 +120,38 @@ class Constants{
   static const String introInfo1 = "La personalización minuciosa de FITTECH  tiene en cuenta parámetros específicos a la salud, composición corporal, capacidades físicas y lugar de entrenamiento a través de test y cuestionarios inteligentes que la hacen única.";
   static const String introInfo2 = "Olvídate de las dietas super estrictas y restrictivas, queremos que aprendas acerca de nutrición. Fittech te enseña lo que nunca antes te han enseñado para lograr tus objetivos comiendo de manera sana, divertida y balanceada.";
   static const String introInfo3 = "Fittech cuenta con aproximadamente 700 ejercicios diferentes estructurados a través de planes de entrenamiento que varían diariamente de acuerdo al objetivo y posibilidades del usuario.";
+
+
+  //Testimonial screen
+
+  static const String titleTestimonial = "Testimonios";
+  static const String beginLabelTestimonial = "Empecemos";
+
+  //TodayWorkout screen
+
+  static const String titleTodayWorkout = "Entrenamiento de hoy";
+
+  static const String todayWorkoutSubTitle1 = "Trabajarás grupos musculares";
+  static const String todayWorkoutSubInfo1 = "Espalda, Deltoide, Pectoral, Biceps";
+
+  static const String todayWorkoutSubTitle2 = "Características";
+  static const String todayWorkoutSubTitle3 = "Ejercicios";
+
+
+  //Gym screen
+
+  static const String titleGymScreen = "ACTIVA MODO GYM";
+  static const String todayGymScreenInfo1 = "Para activar tu modo GYM debes hacer la Prueba Física de GYM y determinaremos tu nivel en Gimnasio. Una vez culminada la prueba podrás empezar tu entrenamiento. Descuida,";
+  static const String todayGymScreenInfo2 =" puedes continuar con tu modo predeterminado cuando desees!";
+  static const String gymScreenLabel1 = "Recuerda que este no es tu modo predeterminado.";
+  static const String activeLabelGymScreen = "Activar";
+
+  //OutdoorScreen screen
+
+  static const String titleOutdoorScreen = "ACTIVA MODO OUTDOOR";
+  static const String todayOutdoorScreenInfo1 = "Para activar tu modo OUTDOOR debes hacer la Prueba Física de OUTDOOR y determinaremos tu nivel en OUTDOOR. Una vez culminada la prueba podrás empezar tu entrenamiento. Descuida,";
+  static const String todayOutdoorScreenInfo2 =" puedes continuar con tu modo predeterminado cuando desees!";
+  static const String outdoorScreenLabel1 = "Recuerda que este no es tu modo predeterminado.";
+  static const String activeLabelOutdoorScreen = "Activar";
+
 }

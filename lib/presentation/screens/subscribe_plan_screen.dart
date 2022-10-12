@@ -1,9 +1,5 @@
-import 'package:fit_tech/presentation/screens/create_account_screen.dart';
-import 'package:fit_tech/presentation/screens/login_welcome_screen.dart';
-import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
+import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
-import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +9,44 @@ class SubscribePlanScreen extends StatelessWidget {
 
   static const String tag = "subscribe_plan_screen";
   static const list = [1, 2, 3];
+  static List<SubscriptionPlansTileModel> list2 = [
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle1,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle2,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle3,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle4,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle5,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle6,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle7,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle8,
+        gratis: false,
+        fitTechPlus: true),
+    SubscriptionPlansTileModel(
+        title: Constants.subscribePlanScreenTileTitle9,
+        gratis: false,
+        fitTechPlus: true),
+  ];
   var currentIndex = 0;
 
   @override
@@ -38,67 +72,260 @@ class SubscribePlanScreen extends StatelessWidget {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  SizedBox(
+                  Container(
                     height: size.width / 1.8,
                     width: size.width,
+                    alignment: Alignment.topRight,
+                    padding: const EdgeInsets.all(20),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding:
+                        const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                            color: MyColors.whiteColor.withOpacity(0.8),
+                            shape: BoxShape.circle),
+                        child: const Icon(
+                          Icons.close,
+                          size: 20,
+                          color: MyColors.blackColor,
+                        ),
+                      ),
+                    ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    decoration: const BoxDecoration(gradient: MyColors.blackGradiant),
+                    decoration:
+                        const BoxDecoration(gradient: MyColors.blackGradiant),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          Constants.titleSubscribePlanScreen,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontFamily: 'Anton',
-                              color: MyColors.whiteColor,
-                              fontSize: 42.0),
-                        ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        const InfoChecks(
-                            title: Constants.subscribePlanScreenInfo1),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        const InfoChecks(
-                            title: Constants.subscribePlanScreenInfo2),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        const InfoChecks(
-                            title: Constants.subscribePlanScreenInfo3),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        const InfoChecks(
-                            title: Constants.subscribePlanScreenInfo4),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        SizedBox(
-                          height: 150,
-                          child: planItem(),
-                        ),
-                        const SizedBox(
-                          height: 30.0,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButton(
-                            title: Constants.subscribePlanLabel,
-                            textColor: MyColors.whiteColor,
-                            backgroundColor: MyColors.redColor,
-                            onPressed: () {
-                            },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                Constants.titleSubscribePlanScreen,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontFamily: 'Anton',
+                                    color: MyColors.whiteColor,
+                                    fontSize: 42.0),
+                              ),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
+                              SizedBox(
+                                height: 150,
+                                child: planItem(),
+                              ),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
+                              const Text(
+                                Constants.subscribePlanScreenInfo,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.whiteColor,
+                                    fontSize: 16.0),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(
                           height: 20.0,
                         ),
+                        Container(
+                          height: 60,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          color: MyColors.blackColor,
+                          child: Row(
+                            children: const [
+                              Expanded(
+                                flex: 3,
+                                child: Text(
+                                  "",
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    color: MyColors.whiteColor,
+                                    fontSize: 15,
+                                    fontFamily: 'Open Sance',
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child:
+                                      Text(
+                                    "Gratis",
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      color: MyColors.whiteColor,
+                                      fontSize: 15,
+                                      fontFamily: 'Open Sance',
+                                    ),
+                                  ),
+                                ),),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "FITTECH",
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    color: MyColors.whiteColor,
+                                    fontSize: 15,
+                                    fontFamily: 'Open Sance',
+                                    fontStyle: FontStyle.italic
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: list2.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 60,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                color: (index % 2 == 0)
+                                    ? MyColors.greyColor
+                                    : MyColors.blackColor,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                        list2[index].title,
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                          color: MyColors.whiteColor,
+                                          fontSize: 15,
+                                          fontFamily: 'Open Sance',
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Center(
+                                        child: (list2[index].gratis is bool)
+                                            ? Container(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                decoration: const BoxDecoration(
+                                                    color: MyColors.whiteColor,
+                                                    shape: BoxShape.circle),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  size: 15,
+                                                  color: (index % 2 == 0)
+                                                      ? MyColors.greyColor
+                                                      : MyColors.blackColor,
+                                                ),
+                                              )
+                                            : Text(
+                                                list2[index].gratis,
+                                                maxLines: 2,
+                                                style: const TextStyle(
+                                                  color: MyColors.whiteColor,
+                                                  fontSize: 15,
+                                                  fontFamily: 'Open Sance',
+                                                ),
+                                              ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: (list2[index].fitTechPlus is bool)
+                                          ? Container(
+                                        padding:
+                                        const EdgeInsets.all(5.0),
+                                        decoration: const BoxDecoration(
+                                            color: MyColors.redColor,
+                                            shape: BoxShape.circle),
+                                        child: const Icon(
+                                          Icons.done_rounded,
+                                          size: 14,
+                                          color: MyColors.whiteColor,
+                                        ),
+                                      )
+                                          : Text(
+                                        list2[index].fitTechPlus,
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                          color: MyColors.whiteColor,
+                                          fontSize: 15,
+                                          fontFamily: 'Open Sance',
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            children: [
+                              // const InfoChecks(
+                              //     title: Constants.subscribePlanScreenInfo1),
+                              // const SizedBox(
+                              //   height: 10.0,
+                              // ),
+                              // const InfoChecks(
+                              //     title: Constants.subscribePlanScreenInfo2),
+                              // const SizedBox(
+                              //   height: 10.0,
+                              // ),
+                              // const InfoChecks(
+                              //     title: Constants.subscribePlanScreenInfo3),
+                              // const SizedBox(
+                              //   height: 10.0,
+                              // ),
+                              // const InfoChecks(
+                              //     title: Constants.subscribePlanScreenInfo4),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: PrimaryButton(
+                                  title: Constants.subscribePlanLabel,
+                                  textColor: MyColors.whiteColor,
+                                  backgroundColor: MyColors.redColor,
+                                  onPressed: () {},
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20.0,
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: PrimaryButton(
+                                  title: Constants.gratisLabel,
+                                  textColor: MyColors.whiteColor,
+                                  backgroundColor: MyColors.blackColor,
+                                  borderColor: MyColors.whiteColor,
+                                  onPressed: () {},
+                                ),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Container(
+                          height:1,color: MyColors.whiteColor,),
                         SizedBox(
                           width: double.infinity,
                           child: PrimaryButton(
@@ -121,106 +348,88 @@ class SubscribePlanScreen extends StatelessWidget {
   }
 
   Widget planItem() {
-    return StatefulBuilder(
-      builder: (context,myState) {
-        return Row(
-          children: list.map((item) {
-            var index = list.indexOf(item);
-            return Expanded(child: GestureDetector(
-              onTap: () {
-                myState((){
-                  currentIndex = index;
-
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                child: Stack(
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 10.0),
-                      decoration: BoxDecoration(
-                          color: MyColors.greyColor,
-                          border: (currentIndex == index)?Border.all(
+    return StatefulBuilder(builder: (context, myState) {
+      return Row(
+        children: list.map((item) {
+          var index = list.indexOf(item);
+          return Expanded(
+              child: GestureDetector(
+            onTap: () {
+              myState(() {
+                currentIndex = index;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3.0),
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 10.0),
+                    decoration: BoxDecoration(
+                        color: MyColors.greyColor,
+                        border: (currentIndex == index)
+                            ? Border.all(color: Colors.white, width: 2.0)
+                            : null),
+                    padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 15.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Plan trimestral",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
                               color: Colors.white,
-                              width: 2.0
-                          ):null
-                      ),
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Plan trimestral",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Open Sance',
-                                decoration: TextDecoration.lineThrough),
-                          ),
-                          Expanded(child: Container()),
-                          Visibility(
-                            visible: index == 0,
-                            child: const Center(
-                                child: Text(
-                                  "¡Gratis!",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                      fontFamily: 'Open Sance',
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ),
-                          const Center(
-                              child: Text(
-                                "x3 meses",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontFamily: 'Open Sance',
-                                    fontWeight: FontWeight.bold),
-                              )),
-                          Expanded(child: Container()),
-                          const Text(
-                            "27.000 COP x mes",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Open Sance',
-                                decoration: TextDecoration.lineThrough),
-                          ),
-                        ],
-                      ),
+                              fontSize: 12,
+                              fontFamily: 'Open Sance',
+                              decoration: TextDecoration.lineThrough),
+                        ),
+                        Expanded(child: Container()),
+                        const Center(
+                            child: Text(
+                          "USD 9.99",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 26,
+                              fontFamily: 'Anton',),
+                        )),
+                        Expanded(child: Container()),
+                        const Text(
+                          "27.000 COP x mes",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Open Sance',
+                              decoration: TextDecoration.lineThrough),
+                        ),
+                      ],
                     ),
-                    if(index == 0)
-                      Container(
-                        decoration: BoxDecoration(
-                            color: MyColors.redColor,
-                          borderRadius: BorderRadius.circular(5.0)
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: Text(
-                            Constants.bestOfferLabel,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontFamily: 'Open Sance',),
+                  ),
+                  if (index == 2)
+                    Container(
+                      decoration: BoxDecoration(
+                          color: MyColors.redColor,
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          Constants.bestOfferLabel,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: 'Open Sance',
                           ),
                         ),
-                      )
-                  ],
-                ),
+                      ),
+                    )
+                ],
               ),
-            ));
-          }).toList(),
-        );
-      }
-    );
+            ),
+          ));
+        }).toList(),
+      );
+    });
   }
 }
