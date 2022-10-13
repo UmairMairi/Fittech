@@ -1,5 +1,6 @@
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -10,6 +11,8 @@ class PrimaryButton extends StatelessWidget {
   final Color? textColor;
   final bool? isLeading;
   final Color borderColor;
+  final Widget? leadingChild;
+  final Widget? trailingChild;
 
   const PrimaryButton({
     super.key,
@@ -20,6 +23,8 @@ class PrimaryButton extends StatelessWidget {
     this.textColor = MyColors.blackColor,
     this.isLeading = false,
     this.borderColor = MyColors.blackColor,
+    this.leadingChild,
+    this.trailingChild,
   });
 
   @override
@@ -36,12 +41,21 @@ class PrimaryButton extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: Text(
-          title,
-          style: TextStyle(
-              color: textColor,
-              fontFamily:'Open Sance',
-              fontSize: titleSize,fontWeight: FontWeight.w500),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if(leadingChild!=null) leadingChild!,
+            Text(
+              title,
+              style: MyTextStyle.buttonTitle.copyWith(color: textColor),
+              // style: TextStyle(
+              //     color: textColor,
+              //     fontFamily:'Open Sance',
+              //     fontSize: titleSize,fontWeight: FontWeight.w500),
+            ),
+            if(trailingChild!=null) trailingChild!,
+          ],
         ),
       ),
     );

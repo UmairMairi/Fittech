@@ -6,6 +6,7 @@ class MyColors {
   static const Color blackColor = Colors.black;
   static const Color redColor = Color(0xFFDE2D41);
   static const Color greyColor = Color(0xFF545454);
+  static const Color lightGreyColor = Color(0xFFF3F3F3);
 
   static const Gradient blackGradiant = LinearGradient(
       begin: Alignment.topCenter,

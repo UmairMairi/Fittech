@@ -1,9 +1,7 @@
 import 'package:fit_tech/presentation/router/app_routes.dart';
 import 'package:flutter/material.dart';
 
-import 'presentation/screens/testimonial_screen.dart';
-import 'presentation/screens/today_workout_screen.dart';
-
+import 'presentation/screens/replace_exercise_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: TodayWorkoutScreen.tag,
+      initialRoute: ReplaceExerciseScreen.tag,
       onGenerateRoute: appRoute.onGenerateRoute,
     );
   }

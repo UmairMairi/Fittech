@@ -12,6 +12,9 @@ class Images {
   static const gymScreenBanner = 'assets/images/subscribe_plan_banner.png';
 
   // OutdoorScreen
-
   static const outdoorScreenBanner = 'assets/images/subscribe_plan_banner.png';
+
+  // HeatingScreen
+  static const heatingScreenBanner = 'assets/images/subscribe_plan_banner.png';
+
 }

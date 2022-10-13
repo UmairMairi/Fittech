@@ -146,12 +146,38 @@ class Constants{
   static const String gymScreenLabel1 = "Recuerda que este no es tu modo predeterminado.";
   static const String activeLabelGymScreen = "Activar";
 
-  //OutdoorScreen screen
+  //Outdoor screen
 
   static const String titleOutdoorScreen = "ACTIVA MODO OUTDOOR";
   static const String todayOutdoorScreenInfo1 = "Para activar tu modo OUTDOOR debes hacer la Prueba Física de OUTDOOR y determinaremos tu nivel en OUTDOOR. Una vez culminada la prueba podrás empezar tu entrenamiento. Descuida,";
   static const String todayOutdoorScreenInfo2 =" puedes continuar con tu modo predeterminado cuando desees!";
   static const String outdoorScreenLabel1 = "Recuerda que este no es tu modo predeterminado.";
   static const String activeLabelOutdoorScreen = "Activar";
+
+  //Heating screen
+  static const String titleHeatingScreen = "CALENTAMIENTO";
+  static const String heatingScreenSubHeading = "Burpees";
+
+  //Rest screen
+  static const String titleRestScreen = "DESCANSO";
+  static const String restScreenOmitButton = "Omitir";
+  static const String restScreenAddButton = "Agregar +20s";
+  static const String restScreenExerciseTitle = "Escalada de Montaña";
+
+  //Burpees screen
+  static const String titleBurpeesScreen = "Burpees";
+  static const String burpeesPauseButton = "Pausar";
+  static const String burpeesAnteriorButton = "Anterior";
+  static const String burpeesOmitButton = "Omitir";
+  static const String burpeesReplaceExcButton = "Reemplazar ejercicio";
+  static const String burpeesAddNoteButton = "Agregar nota";
+
+  //ReplaceExercise screen
+  static const String titleReplaceExercise = "Reemplazar ejercicio";
+  static const String replaceExerciseInfo = "Elige un ejercicio para reemplazar al actual.";
+  static const String replaceExerciseSubHeading = "Ejercicios Tren Inferior";
+  static const String replaceExerciseReplaceButton = "Reemplazar";
+  // static const String burpeesReplaceExcButton = "Reemplazar ejercicio";
+  // static const String burpeesAddNoteButton = "Agregar nota";
 
 }

@@ -73,4 +73,9 @@ flutter:
 
     - family: Open Sance
       fonts:
+        - asset: assets/fonts/open_sauce_sance/OpenSauceSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/open_sauce_sance/OpenSauceSans-Medium.ttf
+          weight: 600
         - asset: assets/fonts/open_sauce_sance/OpenSauceSans-Regular.ttf
+          weight: 500

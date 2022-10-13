@@ -1,5 +1,7 @@
+import 'package:fit_tech/presentation/screens/burpees_screen.dart';
 import 'package:fit_tech/presentation/screens/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/gym_screen.dart';
+import 'package:fit_tech/presentation/screens/heating_screen.dart';
 import 'package:fit_tech/presentation/screens/intro_screen.dart';
 import 'package:fit_tech/presentation/screens/login_screen.dart';
 import 'package:fit_tech/presentation/screens/login_welcome_screen.dart';
@@ -7,6 +9,8 @@ import 'package:fit_tech/presentation/screens/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/outdoor_screen.dart';
 import 'package:fit_tech/presentation/screens/recover_password_screen.dart';
 import 'package:fit_tech/presentation/screens/register_screen.dart';
+import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/rest_screen.dart';
 import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
 import 'package:fit_tech/presentation/screens/test_incomplete_screen.dart';
 import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
@@ -48,6 +52,14 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const GymScreen());
       case GymScreen.tag:
         return MaterialPageRoute(builder: (_) => const OutdoorScreen());
+      case HeatingScreen.tag:
+        return MaterialPageRoute(builder: (_) => const HeatingScreen());
+      case RestScreen.tag:
+        return MaterialPageRoute(builder: (_) => const RestScreen());
+      case BurpeesScreen.tag:
+        return MaterialPageRoute(builder: (_) => const BurpeesScreen());
+      case ReplaceExerciseScreen.tag:
+        return MaterialPageRoute(builder: (_) => const ReplaceExerciseScreen());
       default:
         return null;
     }
