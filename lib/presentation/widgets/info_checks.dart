@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 class InfoChecks extends StatelessWidget {
   final String title;
+  final Widget? richTextChild;
   final Color titleColor;
   final Color iconColor;
 
   const InfoChecks(
       {super.key,
       required this.title,
+      this.richTextChild,
       this.titleColor = MyColors.whiteColor,
       this.iconColor = MyColors.whiteColor});
 
@@ -35,7 +37,7 @@ class InfoChecks extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(
+              child: richTextChild ?? Text(
                 title,
                 style: TextStyle(
                   fontFamily: 'Open Sance',

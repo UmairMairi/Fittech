@@ -164,7 +164,7 @@ class Constants{
   static const String restScreenAddButton = "Agregar +20s";
   static const String restScreenExerciseTitle = "Escalada de Montaña";
 
-  //Burpees screen
+  //Exercisescreen
   static const String titleBurpeesScreen = "Burpees";
   static const String burpeesPauseButton = "Pausar";
   static const String burpeesAnteriorButton = "Anterior";
@@ -177,7 +177,94 @@ class Constants{
   static const String replaceExerciseInfo = "Elige un ejercicio para reemplazar al actual.";
   static const String replaceExerciseSubHeading = "Ejercicios Tren Inferior";
   static const String replaceExerciseReplaceButton = "Reemplazar";
-  // static const String burpeesReplaceExcButton = "Reemplazar ejercicio";
-  // static const String burpeesAddNoteButton = "Agregar nota";
 
+  //TrainingCompletedScreen
+  static const String trainingCompletedScreenTitle = "Entrenamiento completado";
+  static const String trainingCompletedScreenInfo = "¡Felicidades!";
+  static const String trainingCompletedScreenExerciseLabel = "Ejercicios";
+  static const String trainingCompletedScreenKclLabel = "Kcal";
+  static const String trainingCompletedScreenDurationLabel = "Duración";
+  static const String trainingCompletedScreenReviewLabel = "Me siento";
+  static const String trainingCompletedScreenReview1 = "\u{1F971}";
+  static const String trainingCompletedScreenReview2 = "\u{1F610}";
+  static const String trainingCompletedScreenReview3 = "\u{1F60E}";
+  static const String trainingCompletedScreenReview4 = "\u{1F92F}";
+  static const String trainingCompletedScreenReview5 = "\u{1F975}";
+  static const String trainingCompletedScreenWeekLabel = "Esta semana";
+  static const String trainingCompletedScreenSeeMore = "Ver más";
+  static const String trainingCompletedScreenRoutineLabel = "3 entrenamientos";
+
+
+  //DialoguePause
+  static const String dialoguePauseTitle = "Pausa";
+  static const String dialoguePauseContinueLabel = "Continuar";
+  static const String dialoguePauseRestartLabel = "Reiniciar ejercicio";
+  static const String dialoguePauseExitLabel = "Salir de entrenamiento";
+
+  //BreakBetweenSeriesScreen
+  static const String breakBetweenSeriesScreenTitle = "DESCANSO";
+
+  //DialoguePause
+  static const String dialogueCadenceTitle = "Cadence";
+  static const String dialogueCadenceInfo = "Speed of execution, first number indicates in how many seconds the eccentric phase is performed (generally when you go down) and the second number indicates the concentric phase (generally when you go up).\n\nExample:\n 2-2 = down in two seconds, up in two seconds.";
+
+  //DialoguePause
+  static const String trainingTestScreenTitle = "TEST ENTRENAMIENTO";
+  static const String trainingTestScreenInfo1 = "Completa el siguiente Test, consiste en un cuestionario de 9 pasos para personalizar el entrenamiento a tu medida. ";
+  static const String trainingTestScreenInfo2 = "¡Recuerda ser honesto al momento de responder!";
+  static const String trainingTestScreenInfo3= " Así podremos ayudarte de manera objetiva a conseguir juntos tus metas.";
+  static const String trainingTestScreenInfo4= "Este test contiene ejercicios físicos para determinar tu nivel. Te recomendamos tener tu ";
+  static const String trainingTestScreenInfo5= "ropa de entrenamiento a la mano.";
+  static const String trainingTestScreenStartButton= "Empezar";
+
+  //ChooseTrainingModeScreen
+  static const String chooseTrainingModeScreenTitle = "Test Entrenamiento (1/9)";
+  static const String chooseTrainingModeScreenTitle2 = "Elige un modo de entrenamiento";
+
+  static const String chooseTrainingModeScreenLabel1 = "Gym";
+  static const String chooseTrainingModeScreenInfo1 = "Usualmente entreno en un gym convencional, box, estudio fitness o centro deportivo, los cuales tienen maquinaria de fuerza y cardiovascular.";
+
+  static const String chooseTrainingModeScreenLabel2 = "Home";
+  static const String chooseTrainingModeScreenInfo2 = "Usualmente entreno en casa o un estudio pequeño, donde solo necesito implementos deportivos y el uso de mi peso corporal.";
+
+  static const String chooseTrainingModeScreenLabel3 = "Outdoor";
+  static const String chooseTrainingModeScreenInfo3 = "Usualmente entreno en un ambiente abierto, me gusta correr, montar bici, hacer hiking, en combinación con ejercicios usando mi peso corporal.";
+
+  static const String chooseTrainingModeContinueLabel = "Continuar";
+
+
+ //BiologicalGenderScreen
+  static const String biologicalGenderScreenTitle = "Test Entrenamiento (2/9)";
+  static const String biologicalGenderScreenTitle2 = "Género biológico";
+  static const String biologicalGenderScreenTitle2Info = "Déjanos conocerte para poder crear un plan de entrenamiento y nutrición realmente enfocado en tus objetivos y según tus posibilidades de tiempo, elementos y espacio (home, gym y outdoor).";
+  static const String biologicalGenderScreenLabel1 = "Mujer";
+  static const String biologicalGenderScreenInfo1 = "Quiero mantenerme en forma, y hacer un trabajo balanceado entre quema de grasa y ganancia muscular.";
+  static const String biologicalGenderScreenLabel2 = "Hombre";
+  static const String biologicalGenderScreenInfo2 = "Estoy en sobrepeso, quiero adelgazar y crear a su vez una base muscular.";
+  static const String biologicalGenderScreenContinueLabel = "Continuar";
+
+
+  //WeightHeightScreen
+  static const String weightHeightScreenTitle = "Test Entrenamiento (3/9)";
+  static const String weightHeightScreenTitle2 = "Peso y estatura";
+  static const String weightHeightScreenTitle2Info = "Déjanos conocerte para poder crear un plan de entrenamiento y nutrición realmente enfocado en tus objetivos y según tus posibilidades de tiempo, elementos y espacio (home, gym y outdoor).";
+  static const String weightHeightScreenWeightLabel1 = "Peso";
+  static const String weightHeightScreenWeightLabel2 = "Estatura";
+  static const String weightHeightScreenContinueLabel = "Continuar";
+
+
+  //AboutGoalScreen
+  static const String aboutGoalScreenTitle = "Test Entrenamiento (4/9)";
+  static const String aboutGoalScreenTitle2 = "Cuéntanos acerca de tus objetivos";
+
+  static const String aboutGoalScreenLabel1 = "Tonificación";
+  static const String aboutGoalScreenInfo1 = "Quiero mantenerme en forma, y hacer un trabajo balanceado entre quema de grasa y ganancia muscular.";
+
+  static const String aboutGoalScreenLabel2 = "Pérdida de Grasa";
+  static const String aboutGoalScreenInfo2 = "Estoy en sobrepeso, quiero adelgazar y crear a su vez una base muscular.";
+
+  static const String aboutGoalScreenLabel3 = "Ganancia Masa Muscular";
+  static const String aboutGoalScreenInfo3 = "Soy delgado y mi enfoque principal es ganar masa muscular magra.";
+
+  static const String aboutGoalScreenContinueLabel = "Continuar";
 }
