@@ -1,6 +1,6 @@
-import 'package:fit_tech/presentation/screens/create_account_screen.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
-import 'package:fit_tech/presentation/screens/login_welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';

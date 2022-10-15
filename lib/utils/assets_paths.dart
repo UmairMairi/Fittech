@@ -27,4 +27,10 @@ class Images {
   // TrainingCompletedScreen
   static const trainingTestScreenBanner = 'assets/images/training_test_banner.png';
 
+  // TrainingCompletedScreen
+  static const heartStatusScreenHeartIcon = 'assets/images/heart_flash.png';
+
+  // ShowLevelScreen
+  static const showLevelScreenHeartIcon = 'assets/images/icon_done.png';
+
 }

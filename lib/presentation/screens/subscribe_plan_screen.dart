@@ -387,10 +387,11 @@ class SubscribePlanScreen extends StatelessWidget {
                         const Center(
                             child: Text(
                           "USD 9.99",
+                          maxLines: 1,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 26,
+                              fontSize: 25,
                               fontFamily: 'Anton',),
                         )),
                         Expanded(child: Container()),

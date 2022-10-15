@@ -72,6 +72,7 @@ class ExerciseScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 20,),
                           const Text(
                             Constants.titleBurpeesScreen,
                             textAlign: TextAlign.center,

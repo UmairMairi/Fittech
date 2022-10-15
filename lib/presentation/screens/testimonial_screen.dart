@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/intro_model.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -37,91 +38,88 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: SafeArea(
-            child: SizedBox(
-              height: size.height,
-              width: size.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      color: MyColors.blackColor,
-                    ),
-                    child: const Text(
-                      Constants.titleTestimonial,
-                      style: TextStyle(
-                          fontFamily: 'Anton',
-                          color: MyColors.whiteColor,
-                          fontSize: 42.0),
-                    ),
-                  ),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        const Expanded(child: MyGridView()),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal:20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  color: MyColors.blackColor,
+                ),
+                child: const Text(
+                  Constants.titleTestimonial,
+                  style: TextStyle(
+                      fontFamily: 'Anton',
+                      color: MyColors.whiteColor,
+                      fontSize: 42.0),
+                ),
+              ),
+              Expanded(
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    MyGridView(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: _buildPageIndicator(),
-                              ),
-                              const SizedBox(
-                                height: 30.0,
-                              ),
-                              SizedBox(
-                                width: double.infinity,
-                                child: PrimaryButton(
-                                  title: Constants.beginLabelTestimonial,
-                                  textColor: MyColors.whiteColor,
-                                  backgroundColor: MyColors.redColor,
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: _buildPageIndicator(),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  /*Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:20.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: PrimaryButton(
-                        title: Constants.continueLabelIntroScreen,
-                        textColor: MyColors.blackColor,
-                        backgroundColor: MyColors.whiteColor,
-                        onPressed: () {},
+                          const SizedBox(
+                            height: 30.0,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: PrimaryButton(
+                              title: Constants.beginLabelTestimonial,
+                              textColor: MyColors.whiteColor,
+                              backgroundColor: MyColors.redColor,
+                              onPressed: () {
+                                Navigator.pushNamed(context, TrainingTestScreen.tag);
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    height: 0.5,
-                    color: MyColors.whiteColor,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      title: Constants.submitLabelIntroScreen,
-                      textColor: MyColors.whiteColor,
-                      backgroundColor: MyColors.blackColor,
-                      onPressed: () {},
-                    ),
-                  ),*/
-                ],
+                  ],
+                ),
               ),
-            ),
+              /*Padding(
+                padding: const EdgeInsets.symmetric(horizontal:20.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: PrimaryButton(
+                    title: Constants.continueLabelIntroScreen,
+                    textColor: MyColors.blackColor,
+                    backgroundColor: MyColors.whiteColor,
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                height: 0.5,
+                color: MyColors.whiteColor,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: PrimaryButton(
+                  title: Constants.submitLabelIntroScreen,
+                  textColor: MyColors.whiteColor,
+                  backgroundColor: MyColors.blackColor,
+                  onPressed: () {},
+                ),
+              ),*/
+            ],
           ),
         ),
       ),

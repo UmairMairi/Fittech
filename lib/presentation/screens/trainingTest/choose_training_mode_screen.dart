@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/biological_gender_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -117,7 +118,7 @@ class ChooseTrainingModeScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   Text(
-                                    list[index].info,
+                                    list[index].info??"",
                                     textAlign: TextAlign.start,
                                     style: const TextStyle(
                                         fontFamily: 'Open Sance',
@@ -133,12 +134,15 @@ class ChooseTrainingModeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
               child: PrimaryButton(
                 title: Constants.chooseTrainingModeContinueLabel,
                 backgroundColor: MyColors.blackColor,
                 textColor: MyColors.whiteColor,
+                onPressed: (){
+                  Navigator.pushNamed(context, BiologicalGenderScreen.tag);
+                },
               ),
             )
           ],

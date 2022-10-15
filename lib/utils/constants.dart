@@ -111,7 +111,7 @@ class Constants{
 
   static const String titleIntroScreen = "¡Test Incompleto!";
   static const String continueLabelIntroScreen = "Continuar";
-  static const String submitLabelIntroScreen = "Omitir";
+  static const String skipLabelIntroScreen = "Omitir";
 
   static const String introTitle1 = "Personalización única";
   static const String introTitle2 = "¡Comer nunca fue tan divertido!";
@@ -267,4 +267,125 @@ class Constants{
   static const String aboutGoalScreenInfo3 = "Soy delgado y mi enfoque principal es ganar masa muscular magra.";
 
   static const String aboutGoalScreenContinueLabel = "Continuar";
+
+  //PhysicalActivityScreen
+  static const String physicalActivityScreenTitle = "Test Entrenamiento (5/9)";
+  static const String physicalActivityScreenTitle2 = "En que nivel de actividad física consideras estar";
+
+  static const String physicalActivityScreenLabel1 = "Sedentario";
+  static const String physicalActivityScreenInfo1 = "Trabajo generalmente sentado, no hago casi nada de actividad física.";
+
+  static const String physicalActivityScreenLabel2 = "Ligero";
+  static const String physicalActivityScreenInfo2 = "En la semana ocasionalmente salgo a caminar, o realizo oficios básicos del hogar.";
+
+  static const String physicalActivityScreenLabel3 = "Moderado";
+  static const String physicalActivityScreenInfo3 = "Tengo intervalos de actividad/pausa en mi día a día y entreno de 2 a 4 veces por semana.";
+
+  static const String physicalActivityScreenLabel4 = "Activo";
+  static const String physicalActivityScreenInfo4 = "Entreno 5 veces por semana y hago algo de cardio.";
+
+  static const String physicalActivityScreenLabel5 = "Muy activo";
+  static const String physicalActivityScreenInfo5 = "Entreno al menos 6 veces por semana, mis pausas siempre son activas, tengo más de 2 años entrenando.";
+
+  static const String physicalActivityScreenContinueLabel = "Continuar";
+  static const String physicalActivityScreenContinueLaterLabel = "Responder Luego";
+
+
+  //MedicalHistoryScreen
+  static const String medicalHistoryScreenTitle = "Test Entrenamiento (6/9)";
+  static const String medicalHistoryScreenTitle2 = "Antecedentes médicos";
+  static const String medicalHistoryScreenTitle2Info1 = "Déjanos saber si tienes patologías o enfermedades relevantes, recuerda que debes contar con el alta médica en caso que hayas sufrido operaciones recientes, lesiones osteoarticulares, o";
+  static const String medicalHistoryScreenTitle2Info2 = "ENFERMEDADES QUE TE IMPIDAN REALIZAR ACTIVIDAD FÍSICA.";
+  static const String medicalHistoryScreenTitle2Info3 = "Lo primero es tu salud, por eso un médico debe de darte la permisividad para poder empezar a hacer actividad física adecuada a tu condición.";
+  static const String medicalHistoryScreenTitle2Info4 = " Al presionar continuar estas avalando la respuesta que seleccionaste.";
+
+  static const String medicalHistoryScreenLabel1 = "Hipertensión";
+  static const String medicalHistoryScreenLabel2 = "Patologías cardiacas";
+  static const String medicalHistoryScreenInfo2 = "Arritmias, taquicardia, insuficiencia cardiaca, infartos, soplo en el corazón.";
+  static const String medicalHistoryScreenLabel3 = "Enfermedades pulmonares";
+  static const String medicalHistoryScreenInfo3 = "Influenza, asma, bronquitis, enfermedad pulmonar obstructiva crónica, hipertensión pulmonar.";
+  static const String medicalHistoryScreenLabel4 = "Desvanecimientos o convulsiones";
+  static const String medicalHistoryScreenLabel5 = "Diabetes no controlada";
+  static const String medicalHistoryScreenLabel6 = "Dolores en el pecho o falta de aire con esfuerzos leves";
+  static const String medicalHistoryScreenLabel7 = "NO PRESENTO NINGUNA DE LAS ANTERIORES";
+  static const String medicalHistoryScreenContinueLabel = "Continuar";
+  static const String medicalHistoryScreenContinueLaterLabel = "Responder Luego";
+
+  //FamilyHistoryScreen
+  static const String familyHistoryScreenTitle = "Test Entrenamiento (7/9)";
+  static const String familyHistoryScreenTitle2 = "Antecedentes familiares";
+  static const String familyHistoryScreenTitle2Info1 = "¿Algunos de tus padres, hermanos o hijos ha sufrido las siguientes enfermedades?";
+
+  static const String familyHistoryScreenLabel1 = "Ataque al corazón";
+  static const String familyHistoryScreenLabel2 = "Operaciones cardiacas importantes";
+  static const String familyHistoryScreenLabel3 = "Patologías cardiacas congénitas (heredadas)";
+  static const String familyHistoryScreenLabel4 = "Muerte prematura";
+  static const String familyHistoryScreenLabel5 = "Diabetes tipo 1";
+  static const String familyHistoryScreenLabel6 = "NO PRESENTO NINGUNA DE LAS ANTERIORES";
+
+  static const String familyHistoryScreenContinueLabel = "Continuar";
+  static const String familyHistoryScreenContinueLaterLabel = "Responder Luego";
+
+  //HeartRateScreen
+  static const String heartRateScreenTitle = "Test Entrenamiento (8/9)";
+  static const String heartRateScreenTitle2 = "Frecuencia cardiaca";
+  static const String heartRateScreenTitle2Info1 = "Déjanos conocer si tu corazón late de forma correcta y está listo para realizar actividad física sin riesgo asociado. Toca para tomar tu frecuencia en reposo.";
+
+  static const String heartRateScreenFrequencyLabel = "Empezar con la frecuencia";
+  static const String heartRateScreenContinueLaterLabel = "Responder Luego";
+
+  //EnterCountedBeatsScreen
+  static const String enterCountedBeatsScreenTitle = "Test Entrenamiento (8/9)";
+  static const String enterCountedBeatsScreenTitle2 = "Indica cuantos latidos contaste:";
+  static const String enterCountedBeatsScreenBeatsLabel = "N°. de latidos";
+  static const String enterCountedBeatsScreenContinueLabel = "Continue";
+  static const String enterCountedBeatsScreenTryAgainLabel = "Tomar de nuevo";
+
+  // HeartStatusScreen
+  static const String heartStatusScreenTitle = "¡Buena!";
+  static const String heartStatusScreenTitle2 = "Felicidades, tu frecuencia cardiaca en reposo es buena según tu edad y tu género.";
+  static const String heartStatusScreenContinueLabel = "Continuar";
+  static const String heartStatusScreenTryAgainLabel = "Tomar de nuevo";
+
+  // FinishingTrainingTestScreen
+  static const String finishingTrainingTestScreenTitle = "Test Entrenamiento (9/9)";
+  static const String finishingTrainingTestScreenTitle2 = "Estás por finalizar, solo falta probar tu nivel físico en la siguiente TEST.";
+  static const String finishingTrainingTestScreenInfo1 = 'Trata de completar la siguiente PRUEBA, sé muy honesto y muy consciente contigo mismo porque depende del nivel será la intensidad de tu plan de entrenamiento. Si para antes de completarlo, toca el botón "Hasta aquí llegué". Inmediatamente te diremos tu nivel.';
+  static const String finishingTrainingTestScreenRecorderLabel = "Recordar";
+  static const String finishingTrainingTestScreenRecorderInfo1 = 'Debes encontrarte en el lugar de entrenamiento según el modo que elegiste. Test puede incluir equipo.';
+  static const String finishingTrainingTestScreenTakeTestLabel = "Hacer la PRUEBA";
+  static const String finishingTrainingTestScreenContinueLabel = "Responder Luego";
+
+  // TestAfterScreen
+  static const String testAfterScreenTitle = "Burpees";
+  static const String testAfterScreenTitleButtonLabel = "I got this far";
+
+  // ShowLevelScreen
+  static const String showLevelScreenTitle = "Básico";
+  static const String showLevelScreenTitleInfo1 = "¡Felicidades! Tu nivel es:";
+  static const String showLevelScreenTitleInfo2 = "Felicidades por empezar un nuevo estilo de vida con hábitos saludables, mucho esfuerzo, para alcanzar el siguiente nivel.";
+  static const String showLevelScreenButtonLabel = "Finalizar";
+
+
+  //TermsConditionsScreen
+  static const String termsConditionsScreenTitle = "Términos y condiciones";
+
+  static const String termsConditionsScreenInfoTitle1 = "PRIMERO. PARTES";
+  static const String termsConditionsScreenInfo1 = "Estas Condiciones Generales de Contratación son la base del contrato de utilización suscrito entre el usuario y FITTECH. El objeto del contrato es la utilización gratuita u onerosa de los servicios ofrecidos por la aplicación con el nombre FITTECH a través de nuestra aplicación o página de FITTECH, otras páginas web de FITTECH que se puedan crear en el futuro u otras aplicaciones de software que FITTECH pueda crear en el futuro.";
+
+  static const String termsConditionsScreenInfoTitle2 = "SEGUNDO. DEFINICIONES";
+  static const String termsConditionsScreenInfo2 = "Para facilitar la comprensión de estos términos y condiciones de uso de la App de FITTECH, se hace necesario aclarar el significado de las siguientes palabras: a) Contenidos. Implican todas las formas de información o datos que se divulgan en la App, entre los que se encuentran: textos, imágenes, fotos, logos, diseños, animaciones. b) Derechos de Propiedad Intelectual. Hacen referencia a todos los derechos de propiedad de la información de FITTECH o de cualquier persona que sea titular legítima, como: signos distintivos, marcas, lemas, enseñas, logos, nombres de dominio, derechos de autor, bases de datos, diseños, contenidos o cualquier otra obra o creación intelectual vinculada con el objeto, operación o desempeño de la App de FITTECH. c) Internet. Herramienta de comunicación con decenas de miles de redes de computadoras unidas por el protocolo TCP/IP. Sobre esta red se pueden utilizar múltiples servicios como por ejemplo correos electrónicos, www, entre otros. d) Publicar. Hacer que un documento sea visible desde la App. e) Servicios. Son las ayudas en línea que FITTECH provee actualmente o que piensa proveer en el futuro a los usuarios, por medio de esta App, como elaboración de planes de entrenamiento y de nutrición personalizados, publicación de noticias o actividades propias de la gestión comercial; trámites en línea; consultas; foros y buzón de quejas y reclamos, registro de clientes o comercializadores, mapas de ubicación, solicitud de pedidos, catálogo de colecciones, adquisición de mercancía, entre otros. g) Usuario o Cliente. Es la persona natural o jurídica o entidad de cualquier naturaleza que ingresa a la App de FITTECH para acceder, inscribirse o registrarse para adquirir un bien o servicio ofertado por un usuario en la App de FITTECH por cualquier razón, buscar o consultar información de su interés y ejecutar operaciones. h) Vínculo. Link en inglés. Apuntadores hipertexto que sirven para saltar de una información a otra, o de un servidor Web a otro, cuando se navega por Internet.";
+
+  //PrivacyPolicyScreen
+  static const String privacyPolicyScreenTitle = "Políticas de Datos";
+
+  static const String privacyPolicyScreenInfoTitle1 = "PRIMERO. INTRODUCCIÓN.";
+  static const String privacyPolicyScreenInfo1 = "FITTECH, es una aplicación virtual con uso en Colombia; con fundamento en lo dispuesto en la Constitución Política de Colombia, la Ley 1266 de 2008, la Ley 1581 de 2012 y demás normas que las desarrollen, complementen, modifiquen, sustituyan o adicionen, por medio del presente documento y en su calidad de responsable de la información, da a conocer la Política de Tratamiento de Datos Personales de FITTECH.";
+
+  static const String privacyPolicyScreenInfoTitle2 = "SEGUNDO. OBJETIVO.";
+  static const String privacyPolicyScreenInfo2 = "El presente documento tiene por objetivo establecer los principios, términos y condiciones para el tratamiento de datos personales, actividad que incluye la recolección, almacenamiento, procesamiento, actualización, uso, circulación, transmisión, transferencia y supresión de la información que se suministra a FITTECH en el desarrollo de su objeto de negocio. Adicionalmente, la Política de Tratamiento de Datos Personales establece los derechos de los Titulares de la Información y los procedimientos para hacerlos efectivos.";
+
+  static const String privacyPolicyScreenInfoTitle3 = "TERCERO. MARCO LEGAL.";
+  static const String privacyPolicyScreenInfo3 = "De conformidad con el Artículo 15 de la Constitución Política Colombiana, las personas tienen el derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos o archivos tanto de entidades públicas como privadas. En el 2008 se expidió la Ley 1266, Ley especial y sectorial que regula el denominado “habeas data financiero” conforme al cual toda persona tiene derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ella en bancos de datos, particularmente en relación con la información financiera y crediticia, comercial, de servicio y la proveniente de terceros países. Posteriormente, se expidió la Ley estatutaria 1581 de 2012, la cual fue objeto de pronunciamiento previo por parte de la Corte Constitucional mediante Sentencia C-748 de 2011, por la que se precisó la naturaleza y alcance de dicha norma. Esta Ley regula de manera general la protección de los datos personales. Teniendo en cuenta el marco normativo descrito, en los casos que se presente información financiera, crediticia, comercial, de servicios y la proveniente de terceros países será objeto de tratamiento conforme a lo previsto en la Ley 1266 de 2008 y las normas que la complementan, desarrollan, modifiquen y/o sustituyan. Según lo previsto en el literal j) del artículo 3 de la citada Ley la información regulada por ella es aquella referida al nacimiento, ejecución y extinción de obligaciones dinerarias, independientemente de la naturaleza del contrato que les dé origen. La demás información no comprendida dentro del alcance de la Ley 1266 de 2008 será tratada conforme a la Ley 1581 de 2012 y las normas que la complementan, desarrollan, modifiquen y/o sustituyan.";
+
 }

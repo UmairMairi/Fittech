@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -140,12 +141,15 @@ class WeightHeightScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
               child: PrimaryButton(
                 title: Constants.weightHeightScreenContinueLabel,
                 backgroundColor: MyColors.blackColor,
                 textColor: MyColors.whiteColor,
+                onPressed: (){
+                  Navigator.pushNamed(context, AboutGoalScreen.tag);
+                },
               ),
             )
           ],

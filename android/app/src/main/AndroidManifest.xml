@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="union.dev.fittech.fit_tech">
    <application
-        android:label="fit_tech"
+        android:label="FITTECH"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
