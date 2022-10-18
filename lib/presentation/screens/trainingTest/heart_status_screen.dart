@@ -4,6 +4,7 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'finishing_training_test_screen.dart';
@@ -57,27 +58,21 @@ class HeartStatusScreen extends StatelessWidget {
       const SizedBox(
         height: 30.0,
       ),
-      const SizedBox(
+      SizedBox(
         width: double.infinity,
         child: Text(
           Constants.heartStatusScreenTitle,
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontFamily: 'Anton',
-              color: MyColors.whiteColor,
-              fontSize: 42.0),
+          style: MyTextStyle.heading1.copyWith(color: MyColors.whiteColor),
         ),
       ),
       const SizedBox(
         height: 30.0,
       ),
-      const Text(
+      Text(
         Constants.heartStatusScreenTitle2,
         textAlign: TextAlign.center,
-        style: TextStyle(
-            fontFamily: 'Open Sance',
-            color: MyColors.whiteColor,
-            fontSize: 18.0),
+        style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
       ),
       const SizedBox(
         height: 30.0,

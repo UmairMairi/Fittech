@@ -3,6 +3,7 @@ import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class LoginWelcomeScreen extends StatelessWidget {
@@ -13,10 +14,10 @@ class LoginWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: MyColors.blackColor,
-      body: SafeArea(
-        child: SizedBox(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.blackColor,
+        body: SizedBox(
           width: size.width,
           height: size.height,
           child: Padding(
@@ -46,27 +47,22 @@ class LoginWelcomeScreen extends StatelessWidget {
       const SizedBox(
         height: 30.0,
       ),
-      const SizedBox(
+      SizedBox(
         width: double.infinity,
         child: Text(
           Constants.titleLoginWelcomeScreen,
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontFamily: 'Anton',
-              color: MyColors.whiteColor,
-              fontSize: 42.0),
+          style: MyTextStyle.heading1.copyWith(color: MyColors.whiteColor
+          ),
         ),
       ),
       const SizedBox(
         height: 30.0,
       ),
-      const Text(
+      Text(
         Constants.loginWelcomeScreenInfo,
         textAlign: TextAlign.center,
-        style: TextStyle(
-            fontFamily: 'Open Sance',
-            color: MyColors.whiteColor,
-            fontSize: 18.0),
+        style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
       ),
       const SizedBox(
         height: 30.0,

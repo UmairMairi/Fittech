@@ -5,12 +5,15 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class OTPScreen extends StatelessWidget {
-  const OTPScreen({super.key});
+  OTPScreen({super.key});
 
   static const String tag = "otp_screen";
+  final TextEditingController otpController = TextEditingController(text: "Angel");
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,100 +22,107 @@ class OTPScreen extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: MyColors.blackColor,
-                  size: 24.0,
+            SizedBox(
+              height: 65,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: MyColors.blackColor,
+                    size: 24.0,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    Constants.titleOtpScreen,
-                    style: TextStyle(
-                        fontFamily: 'Anton',
-                        color: MyColors.blackColor,
-                        fontSize: 42.0),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  const Text(
-                    Constants.otpInfo,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 18.0),
-                  ),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  const TextFieldPrimary(
-                      isLabelRequired: true,
-                      title: Constants.codeLabel,
-                      isObscure: false,
-                      keyboardType: TextInputType.text),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      title: Constants.verifyLabel,
-                      textColor: MyColors.whiteColor,
-                      backgroundColor: MyColors.blackColor,
-                      onPressed: (){
-                        Navigator.pushNamed(context, LoginWelcomeScreen.tag);
-                      },
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      Constants.titleOtpScreen,
+                      style: MyTextStyle.heading1,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      title: Constants.resendLabel,
-                      textColor: MyColors.blackColor,
-                      backgroundColor: MyColors.whiteColor,
-                      onPressed: () {
-                      },
+                    const SizedBox(
+                      height: 10.0,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 50.0,
-                  ),
-
-                  const SizedBox(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal:20.0),
-                      child: Text(
-                        Constants.resendTimerInfo,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0),
+                    const Text(
+                      Constants.otpInfo,
+                      style: MyTextStyle.paragraph1,
+                    ),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    TextFieldPrimary(
+                        isLabelRequired: true,
+                        title: Constants.codeLabel,
+                        isObscure: false,
+                        controller: otpController,
+                        validator: (value) {
+                          return null;
+                        },
+                        keyboardType: TextInputType.text),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: PrimaryButton(
+                        title: Constants.verifyLabel,
+                        textColor: MyColors.whiteColor,
+                        backgroundColor: MyColors.blackColor,
+                        onPressed: (){
+                          Navigator.pushNamed(context, LoginWelcomeScreen.tag);
+                        },
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                ],
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: PrimaryButton(
+                        title: Constants.resendLabel,
+                        titleStyle: MyTextStyle.buttonTitle.copyWith(
+                          fontWeight: FontWeight.w600
+                        ),
+                        textColor: MyColors.blackColor,
+                        backgroundColor: MyColors.whiteColor,
+                        onPressed: () {
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 50.0,
+                    ),
+
+                    const SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal:20.0),
+                        child: Text(
+                          Constants.resendTimerInfo,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Open Sance',
+                              color: MyColors.blackColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

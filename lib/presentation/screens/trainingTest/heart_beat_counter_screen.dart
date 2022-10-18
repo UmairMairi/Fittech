@@ -2,6 +2,7 @@ import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -20,21 +21,23 @@ class HeartBeatCounterScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: MyColors.blackColor,
+                      size: 24.0,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Expanded(
-                  child: Container(),
-                ),],
+                ],
+              ),
             ),
             const LinearProgressIndicator(
               minHeight: 8,
@@ -51,14 +54,11 @@ class HeartBeatCounterScreen extends StatelessWidget {
                     border: Border.all(color: MyColors.redColor,width: 5.0)
                   ),
                   child: const Text("10",
-                    style: TextStyle(
-                      fontFamily: 'Anton',
-                      fontSize: 42,
+                    style: MyTextStyle.heading1,
                     ),
                   ),
                 ),
               ),
-            ),
             const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),

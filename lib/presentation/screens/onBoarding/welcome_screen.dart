@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                           title: Constants.createAccount),
                     ),
                     const SizedBox(
-                      height: 20.0,
+                      height: 10.0,
                     ),
                     SizedBox(
                       width: double.infinity,
@@ -70,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       text: TextSpan(
                           text: "${Constants.agreeTermsConditionsInfo}\n",
-                          style: const TextStyle(fontSize: 15.0),
+                          style: const TextStyle(fontSize: 15.0,fontWeight: FontWeight.normal),
                           children: <TextSpan>[
                             TextSpan(
                                 text: Constants.termsConditions,
@@ -80,6 +80,7 @@ class WelcomeScreen extends StatelessWidget {
                                         context, TermsConditionsScreen.tag);
                                   },
                                 style: const TextStyle(
+                                    fontSize: 15.0,
                                     fontWeight: FontWeight.bold,
                                     color: MyColors.whiteColor)),
                             const TextSpan(
@@ -93,6 +94,7 @@ class WelcomeScreen extends StatelessWidget {
                                         context, PrivacyPolicyScreen.tag);
                                   },
                                 style: const TextStyle(
+                                    fontSize: 15.0,
                                     fontWeight: FontWeight.bold,
                                     color: MyColors.whiteColor)),
                           ]),

@@ -49,9 +49,9 @@ class AppRoute {
       case LoginScreen.tag:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case RegisterScreen.tag:
-        return MaterialPageRoute(builder: (_) => const RegisterScreen());
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
       case OTPScreen.tag:
-        return MaterialPageRoute(builder: (_) => const OTPScreen());
+        return MaterialPageRoute(builder: (_) => OTPScreen());
       case LoginWelcomeScreen.tag:
         return MaterialPageRoute(builder: (_) => const LoginWelcomeScreen());
       case SubscribePlanScreen.tag:

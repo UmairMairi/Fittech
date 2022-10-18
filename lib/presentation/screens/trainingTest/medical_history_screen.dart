@@ -2,6 +2,7 @@ import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -29,32 +30,12 @@ class MedicalHistoryScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.medicalHistoryScreenTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
                       color: MyColors.blackColor,
@@ -64,9 +45,34 @@ class MedicalHistoryScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                ),
-              ],
+                  const Expanded(
+                    child: Text(
+                      Constants.medicalHistoryScreenTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Open Sance',
+                          color: MyColors.blackColor,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: MyColors.blackColor,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
+
             const LinearProgressIndicator(
               minHeight: 8,
               backgroundColor: Colors.transparent,
@@ -86,11 +92,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                       const Text(
                         Constants.medicalHistoryScreenTitle2,
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 28.0),
+                        style: MyTextStyle.heading2,
                       ),
                       const SizedBox(
                         height: 20.0,
@@ -98,21 +100,16 @@ class MedicalHistoryScreen extends StatelessWidget {
 
                       RichText(
                         textAlign: TextAlign.start,
-                        text: const TextSpan(
+                        text: TextSpan(
                             text: "",
-                            style: TextStyle(
-                              fontFamily: 'Open Sance',
-                                fontSize: 15.0),
+                            style: MyTextStyle.paragraph1,
                             children: <TextSpan>[
-                              TextSpan(
+                              const TextSpan(
                                   text: Constants.medicalHistoryScreenTitle2Info1,
-                                  style: TextStyle(
-                                      color: MyColors.blackColor)),
+                                  style: MyTextStyle.paragraph1,),
                               TextSpan(
                                   text: " ${Constants.medicalHistoryScreenTitle2Info2}.",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      color: MyColors.blackColor)),
+                                  style: MyTextStyle.paragraph1.copyWith(fontWeight: FontWeight.bold),),
                             ]),
                       ),
 
@@ -135,11 +132,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   Text(
                                     list[index].title,
                                     textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.blackColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.0),
+                                    style: MyTextStyle.heading3,
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -147,10 +140,7 @@ class MedicalHistoryScreen extends StatelessWidget {
                                   if(list[index].info!=null) Text(
                                     list[index].info??"",
                                     textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.greyColor,
-                                        fontSize: 18.0),
+                                    style: MyTextStyle.paragraph1,
                                   ),
                                 ],
                               ));
@@ -161,21 +151,16 @@ class MedicalHistoryScreen extends StatelessWidget {
                       ),
                       RichText(
                         textAlign: TextAlign.start,
-                        text: const TextSpan(
+                        text: TextSpan(
                             text: "",
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                fontSize: 15.0),
+                            style: MyTextStyle.paragraph1,
                             children: <TextSpan>[
-                              TextSpan(
+                              const TextSpan(
                                   text: Constants.medicalHistoryScreenTitle2Info3,
-                                  style: TextStyle(
-                                      color: MyColors.blackColor)),
+                                  style: MyTextStyle.paragraph1),
                               TextSpan(
                                   text: " ${Constants.medicalHistoryScreenTitle2Info4}.",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      color: MyColors.blackColor)),
+                                  style: MyTextStyle.paragraph1.copyWith(fontWeight: FontWeight.bold)),
                             ]),
                       ),
 

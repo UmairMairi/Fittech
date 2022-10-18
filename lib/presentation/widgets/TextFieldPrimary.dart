@@ -1,4 +1,5 @@
 import 'package:fit_tech/utils/colors.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldPrimary extends StatefulWidget {
@@ -10,6 +11,8 @@ class TextFieldPrimary extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool? isEnabled;
   final String? hintText;
+  final String? suffixText;
+  final Widget? suffix;
 
   const TextFieldPrimary({
     Key? key,
@@ -21,6 +24,8 @@ class TextFieldPrimary extends StatefulWidget {
     this.controller,
     this.validator,
     this.hintText,
+    this.suffix,
+    this.suffixText,
   }) : super(key: key);
 
   @override
@@ -43,22 +48,17 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
       children: [
         Visibility(
           visible: widget.isLabelRequired!,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: Column(
-              children: [
-                Text(
-                  widget.title!,
-                  textAlign: TextAlign.start,
-                  style: const TextStyle(
-                    fontFamily: 'Open Sance',
-                      fontSize: 14, color: MyColors.greyColor),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
+          child: Column(
+            children: [
+              Text(
+                widget.title!,
+                textAlign: TextAlign.start,
+                style: MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+            ],
           ),
         ),
         TextFormField(
@@ -69,19 +69,28 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
           enabled: widget.isEnabled,
           decoration: InputDecoration(
               hintText: widget.hintText ?? "",
-              contentPadding:
-              const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+              errorStyle: const TextStyle(
+                fontSize: 15,
+                fontFamily: 'Open Sance',
+                color: MyColors.redColor
+              ),
+              constraints: const BoxConstraints(minHeight: 0.0,minWidth: 0.0),
+              contentPadding: EdgeInsets.zero,
               fillColor: MyColors.whiteColor,
               border: const UnderlineInputBorder(
                 borderSide: BorderSide(color: MyColors.greyColor),
               ),
               focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
+                borderSide: BorderSide(color: Colors.black,width: 2.0),
               ),
+              errorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red,width: 2.0),
+              ),
+              suffix: widget.suffix,
+              suffixText: widget.suffixText,
               suffixIcon: widget.isObscure!
                   ? IconButton(
-                icon: Icon(
-                  // Based on passwordVisible state choose the icon
+                icon: Icon(// Based on passwordVisible state choose the icon
                   _isPasswordVisible
                       ? Icons.visibility
                       : Icons.visibility_off,
@@ -92,9 +101,12 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
                     _isPasswordVisible = !_isPasswordVisible;
                   });
                 },
+                constraints: const BoxConstraints(minWidth: 0.0,minHeight: 0.0),
+                padding: EdgeInsets.zero,
+
               )
                   : null),
-          style: const TextStyle(color: MyColors.blackColor),
+          style: MyTextStyle.paragraph1,
           obscureText: widget.isObscure! ? _isPasswordVisible : false,
         )
       ],

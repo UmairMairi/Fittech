@@ -1,9 +1,11 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
+import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class EnterCountedBeatsScreen extends StatelessWidget {
@@ -17,32 +19,12 @@ class EnterCountedBeatsScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.enterCountedBeatsScreenTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
                       color: MyColors.blackColor,
@@ -52,8 +34,32 @@ class EnterCountedBeatsScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                ),
-              ],
+                  const Expanded(
+                    child: Text(
+                      Constants.enterCountedBeatsScreenTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Open Sance',
+                          color: MyColors.blackColor,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: MyColors.blackColor,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             const LinearProgressIndicator(
               minHeight: 8,
@@ -73,11 +79,7 @@ class EnterCountedBeatsScreen extends StatelessWidget {
                     const Text(
                       Constants.enterCountedBeatsScreenTitle2,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 28.0),
+                      style: MyTextStyle.heading2,
                     ),
                     const SizedBox(
                       height: 50.0,
@@ -86,18 +88,14 @@ class EnterCountedBeatsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      const Text(
-                        Constants.enterCountedBeatsScreenBeatsLabel,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 18.0),
-                      ),
                       Row(
                         children: [
-                          Expanded(
-                            child: TextFormField(
+                          const Expanded(
+                            child: TextFieldPrimary(
+                              title: Constants.enterCountedBeatsScreenBeatsLabel,
+                              isLabelRequired: true,
+                              isObscure: false,
+                              keyboardType: TextInputType.number,
                             ),
                           ),
                           Expanded(child: Container(),),

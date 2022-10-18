@@ -5,6 +5,7 @@ import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'show_level_screen.dart';
@@ -79,15 +80,11 @@ class TestAfterScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 30,),
+                          const SizedBox(height: 20,),
                           const Text(
                             Constants.titleBurpeesScreen,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.w600),
+                            style: MyTextStyle.heading2,
                           ),
                           const Expanded(
                             child: SizedBox(

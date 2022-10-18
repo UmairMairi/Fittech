@@ -2,6 +2,7 @@ import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class SubscribePlanScreen extends StatelessWidget {
@@ -12,11 +13,11 @@ class SubscribePlanScreen extends StatelessWidget {
   static List<SubscriptionPlansTileModel> list2 = [
     SubscriptionPlansTileModel(
         title: Constants.subscribePlanScreenTileTitle1,
-        gratis: false,
+        gratis: "7 días",
         fitTechPlus: true),
     SubscriptionPlansTileModel(
         title: Constants.subscribePlanScreenTileTitle2,
-        gratis: false,
+        gratis: "1 receta",
         fitTechPlus: true),
     SubscriptionPlansTileModel(
         title: Constants.subscribePlanScreenTileTitle3,
@@ -106,31 +107,25 @@ class SubscribePlanScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 Constants.titleSubscribePlanScreen,
                                 textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: 'Anton',
-                                    color: MyColors.whiteColor,
-                                    fontSize: 42.0),
+                                style: MyTextStyle.heading1.copyWith(color: MyColors.whiteColor),
                               ),
                               const SizedBox(
                                 height: 20.0,
                               ),
                               SizedBox(
-                                height: 150,
+                                height: 180,
                                 child: planItem(),
                               ),
                               const SizedBox(
                                 height: 20.0,
                               ),
-                              const Text(
+                              Text(
                                 Constants.subscribePlanScreenInfo,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Open Sance',
-                                    color: MyColors.whiteColor,
-                                    fontSize: 16.0),
+                                style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
                               ),
                             ],
                           ),
@@ -234,11 +229,7 @@ class SubscribePlanScreen extends StatelessWidget {
                                             : Text(
                                                 list2[index].gratis,
                                                 maxLines: 2,
-                                                style: const TextStyle(
-                                                  color: MyColors.whiteColor,
-                                                  fontSize: 15,
-                                                  fontFamily: 'Open Sance',
-                                                ),
+                                                style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor),
                                               ),
                                       ),
                                     ),
@@ -260,11 +251,7 @@ class SubscribePlanScreen extends StatelessWidget {
                                           : Text(
                                         list2[index].fitTechPlus,
                                         maxLines: 2,
-                                        style: const TextStyle(
-                                          color: MyColors.whiteColor,
-                                          fontSize: 15,
-                                          fontFamily: 'Open Sance',
-                                        ),
+                                        style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor),
                                       ),
                                     )
                                   ],
@@ -374,14 +361,10 @@ class SubscribePlanScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 15.0),
                     child: Column(
                       children: [
-                        const Text(
+                        Text(
                           "Plan trimestral",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontFamily: 'Open Sance',
-                              decoration: TextDecoration.lineThrough),
+                          style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor,fontSize: 13,),
                         ),
                         Expanded(child: Container()),
                         const Center(
@@ -395,14 +378,10 @@ class SubscribePlanScreen extends StatelessWidget {
                               fontFamily: 'Anton',),
                         )),
                         Expanded(child: Container()),
-                        const Text(
+                        Text(
                           "27.000 COP x mes",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontFamily: 'Open Sance',
-                              decoration: TextDecoration.lineThrough),
+                          style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor,fontSize: 13,),
                         ),
                       ],
                     ),

@@ -2,6 +2,7 @@ import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'medical_history_screen.dart';
@@ -24,32 +25,12 @@ class PhysicalActivityScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.physicalActivityScreenTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
                       color: MyColors.blackColor,
@@ -59,8 +40,32 @@ class PhysicalActivityScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                ),
-              ],
+                  const Expanded(
+                    child: Text(
+                      Constants.physicalActivityScreenTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Open Sance',
+                          color: MyColors.blackColor,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: MyColors.blackColor,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             const LinearProgressIndicator(
               minHeight: 8,
@@ -80,11 +85,7 @@ class PhysicalActivityScreen extends StatelessWidget {
                     const Text(
                       Constants.physicalActivityScreenTitle2,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 28.0),
+                      style: MyTextStyle.heading2,
                     ),
                     const SizedBox(
                       height: 20.0,
@@ -105,11 +106,7 @@ class PhysicalActivityScreen extends StatelessWidget {
                                   Text(
                                     list[index].title,
                                     textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.blackColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.0),
+                                    style: MyTextStyle.heading3,
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -117,10 +114,7 @@ class PhysicalActivityScreen extends StatelessWidget {
                                   Text(
                                     list[index].info??"",
                                     textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.greyColor,
-                                        fontSize: 18.0),
+                                    style: MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),
                                   ),
                                 ],
                               ));

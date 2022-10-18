@@ -5,6 +5,7 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -14,24 +15,30 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
           shrinkWrap: true,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: MyColors.blackColor,
-                  size: 24.0,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: MyColors.blackColor,
+                      size: 24.0,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
@@ -40,20 +47,14 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text(
                     Constants.titleLoginScreen,
-                    style: TextStyle(
-                        fontFamily: 'Anton',
-                        color: MyColors.blackColor,
-                        fontSize: 42.0),
+                    style: MyTextStyle.heading1,
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
                   const Text(
                     Constants.loginInfo,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 18.0),
+                    style: MyTextStyle.paragraph1,
                   ),
                   const SizedBox(
                     height: 30.0,
@@ -83,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 30.0,
+                    height: 10.0,
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -123,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 20.0,
+                    height: 30.0,
                   ),
                   const SizedBox(
                     width: double.infinity,
@@ -145,11 +146,7 @@ class LoginScreen extends StatelessWidget {
                       child: Text(
                         Constants.forgotPassword,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0),
+                        style: MyTextStyle.heading3,
                       ),
                     ),
                   ),

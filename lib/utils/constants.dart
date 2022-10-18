@@ -39,7 +39,8 @@ class Constants{
   static const String registerPasswordLabel = "Correo electrónico";
   static const String confirmPasswordLabel = "Confirmar contraseña";
   static const String cb1Label = "Quiero recibir actualizaciones, recetas y consejos de Fittech en mi correo.";
-  static const String cb2Label = "Al registrarte, aceptas nuestros Términos y Condiciones y Políticas de Datos.";
+  static const String cb2Label1 = "Al registrarte, aceptas nuestros ";
+  static const String cb2Label2 = "Términos y Condiciones y Políticas de Datos.";
   static const String cb3Label = "Para crear mi programa personalizado, acepto que Fittech recopile y procese datos de salud.";
   static const String continueLabel = "Continuar";
 

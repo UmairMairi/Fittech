@@ -6,6 +6,7 @@ import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -79,7 +80,7 @@ class _IntroScreenState extends State<IntroScreen> {
                           ),
                           Expanded(
                             child: PageView(
-                              allowImplicitScrolling: false,
+                              allowImplicitScrolling: true,
                               scrollDirection: Axis.horizontal,
                               controller: controller,
                               onPageChanged: (index) {
@@ -199,11 +200,7 @@ class _IntroScreenState extends State<IntroScreen> {
           Text(
             item.title,
             textAlign: TextAlign.start,
-            style: const TextStyle(
-                fontFamily: 'Open Sance',
-                color: MyColors.whiteColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.0),
+            style: MyTextStyle.heading2.copyWith(color: MyColors.whiteColor),
           ),
           const SizedBox(
             height: 20.0,
@@ -212,11 +209,7 @@ class _IntroScreenState extends State<IntroScreen> {
             child: Text(
               item.info,
               textAlign: TextAlign.start,
-              style: const TextStyle(
-                  fontFamily: 'Open Sance',
-                  color: MyColors.whiteColor,
-                  fontSize: 16.0,
-                  height: 1.5),
+              style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
             ),
           ),
         ],

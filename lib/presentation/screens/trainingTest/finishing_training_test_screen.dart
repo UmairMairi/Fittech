@@ -3,6 +3,7 @@ import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -33,32 +34,13 @@ class FinishingTrainingTestScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.finishingTrainingTestScreenTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
+
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
                       color: MyColors.blackColor,
@@ -68,8 +50,32 @@ class FinishingTrainingTestScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                ),
-              ],
+                  const Expanded(
+                    child: Text(
+                      Constants.finishingTrainingTestScreenTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Open Sance',
+                          color: MyColors.blackColor,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: MyColors.blackColor,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             const LinearProgressIndicator(
               minHeight: 8,
@@ -90,11 +96,7 @@ class FinishingTrainingTestScreen extends StatelessWidget {
                       const Text(
                         Constants.finishingTrainingTestScreenTitle2,
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 28.0),
+                        style: MyTextStyle.heading2,
                       ),
                       const SizedBox(
                         height: 20.0,
@@ -102,11 +104,7 @@ class FinishingTrainingTestScreen extends StatelessWidget {
 
                       const Text(
                         Constants.finishingTrainingTestScreenInfo1,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            fontSize: 18.0,
-                            color: MyColors.blackColor
-                        ),
+                        style: MyTextStyle.paragraph1,
                       ),
 
                       const SizedBox(
@@ -121,53 +119,39 @@ class FinishingTrainingTestScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                children: const [
-                                  Icon(Icons.warning,color: MyColors.redColor,),
-                                  SizedBox(width: 10,),
+                                children: [
+                                  const Icon(Icons.warning,color: MyColors.redColor,),
+                                  const SizedBox(width: 10,),
                                   Text(
                                     Constants.finishingTrainingTestScreenRecorderLabel,
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.blackColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.0),
+                                    style: MyTextStyle.heading3.copyWith(color: MyColors.redColor),
                                   ),
                                 ],
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              const Text(
+                              Text(
                                Constants.finishingTrainingTestScreenRecorderInfo1,
                                 textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontFamily: 'Open Sance',
-                                    color: MyColors.greyColor,
-                                    fontSize: 18.0),
+                                style: MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
                               Row(
-                                children: const [
-                                  Text(
+                                children: [
+                                  const Text(
                                     'Seleccionaste',
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.blackColor,
-                                        fontSize: 18.0),
+                                    style: MyTextStyle.paragraph1,
                                   ),
-                                  SizedBox(width: 10,),
+                                  const SizedBox(width: 10,),
                                   Text(
                                     'GYM',
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.redColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18.0),
+                                    style: MyTextStyle.heading3.copyWith(color: MyColors.redColor),
                                   ),
                                 ],
                               ),

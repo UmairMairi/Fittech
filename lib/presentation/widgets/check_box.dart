@@ -1,14 +1,17 @@
 import 'package:fit_tech/utils/colors.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class MyCheckBox extends StatefulWidget {
   final String? title;
+  final Widget? child;
   final bool? isChecked;
   final ValueChanged<bool>? valueChanged;
 
   const MyCheckBox({
     Key? key,
-    required this.title,
+    this.title,
+    this.child,
     this.isChecked,
     this.valueChanged,
   }) : super(key: key);
@@ -18,8 +21,8 @@ class MyCheckBox extends StatefulWidget {
 }
 
 class _MyCheckBoxState extends State<MyCheckBox> {
-
   bool state = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,14 +41,19 @@ class _MyCheckBoxState extends State<MyCheckBox> {
             height: 25.0,
             width: 25.0,
             decoration: BoxDecoration(
-                border: Border.all(color: MyColors.blackColor),
+                color: state ? MyColors.redColor : MyColors.whiteColor,
+                border: Border.all(
+                  color: state ? MyColors.redColor : MyColors.blackColor,
+                ),
                 borderRadius: BorderRadius.circular(5.0)),
             child: Checkbox(
               activeColor: MyColors.whiteColor.withAlpha(0),
-              checkColor: MyColors.blackColor,
+              checkColor: MyColors.whiteColor,
               tristate: false,
               value: state,
-              side: BorderSide(color: MyColors.blackColor.withAlpha(0),),
+              side: BorderSide(
+                color: MyColors.blackColor.withAlpha(0),
+              ),
               onChanged: (bool) {
                 setState(() {
                   state = bool!;
@@ -56,15 +64,14 @@ class _MyCheckBoxState extends State<MyCheckBox> {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal:10.0),
-              child: Text(widget.title!,style: const TextStyle(
-                fontFamily: 'Open Sance',
-                fontSize: 18.0,
-                color: MyColors.blackColor,
-              ),),
-            ),
-          )
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: widget.child ??
+                Text(
+                  widget.title!,
+                  style: MyTextStyle.paragraph1,
+                ),
+          ))
         ],
       ),
     );

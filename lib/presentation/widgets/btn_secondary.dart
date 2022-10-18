@@ -14,7 +14,7 @@ class SecondaryButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.image,
-    this.titleSize = 18.0,
+    this.titleSize = 16.0,
     this.onPressed,
     this.backgroundColor = MyColors.whiteColor,
     this.textColor = MyColors.blackColor,
@@ -46,7 +46,8 @@ class SecondaryButton extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontFamily:'Open Sance',
-                color: textColor, fontSize: titleSize,),
+                color: textColor,
+                fontSize: titleSize,),
             ),
           ),
           const SizedBox(

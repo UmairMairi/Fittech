@@ -7,6 +7,7 @@ class PrimaryButton extends StatelessWidget {
   final Function()? onPressed;
   final String title;
   final double? titleSize;
+  final TextStyle? titleStyle;
   final Color? backgroundColor;
   final Color? textColor;
   final bool? isLeading;
@@ -19,6 +20,7 @@ class PrimaryButton extends StatelessWidget {
     required this.title,
     this.titleSize = 18.0,
     this.onPressed,
+    this.titleStyle,
     this.backgroundColor = MyColors.whiteColor,
     this.textColor = MyColors.blackColor,
     this.isLeading = false,
@@ -48,7 +50,7 @@ class PrimaryButton extends StatelessWidget {
             if(leadingChild!=null) leadingChild!,
             Text(
               title,
-              style: MyTextStyle.buttonTitle.copyWith(color: textColor),
+              style: titleStyle??MyTextStyle.buttonTitle.copyWith(color: textColor),
               // style: TextStyle(
               //     color: textColor,
               //     fontFamily:'Open Sance',

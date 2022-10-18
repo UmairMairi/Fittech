@@ -1,8 +1,10 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
+import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class WeightHeightScreen extends StatelessWidget {
@@ -12,56 +14,60 @@ class WeightHeightScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.weightHeightScreenTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 65.0,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
                         color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: MyColors.blackColor,
-                      size: 24.0,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+                    const Expanded(
+                      child: Text(
+                        Constants.weightHeightScreenTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Open Sance',
+                            color: MyColors.blackColor,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Opacity(
+                      opacity: 0.0,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: MyColors.blackColor,
+                          size: 24.0,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            const LinearProgressIndicator(
-              minHeight: 8,
-              backgroundColor: Colors.transparent,
-              value: 0.2,
-              valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
-            ),
-            Expanded(
-              child: Container(
+              ),
+              const LinearProgressIndicator(
+                minHeight: 8,
+                backgroundColor: Colors.transparent,
+                value: 0.2,
+                valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
+              ),
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,11 +78,7 @@ class WeightHeightScreen extends StatelessWidget {
                     const Text(
                       Constants.weightHeightScreenTitle2,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 28.0),
+                      style: MyTextStyle.heading2,
                     ),
                     const SizedBox(
                       height: 20.0,
@@ -84,10 +86,7 @@ class WeightHeightScreen extends StatelessWidget {
                     const Text(
                       Constants.weightHeightScreenTitle2Info,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontSize: 18.0),
+                      style: MyTextStyle.paragraph1,
                     ),
                     const SizedBox(
                       height: 20.0,
@@ -95,64 +94,67 @@ class WeightHeightScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      const Text(
-                        Constants.weightHeightScreenWeightLabel1,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 18.0),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
+                        Row(
+                          children: [
+                            const Expanded(
+                              child: TextFieldPrimary(
+                                title: Constants.weightHeightScreenWeightLabel1,
+                                isLabelRequired: true,
+                                isObscure: false,
+                                keyboardType: TextInputType.number,
+                                suffixText: "Kg.",
+                              ),
                             ),
-                          ),
-                          Expanded(child: Container(),),
-                        ],
-                      )
-                    ],),
+                            Expanded(
+                              child: Container(),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                     const SizedBox(
                       height: 20.0,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      const Text(
-                        Constants.weightHeightScreenWeightLabel2,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 18.0),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
+                        Row(
+                          children: [
+                            const Expanded(
+                              child: TextFieldPrimary(
+                                title: Constants.weightHeightScreenWeightLabel2,
+                                isLabelRequired: true,
+                                isObscure: false,
+                                keyboardType: TextInputType.number,
+                                suffixText: "cm.",
+                              ),
                             ),
-                          ),
-                          Expanded(child: Container(),),
-                        ],
-                      )
-                    ],)
+                            Expanded(
+                              child: Container(),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: PrimaryButton(
-                title: Constants.weightHeightScreenContinueLabel,
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                onPressed: (){
-                  Navigator.pushNamed(context, AboutGoalScreen.tag);
-                },
+              const SizedBox(
+                height: 150.0,
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: PrimaryButton(
+                  title: Constants.weightHeightScreenContinueLabel,
+                  backgroundColor: MyColors.blackColor,
+                  textColor: MyColors.whiteColor,
+                  onPressed: () {
+                    Navigator.pushNamed(context, AboutGoalScreen.tag);
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
