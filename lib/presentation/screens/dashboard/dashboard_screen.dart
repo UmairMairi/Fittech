@@ -1,12 +1,10 @@
 import 'package:fit_tech/data/models/my_plans_list_model.dart';
-import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -70,16 +68,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         const SizedBox(
                           height: 65.0,
-                          child: Expanded(
-                            child: Text(
-                              Constants.myPlanScreenTitle,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: 'Anton',
-                                  color: MyColors.whiteColor,
-                                  fontSize: 32.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          child: Text(
+                            Constants.myPlanScreenTitle,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Anton',
+                                color: MyColors.whiteColor,
+                                fontSize: 32.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                         Text(
@@ -301,7 +297,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 children: [
                                   Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         list[index].title,
@@ -318,7 +314,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         list[index].quantity,
