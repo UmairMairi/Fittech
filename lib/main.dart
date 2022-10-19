@@ -1,9 +1,6 @@
 import 'package:fit_tech/presentation/router/app_routes.dart';
-import 'package:fit_tech/presentation/screens/about/privacy_policy_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'presentation/screens/about/terms_conditions_screen.dart';
-import 'presentation/screens/onBoarding/welcome_screen.dart';
+import 'presentation/screens/dashboard/dashboard_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: WelcomeScreen.tag,
+      initialRoute: DashboardScreen.tag,
       onGenerateRoute: appRoute.onGenerateRoute,
     );
   }

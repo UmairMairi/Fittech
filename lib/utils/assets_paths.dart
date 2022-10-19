@@ -33,4 +33,19 @@ class Images {
   // ShowLevelScreen
   static const showLevelScreenHeartIcon = 'assets/images/icon_done.png';
 
+  // DashboardScreen
+  static const planChecked = 'assets/images/plan_checked.png';
+  static const planUnChecked = 'assets/images/plan_unchecked.png';
+  static const nutritionChecked = 'assets/images/nutrition_checked.png';
+  static const nutritionUnChecked = 'assets/images/nutrition_unchecked.png';
+  static const storeChecked = 'assets/images/store_checked.png';
+  static const storeUnChecked = 'assets/images/store_unchecked.png';
+  static const profileChecked = 'assets/images/profile_checked.png';
+  static const profileUnChecked = 'assets/images/profile_unchecked.png';
+
+  // MyPlansScreen
+  static const myPlansScreenGymBanner = 'assets/images/gym_banner.png';
+  static const myPlansScreenHomeBanner = 'assets/images/home_banner.png';
+  static const myPlansScreenOutdoorBanner = 'assets/images/outdoor_banner.png';
+
 }

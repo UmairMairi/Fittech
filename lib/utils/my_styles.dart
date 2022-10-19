@@ -13,6 +13,9 @@ class MyTextStyle {
       height: 1.75,
       fontWeight: FontWeight.bold);
 
+  static const style = TextStyle(
+      fontFamily: 'Open Sance',);
+
   static const heading3 = TextStyle(
       fontFamily: 'Open Sance',
       fontSize: 18,

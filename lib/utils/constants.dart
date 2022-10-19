@@ -389,4 +389,18 @@ class Constants{
   static const String privacyPolicyScreenInfoTitle3 = "TERCERO. MARCO LEGAL.";
   static const String privacyPolicyScreenInfo3 = "De conformidad con el Artículo 15 de la Constitución Política Colombiana, las personas tienen el derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos o archivos tanto de entidades públicas como privadas. En el 2008 se expidió la Ley 1266, Ley especial y sectorial que regula el denominado “habeas data financiero” conforme al cual toda persona tiene derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ella en bancos de datos, particularmente en relación con la información financiera y crediticia, comercial, de servicio y la proveniente de terceros países. Posteriormente, se expidió la Ley estatutaria 1581 de 2012, la cual fue objeto de pronunciamiento previo por parte de la Corte Constitucional mediante Sentencia C-748 de 2011, por la que se precisó la naturaleza y alcance de dicha norma. Esta Ley regula de manera general la protección de los datos personales. Teniendo en cuenta el marco normativo descrito, en los casos que se presente información financiera, crediticia, comercial, de servicios y la proveniente de terceros países será objeto de tratamiento conforme a lo previsto en la Ley 1266 de 2008 y las normas que la complementan, desarrollan, modifiquen y/o sustituyan. Según lo previsto en el literal j) del artículo 3 de la citada Ley la información regulada por ella es aquella referida al nacimiento, ejecución y extinción de obligaciones dinerarias, independientemente de la naturaleza del contrato que les dé origen. La demás información no comprendida dentro del alcance de la Ley 1266 de 2008 será tratada conforme a la Ley 1581 de 2012 y las normas que la complementan, desarrollan, modifiquen y/o sustituyan.";
 
+  //MyPlanScreen
+  static const String myPlanScreenTitle = "Hola Angel";
+  static const String myPlanScreenInfo = "Métricas de la semana:";
+
+  static const String myPlanScreenCurrentTextTitle = "Test de nivel actual pendiente";
+  static const String myPlanScreenCurrentTextInfo = "Personalizaremos el entrenamiento a tu medida y estableceremos objetivos.";
+  static const String myPlanScreenContinueTestTitle = "Hacer Test";
+
+  static const String myPlanScreenTutorialTitle = "Tutorial de Uso";
+  static const String myPlanScreenTutorialInfo = "Aprende como funciona Fittech";
+  static const String myPlanScreenWatchTutorialTitle = "Ver Tutorial";
+
+  static const String myPlanScreenTodayTrainingTitle = "ENTRENAMIENTO DE HOY";
+
 }

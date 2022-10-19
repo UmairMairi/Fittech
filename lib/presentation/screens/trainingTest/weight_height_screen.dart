@@ -1,4 +1,3 @@
-import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
