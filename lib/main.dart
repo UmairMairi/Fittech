@@ -1,4 +1,5 @@
 import 'package:fit_tech/presentation/router/app_routes.dart';
+import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/screens/onBoarding/welcome_screen.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'FITTECH',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       initialRoute: WelcomeScreen.tag,
       onGenerateRoute: appRoute.onGenerateRoute,

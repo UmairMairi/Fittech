@@ -48,4 +48,17 @@ class Images {
   static const myPlansScreenHomeBanner = 'assets/images/home_banner.png';
   static const myPlansScreenOutdoorBanner = 'assets/images/outdoor_banner.png';
 
+  // NutritionScreen
+  static const nutritionScreenBanner = 'assets/images/nutrition_banner.png';
+
+  // ProfileScreen
+  static const profileScreenGoogleIcon = 'assets/images/icon_google.png';
+
+  static const profileScreenMyDataIcon = 'assets/images/icon_my_data.png';
+  static const profileScreenPerformanceIcon = 'assets/images/icon_performance.png';
+  static const profileScreenResultsIcon = 'assets/images/icon_test_results.png';
+  static const profileScreenNotesIcon = 'assets/images/icon_notes.png';
+  static const profileScreenFaqIcon = 'assets/images/icon_faq.png';
+  static const profileScreenAboutIcon = 'assets/images/icon_about.png';
+
 }

@@ -1,6 +1,7 @@
 import 'package:fit_tech/presentation/screens/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
@@ -121,6 +122,8 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
       case DashboardScreen.tag:
         return MaterialPageRoute(builder: (_) => const DashboardScreen());
+      case StoreScreen.tag:
+        return MaterialPageRoute(builder: (_) => const StoreScreen());
       default:
         return null;
     }

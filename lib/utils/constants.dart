@@ -403,4 +403,17 @@ class Constants{
 
   static const String myPlanScreenTodayTrainingTitle = "ENTRENAMIENTO DE HOY";
 
+  //NutritionScreen
+  static const String nutritionScreenTitle = "Vive saludable con Fittech";
+  static const String nutritionScreenInfo = "Come mejor, piensa positivo, realiza actividad física y genera nuevos hábitos saludables.";
+  static const String nutritionScreenButtonTitle = "Empecemos";
+
+  //ProfileScreen
+  static const String profileScreenTitle = "Mi cuenta";
+  static const String profileScreenMyDataTitle = "Mis Datos";
+  static const String profileScreenCurrentPerformanceTitle = "Rendimiento actual";
+  static const String profileScreenResultsTitle = "Resultados de Test";
+  static const String profileScreenNotesTitle = "Notas de entrenamiento";
+  static const String profileScreenFaqsTitle = "Preguntas frecuentes";
+  static const String profileScreenAboutTitle = "Acerca De";
 }

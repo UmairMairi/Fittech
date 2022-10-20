@@ -1,5 +1,6 @@
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
@@ -30,11 +31,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   child: Text(
                     Constants.privacyPolicyScreenTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
+                    style: MyTextStyle.heading3,
                   ),
                 ),
                 Opacity(
@@ -58,32 +55,19 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 textAlign: TextAlign.start,
                 text: const TextSpan(
                     text: "",
+                    style: MyTextStyle.paragraph1,
                     children: <TextSpan>[
                       TextSpan(
                           text: "\n\n${Constants.privacyPolicyScreenInfoTitle1}\n\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: MyColors.blackColor)),
+                          style: MyTextStyle.heading3),
                       TextSpan(
                           text: Constants.privacyPolicyScreenInfo1,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: MyColors.blackColor),
                       ),
                       TextSpan(
                           text: "\n\n${Constants.privacyPolicyScreenInfoTitle2}\n\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: MyColors.blackColor)),
+                          style: MyTextStyle.heading3),
                       TextSpan(
                           text: "${Constants.privacyPolicyScreenInfo2}\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: MyColors.blackColor),
                       ),
                       TextSpan(
                           text: "\n\n${Constants.privacyPolicyScreenInfoTitle3}\n\n",
@@ -93,10 +77,6 @@ class PrivacyPolicyScreen extends StatelessWidget {
                               color: MyColors.blackColor)),
                       TextSpan(
                           text: "${Constants.privacyPolicyScreenInfo3}\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: MyColors.blackColor),
                       ),
                     ]),
               ),
