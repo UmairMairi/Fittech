@@ -58,13 +58,15 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
               Expanded(
                 child: Stack(
                   fit: StackFit.expand,
+                  alignment: Alignment.bottomCenter,
                   children: [
-                    MyGridView(),
+                    // const MyGridView(),
+                    SingleChildScrollView(child: Image.asset(Images.testimonialScreen,fit: BoxFit.fitWidth,)),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:20.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
 
                           Row(
@@ -80,6 +82,7 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                               title: Constants.beginLabelTestimonial,
                               textColor: MyColors.whiteColor,
                               backgroundColor: MyColors.redColor,
+                              borderColor: MyColors.redColor,
                               onPressed: () {
                                 Navigator.pushNamed(context, TrainingTestScreen.tag);
                               },
@@ -91,34 +94,6 @@ class _TestimonialScreenState extends State<TestimonialScreen> {
                   ],
                 ),
               ),
-              /*Padding(
-                padding: const EdgeInsets.symmetric(horizontal:20.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: PrimaryButton(
-                    title: Constants.continueLabelIntroScreen,
-                    textColor: MyColors.blackColor,
-                    backgroundColor: MyColors.whiteColor,
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Container(
-                height: 0.5,
-                color: MyColors.whiteColor,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: PrimaryButton(
-                  title: Constants.submitLabelIntroScreen,
-                  textColor: MyColors.whiteColor,
-                  backgroundColor: MyColors.blackColor,
-                  onPressed: () {},
-                ),
-              ),*/
             ],
           ),
         ),

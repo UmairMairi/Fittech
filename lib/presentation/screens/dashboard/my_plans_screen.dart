@@ -1,4 +1,8 @@
 import 'package:fit_tech/data/models/my_plans_list_model.dart';
+import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
+import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
+import 'package:fit_tech/presentation/screens/today_training_screen.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -25,17 +29,23 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
         image: Images.myPlansScreenGymBanner,
         title: "Home",
         quantity: "12 ejercicios",
-        duration: "15 minutos"));
+        duration: "15 minutos",
+        route: TodayTrainingScreen.tag,
+    ));
     list.add(MyPlansListModel(
         image: Images.myPlansScreenHomeBanner,
         title: "Gym",
         quantity: "12 ejercicios",
-        duration: "15 minutos"));
+        duration: "15 minutos",
+      route: GymScreen.tag,
+    ));
     list.add(MyPlansListModel(
         image: Images.myPlansScreenOutdoorBanner,
         title: "Outdoor",
         quantity: "12 ejercicios",
-        duration: "15 minutos"));
+        duration: "15 minutos",
+      route: OutdoorScreen.tag,
+    ));
   }
 
   @override
@@ -193,25 +203,25 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
                       const BoxDecoration(color: MyColors.redColor),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             Constants.myPlanScreenCurrentTextTitle,
                             style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
                                 color: MyColors.whiteColor),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15.0,
                           ),
-                          Text(
+                          const Text(
                             Constants.myPlanScreenCurrentTextInfo,
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,
                                 color: MyColors.whiteColor),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15.0,
                           ),
                           PrimaryButton(
@@ -219,6 +229,9 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
                             backgroundColor: MyColors.blackColor,
                             borderColor: MyColors.blackColor,
                             textColor: MyColors.whiteColor,
+                            onPressed: (){
+                              Navigator.pushNamed(context, TrainingTestScreen.tag);
+                            },
                           )
                         ],
                       ),
@@ -236,25 +249,25 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
           decoration: const BoxDecoration(color: MyColors.blackColor),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 Constants.myPlanScreenTutorialTitle,
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w500,
                     color: MyColors.whiteColor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
-              Text(
+              const Text(
                 Constants.myPlanScreenTutorialInfo,
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
                     color: MyColors.whiteColor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
               PrimaryButton(
@@ -262,6 +275,9 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
                 backgroundColor: MyColors.redColor,
                 borderColor: MyColors.redColor,
                 textColor: MyColors.whiteColor,
+                onPressed: (){
+                  Navigator.pushNamed(context, TrainingTestScreen.tag);
+                },
               )
             ],
           ),
@@ -273,70 +289,75 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: AspectRatio(
-                    aspectRatio: 3 / 1.5,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        Container(
-                          color: MyColors.blackColor,
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: Image.asset(
-                            list[index].image,
-                            fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, list[index].route);
+                  },
+                  child: AspectRatio(
+                      aspectRatio: 3 / 1.5,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Container(
+                            color: MyColors.blackColor,
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: Image.asset(
+                              list[index].image,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    list[index].title,
-                                    style: MyTextStyle.style.copyWith(
-                                      color: MyColors.whiteColor,
-                                      fontSize: 24,
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      list[index].title,
+                                      style: MyTextStyle.style.copyWith(
+                                        color: MyColors.whiteColor,
+                                        fontSize: 24,
+                                      ),
                                     ),
-                                  ),
-                                  const Icon(
-                                    Icons.arrow_forward_rounded,
-                                    color: MyColors.whiteColor,
-                                  )
-                                ],
-                              ),
-                              Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    list[index].quantity,
-                                    style: MyTextStyle.paragraph1.copyWith(
+                                    const Icon(
+                                      Icons.arrow_forward_rounded,
                                       color: MyColors.whiteColor,
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      list[index].quantity,
+                                      style: MyTextStyle.paragraph1.copyWith(
+                                        color: MyColors.whiteColor,
+                                      ),
                                     ),
-                                  ),
-                                  const Text(
-                                    " • ",
-                                    style: TextStyle(
-                                        color: MyColors.whiteColor),
-                                  ),
-                                  Text(
-                                    list[index].duration,
-                                    style: MyTextStyle.paragraph1.copyWith(
-                                      color: MyColors.whiteColor,
+                                    const Text(
+                                      " • ",
+                                      style: TextStyle(
+                                          color: MyColors.whiteColor),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    Text(
+                                      list[index].duration,
+                                      style: MyTextStyle.paragraph1.copyWith(
+                                        color: MyColors.whiteColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    )),
+                        ],
+                      )),
+                ),
               );
             })
       ],

@@ -62,9 +62,9 @@ class EnterCountedBeatsScreen extends StatelessWidget {
               ),
             ),
             const LinearProgressIndicator(
-              minHeight: 8,
-              backgroundColor: Colors.transparent,
-              value: 0.2,
+              minHeight: 5,
+              backgroundColor: MyColors.lightGreyColor,
+              value: 0.8,
               valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
             ),
             Expanded(
@@ -118,7 +118,7 @@ class EnterCountedBeatsScreen extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height:20.0),
+            const SizedBox(height:10.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
               child: PrimaryButton(

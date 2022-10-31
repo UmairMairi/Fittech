@@ -78,9 +78,9 @@ class FinishingTrainingTestScreen extends StatelessWidget {
               ),
             ),
             const LinearProgressIndicator(
-              minHeight: 8,
-              backgroundColor: Colors.transparent,
-              value: 1,
+              minHeight: 5,
+              backgroundColor: MyColors.lightGreyColor,
+              value: 0.9,
               valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
             ),
             Expanded(
@@ -114,7 +114,7 @@ class FinishingTrainingTestScreen extends StatelessWidget {
                           margin: const EdgeInsets.only(bottom: 10.0),
                           padding: const EdgeInsets.all(20.0),
                           decoration: const BoxDecoration(
-                              color: MyColors.lightGreyColor),
+                              color: MyColors.extraLightGreyColor),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -157,40 +157,31 @@ class FinishingTrainingTestScreen extends StatelessWidget {
                               ),
                             ],
                           )),
-                      const SizedBox(
-                        height: 20.0,
+                      const SizedBox(height: 20,),
+                      PrimaryButton(
+                        title: Constants.finishingTrainingTestScreenTakeTestLabel,
+                        backgroundColor: MyColors.blackColor,
+                        textColor: MyColors.whiteColor,
+                        onPressed: () {
+                          Navigator.pushNamed(context, TestAfterScreen.tag);
+                        },
                       ),
+                      const SizedBox(height: 20,),
+                      PrimaryButton(
+                        title: Constants.finishingTrainingTestScreenContinueLabel,
+                        backgroundColor: MyColors.whiteColor,
+                        textColor: MyColors.blackColor,
+                        borderColor: MyColors.blackColor,
+                        onPressed: () {
+                          // Navigator.pushNamed(context, ExerciseScreen.tag);
+                        },
+                      ),
+                      const SizedBox(height: 20,),
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: PrimaryButton(
-                title: Constants.finishingTrainingTestScreenTakeTestLabel,
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                onPressed: () {
-                  Navigator.pushNamed(context, TestAfterScreen.tag);
-                },
-              ),
-            ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: PrimaryButton(
-                title: Constants.finishingTrainingTestScreenContinueLabel,
-                backgroundColor: MyColors.whiteColor,
-                textColor: MyColors.blackColor,
-                borderColor: MyColors.blackColor,
-                onPressed: () {
-                  // Navigator.pushNamed(context, ExerciseScreen.tag);
-                },
-              ),
-            ),
-            const SizedBox(height: 20,),
           ],
         ),
       ),

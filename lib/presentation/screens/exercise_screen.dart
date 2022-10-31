@@ -118,8 +118,8 @@ class ExerciseScreen extends StatelessWidget {
                                 children: const [
                                   Expanded(
                                     child: PrimaryButton(
-                                      backgroundColor: MyColors.lightGreyColor,
-                                      borderColor: MyColors.lightGreyColor,
+                                      backgroundColor: MyColors.extraLightGreyColor,
+                                      borderColor: MyColors.extraLightGreyColor,
                                       textColor: MyColors.blackColor,
                                       title: Constants.burpeesAnteriorButton,
                                       leadingChild: Icon(
@@ -134,8 +134,8 @@ class ExerciseScreen extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: PrimaryButton(
-                                      backgroundColor: MyColors.lightGreyColor,
-                                      borderColor: MyColors.lightGreyColor,
+                                      backgroundColor: MyColors.extraLightGreyColor,
+                                      borderColor: MyColors.extraLightGreyColor,
                                       textColor: MyColors.blackColor,
                                       title: Constants.burpeesOmitButton,
                                       trailingChild: Icon(

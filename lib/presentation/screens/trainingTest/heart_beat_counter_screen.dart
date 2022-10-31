@@ -40,15 +40,15 @@ class HeartBeatCounterScreen extends StatelessWidget {
               ),
             ),
             const LinearProgressIndicator(
-              minHeight: 8,
-              backgroundColor: Colors.transparent,
-              value: 0.2,
+              minHeight: 5,
+              backgroundColor: MyColors.lightGreyColor,
+              value: 0.8,
               valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
             ),
             Expanded(
               child: Center(
                 child: Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(40.0),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: MyColors.redColor,width: 5.0)
@@ -63,7 +63,7 @@ class HeartBeatCounterScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
               child: PrimaryButton(
-                title: Constants.heartRateScreenFrequencyLabel,
+                title: "Iniciar",
                 backgroundColor: MyColors.redColor,
                 textColor: MyColors.whiteColor,
                 borderColor: MyColors.redColor,

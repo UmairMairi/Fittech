@@ -32,71 +32,68 @@ class _NutritionScreenState extends State<NutritionScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: MyColors.blackColor,
-      body: SafeArea(
+    return Container(
+      color: Colors.black,
         child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Image.asset(
-                Images.nutritionScreenBanner,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(
-              height: size.height,
-              width: size.width,
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: size.width,
-                        width: size.width,
-                      ),
-                      Text(
-                        Constants.nutritionScreenTitle,
-                        textAlign: TextAlign.center,
-                        style: MyTextStyle.heading1
-                            .copyWith(color: MyColors.whiteColor),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        Constants.nutritionScreenInfo,
-                        textAlign: TextAlign.center,
-                        style: MyTextStyle.paragraph1
-                            .copyWith(color: MyColors.whiteColor),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: PrimaryButton(
-                          title: Constants.nutritionScreenButtonTitle,
-                          textColor: MyColors.whiteColor,
-                          backgroundColor: MyColors.redColor,
-                          borderColor: MyColors.redColor,
-                          onPressed: () {
-                            Navigator.pushNamed(context, TestimonialScreen.tag);
-                          },
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+      alignment: Alignment.topCenter,
+      children: [
+        AspectRatio(
+          aspectRatio: 1,
+          child: Image.asset(
+            Images.nutritionScreenBanner,
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-    );
+        SizedBox(
+          height: size.height,
+          width: size.width,
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: size.width,
+                    width: size.width,
+                  ),
+                  Text(
+                    Constants.nutritionScreenTitle,
+                    textAlign: TextAlign.center,
+                    style: MyTextStyle.heading1
+                        .copyWith(color: MyColors.whiteColor),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    Constants.nutritionScreenInfo,
+                    textAlign: TextAlign.center,
+                    style: MyTextStyle.paragraph1
+                        .copyWith(color: MyColors.whiteColor),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: PrimaryButton(
+                      title: Constants.nutritionScreenButtonTitle,
+                      textColor: MyColors.whiteColor,
+                      backgroundColor: MyColors.redColor,
+                      borderColor: MyColors.redColor,
+                      onPressed: () {
+                        Navigator.pushNamed(context, TestimonialScreen.tag);
+                      },
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 }

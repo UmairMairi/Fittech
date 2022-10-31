@@ -10,7 +10,7 @@ class MyTextStyle {
   static const heading2 = TextStyle(
       fontFamily: 'Open Sance',
       fontSize: 28,
-      height: 1.75,
+      height: 1.28,
       fontWeight: FontWeight.bold);
 
   static const style = TextStyle(
@@ -68,6 +68,6 @@ class MyTextStyle {
   static const buttonTitle = TextStyle(
       fontFamily: 'Open Sance',
       fontSize: 16,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       color: MyColors.blackColor);
 }

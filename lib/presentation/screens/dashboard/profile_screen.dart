@@ -1,15 +1,10 @@
-import 'package:fit_tech/data/models/intro_model.dart';
 import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/info_checks.dart';
+import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -24,22 +19,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var list = <ProfileModel>[
     ProfileModel(
         image: Images.profileScreenMyDataIcon,
-        title: Constants.profileScreenMyDataTitle),
+        title: Constants.profileScreenMyDataTitle,
+        route: MyDataScreen.tag),
     ProfileModel(
         image: Images.profileScreenPerformanceIcon,
-        title: Constants.profileScreenCurrentPerformanceTitle),
+        title: Constants.profileScreenCurrentPerformanceTitle,
+        route: MyDataScreen.tag),
     ProfileModel(
         image: Images.profileScreenResultsIcon,
-        title: Constants.profileScreenResultsTitle),
+        title: Constants.profileScreenResultsTitle,
+        route: MyDataScreen.tag),
     ProfileModel(
         image: Images.profileScreenNotesIcon,
-        title: Constants.profileScreenNotesTitle),
+        title: Constants.profileScreenNotesTitle,
+        route: MyDataScreen.tag),
     ProfileModel(
         image: Images.profileScreenFaqIcon,
-        title: Constants.profileScreenFaqsTitle),
+        title: Constants.profileScreenFaqsTitle,
+        route: MyDataScreen.tag),
     ProfileModel(
         image: Images.profileScreenAboutIcon,
-        title: Constants.profileScreenAboutTitle)
+        title: Constants.profileScreenAboutTitle,
+        route: MyDataScreen.tag),
   ];
 
   @override
@@ -99,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 6),
                   margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: MyColors.lightGreyColor,
+                      color: MyColors.extraLightGreyColor,
                       borderRadius: BorderRadius.circular(50.0)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -127,15 +128,89 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Container(
                   height: 20,
-                  color: MyColors.lightGreyColor,
+                  color: MyColors.extraLightGreyColor,
                 ),
                 Container(
-                  height: 100,
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   color: MyColors.whiteColor,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Image.asset(
+                              Images.actualPlanIcon,
+                              height: 40,
+                              width: 40,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                Constants.profileScreenAboutTitleManual,
+                                style: MyTextStyle.heading3
+                                    .copyWith(color: MyColors.redColor),
+                              ),
+                              const Text(
+                                Constants.profileScreenAboutTitleInfoManual,
+                                style: MyTextStyle.inputTitle,
+                              ),
+                            ],
+                          )
+                        ],
+                      )),
+                      const VerticalDivider(
+                        width: 3,
+                        color: MyColors.redColor,
+                      ),
+                      Expanded(
+                          child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Image.asset(
+                              Images.totalIcon,
+                              height: 40,
+                              width: 40,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "24",
+                                style: MyTextStyle.heading3
+                                    .copyWith(color: MyColors.blackColor),
+                              ),
+                              const Text(
+                                Constants.profileScreenAboutTitleInfoRutine,
+                                style: MyTextStyle.inputTitle,
+                              ),
+                            ],
+                          )
+                        ],
+                      ))
+                    ],
+                  ),
                 ),
                 Container(
                   height: 20,
-                  color: MyColors.lightGreyColor,
+                  color: MyColors.extraLightGreyColor,
                 ),
                 ListView.builder(
                     itemCount: list.length,
@@ -150,13 +225,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               size: 24,
                               color: MyColors.blackColor,
                             ),
-                            trailing: const Icon(Icons.arrow_forward_ios_rounded,color: MyColors.greyMediumColor,),
-                            title: Text(list[index].title,style: MyTextStyle.paragraph1,),
+                            trailing: const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: MyColors.greyMediumColor,
+                            ),
+                            title: Text(
+                              list[index].title,
+                              style: MyTextStyle.paragraph1,
+                            ),
                             minLeadingWidth: 0.0,
-                            onTap: (){},
+                            onTap: () {
+                              Navigator.pushNamed(context, list[index].route);
+                            },
                           ),
-                          if(index != (list.length-1))
-                            const Divider()
+                          if (index != (list.length - 1)) const Divider()
                         ],
                       );
                     })

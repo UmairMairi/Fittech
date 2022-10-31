@@ -9,6 +9,10 @@ import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/verify_identity_screen.dart';
+import 'package:fit_tech/presentation/screens/today_workout.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/biological_gender_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/choose_training_mode_screen.dart';
@@ -45,89 +49,205 @@ class AppRoute {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case WelcomeScreen.tag:
-        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const WelcomeScreen());
       case CreateAccountScreen.tag:
-        return MaterialPageRoute(builder: (_) => const CreateAccountScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const CreateAccountScreen());
       case LoginScreen.tag:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const LoginScreen());
       case RegisterScreen.tag:
-        return MaterialPageRoute(builder: (_) => RegisterScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) => RegisterScreen());
       case OTPScreen.tag:
-        return MaterialPageRoute(builder: (_) => OTPScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) => OTPScreen());
       case LoginWelcomeScreen.tag:
-        return MaterialPageRoute(builder: (_) => const LoginWelcomeScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const LoginWelcomeScreen());
       case SubscribePlanScreen.tag:
-        return MaterialPageRoute(builder: (_) => SubscribePlanScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                SubscribePlanScreen());
       case RecoverPasswordScreen.tag:
-        return MaterialPageRoute(builder: (_) => const RecoverPasswordScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const RecoverPasswordScreen());
       case VerifyCodeScreen.tag:
-        return MaterialPageRoute(builder: (_) => const VerifyCodeScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const VerifyCodeScreen());
       case TestIncompleteScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TestIncompleteScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TestIncompleteScreen());
       case IntroScreen.tag:
-        return MaterialPageRoute(builder: (_) => const IntroScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const IntroScreen());
       case TestimonialScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TestimonialScreen());
-      case TodayWorkoutScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TodayWorkoutScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TestimonialScreen());
+      case TodayTrainingScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TodayTrainingScreen());
       case OutdoorScreen.tag:
-        return MaterialPageRoute(builder: (_) => const GymScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const OutdoorScreen());
       case GymScreen.tag:
-        return MaterialPageRoute(builder: (_) => const OutdoorScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const GymScreen());
       case HeatingScreen.tag:
-        return MaterialPageRoute(builder: (_) => const HeatingScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const HeatingScreen());
       case RestScreen.tag:
-        return MaterialPageRoute(builder: (_) => const RestScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const RestScreen());
       case ExerciseScreen.tag:
-        return MaterialPageRoute(builder: (_) => const ExerciseScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ExerciseScreen());
       case ReplaceExerciseScreen.tag:
-        return MaterialPageRoute(builder: (_) => const ReplaceExerciseScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ReplaceExerciseScreen());
       case TrainingCompletedScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TrainingCompletedScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TrainingCompletedScreen());
       case BreakBetweenSeriesScreen.tag:
-        return MaterialPageRoute(builder: (_) => const BreakBetweenSeriesScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const BreakBetweenSeriesScreen());
       case TrainingTestScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TrainingTestScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TrainingTestScreen());
       case ChooseTrainingModeScreen.tag:
-        return MaterialPageRoute(builder: (_) => const ChooseTrainingModeScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ChooseTrainingModeScreen());
       case BiologicalGenderScreen.tag:
-        return MaterialPageRoute(builder: (_) => const BiologicalGenderScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const BiologicalGenderScreen());
       case WeightHeightScreen.tag:
-        return MaterialPageRoute(builder: (_) => const WeightHeightScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const WeightHeightScreen());
       case AboutGoalScreen.tag:
-        return MaterialPageRoute(builder: (_) => const AboutGoalScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const AboutGoalScreen());
       case PhysicalActivityScreen.tag:
-        return MaterialPageRoute(builder: (_) => const PhysicalActivityScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const PhysicalActivityScreen());
       case MedicalHistoryScreen.tag:
-        return MaterialPageRoute(builder: (_) => const MedicalHistoryScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const MedicalHistoryScreen());
       case FamilyHistoryScreen.tag:
-        return MaterialPageRoute(builder: (_) => const FamilyHistoryScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FamilyHistoryScreen());
       case HeartRateScreen.tag:
-        return MaterialPageRoute(builder: (_) => const HeartRateScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const HeartRateScreen());
       case HeartBeatCounterScreen.tag:
-        return MaterialPageRoute(builder: (_) => const HeartBeatCounterScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const HeartBeatCounterScreen());
       case EnterCountedBeatsScreen.tag:
-        return MaterialPageRoute(builder: (_) => const EnterCountedBeatsScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const EnterCountedBeatsScreen());
       case HeartStatusScreen.tag:
-        return MaterialPageRoute(builder: (_) => const HeartStatusScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const HeartStatusScreen());
       case FinishingTrainingTestScreen.tag:
-        return MaterialPageRoute(builder: (_) => const FinishingTrainingTestScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FinishingTrainingTestScreen());
       case TestAfterScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TestAfterScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TestAfterScreen());
       case ShowLevelScreen.tag:
-        return MaterialPageRoute(builder: (_) => const ShowLevelScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ShowLevelScreen());
       case TermsConditionsScreen.tag:
-        return MaterialPageRoute(builder: (_) => const TermsConditionsScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TermsConditionsScreen());
       case PrivacyPolicyScreen.tag:
-        return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const PrivacyPolicyScreen());
       case DashboardScreen.tag:
-        return MaterialPageRoute(builder: (_) => const DashboardScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const DashboardScreen());
       case StoreScreen.tag:
-        return MaterialPageRoute(builder: (_) => const StoreScreen());
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const StoreScreen());
+      case TodayWorkoutScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TodayWorkoutScreen());
+      case MyDataScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const MyDataScreen());
+      case VerifyIdentityScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                VerifyIdentityScreen());
+      case UpdatePasswordScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                UpdatePasswordScreen());
       default:
         return null;
     }
   }
 
   void dispose() {}
+}
+
+class SlideRightRoute extends PageRouteBuilder {
+  final Widget Function(BuildContext, Animation, Animation) page;
+
+  SlideRightRoute({required this.page})
+      : super(
+          pageBuilder: page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
 }

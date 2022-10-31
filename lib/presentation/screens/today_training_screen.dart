@@ -10,16 +10,16 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class TodayWorkoutScreen extends StatefulWidget {
-  const TodayWorkoutScreen({super.key});
+class TodayTrainingScreen extends StatefulWidget {
+  const TodayTrainingScreen({super.key});
 
   static const String tag = "today_training_screen";
 
   @override
-  State<TodayWorkoutScreen> createState() => _TodayWorkoutScreenState();
+  State<TodayTrainingScreen> createState() => _TodayTrainingScreenState();
 }
 
-class _TodayWorkoutScreenState extends State<TodayWorkoutScreen>
+class _TodayTrainingScreenState extends State<TodayTrainingScreen>
     with TickerProviderStateMixin {
   List<String>? tabNames;
   List<Widget>? tabWidgets;
@@ -33,51 +33,28 @@ class _TodayWorkoutScreenState extends State<TodayWorkoutScreen>
     tabNames = ["Home", "Gym", "Outdoor"];
     tabWidgets = [const TodayWorkoutHome(), Container(), Container()];
     _controller = TabController(length: tabNames!.length, vsync: this);
-    _controller!.addListener(() {
-      if (_controller!.index == 1) {
-        Navigator.pushNamed(context, GymScreen.tag);
-      } else if (_controller!.index == 2) {
-        Navigator.pushNamed(context, OutdoorScreen.tag);
-      }
-    });
+    // _controller!.addListener(() {
+    //   if (_controller!.index == 1) {
+    //     Navigator.pushNamed(context, GymScreen.tag);
+    //   } else if (_controller!.index == 2) {
+    //     Navigator.pushNamed(context, OutdoorScreen.tag);
+    //   }
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
+        child: Column(
           children: [
-            ListView(
-              shrinkWrap: true,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: MyColors.blackColor,
-                        size: 24.0,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    const Expanded(
-                      child: Text(
-                        Constants.titleVerifyCodeScreen,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Opacity(
-                      opacity: 0.0,
-                      child: IconButton(
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
                         icon: const Icon(
                           Icons.arrow_back,
                           color: MyColors.blackColor,
@@ -87,35 +64,60 @@ class _TodayWorkoutScreenState extends State<TodayWorkoutScreen>
                           Navigator.pop(context);
                         },
                       ),
-                    ),
-                  ],
-                ),
-                TabBar(
-                  labelColor: Colors.black,
-                  unselectedLabelStyle: const TextStyle(
-                      fontFamily: 'Open Sance',
-                      color: MyColors.blackColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0),
-                  tabs: tabNames!.map((item) {
-                    return Tab(
-                      height: 30.0,
-                      child: Text(item,
-                          style: const TextStyle(
+                      const Expanded(
+                        child: Text(
+                          Constants.titleVerifyCodeScreen,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
                               fontFamily: 'Open Sance',
                               color: MyColors.blackColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0)),
-                    );
-                  }).toList(),
-                  controller: _controller!,
-                  indicatorColor: Colors.black,
-                  padding: EdgeInsets.zero,
-                  labelStyle: const TextStyle(fontSize: 12.0),
-                ),
-                const TodayWorkoutHome()
-              ],
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Opacity(
+                        opacity: 0.0,
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: MyColors.blackColor,
+                            size: 24.0,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  TabBar(
+                    labelColor: Colors.black,
+                    unselectedLabelStyle: const TextStyle(
+                        fontFamily: 'Open Sance',
+                        color: MyColors.blackColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0),
+                    tabs: tabNames!.map((item) {
+                      return Tab(
+                        height: 30.0,
+                        child: Text(item,
+                            style: const TextStyle(
+                                fontFamily: 'Open Sance',
+                                color: MyColors.blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0)),
+                      );
+                    }).toList(),
+                    controller: _controller!,
+                    indicatorColor: Colors.black,
+                    padding: EdgeInsets.zero,
+                    labelStyle: const TextStyle(fontSize: 12.0),
+                  ),
+                  const TodayWorkoutHome()
+                ],
+              ),
             ),
+            const SizedBox(height: 20,),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -127,6 +129,8 @@ class _TodayWorkoutScreenState extends State<TodayWorkoutScreen>
                 onPressed: () {},
               ),
             ),
+            const SizedBox(height: 20,)
+
           ],
         ),
       ),

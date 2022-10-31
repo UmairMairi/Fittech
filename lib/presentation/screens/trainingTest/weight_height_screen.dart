@@ -61,9 +61,9 @@ class WeightHeightScreen extends StatelessWidget {
                 ),
               ),
               const LinearProgressIndicator(
-                minHeight: 8,
-                backgroundColor: Colors.transparent,
-                value: 0.2,
+                minHeight: 5,
+                backgroundColor: MyColors.lightGreyColor,
+                value: 0.3,
                 valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
               ),
               Container(

@@ -357,26 +357,27 @@ class SubscribePlanScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 10.0),
                     decoration: BoxDecoration(
-                        color: MyColors.greyColor,
-                        border: (currentIndex == index)
-                            ? Border.all(color: Colors.white, width: 2.0)
-                            : null),
+                        color: (currentIndex == index)?MyColors.whiteColor:MyColors.greyColor,
+                        // border: (currentIndex == index)
+                        //     ? Border.all(color: Colors.white, width: 2.0)
+                        //     : null
+                    ),
                     padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 15.0),
                     child: Column(
                       children: [
                         Text(
                           "Plan trimestral",
                           textAlign: TextAlign.center,
-                          style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor,fontSize: 13,),
+                          style: MyTextStyle.paragraph2.copyWith(color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,fontSize: 13,),
                         ),
                         Expanded(child: Container()),
-                        const Center(
+                        Center(
                             child: Text(
                           "USD 9.99",
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: Colors.white,
+                              color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,
                               fontSize: 25,
                               fontFamily: 'Anton',),
                         )),
@@ -384,7 +385,7 @@ class SubscribePlanScreen extends StatelessWidget {
                         Text(
                           "27.000 COP x mes",
                           textAlign: TextAlign.center,
-                          style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor,fontSize: 13,),
+                          style: MyTextStyle.paragraph2.copyWith(color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,fontSize: 13,),
                         ),
                       ],
                     ),
@@ -399,11 +400,14 @@ class SubscribePlanScreen extends StatelessWidget {
                         child: Text(
                           Constants.bestOfferLabel,
                           textAlign: TextAlign.center,
+                          maxLines: 1,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 10,
                             fontFamily: 'Open Sance',
                           ),
+                          overflow: TextOverflow.ellipsis,
+
                         ),
                       ),
                     )

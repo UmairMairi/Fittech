@@ -64,9 +64,9 @@ class HeartRateScreen extends StatelessWidget {
               ),
             ),
             const LinearProgressIndicator(
-              minHeight: 8,
-              backgroundColor: Colors.transparent,
-              value: 0.2,
+              minHeight: 5,
+              backgroundColor: MyColors.lightGreyColor,
+              value: 0.8,
               valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
             ),
             Expanded(
@@ -103,37 +103,32 @@ class HeartRateScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20.0,
                     ),
+
+                    const SizedBox(height: 20,),
+                    PrimaryButton(
+                      title: Constants.heartRateScreenFrequencyLabel,
+                      backgroundColor: MyColors.blackColor,
+                      textColor: MyColors.whiteColor,
+                      borderColor: MyColors.blackColor,
+                      onPressed: (){
+                        Navigator.pushNamed(context, HeartBeatCounterScreen.tag);
+                      },
+                    ),
+                    const SizedBox(height: 10,),
+                    PrimaryButton(
+                      title: Constants.heartRateScreenContinueLaterLabel,
+                      backgroundColor: MyColors.whiteColor,
+                      textColor: MyColors.blackColor,
+                      borderColor: MyColors.blackColor,
+                      onPressed: (){
+                        // Navigator.pushNamed(context, PhysicalActivityScreen.tag);
+                      },
+                    ),
+                    const SizedBox(height: 20,),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: Constants.heartRateScreenFrequencyLabel,
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                borderColor: MyColors.blackColor,
-                onPressed: (){
-                  Navigator.pushNamed(context, HeartBeatCounterScreen.tag);
-                },
-              ),
-            ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: Constants.heartRateScreenContinueLaterLabel,
-                backgroundColor: MyColors.whiteColor,
-                textColor: MyColors.blackColor,
-                borderColor: MyColors.blackColor,
-                onPressed: (){
-                  // Navigator.pushNamed(context, PhysicalActivityScreen.tag);
-                },
-              ),
-            ),
-            const SizedBox(height: 20,),
           ],
         ),
       ),

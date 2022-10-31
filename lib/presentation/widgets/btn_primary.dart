@@ -51,10 +51,6 @@ class PrimaryButton extends StatelessWidget {
             Text(
               title,
               style: titleStyle??MyTextStyle.buttonTitle.copyWith(color: textColor),
-              // style: TextStyle(
-              //     color: textColor,
-              //     fontFamily:'Open Sance',
-              //     fontSize: titleSize,fontWeight: FontWeight.w500),
             ),
             if(trailingChild!=null) trailingChild!,
           ],

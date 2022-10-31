@@ -335,6 +335,7 @@ class Constants{
   static const String heartRateScreenFrequencyLabel = "Empezar con la frecuencia";
   static const String heartRateScreenContinueLaterLabel = "Responder Luego";
 
+
   //EnterCountedBeatsScreen
   static const String enterCountedBeatsScreenTitle = "Test Entrenamiento (8/9)";
   static const String enterCountedBeatsScreenTitle2 = "Indica cuantos latidos contaste:";
@@ -416,4 +417,38 @@ class Constants{
   static const String profileScreenNotesTitle = "Notas de entrenamiento";
   static const String profileScreenFaqsTitle = "Preguntas frecuentes";
   static const String profileScreenAboutTitle = "Acerca De";
+
+  static const String profileScreenAboutTitleManual = "Mensual";
+  static const String profileScreenAboutTitleInfoManual = "Plan actual";
+  static const String profileScreenAboutTitleInfoRutine = "Rutinas totales";
+
+
+
+  //MyDataScreen
+  static const String myDataScreenTitle = "Mis datos";
+  static const String myDataScreenUpdatePhoto = "Cambiar foto";
+
+  static const String myDataScreenName = "Nombre";
+  static const String myDataScreenLastName = "Apellidos";
+  static const String myDataScreenMail = "Correo";
+  static const String myDataScreenGander = "Sexo";
+  static const String myDataScreenUpdatePassword = "Actualizar contraseña";
+
+  //ProfileDialogue
+  static const String ProfileDialogueButtonCancel = "Cancelar";
+  static const String ProfileDialogueButtonSave = "Guardar";
+
+  //UpdatePasswordScreen
+  static const String verifyIdentityScreenTitle = "Verifica tu identidad";
+  static const String verifyIdentityScreenInfo = "Ingresa tu contraseña actual para verificar tu identidad.";
+  static const String verifyIdentityScreenPasswordLabel = "Contraseña";
+  static const String verifyIdentityScreenContinue = "Continuar";
+
+  //UpdatePasswordScreen
+  static const String updatePasswordScreenTitle = "Actualiza contraseña";
+  static const String updatePasswordScreenInfo = "Gracias! Ahora puedes ingresar tu nueva contraseña.";
+  static const String updatePasswordScreenPasswordLabel = "Nueva contraseña";
+  static const String updatePasswordScreenPasswordInfo = "Debe contener mínimo 6 caracteres y un número.";
+  static const String updatePasswordScreenConfirmPasswordLabel = "Confirmar contraseña";
+  static const String updatePasswordScreenContinue = "Continuar";
 }

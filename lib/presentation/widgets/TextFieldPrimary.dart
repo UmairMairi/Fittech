@@ -46,21 +46,21 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Visibility(
-          visible: widget.isLabelRequired!,
-          child: Column(
-            children: [
-              Text(
-                widget.title!,
-                textAlign: TextAlign.start,
-                style: MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
-              ),
-              const SizedBox(
-                height: 5.0,
-              ),
-            ],
-          ),
-        ),
+        // Visibility(
+        //   visible: widget.isLabelRequired!,
+        //   child: Column(
+        //     children: [
+        //       Text(
+        //         widget.title!,
+        //         textAlign: TextAlign.start,
+        //         style: MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
+        //       ),
+        //       const SizedBox(
+        //         height: 5.0,
+        //       ),
+        //     ],
+        //   ),
+        // ),
         TextFormField(
           textAlign: TextAlign.start,
           keyboardType: widget.keyboardType,
@@ -69,6 +69,8 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
           enabled: widget.isEnabled,
           decoration: InputDecoration(
               hintText: widget.hintText ?? "",
+              labelText: widget.title!,
+              labelStyle: MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
               errorStyle: const TextStyle(
                 fontSize: 15,
                 fontFamily: 'Open Sance',

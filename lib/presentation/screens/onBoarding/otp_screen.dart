@@ -12,14 +12,17 @@ class OTPScreen extends StatelessWidget {
   OTPScreen({super.key});
 
   static const String tag = "otp_screen";
-  final TextEditingController otpController = TextEditingController(text: "Angel");
+  final TextEditingController otpController = TextEditingController(
+      text: "Angel");
   final _formKey = GlobalKey<FormState>();
+
+  var isInfoShown = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
           shrinkWrap: true,
           children: [
             SizedBox(
@@ -78,7 +81,7 @@ class OTPScreen extends StatelessWidget {
                         title: Constants.verifyLabel,
                         textColor: MyColors.whiteColor,
                         backgroundColor: MyColors.blackColor,
-                        onPressed: (){
+                        onPressed: () {
                           Navigator.pushNamed(context, LoginWelcomeScreen.tag);
                         },
                       ),
@@ -86,41 +89,51 @@ class OTPScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: PrimaryButton(
-                        title: Constants.resendLabel,
-                        titleStyle: MyTextStyle.buttonTitle.copyWith(
-                          fontWeight: FontWeight.w600
-                        ),
-                        textColor: MyColors.blackColor,
-                        backgroundColor: MyColors.whiteColor,
-                        onPressed: () {
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50.0,
-                    ),
 
-                    const SizedBox(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal:20.0),
-                        child: Text(
-                          Constants.resendTimerInfo,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Open Sance',
-                              color: MyColors.blackColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15.0),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
+                    StatefulBuilder(builder: (context, myState) {
+                      return Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: PrimaryButton(
+                              title: Constants.resendLabel,
+                              titleStyle: MyTextStyle.buttonTitle.copyWith(
+                                  fontWeight: FontWeight.w600
+                              ),
+                              textColor: MyColors.blackColor,
+                              backgroundColor: MyColors.whiteColor,
+                              onPressed: () {
+                                myState((){
+                                  isInfoShown = true;
+                                });
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 50.0,
+                          ),
+                          if(isInfoShown)
+                            const SizedBox(
+                              width: double.infinity,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                child: Text(
+                                  Constants.resendTimerInfo,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'Open Sance',
+                                      color: MyColors.blackColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0),
+                                ),
+                              ),
+                            ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                        ],
+                      );
+                    })
                   ],
                 ),
               ),

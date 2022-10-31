@@ -1,5 +1,6 @@
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class TermsConditionsScreen extends StatelessWidget {
@@ -30,11 +31,7 @@ class TermsConditionsScreen extends StatelessWidget {
                   child: Text(
                     Constants.termsConditionsScreenTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
+                    style: MyTextStyle.heading3,
                   ),
                 ),
                 Opacity(
@@ -57,33 +54,19 @@ class TermsConditionsScreen extends StatelessWidget {
               child: RichText(
                 textAlign: TextAlign.start,
                 text: const TextSpan(
-                    text: "",
+                    style: MyTextStyle.paragraph1,
                     children: <TextSpan>[
                       TextSpan(
                           text: "\n\n${Constants.termsConditionsScreenInfoTitle1}\n\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: MyColors.blackColor)),
+                          style: MyTextStyle.heading3),
                       TextSpan(
                           text: Constants.termsConditionsScreenInfo1,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: MyColors.blackColor),
                       ),
                       TextSpan(
                           text: "\n\n${Constants.termsConditionsScreenInfoTitle2}\n\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: MyColors.blackColor)),
+                          style: MyTextStyle.heading3),
                       TextSpan(
                           text: "${Constants.termsConditionsScreenInfo2}\n",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: MyColors.blackColor),
                       ),
                     ]),
               ),

@@ -193,26 +193,26 @@ class _IntroScreenState extends State<IntroScreen> {
 
   List<Widget> funPagerValue(List<IntroModel> list) {
     return list.map((item) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            item.title,
-            textAlign: TextAlign.start,
-            style: MyTextStyle.heading2.copyWith(color: MyColors.whiteColor),
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          Expanded(
-            child: Text(
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              item.title,
+              textAlign: TextAlign.start,
+              style: MyTextStyle.heading2.copyWith(color: MyColors.whiteColor),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Text(
               item.info,
               textAlign: TextAlign.start,
               style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     }).toList();
   }

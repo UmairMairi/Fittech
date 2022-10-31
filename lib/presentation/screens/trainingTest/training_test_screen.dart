@@ -16,10 +16,10 @@ class TrainingTestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: MyColors.blackColor,
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.blackColor,
+        body: Stack(
           alignment: Alignment.topCenter,
           children: [
             SizedBox(
@@ -33,16 +33,17 @@ class TrainingTestScreen extends StatelessWidget {
             SizedBox(
               height: size.height,
               width: size.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal:20),
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    SizedBox(
-                      height: size.width,
-                      width: size.width
-                    ),
-                    Column(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  SizedBox(
+                    height: size.width,
+                    width: size.width
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(gradient: MyColors.blackGradiant2),
+                    padding: const EdgeInsets.symmetric(horizontal:20),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
@@ -107,8 +108,8 @@ class TrainingTestScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Align(

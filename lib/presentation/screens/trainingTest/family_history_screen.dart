@@ -25,6 +25,8 @@ class FamilyHistoryScreen extends StatelessWidget {
       ChooseTrainingModeModel(title: Constants.familyHistoryScreenLabel5,),
       ChooseTrainingModeModel(title: Constants.familyHistoryScreenLabel6,),
     ];
+    var currentSelectedItem = -1;
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -72,9 +74,9 @@ class FamilyHistoryScreen extends StatelessWidget {
               ),
             ),
             const LinearProgressIndicator(
-              minHeight: 8,
-              backgroundColor: Colors.transparent,
-              value: 0.2,
+              minHeight: 5,
+              backgroundColor: MyColors.lightGreyColor,
+              value: 0.7,
               valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
             ),
             Expanded(
@@ -105,71 +107,80 @@ class FamilyHistoryScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      ListView.builder(
-                        itemCount: list.length,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                              margin: const EdgeInsets.only(bottom: 10.0),
-                              padding: const EdgeInsets.all(10.0),
-                              decoration: const BoxDecoration(
-                                  color: MyColors.lightGreyColor),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    list[index].title,
-                                    textAlign: TextAlign.start,
-                                    style: MyTextStyle.heading3,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  if(list[index].info!=null) Text(
-                                    list[index].info??"",
-                                    textAlign: TextAlign.start,
-                                    style: MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),
-                                  ),
-                                ],
-                              ));
+                      StatefulBuilder(
+                        builder: (context,myState) {
+                          return ListView.builder(
+                            itemCount: list.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: (){
+                                  myState(() {
+                                    currentSelectedItem = index;
+                                  });
+                                },
+                                child: Container(
+                                    margin: const EdgeInsets.only(bottom: 10.0),
+                                    padding: const EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                        color:  (currentSelectedItem == index)
+                                            ? MyColors.redColor
+                                            : MyColors.extraLightGreyColor),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          list[index].title,
+                                          textAlign: TextAlign.start,
+                                          style: MyTextStyle.heading3.copyWith(
+                                              color:
+                                              (currentSelectedItem == index)
+                                                  ? MyColors.whiteColor
+                                                  : MyColors.blackColor),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        if(list[index].info!=null) Text(
+                                          list[index].info??"",
+                                          textAlign: TextAlign.start,
+                                          style: MyTextStyle.paragraph1.copyWith(color: (currentSelectedItem == index)
+                                              ? MyColors.whiteColor
+                                              : MyColors.greyColor),
+                                        ),
+                                      ],
+                                    )),
+                              );
+                            },
+                          );
+                        }
+                      ),
+                      const SizedBox(height: 20,),
+                      PrimaryButton(
+                        title: Constants.physicalActivityScreenContinueLabel,
+                        backgroundColor: MyColors.blackColor,
+                        textColor: MyColors.whiteColor,
+                        onPressed: (){
+                          Navigator.pushNamed(context, HeartRateScreen.tag);
                         },
                       ),
-                      const SizedBox(
-                        height: 20.0,
+                      const SizedBox(height: 20,),
+                      PrimaryButton(
+                        title: Constants.physicalActivityScreenContinueLaterLabel,
+                        backgroundColor: MyColors.whiteColor,
+                        textColor: MyColors.blackColor,
+                        borderColor: MyColors.blackColor,
+                        onPressed: (){
+                          // Navigator.pushNamed(context, PhysicalActivityScreen.tag);
+                        },
                       ),
-
+                      const SizedBox(height: 20,),
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: Constants.physicalActivityScreenContinueLabel,
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                onPressed: (){
-                  Navigator.pushNamed(context, HeartRateScreen.tag);
-                },
-              ),
-            ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: Constants.physicalActivityScreenContinueLaterLabel,
-                backgroundColor: MyColors.whiteColor,
-                textColor: MyColors.blackColor,
-                borderColor: MyColors.blackColor,
-                onPressed: (){
-                  // Navigator.pushNamed(context, PhysicalActivityScreen.tag);
-                },
-              ),
-            ),
-            const SizedBox(height: 20,),
           ],
         ),
       ),

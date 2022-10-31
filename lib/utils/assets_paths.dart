@@ -12,6 +12,9 @@ class Images {
   static const introImage2 = 'assets/images/intro_banner2.png';
   static const introImage3 = 'assets/images/intro_banner3.png';
 
+  // TestimonialScreen
+  static const testimonialScreen = 'assets/images/testimonial.png';
+
   // GymScreen
   static const gymScreenBanner = 'assets/images/subscribe_plan_banner.png';
 
@@ -53,6 +56,8 @@ class Images {
 
   // ProfileScreen
   static const profileScreenGoogleIcon = 'assets/images/icon_google.png';
+  static const actualPlanIcon = 'assets/images/icon_actual_plan.png';
+  static const totalIcon = 'assets/images/icon_total.png';
 
   static const profileScreenMyDataIcon = 'assets/images/icon_my_data.png';
   static const profileScreenPerformanceIcon = 'assets/images/icon_performance.png';
