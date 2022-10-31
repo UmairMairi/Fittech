@@ -92,6 +92,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                         shape: BoxShape.circle,
                         color: MyColors.greyColor,
                       ),
+                      child: Image.asset(Images.profileScreenProfileIcon),
                     ),
                     const SizedBox(height: 20,),
                     Container(
@@ -124,7 +125,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 Expanded(child: Text(
                                   "Angle",
                                   textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: Colors.grey),))
+                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),))
                               ],
                             ),
                           ),
@@ -145,7 +146,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 Expanded(child: Text(
                                   "Castañeda",
                                   textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: Colors.grey),))
+                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),))
                               ],
                             ),
                           ),
@@ -169,7 +170,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 Text(
                                   "ejemplo@gmail.com",
                                   textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: Colors.grey),)
+                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),)
                               ],
                             ),
                           ),
@@ -193,7 +194,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 Expanded(child: Text(
                                   "Hombre",
                                   textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: Colors.grey),))
+                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),))
                               ],
                             ),
                           ),
@@ -211,7 +212,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                       trailing: const Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: MyColors.greyMediumColor,
-                        size: 20,
+                        size: 18,
                       ),
                       title: const Text(
                         Constants.myDataScreenUpdatePassword,

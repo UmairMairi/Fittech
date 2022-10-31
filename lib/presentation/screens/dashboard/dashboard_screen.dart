@@ -1,12 +1,9 @@
-import 'package:fit_tech/data/models/my_plans_list_model.dart';
 import 'package:fit_tech/presentation/screens/dashboard/my_plans_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/nutrition_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/profile_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
-import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +33,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -44,7 +40,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: MyTextStyle.style.copyWith(
-            color: (currentIndex !=2) ?MyColors.redColor:MyColors.blackColor,
+            color:
+                (currentIndex != 2) ? MyColors.redColor : MyColors.blackColor,
             fontSize: 13,
           ),
           unselectedLabelStyle: MyTextStyle.style.copyWith(
@@ -55,9 +52,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           selectedItemColor: MyColors.redColor,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
-            if(index == 2){
+            if (index == 2) {
               Navigator.pushNamed(context, StoreScreen.tag);
-            }else{
+            } else {
               setState(() {
                 currentIndex = index;
               });

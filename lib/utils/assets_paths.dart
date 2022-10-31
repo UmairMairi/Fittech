@@ -55,6 +55,7 @@ class Images {
   static const nutritionScreenBanner = 'assets/images/nutrition_banner.png';
 
   // ProfileScreen
+  static const profileScreenProfileIcon = 'assets/images/icon_profile.png';
   static const profileScreenGoogleIcon = 'assets/images/icon_google.png';
   static const actualPlanIcon = 'assets/images/icon_actual_plan.png';
   static const totalIcon = 'assets/images/icon_total.png';
@@ -65,5 +66,26 @@ class Images {
   static const profileScreenNotesIcon = 'assets/images/icon_notes.png';
   static const profileScreenFaqIcon = 'assets/images/icon_faq.png';
   static const profileScreenAboutIcon = 'assets/images/icon_about.png';
+
+  //AppFounderScreen
+  static const appFounderScreenBanner = 'assets/images/app_founder_banner.png';
+  static const appFounderScreenImage1 = 'assets/images/app_founder_img1.png';
+  static const appFounderScreenImage2 = 'assets/images/app_founder_img2.png';
+
+  //ContactScreen
+  static const contactScreenInst = 'assets/images/icon_my_data.png';
+  static const contactScreenFacebook = 'assets/images/icon_performance.png';
+  static const contactScreenCorreo = 'assets/images/icon_test_results.png';
+
+  //TestResultDialogue
+  static const testResultDialogueHeight = 'assets/images/height.png';
+  static const testResultDialogueMinWaist = 'assets/images/min_waist.png';
+  static const testResultDialogueMaxWaist = 'assets/images/icon_max_waist.png';
+  static const testResultDialogueHip = 'assets/images/icon_hip.png';
+  static const testResultDialogueNeck = 'assets/images/icon_neck.png';
+  static const testResultDialogueMiddleThigh = 'assets/images/icon_middle_thigh.png';
+  static const testResultDialogueArm = 'assets/images/icon_arm.png';
+  static const testResultDialogueChest = 'assets/images/icon_chest.png';
+
 
 }

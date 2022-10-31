@@ -9,8 +9,15 @@ import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/app_founder_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/contact_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_status_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/verify_identity_screen.dart';
 import 'package:fit_tech/presentation/screens/today_workout.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
@@ -222,6 +229,34 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 UpdatePasswordScreen());
+      case TestResultsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TestResultsScreen());
+      case TrainingNotesScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TrainingNotesScreen());
+      case FAQScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FAQScreen());
+      case AboutScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const AboutScreen());
+      case AppFounderScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const AppFounderScreen());
+      case ContactScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ContactScreen());
+      case UpdatePasswordStatusScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const UpdatePasswordStatusScreen());
       default:
         return null;
     }

@@ -8,10 +8,13 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
+import 'update_password_status_screen.dart';
+
 class UpdatePasswordScreen extends StatelessWidget {
   static const String tag = "update_password_screen";
 
   UpdatePasswordScreen({super.key});
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
 
@@ -93,7 +96,8 @@ class UpdatePasswordScreen extends StatelessWidget {
                       ),
                       TextFieldPrimary(
                           isLabelRequired: true,
-                          title: Constants.updatePasswordScreenConfirmPasswordLabel,
+                          title: Constants
+                              .updatePasswordScreenConfirmPasswordLabel,
                           isObscure: true,
                           controller: passwordController,
                           validator: (value) {
@@ -115,8 +119,10 @@ class UpdatePasswordScreen extends StatelessWidget {
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                            }
+                            Navigator.pushNamed(
+                                context, UpdatePasswordStatusScreen.tag);
+                            // if (_formKey.currentState!.validate()) {
+                            // }
                           },
                         ),
                       ),

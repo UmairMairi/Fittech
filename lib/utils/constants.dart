@@ -451,4 +451,82 @@ class Constants{
   static const String updatePasswordScreenPasswordInfo = "Debe contener mínimo 6 caracteres y un número.";
   static const String updatePasswordScreenConfirmPasswordLabel = "Confirmar contraseña";
   static const String updatePasswordScreenContinue = "Continuar";
+
+
+  //TestResult
+  // (health Indicators)
+  static const String healthIndicatorScreenTitle1 = "Índice de masa corporal";
+  static const String healthIndicatorScreenTitle2 = "Índice cintura/cadera";
+  static const String healthIndicatorScreenTitle3 = "Índice cintura/altura";
+  static const String healthIndicatorScreenTitle4 = "Perímetro de cintura";
+  static const String healthIndicatorScreenTitle5 = "TMBA";
+  static const String healthIndicatorScreenTitle6 = "Estrategia nutricional";
+  // (health Indicators)
+  static const String measurementsScreenTitle1 = "Medidas 20 Ago";
+  static const String measurementsScreenTitle2 = "Peso";
+  static const String measurementsScreenTitle3 = "Altura";
+  static const String measurementsScreenTitle4 = "Cintura mínima";
+  static const String measurementsScreenTitle5 = "Cintura máxima";
+  static const String measurementsScreenTitle6 = "Cadera";
+  static const String measurementsScreenTitle7 = "Cuello";
+  static const String measurementsScreenTitle8 = "Muslo medio";
+  static const String measurementsScreenTitle9 = "Brazo";
+  static const String measurementsScreenTitle10 = "Tórax";
+
+  static const String measurementsScreenLabel1 = "Nuevas medidas";
+  static const String measurementsScreenLabel2 = "Comparar";
+
+
+  // Training Notes
+  static const String trainingNotesScreenTitle = "Notas de entrenamiento";
+
+  // AboutScreen
+  static const String aboutScreenTitle = "Acerca De";
+  static const String aboutScreenLabel1 = "App y creadores";
+  static const String aboutScreenLabel2 = "Políticas de Datos";
+  static const String aboutScreenLabel3 = "Términos y condiciones";
+  static const String aboutScreenLabel4 = "Contacto";
+
+  //AppFounderScreen
+  static const String appFounderScreenTitle = "Nota de fundadores";
+  static const String appFounderScreenInfo1 = "Nos complace presentar a Fittech, un sistema inteligente de entrenamiento personal y nutrición que se adapta a los objetivos, contexto y posibilidades de cada persona, teniendo en cuenta todos los parámetros de salud de una manera integral.\n\nCon un plan de entrenamiento y de nutrición personalizado, además de un registro de datos, fotos, e indicadores de salud.\n\ngarantizamos un cambio de 180 grados a tu físico y tu salud. Fittech cuenta con una tienda virtual donde podrás tener acceso a todo lo relacionado con fitness, suplementación e implementos deportivos a tan solo un clic de distancia.";
+  static const String appFounderScreenTitle2 = "Los fundadores:";
+  static const String appFounderScreenTitle3 = "Santiago Valencia";
+  static const String appFounderScreenTitle4 = "Alejandro Mejía";
+  static const String appFounderScreenInfo2 = "Master coach con 10 años de experiencia en los principales centros de acondicionamiento físico de Sudamérica.";
+  static const String appFounderScreenInfo3= "Certificado NSCA (National Strength and Conditioning Association).";
+  static const String appFounderScreenInfo4= "Master en prevención y readaptación, Functional Training.";
+  static const String appFounderScreenInfo5= "Licenciado en educación física universidad de San Buenaventura.";
+
+  static const String appFounderScreenInfo6= "Personal Trainer Certified by IFBB International Federation of Bodybuilding.";
+  static const String appFounderScreenInfo7= "EHFA European Health Fitness Association FEDA Federación Española de Fitness y Actividades dirigidas.";
+  static const String appFounderScreenInfo8= "ISAK International Society for the Advancement of Kinanthropometry.";
+  static const String appFounderScreenInfo9= "8 años de experiencia en los mejores CAF de Suramérica.";
+
+  //ContactScreen
+  static const String contactScreenTitle = "Contacto";
+  static const String contactScreenInsta = "Instagram";
+  static const String contactScreenFacebook = "Facebook";
+  static const String contactScreenCorreo = "Correo";
+
+  // UpdatePasswordScreen
+  static const String passwordUpdateScreenTitle = "¡Contraseña actualizada!";
+  static const String passwordUpdateScreenInfo = "Tu contraseña ha sido actualizada con éxito. Vuelve a iniciar sesión para completar el proceso.";
+  static const String passwordUpdateScreenContinueLabel = "Continuar";
+
+
+  //ProfileDialogue
+  static const String testResultDialogueTitle1 = "Peso";
+  static const String testResultDialogueTitle2 = "Altura";
+  static const String testResultDialogueTitle3 = "Cintura mínima";
+  static const String testResultDialogueTitle4 = "Cintura máxima";
+  static const String testResultDialogueTitle5 = "Cadera";
+  static const String testResultDialogueTitle6 = "Cuello";
+  static const String testResultDialogueTitle7 = "Muslo medio";
+  static const String testResultDialogueTitle8 = "Brazo";
+  static const String testResultDialogueTitle9 = "Tórax";
+
+  static const String testResultDialogueNewMeasure = "Nuevas medidas";
+  static const String testResultDialogueCompare = "Comparar";
+
 }

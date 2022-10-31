@@ -15,161 +15,159 @@ class ProfileDialogue extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
     var selected = 0;
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(color: MyColors.whiteColor),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    getName(category),
-                    textAlign: TextAlign.start,
-                    style: MyTextStyle.heading3
-                        .copyWith(color: MyColors.blackColor),
-                  ),
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: const BoxDecoration(color: MyColors.whiteColor),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  getName(category),
+                  textAlign: TextAlign.start,
+                  style: MyTextStyle.heading3
+                      .copyWith(color: MyColors.blackColor),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.close,
+                  color: MyColors.blackColor,
+                  size: 20,
+                ),
+                constraints:
+                    const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          category != Profile.gender
+              ? TextFieldPrimary(
+                  isLabelRequired: true,
+                  title: getName(category),
+                  isObscure: false,
+                  controller: controller,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {}
+                    return null;
                   },
-                  icon: const Icon(
-                    Icons.close,
-                    color: MyColors.blackColor,
-                    size: 20,
-                  ),
-                  constraints:
-                      const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            category != Profile.gender
-                ? TextFieldPrimary(
-                    isLabelRequired: true,
-                    title: getName(category),
-                    isObscure: false,
-                    controller: controller,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {}
-                      return null;
-                    },
-                    keyboardType: TextInputType.name)
-                : StatefulBuilder(builder: (context, myState) {
-                    return Column(
-                      children: [
-                        Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                myState(() {
-                                  selected = 0;
-                                });
-                              },
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      "Hombre",
-                                      style: MyTextStyle.paragraph1
-                                          .copyWith(color: MyColors.blackColor),
-                                    )),
-                                    Container(
-                                      height: 20,
-                                      width: 20,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (selected == 0)
-                                                  ? MyColors.redColor
-                                                  : MyColors.greyColor,
-                                              width: (selected == 0) ? 5 : 1)),
-                                    )
-                                  ],
-                                ),
+                  keyboardType: TextInputType.name)
+              : StatefulBuilder(builder: (context, myState) {
+                  return Column(
+                    children: [
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              myState(() {
+                                selected = 0;
+                              });
+                            },
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                    "Hombre",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.blackColor),
+                                  )),
+                                  Container(
+                                    height: 20,
+                                    width: 20,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (selected == 0)
+                                                ? MyColors.redColor
+                                                : MyColors.greyColor,
+                                            width: (selected == 0) ? 5 : 1)),
+                                  )
+                                ],
                               ),
                             ),
-                            const Divider()
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            InkWell(
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      "Mujer",
-                                      style: MyTextStyle.paragraph1
-                                          .copyWith(color: MyColors.blackColor),
-                                    )),
-                                    Container(
-                                      height: 20,
-                                      width: 20,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (selected == 1)
-                                                  ? MyColors.redColor
-                                                  : MyColors.greyColor,
-                                              width: (selected == 1) ? 5 : 1)),
-                                    )
-                                  ],
-                                ),
+                          ),
+                          const Divider()
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          InkWell(
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                    "Mujer",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.blackColor),
+                                  )),
+                                  Container(
+                                    height: 20,
+                                    width: 20,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (selected == 1)
+                                                ? MyColors.redColor
+                                                : MyColors.greyColor,
+                                            width: (selected == 1) ? 5 : 1)),
+                                  )
+                                ],
                               ),
-                              onTap: () {
-                                myState(() {
-                                  selected = 1;
-                                });
-                              },
                             ),
-                            const Divider()
-                          ],
-                        ),
-                      ],
-                    );
-                  }),
-            const SizedBox(
-              height: 50,
-            ),
-            Row(
-              children: const [
-                Expanded(
-                  child: PrimaryButton(
-                    title: Constants.ProfileDialogueButtonCancel,
-                    backgroundColor: MyColors.whiteColor,
-                    textColor: Colors.black,
-                    borderColor: MyColors.blackColor,
-                  ),
+                            onTap: () {
+                              myState(() {
+                                selected = 1;
+                              });
+                            },
+                          ),
+                          const Divider()
+                        ],
+                      ),
+                    ],
+                  );
+                }),
+          const SizedBox(
+            height: 50,
+          ),
+          Row(
+            children: const [
+              Expanded(
+                child: PrimaryButton(
+                  title: Constants.ProfileDialogueButtonCancel,
+                  backgroundColor: MyColors.whiteColor,
+                  textColor: Colors.black,
+                  borderColor: MyColors.blackColor,
                 ),
-                SizedBox(
-                  width: 10,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: PrimaryButton(
+                  title: Constants.ProfileDialogueButtonSave,
+                  backgroundColor: MyColors.blackColor,
+                  textColor: MyColors.whiteColor,
+                  borderColor: MyColors.blackColor,
                 ),
-                Expanded(
-                  child: PrimaryButton(
-                    title: Constants.ProfileDialogueButtonSave,
-                    backgroundColor: MyColors.blackColor,
-                    textColor: MyColors.whiteColor,
-                    borderColor: MyColors.blackColor,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

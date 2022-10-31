@@ -1,33 +1,38 @@
+import 'package:fit_tech/presentation/screens/profile/testResults/health_indicator_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class TodayTrainingScreen extends StatefulWidget {
-  const TodayTrainingScreen({super.key});
+class TestResultsScreen extends StatefulWidget {
+  const TestResultsScreen({super.key});
 
-  static const String tag = "today_training_screen";
+  static const String tag = "test_result_screen";
 
   @override
-  State<TodayTrainingScreen> createState() => _TodayTrainingScreenState();
+  State<TestResultsScreen> createState() => _TestResultsScreenState();
 }
 
-class _TodayTrainingScreenState extends State<TodayTrainingScreen>
+class _TestResultsScreenState extends State<TestResultsScreen>
     with TickerProviderStateMixin {
   List<String>? tabNames;
   List<Widget>? tabWidgets;
   TabController? _controller;
   var selectedIndex = 0;
-  var tabSelectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    tabNames = ["Home", "Gym", "Outdoor"];
-    tabWidgets = [const TodayWorkoutHome(), Container(), Container()];
+    tabNames = ["Indicadores de salud", "Mis medidas"];
+    tabWidgets = [const HealthIndicatorsScreen(), const MeasurementsScreen()];
     _controller = TabController(length: tabNames!.length, vsync: this);
+    _controller?.addListener(() {
+      setState(() {
+        selectedIndex = _controller!.index;
+      });
+    });
   }
 
   @override
@@ -37,8 +42,7 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
         body: Column(
           children: [
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
+              child: Column(
                 children: [
                   Row(
                     children: [
@@ -83,13 +87,17 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                     unselectedLabelStyle: const TextStyle(
                         fontFamily: 'Open Sance',
                         color: MyColors.blackColor,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         fontSize: 16.0),
                     tabs: tabNames!.map((item) {
                       return Tab(
-                        height: 30.0,
+                        height: 50.0,
                         child: Text(item,
-                            style: MyTextStyle.inputTitle.copyWith(color: MyColors.blackColor)),
+                            style: const TextStyle(
+                                fontFamily: 'Open Sance',
+                                color: MyColors.blackColor,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16.0)),
                       );
                     }).toList(),
                     controller: _controller!,
@@ -97,24 +105,10 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                     padding: EdgeInsets.zero,
                     labelStyle: const TextStyle(fontSize: 12.0),
                   ),
-                  const TodayWorkoutHome()
+                  Expanded(child: tabWidgets![selectedIndex])
                 ],
               ),
             ),
-            const SizedBox(height: 20,),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: PrimaryButton(
-                title: Constants.beginLabelTestimonial,
-                textColor: MyColors.whiteColor,
-                backgroundColor: MyColors.redColor,
-                borderColor: Colors.transparent,
-                onPressed: () {},
-              ),
-            ),
-            const SizedBox(height: 20,)
-
           ],
         ),
       ),

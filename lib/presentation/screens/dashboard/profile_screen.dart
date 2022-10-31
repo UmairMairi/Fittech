@@ -1,5 +1,9 @@
 import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -24,23 +28,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ProfileModel(
         image: Images.profileScreenPerformanceIcon,
         title: Constants.profileScreenCurrentPerformanceTitle,
-        route: MyDataScreen.tag),
+        route: TestResultsScreen.tag),
     ProfileModel(
         image: Images.profileScreenResultsIcon,
         title: Constants.profileScreenResultsTitle,
-        route: MyDataScreen.tag),
+        route: TestResultsScreen.tag),
     ProfileModel(
         image: Images.profileScreenNotesIcon,
         title: Constants.profileScreenNotesTitle,
-        route: MyDataScreen.tag),
+        route: TrainingNotesScreen.tag),
     ProfileModel(
         image: Images.profileScreenFaqIcon,
         title: Constants.profileScreenFaqsTitle,
-        route: MyDataScreen.tag),
+        route: FAQScreen.tag),
     ProfileModel(
         image: Images.profileScreenAboutIcon,
         title: Constants.profileScreenAboutTitle,
-        route: MyDataScreen.tag),
+        route: AboutScreen.tag),
   ];
 
   @override
@@ -61,10 +65,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
                     Constants.profileScreenTitle,
-                    style: MyTextStyle.heading2,
+                    style: MyTextStyle.style
+                        .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
                 IconButton(
@@ -85,16 +90,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: 100,
-                  width: 100,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: MyColors.greyColor,
+                    height: 110,
+                    width: 110,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: MyColors.greyColor,
+                    ),
+                    child: Image.asset(Images.profileScreenProfileIcon)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    "Angel Castañeda",
+                    style: MyTextStyle.style
+                        .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const Text(
-                  "Angel Castañeda",
-                  style: MyTextStyle.heading2,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 6),
@@ -134,6 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   color: MyColors.whiteColor,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                           child: Row(
@@ -142,10 +152,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Image.asset(
-                              Images.actualPlanIcon,
-                              height: 40,
-                              width: 40,
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              child: Image.asset(
+                                Images.actualPlanIcon,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -179,10 +192,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Image.asset(
-                              Images.totalIcon,
-                              height: 40,
-                              width: 40,
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              child: Image.asset(
+                                Images.totalIcon,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -222,12 +238,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ListTile(
                             leading: ImageIcon(
                               AssetImage(list[index].image),
-                              size: 24,
+                              size: 20,
                               color: MyColors.blackColor,
                             ),
                             trailing: const Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: MyColors.greyMediumColor,
+                              size: 18,
                             ),
                             title: Text(
                               list[index].title,

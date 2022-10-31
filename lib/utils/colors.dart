@@ -20,7 +20,13 @@ class MyColors {
         Colors.black,
         Colors.black,
       ]);
-
+  static const Gradient blackGradiant1 = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Colors.transparent,
+        Colors.black,
+      ]);
   static const Gradient blackGradiant2 = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,

@@ -1,5 +1,6 @@
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class TodayWorkoutHome extends StatelessWidget {
@@ -22,11 +23,7 @@ class TodayWorkoutHome extends StatelessWidget {
             Text(
               Constants.todayWorkoutSubTitle1,
               textAlign: TextAlign.start,
-              style: TextStyle(
-                  fontFamily: 'Open Sance',
-                  color: MyColors.blackColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0),
+              style: MyTextStyle.heading3,
             ),
             SizedBox(
               height: 10.0,
@@ -34,11 +31,7 @@ class TodayWorkoutHome extends StatelessWidget {
             Text(
               Constants.todayWorkoutSubInfo1,
               textAlign: TextAlign.start,
-              style: TextStyle(
-                  fontFamily: 'Open Sance',
-                  color: MyColors.blackColor,
-                  fontSize: 16.0,
-                  height: 1.5),
+              style: MyTextStyle.paragraph1,
             ),
           ],
         ),
@@ -51,17 +44,10 @@ class TodayWorkoutHome extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 20.0,
-            ),
             const Text(
               Constants.todayWorkoutSubTitle2,
               textAlign: TextAlign.start,
-              style: TextStyle(
-                  fontFamily: 'Open Sance',
-                  color: MyColors.blackColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0),
+              style: MyTextStyle.heading3,
             ),
             const SizedBox(
               height: 10.0,
@@ -78,11 +64,7 @@ class TodayWorkoutHome extends StatelessWidget {
                           Text(
                             "Intermedio",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0),
+                            style: MyTextStyle.heading3,
                           ),
                           SizedBox(
                             height: 10.0,
@@ -90,11 +72,7 @@ class TodayWorkoutHome extends StatelessWidget {
                           Text(
                             "Nivel",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15.0),
+                            style: MyTextStyle.paragraph2,
                           ),
                         ],
                       ),
@@ -114,11 +92,7 @@ class TodayWorkoutHome extends StatelessWidget {
                           Text(
                             "≈150.5",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0),
+                            style: MyTextStyle.heading3,
                           ),
                           SizedBox(
                             height: 10.0,
@@ -126,11 +100,8 @@ class TodayWorkoutHome extends StatelessWidget {
                           Text(
                             "Kcal",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15.0),
+                            style: MyTextStyle.paragraph2,
+
                           ),
                         ],
                       ),
@@ -150,11 +121,8 @@ class TodayWorkoutHome extends StatelessWidget {
                           Text(
                             "9 min",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0),
+                            style: MyTextStyle.heading3,
+
                           ),
                           SizedBox(
                             height: 10.0,
@@ -162,11 +130,8 @@ class TodayWorkoutHome extends StatelessWidget {
                           Text(
                             "Duración",
                             textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15.0),
+                            style: MyTextStyle.paragraph2,
+
                           ),
                         ],
                       ),
@@ -190,11 +155,7 @@ class TodayWorkoutHome extends StatelessWidget {
             const Text(
               "${Constants.todayWorkoutSubTitle3} (12)",
               textAlign: TextAlign.start,
-              style: TextStyle(
-                  fontFamily: 'Open Sance',
-                  color: MyColors.blackColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0),
+              style: MyTextStyle.heading3
             ),
             const SizedBox(
               height: 10.0,
@@ -225,11 +186,7 @@ class TodayWorkoutHome extends StatelessWidget {
                                   Text(
                                     "Calentamiento",
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontFamily: 'Open Sance',
-                                        color: MyColors.blackColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0),
+                                    style: MyTextStyle.heading3,
                                   ),
                                   Text(
                                     "00:24",
@@ -238,7 +195,7 @@ class TodayWorkoutHome extends StatelessWidget {
                                         fontFamily: 'Open Sance',
                                         color: MyColors.redColor,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20.0),
+                                        fontSize: 18.0),
                                   ),
                                 ],
                               ),

@@ -1,3 +1,5 @@
+import 'package:fit_tech/presentation/screens/dialogue/test_result_dialogue.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -95,13 +97,17 @@ class WeightHeightScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: TextFieldPrimary(
                                 title: Constants.weightHeightScreenWeightLabel1,
                                 isLabelRequired: true,
                                 isObscure: false,
                                 keyboardType: TextInputType.number,
-                                suffixText: "Kg.",
+                                suffix: InkWell(
+                                  onTap: (){
+                                    showDialogue(context: context, category: TestResult.weight);
+                                  },
+                                    child: const Text("kg")),
                               ),
                             ),
                             Expanded(
@@ -119,13 +125,17 @@ class WeightHeightScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: TextFieldPrimary(
                                 title: Constants.weightHeightScreenWeightLabel2,
                                 isLabelRequired: true,
                                 isObscure: false,
                                 keyboardType: TextInputType.number,
-                                suffixText: "cm.",
+                                suffix: InkWell(
+                                    onTap: (){
+                                      showDialogue(context: context, category: TestResult.height);
+                                    },
+                                    child: const Text("ft")),
                               ),
                             ),
                             Expanded(
@@ -156,6 +166,16 @@ class WeightHeightScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  showDialogue({required BuildContext context, required TestResult category}) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return TestResultsDialogue(category: category);
+      },
+      isScrollControlled: true,
     );
   }
 }
