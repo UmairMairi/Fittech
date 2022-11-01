@@ -529,4 +529,42 @@ class Constants{
   static const String testResultDialogueNewMeasure = "Nuevas medidas";
   static const String testResultDialogueCompare = "Comparar";
 
+
+  //SettingsScreen
+  static const String settingsScreenTitle = "Configuración";
+  static const String settingsScreenLabel1 = "Membresía actual";
+  static const String settingsScreenLabel2 = "Privacidad";
+  static const String settingsScreenLabel3 = "Cerrar Sesión";
+
+
+  //CurrentPlanScreen
+  static const String currentPlanScreenTitle = "Membresía actual";
+  static const String currentPlanScreenLabel1 = "Historial de membresías";
+
+  //PrivacyScreen
+  static const String privacyScreenTitle = "Privacidad";
+  static const String privacyScreenLabel1 = "Eliminar cuenta";
+
+  //DeleteAccountScreen
+  static const String deleteAccountTitle = "Eliminar cuenta";
+  static const String deleteAccountInfo = "Al eliminar tu cuenta estás quitando todo el avance en tu viaje fitness con nosotros y retirandote de la plataforma Fittech.";
+  static const String deleteAccountButtonLabel = "Eliminar cuenta";
+
+  static const String deleteAccountDialogueLabel = "¿Estás seguro?";
+  static const String deleteAccountDialogueInfo = "Eliminarás tu cuenta definitivamente.";
+  static const String deleteAccountDialogueButtonLabel1 = "No";
+  static const String deleteAccountDialogueButtonLabel2 = "Sí";
+
+  //CloseSessionDialogue
+  static const String closeSessionDialogueLabel = "Cerrar Sesión";
+  static const String closeSessionDialogueInfo = "Estás por cerrar sesión.";
+  static const String closeSessionDialogueButtonLabel1 = "No";
+  static const String closeSessionDialogueButtonLabel2 = "Sí";
+
+  //CurrentPerformanceScreen
+  static const String currentPerformanceScreenTitle = "Rendimiento actual";
+  static const String currentPerformanceScreenLabel1 = "Metrics of the month";
+  static const String currentPerformanceScreenButtonLabel1 = "No";
+  static const String currentPerformanceScreenButtonLabel2 = "Sí";
+
 }

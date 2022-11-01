@@ -5,9 +5,6 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../about/privacy_policy_screen.dart';
-import '../about/terms_conditions_screen.dart';
 import 'heart_beat_counter_screen.dart';
 
 class HeartRateScreen extends StatelessWidget {
@@ -40,11 +37,7 @@ class HeartRateScreen extends StatelessWidget {
                     child: Text(
                       Constants.heartRateScreenTitle,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
+                      style: MyTextStyle.heading3,
                     ),
                   ),
                   Opacity(

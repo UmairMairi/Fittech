@@ -45,11 +45,7 @@ class BiologicalGenderScreen extends StatelessWidget {
                     child: Text(
                       Constants.biologicalGenderScreenTitle,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
+                      style: MyTextStyle.heading3,
                     ),
                   ),
                   Opacity(

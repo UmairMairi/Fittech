@@ -1,7 +1,7 @@
-import 'package:fit_tech/presentation/screens/about/privacy_policy_screen.dart';
-import 'package:fit_tech/presentation/screens/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';

@@ -1,0 +1,6 @@
+class SettingsModel {
+
+  SettingsModel({required this.title,required this.route});
+  String title;
+  String route;
+}

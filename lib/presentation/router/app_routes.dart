@@ -1,4 +1,3 @@
-import 'package:fit_tech/presentation/screens/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
@@ -9,11 +8,18 @@ import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/app_founder_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/contact_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/app_founder_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/contact_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/current_performance_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/Privacy_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/current_plan_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/delete_acount_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/settings_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
@@ -45,7 +51,6 @@ import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/about/privacy_policy_screen.dart';
 import '../screens/trainingTest/family_history_screen.dart';
 import '../screens/trainingTest/heart_rate_screen.dart';
 import '../screens/trainingTest/heart_status_screen.dart';
@@ -257,6 +262,26 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const UpdatePasswordStatusScreen());
+      case SettingsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const SettingsScreen());
+      case CurrentPlanScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const CurrentPlanScreen());
+      case PrivacyScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const PrivacyScreen());
+      case DeleteAccountScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const DeleteAccountScreen());
+      case CurrentPerformanceScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const CurrentPerformanceScreen());
       default:
         return null;
     }

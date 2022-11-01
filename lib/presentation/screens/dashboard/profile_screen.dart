@@ -1,7 +1,9 @@
 import 'package:fit_tech/data/models/profile_model.dart';
 import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/current_performance_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/settings_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -28,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ProfileModel(
         image: Images.profileScreenPerformanceIcon,
         title: Constants.profileScreenCurrentPerformanceTitle,
-        route: TestResultsScreen.tag),
+        route: CurrentPerformanceScreen.tag),
     ProfileModel(
         image: Images.profileScreenResultsIcon,
         title: Constants.profileScreenResultsTitle,
@@ -73,7 +75,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, SettingsScreen.tag);
+                    },
                     constraints:
                         const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
                     alignment: Alignment.center,

@@ -239,4 +239,4 @@ class _MyDataScreenState extends State<MyDataScreen> {
   }
 }
 
-enum Profile {name,lastName,email,gender,updatePassword}
+enum Profile {name,lastName,email,gender,updatePassword,deleteAccount,logout}

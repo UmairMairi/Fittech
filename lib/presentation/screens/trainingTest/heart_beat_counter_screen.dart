@@ -5,9 +5,6 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../about/privacy_policy_screen.dart';
-import '../about/terms_conditions_screen.dart';
 import 'enter_counted_beats_screen.dart';
 
 class HeartBeatCounterScreen extends StatelessWidget {

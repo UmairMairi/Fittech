@@ -1,30 +1,34 @@
-import 'package:fit_tech/data/models/about_model.dart';
-import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/about/app_founder_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/about/contact_screen.dart';
+import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/data/models/settings_model.dart';
+import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
+import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/Privacy_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/settings/current_plan_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
+import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key});
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
 
-  static const String tag = "about_screen";
+  static const String tag = "settings_screen";
 
   @override
-  State<AboutScreen> createState() => _AboutScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _AboutScreenState extends State<AboutScreen> {
-
+class _SettingsScreenState extends State<SettingsScreen> {
   var list = [
-    AboutModel(title: Constants.aboutScreenLabel1,route: AppFounderScreen.tag),
-    AboutModel(title: Constants.aboutScreenLabel2,route: PrivacyPolicyScreen.tag),
-    AboutModel(title: Constants.aboutScreenLabel3,route: TermsConditionsScreen.tag),
-    AboutModel(title: Constants.aboutScreenLabel4,route: ContactScreen.tag)
+    SettingsModel(
+        title: Constants.settingsScreenLabel1, route: CurrentPlanScreen.tag),
+    SettingsModel(
+        title: Constants.settingsScreenLabel2, route: PrivacyScreen.tag),
+    SettingsModel(title: Constants.settingsScreenLabel3, route: "")
   ];
+
   @override
   void initState() {
     super.initState();
@@ -53,7 +57,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   ),
                   const Expanded(
                     child: Text(
-                      Constants.aboutScreenTitle,
+                      Constants.settingsScreenTitle,
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading3,
                     ),
@@ -82,15 +86,20 @@ class _AboutScreenState extends State<AboutScreen> {
                   return Column(
                     children: [
                       InkWell(
-                        onTap: (){
-                          Navigator.pushNamed(context, list[index].route);
+                        onTap: () {
+                          if (index == (list.length - 1)) {
+                            showDialogue(context: context, category: Profile.logout);
+                          } else {
+                            Navigator.pushNamed(context, list[index].route);
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20),
                           child: Row(
                             children: [
-                              Expanded(child: Text(
+                              Expanded(
+                                  child: Text(
                                 list[index].title,
                                 style: MyTextStyle.paragraph1,
                               )),
@@ -111,5 +120,13 @@ class _AboutScreenState extends State<AboutScreen> {
         ),
       ),
     );
+  }
+
+  showDialogue({required BuildContext context, required Profile category}) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ProfileDialogue(category: category);
+        });
   }
 }

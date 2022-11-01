@@ -87,5 +87,8 @@ class Images {
   static const testResultDialogueArm = 'assets/images/icon_arm.png';
   static const testResultDialogueChest = 'assets/images/icon_chest.png';
 
+  //CurrentPlanScreen
+  static const currentPlanScreenIcon1 = 'assets/images/icon_actual_plan.png';
+
 
 }

@@ -20,6 +20,7 @@ class ProfileDialogue extends StatelessWidget {
       decoration: const BoxDecoration(color: MyColors.whiteColor),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -49,16 +50,20 @@ class ProfileDialogue extends StatelessWidget {
             height: 10,
           ),
           category != Profile.gender
-              ? TextFieldPrimary(
-                  isLabelRequired: true,
-                  title: getName(category),
-                  isObscure: false,
-                  controller: controller,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {}
-                    return null;
-                  },
-                  keyboardType: TextInputType.name)
+              ?category == Profile.deleteAccount
+              ?const Text(Constants.deleteAccountDialogueInfo,style: MyTextStyle.paragraph1,)
+              :category == Profile.logout
+              ?const Text(Constants.closeSessionDialogueInfo,style: MyTextStyle.paragraph1,)
+              :TextFieldPrimary(
+              isLabelRequired: true,
+              title: getName(category),
+              isObscure: false,
+              controller: controller,
+              validator: (value) {
+                if (value == null || value.isEmpty) {}
+                return null;
+              },
+              keyboardType: TextInputType.name)
               : StatefulBuilder(builder: (context, myState) {
                   return Column(
                     children: [
@@ -145,21 +150,26 @@ class ProfileDialogue extends StatelessWidget {
             height: 50,
           ),
           Row(
-            children: const [
+            children: [
               Expanded(
                 child: PrimaryButton(
-                  title: Constants.ProfileDialogueButtonCancel,
+                  title: ((category != Profile.deleteAccount)&&(category != Profile.logout))
+                      ?Constants.ProfileDialogueButtonCancel
+                      :Constants.deleteAccountDialogueButtonLabel1,
                   backgroundColor: MyColors.whiteColor,
                   textColor: Colors.black,
                   borderColor: MyColors.blackColor,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                 child: PrimaryButton(
-                  title: Constants.ProfileDialogueButtonSave,
+                  title: ((category != Profile.deleteAccount)&&(category != Profile.logout))
+                      ?Constants.ProfileDialogueButtonSave
+                      :Constants.deleteAccountDialogueButtonLabel2
+                  ,
                   backgroundColor: MyColors.blackColor,
                   textColor: MyColors.whiteColor,
                   borderColor: MyColors.blackColor,
@@ -183,6 +193,10 @@ class ProfileDialogue extends StatelessWidget {
       return Constants.myDataScreenGander;
     } else if (cat == Profile.name) {
       return Constants.myDataScreenName;
+    } else if (cat == Profile.deleteAccount) {
+      return Constants.deleteAccountDialogueLabel;
+    } else if (cat == Profile.logout) {
+      return Constants.closeSessionDialogueLabel;
     }
   }
 }
