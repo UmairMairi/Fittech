@@ -564,7 +564,8 @@ class Constants{
   //CurrentPerformanceScreen
   static const String currentPerformanceScreenTitle = "Rendimiento actual";
   static const String currentPerformanceScreenLabel1 = "Metrics of the month";
-  static const String currentPerformanceScreenButtonLabel1 = "No";
-  static const String currentPerformanceScreenButtonLabel2 = "Sí";
+
+  // PerformanceTrainingNotesScreen
+  static const String performanceTrainingNotesScreenTitle = "Notas de entrenamiento (2)";
 
 }

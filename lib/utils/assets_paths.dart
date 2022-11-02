@@ -59,6 +59,7 @@ class Images {
   static const profileScreenGoogleIcon = 'assets/images/icon_google.png';
   static const actualPlanIcon = 'assets/images/icon_actual_plan.png';
   static const totalIcon = 'assets/images/icon_total.png';
+  static const settingsIcon = 'assets/images/icon_settings.png';
 
   static const profileScreenMyDataIcon = 'assets/images/icon_my_data.png';
   static const profileScreenPerformanceIcon = 'assets/images/icon_performance.png';
@@ -89,6 +90,9 @@ class Images {
 
   //CurrentPlanScreen
   static const currentPlanScreenIcon1 = 'assets/images/icon_actual_plan.png';
+
+  //CurrentPerformanceScreen
+  static const currentPerformanceScreenIcon1 = 'assets/images/current_performance_icon1.png';
 
 
 }

@@ -1,7 +1,7 @@
 import 'package:fit_tech/data/models/profile_model.dart';
 import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/current_performance_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/FAQs/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/settings_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
@@ -81,9 +81,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     constraints:
                         const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
                     alignment: Alignment.center,
-                    icon: const Icon(
-                      Icons.settings_outlined,
+                    icon: const ImageIcon(
+                      AssetImage(Images.settingsIcon),
                       color: MyColors.blackColor,
+                      size: 24,
                     ))
               ],
             ),

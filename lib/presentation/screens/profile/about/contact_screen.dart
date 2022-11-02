@@ -1,9 +1,6 @@
 import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';

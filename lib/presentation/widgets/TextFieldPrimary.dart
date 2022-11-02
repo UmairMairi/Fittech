@@ -13,6 +13,7 @@ class TextFieldPrimary extends StatefulWidget {
   final String? hintText;
   final String? suffixText;
   final Widget? suffix;
+  final int? lines;
 
   const TextFieldPrimary({
     Key? key,
@@ -25,6 +26,7 @@ class TextFieldPrimary extends StatefulWidget {
     this.validator,
     this.hintText,
     this.suffix,
+    this.lines,
     this.suffixText,
   }) : super(key: key);
 
@@ -67,6 +69,7 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
           controller: widget.controller,
           validator: widget.validator,
           enabled: widget.isEnabled,
+          maxLines: widget.lines,
           decoration: InputDecoration(
               hintText: widget.hintText ?? "",
               labelText: widget.title!,

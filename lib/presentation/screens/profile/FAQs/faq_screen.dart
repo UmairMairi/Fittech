@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/presentation/screens/profile/FAQs/faq_details_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -45,7 +46,7 @@ class _FAQScreenState extends State<FAQScreen> {
                   ),
                   const Expanded(
                     child: Text(
-                      Constants.trainingNotesScreenTitle,
+                      "Preguntas frecuentes",
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading3,
                     ),
@@ -73,21 +74,27 @@ class _FAQScreenState extends State<FAQScreen> {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20),
-                        child: Row(
-                          children: [
-                            Expanded(child: Text(
-                              "Ejemplo de categoría $index",
-                              style: MyTextStyle.paragraph1,
-                            )),
-                            const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: MyColors.greyColor,
-                              size: 18,
-                            )
-                          ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, FAQDetailsScreen.tag);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                "Ejemplo de categoría $index",
+                                style: MyTextStyle.paragraph1,
+                              )),
+                              const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: MyColors.greyColor,
+                                size: 18,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       const Divider()

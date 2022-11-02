@@ -8,13 +8,15 @@ import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/FAQs/faq_details_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/app_founder_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/contact_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/current_performance_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/faq_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/currentPerformance/performance_training_notes_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/FAQs/faq_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/Privacy_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/current_plan_screen.dart';
@@ -62,16 +64,13 @@ class AppRoute {
     switch (routeSettings.name) {
       case WelcomeScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                const WelcomeScreen());
+            page: (context, animation, secondaryAnimation) => const WelcomeScreen());
       case CreateAccountScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                const CreateAccountScreen());
+            page: (context, animation, secondaryAnimation) => const CreateAccountScreen());
       case LoginScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                const LoginScreen());
+            page: (context, animation, secondaryAnimation) => const LoginScreen());
       case RegisterScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) => RegisterScreen());
@@ -246,6 +245,10 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const FAQScreen());
+      case FAQDetailsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FAQDetailsScreen());
       case AboutScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -282,6 +285,10 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const CurrentPerformanceScreen());
+      case TrainingNotesDetailScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TrainingNotesDetailScreen());
       default:
         return null;
     }

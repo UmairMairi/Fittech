@@ -1,5 +1,4 @@
 import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/profile/currentPerformance/performance_training_notes_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -8,16 +7,16 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class TrainingNotesScreen extends StatefulWidget {
-  const TrainingNotesScreen({super.key});
+class FAQDetailsScreen extends StatefulWidget {
+  const FAQDetailsScreen({super.key});
 
-  static const String tag = "training_notes_screen";
+  static const String tag = "faq_details_screen";
 
   @override
-  State<TrainingNotesScreen> createState() => _TrainingNotesScreenState();
+  State<FAQDetailsScreen> createState() => _FAQDetailsScreenState();
 }
 
-class _TrainingNotesScreenState extends State<TrainingNotesScreen> {
+class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
   @override
   void initState() {
     super.initState();
@@ -27,8 +26,7 @@ class _TrainingNotesScreenState extends State<TrainingNotesScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          shrinkWrap: true,
+        body: Column(
           children: [
             SizedBox(
               height: 65.0,
@@ -47,7 +45,7 @@ class _TrainingNotesScreenState extends State<TrainingNotesScreen> {
                   ),
                   const Expanded(
                     child: Text(
-                      Constants.trainingNotesScreenTitle,
+                      "Categoría 1",
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading3,
                     ),
@@ -75,40 +73,21 @@ class _TrainingNotesScreenState extends State<TrainingNotesScreen> {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, TrainingNotesDetailScreen.tag);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20),
-                          child: Row(
-                            children: [
-                              const Expanded(
-                                  child: Text(
-                                "22 de Ago 2022",
-                                style: MyTextStyle.paragraph1,
-                              )),
-                              Container(
-                                padding: const EdgeInsets.all(6),
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: const BoxDecoration(
-                                    color: MyColors.blackColor,
-                                    shape: BoxShape.circle),
-                                child: Center(
-                                    child: Text(
-                                  index.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                )),
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 18,
-                              )
-                            ],
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20),
+                        child: Row(
+                          children: const [
+                            Expanded(child: Text(
+                              "Ejemplo de pregunta",
+                              style: MyTextStyle.paragraph1,
+                            )),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: MyColors.greyColor,
+                              size: 18,
+                            )
+                          ],
                         ),
                       ),
                       const Divider()
