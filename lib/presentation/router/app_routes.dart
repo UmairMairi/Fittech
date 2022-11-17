@@ -1,7 +1,11 @@
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/dashboard/nutrition_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
@@ -22,6 +26,7 @@ import 'package:fit_tech/presentation/screens/profile/settings/Privacy_screen.da
 import 'package:fit_tech/presentation/screens/profile/settings/current_plan_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/delete_acount_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/settings_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
@@ -53,6 +58,7 @@ import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/nutritionTest/nutrition_test_screen.dart';
 import '../screens/trainingTest/family_history_screen.dart';
 import '../screens/trainingTest/heart_rate_screen.dart';
 import '../screens/trainingTest/heart_status_screen.dart';
@@ -64,13 +70,16 @@ class AppRoute {
     switch (routeSettings.name) {
       case WelcomeScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) => const WelcomeScreen());
+            page: (context, animation, secondaryAnimation) =>
+                const WelcomeScreen());
       case CreateAccountScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) => const CreateAccountScreen());
+            page: (context, animation, secondaryAnimation) =>
+                const CreateAccountScreen());
       case LoginScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) => const LoginScreen());
+            page: (context, animation, secondaryAnimation) =>
+                const LoginScreen());
       case RegisterScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) => RegisterScreen());
@@ -289,6 +298,26 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const TrainingNotesDetailScreen());
+      case NutritionTestScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const NutritionTestScreen());
+      case NutritionTrainingLineIdentificationScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const NutritionTrainingLineIdentificationScreen());
+      case ChooseFoodScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                ChooseFoodScreen());
+      case FatPercentageScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FatPercentageScreen());
+      case MeasurementsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const MeasurementsScreen());
       default:
         return null;
     }

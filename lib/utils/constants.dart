@@ -568,4 +568,30 @@ class Constants{
   // PerformanceTrainingNotesScreen
   static const String performanceTrainingNotesScreenTitle = "Notas de entrenamiento (2)";
 
+
+  //NutritionTestScreen
+  static const String nutritionTestScreenTitle = "TEST DE NUTRICIÓN";
+  static const String nutritionTestScreenInfo1 = "Completa el siguiente Test que consiste en un cuestionario de 4 pasos para personalizar las opciones nutricionales.";
+  static const String nutritionTestScreenInfo2 = " ¡Recuerda ser honesto al momento de responder! ";
+  static const String nutritionTestScreenInfo3= "Así podremos ayudarte de manera objetiva en tu viaje fitness.";
+  static const String nutritionTestScreenInfo4= "Este test contiene apartado para ingresar tus medidas físicas. Te recomendamos tener ";
+  static const String nutritionTestScreenInfo5= "cinta métrica a la mano..";
+  static const String nutritionTestScreenStartButton= "Empezar";
+
+  //LineIdentificationScreenScreen
+  static const String lineIdentificationScreenTitle1 = "Test de nutrición (1/4)";
+  static const String lineIdentificationScreenTitle2 = "¿Con qué línea nutricional te identificas?";
+  static const String lineIdentificationScreenLabel1 = "Vegetariano";
+  static const String lineIdentificationScreenLabel2 = "Vegano";
+  static const String lineIdentificationScreenLabel3 = "Pescetariano";
+  static const String lineIdentificationScreenLabel4 = "Como de todo";
+
+  //chooseFoodScreen
+  static const String chooseFoodScreenTitle1 = "Test de nutrición (2/4)";
+  static const String chooseFoodScreenTitle2 = "De los siguiente alimentos elige los que NO te gustan:";
+
+  //faTPercentageScreen
+  static const String faTPercentageScreenTitle1 = "Test de nutrición (3/4)";
+  static const String faTPercentageScreenTitle2 = "Déjanos conocer tu porcentaje graso aprox.";
+
 }

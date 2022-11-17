@@ -69,7 +69,9 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
           controller: widget.controller,
           validator: widget.validator,
           enabled: widget.isEnabled,
-          maxLines: widget.lines,
+          // maxLines: (widget.isObscure == null &&widget.isObscure == false)
+          //     ?widget.lines
+          //     :null,
           decoration: InputDecoration(
               hintText: widget.hintText ?? "",
               labelText: widget.title!,

@@ -1,6 +1,3 @@
-import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';

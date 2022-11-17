@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/intro_model.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_test_screen.dart';
 import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -83,7 +84,7 @@ class _NutritionScreenState extends State<NutritionScreen> {
                       backgroundColor: MyColors.redColor,
                       borderColor: MyColors.redColor,
                       onPressed: () {
-                        Navigator.pushNamed(context, TestimonialScreen.tag);
+                        Navigator.pushNamed(context, NutritionTestScreen.tag);
                       },
                     ),
                   ),
