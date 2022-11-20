@@ -1,3 +1,4 @@
+import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -28,6 +29,14 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
     tabNames = ["Home", "Gym", "Outdoor"];
     tabWidgets = [const TodayWorkoutHome(), Container(), Container()];
     _controller = TabController(length: tabNames!.length, vsync: this);
+
+    // _controller?.addListener(() {
+    //   if(_controller?.index == 1){
+    //     Navigator.pushNamed(context, GymScreen.tag);
+    //   }else if(_controller?.index == 2){
+    //     print("Move to outdoor screen");
+    //   }
+    // });
   }
 
   @override

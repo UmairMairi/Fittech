@@ -197,6 +197,8 @@ class ProfileDialogue extends StatelessWidget {
       return Constants.deleteAccountDialogueLabel;
     } else if (cat == Profile.logout) {
       return Constants.closeSessionDialogueLabel;
+    } else if (cat == Profile.coupon) {
+      return Constants.couponDialogueName;
     }
   }
 }

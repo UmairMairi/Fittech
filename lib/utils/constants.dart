@@ -360,7 +360,7 @@ class Constants{
 
   // TestAfterScreen
   static const String testAfterScreenTitle = "Burpees";
-  static const String testAfterScreenTitleButtonLabel = "I got this far";
+  static const String testAfterScreenTitleButtonLabel = "Hasta aquí llegué";
 
   // ShowLevelScreen
   static const String showLevelScreenTitle = "Básico";
@@ -594,4 +594,16 @@ class Constants{
   static const String faTPercentageScreenTitle1 = "Test de nutrición (3/4)";
   static const String faTPercentageScreenTitle2 = "Déjanos conocer tu porcentaje graso aprox.";
 
+  //OutdoorTrainingScreen
+  static const String outdoorTrainingScreenTitle = "Entrenamiento de hoy";
+  static const String outdoorTrainingScreenHeading1 = "CARDIO";
+  static const String outdoorTrainingScreenHeading2 = "MIXTA";
+
+  //CardioEquipmentScreen
+  static const String cardioEquipmentScreenTitle = "EQUIPO DE CARDIO";
+  static const String cardioEquipmentScreenInfo = "Selecciona el equipo que dispones para hacer la secuencia de cardio al finalizar la rutina.";
+
+  //couponDialogue
+  static const String couponDialogueName = "Tengo un cupón";
+  static const String couponDialogueLabel = "Ingresar cupón";
 }

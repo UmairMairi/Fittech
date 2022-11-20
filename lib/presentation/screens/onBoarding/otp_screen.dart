@@ -13,7 +13,7 @@ class OTPScreen extends StatelessWidget {
 
   static const String tag = "otp_screen";
   final TextEditingController otpController = TextEditingController(
-      text: "Angel");
+      text: "1234");
   final _formKey = GlobalKey<FormState>();
 
   var isInfoShown = false;
@@ -71,7 +71,7 @@ class OTPScreen extends StatelessWidget {
                         validator: (value) {
                           return null;
                         },
-                        keyboardType: TextInputType.text),
+                        keyboardType: TextInputType.number),
                     const SizedBox(
                       height: 30.0,
                     ),
@@ -128,6 +128,7 @@ class OTPScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+
                           const SizedBox(
                             height: 20.0,
                           ),

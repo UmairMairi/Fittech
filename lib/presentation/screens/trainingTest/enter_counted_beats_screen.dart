@@ -1,5 +1,6 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_beat_counter_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -15,9 +16,9 @@ class EnterCountedBeatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
           children: [
             SizedBox(
               height: 65.0,
@@ -122,7 +123,7 @@ class EnterCountedBeatsScreen extends StatelessWidget {
                 backgroundColor: MyColors.whiteColor,
                 textColor: MyColors.blackColor,
                 onPressed: (){
-                  // Navigator.pushNamed(context, HeartStatusScreen.tag);
+                  Navigator.pushNamed(context, HeartBeatCounterScreen.tag);
                 },
               ),
             ),

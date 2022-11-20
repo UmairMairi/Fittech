@@ -1,5 +1,5 @@
 import 'package:fit_tech/presentation/router/app_routes.dart';
-import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      initialRoute: DashboardScreen.tag,
+      initialRoute: WelcomeScreen.tag,
       onGenerateRoute: appRoute.onGenerateRoute,
     );
   }

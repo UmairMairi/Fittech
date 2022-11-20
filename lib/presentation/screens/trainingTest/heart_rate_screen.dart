@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -114,7 +115,7 @@ class HeartRateScreen extends StatelessWidget {
                       textColor: MyColors.blackColor,
                       borderColor: MyColors.blackColor,
                       onPressed: (){
-                        // Navigator.pushNamed(context, PhysicalActivityScreen.tag);
+                        Navigator.pushNamed(context, HeartStatusScreen.tag);
                       },
                     ),
                     const SizedBox(height: 20,),

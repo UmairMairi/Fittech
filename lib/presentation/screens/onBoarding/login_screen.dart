@@ -1,3 +1,4 @@
+import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/recover_password_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -75,12 +76,15 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 30.0,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: PrimaryButton(
                       title: Constants.signIn,
                       textColor: MyColors.whiteColor,
                       backgroundColor: MyColors.blackColor,
+                      onPressed: (){
+                        Navigator.pushNamed(context, DashboardScreen.tag);
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -139,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Navigator.popAndPushNamed(context, RecoverPasswordScreen.tag);
+                      Navigator.pushNamed(context, RecoverPasswordScreen.tag);
                     },
                     child: const SizedBox(
                       width: double.infinity,

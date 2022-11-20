@@ -1,4 +1,5 @@
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
+import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/nutrition_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
@@ -12,6 +13,7 @@ import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/outdoor/outdoor_trainings_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/FAQs/faq_details_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
@@ -318,6 +320,14 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const MeasurementsScreen());
+      case OutdoorTrainingsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const OutdoorTrainingsScreen());
+      case CardioEquipmentsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const CardioEquipmentsScreen());
       default:
         return null;
     }

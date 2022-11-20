@@ -1,10 +1,13 @@
 import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+
+import 'profile/my_data_screen.dart';
 
 class SubscribePlanScreen extends StatelessWidget {
   SubscribePlanScreen({super.key});
@@ -322,7 +325,11 @@ class SubscribePlanScreen extends StatelessWidget {
                             title: Constants.couponLabel,
                             textColor: MyColors.whiteColor,
                             backgroundColor: MyColors.blackColor,
-                            onPressed: () {},
+                            onPressed: () {
+                              showModalBottomSheet<void>(context: context, builder: (BuildContext context){
+                                return const ProfileDialogue(category: Profile.coupon);
+                              });
+                            },
                           ),
                         ),
                       ],

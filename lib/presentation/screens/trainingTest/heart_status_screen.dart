@@ -1,3 +1,4 @@
+import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/intro_screen.dart';
 import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -45,14 +46,14 @@ class HeartStatusScreen extends StatelessWidget {
       Expanded(child: Container()),
       Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
           color: MyColors.redColor,
           shape: BoxShape.circle
         ),
         child: Image.asset(
           Images.heartStatusScreenHeartIcon,
-          height: 60,
+          height: 50,
         ),
       ),
       const SizedBox(
@@ -91,7 +92,7 @@ class HeartStatusScreen extends StatelessWidget {
         ),
       ),
       const SizedBox(
-        height: 20.0,
+        height: 10.0,
       ),
       SizedBox(
         width: double.infinity,
@@ -101,7 +102,7 @@ class HeartStatusScreen extends StatelessWidget {
           backgroundColor: MyColors.blackColor,
           borderColor: MyColors.whiteColor,
           onPressed: (){
-            // Navigator.pushNamed(context,IntroScreen.tag);
+            Navigator.pushNamed(context,DashboardScreen.tag);
           },
         ),
       ),

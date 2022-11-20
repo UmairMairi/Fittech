@@ -22,6 +22,9 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Object? isNutritionTest = ModalRoute.of(context)?.settings.arguments;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -37,39 +40,39 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                   children: [
                     Expanded(
                         child: Container(
-                          color: MyColors.greyColor,
-                        )),
+                      color: MyColors.greyColor,
+                    )),
                     const SizedBox(
                       width: 1,
                     ),
                     Expanded(
                         child: Container(
-                          color: MyColors.greyColor,
-                        )),
+                      color: MyColors.greyColor,
+                    )),
                     const SizedBox(
                       width: 1,
                     ),
                     Expanded(
                         child: Container(
-                          color: MyColors.greyColor,
-                        )),
+                      color: MyColors.greyColor,
+                    )),
                   ],
                 ),
               ),
               Column(
                 children: [
                   Container(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     child: Row(
                       children: [
                         Expanded(
                             child: Text(
-                              Constants.measurementsScreenTitle1,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          Constants.measurementsScreenTitle1,
+                          style: MyTextStyle.paragraph1.copyWith(
+                              color: MyColors.blackColor,
+                              fontWeight: FontWeight.bold),
+                        )),
                         Text(
                           "Ver historial",
                           textAlign: TextAlign.end,
@@ -93,10 +96,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle2,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle2,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "62 kg",
                             textAlign: TextAlign.end,
@@ -107,7 +110,8 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       ),
                     ),
                     onTap: () {
-                      showDialogue(context: context, category: TestResult.weight);
+                      showDialogue(
+                          context: context, category: TestResult.weight);
                     },
                   ),
                   const Divider()
@@ -123,10 +127,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle3,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle3,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "180cm",
                             textAlign: TextAlign.end,
@@ -137,7 +141,8 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       ),
                     ),
                     onTap: () {
-                      showDialogue(context: context, category: TestResult.height);
+                      showDialogue(
+                          context: context, category: TestResult.height);
                     },
                   ),
                   const Divider()
@@ -153,10 +158,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle4,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle4,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -184,10 +189,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle5,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle5,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -215,10 +220,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle6,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle6,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -245,10 +250,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle7,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle7,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -275,10 +280,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle8,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle8,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -306,10 +311,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle9,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle9,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -336,10 +341,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         children: [
                           Expanded(
                               child: Text(
-                                Constants.measurementsScreenTitle10,
-                                style: MyTextStyle.paragraph1
-                                    .copyWith(color: MyColors.blackColor),
-                              )),
+                            Constants.measurementsScreenTitle10,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
                           Text(
                             "60cm",
                             textAlign: TextAlign.end,
@@ -350,7 +355,8 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       ),
                     ),
                     onTap: () {
-                      showDialogue(context: context, category: TestResult.chest);
+                      showDialogue(
+                          context: context, category: TestResult.chest);
                     },
                   ),
                 ],
@@ -361,28 +367,28 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
-                  children: const [
-                    Expanded(
-                      child: PrimaryButton(
-                        title: Constants.measurementsScreenLabel1,
-                        backgroundColor: MyColors.blackColor,
-                        textColor: MyColors.whiteColor,
-                        borderColor: MyColors.blackColor,
+                        children: const [
+                          Expanded(
+                            child: PrimaryButton(
+                              title: Constants.measurementsScreenLabel1,
+                              backgroundColor: MyColors.blackColor,
+                              textColor: MyColors.whiteColor,
+                              borderColor: MyColors.blackColor,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: PrimaryButton(
+                              title: Constants.measurementsScreenLabel2,
+                              backgroundColor: MyColors.whiteColor,
+                              textColor: MyColors.blackColor,
+                              borderColor: MyColors.blackColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: PrimaryButton(
-                        title: Constants.measurementsScreenLabel2,
-                        backgroundColor: MyColors.whiteColor,
-                        textColor: MyColors.blackColor,
-                        borderColor: MyColors.blackColor,
-                      ),
-                    ),
-                  ],
-                ),
               ),
               const SizedBox(
                 height: 40,

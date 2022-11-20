@@ -94,5 +94,8 @@ class Images {
   //CurrentPerformanceScreen
   static const currentPerformanceScreenIcon1 = 'assets/images/current_performance_icon1.png';
 
+  //OutdoorTrainingsScreen
+  static const outdoorTrainingsScreenBanner1 = 'assets/images/outdoor_trainings_screen_banner1.png';
+
 
 }

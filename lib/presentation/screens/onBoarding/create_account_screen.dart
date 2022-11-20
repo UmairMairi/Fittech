@@ -72,12 +72,15 @@ class CreateAccountScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: SecondaryButton(
                         title: Constants.registerWithGoogle,
                         image: 'assets/images/icon_google.png',
                         textColor: MyColors.blackColor,
+                        onPressed: () {
+                          Navigator.pushNamed(context, RegisterScreen.tag);
+                        },
                       ),
                     ),
                     Expanded(child: Container()),

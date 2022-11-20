@@ -91,7 +91,7 @@ class FatPercentageScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, MeasurementsScreen.tag);
+                          Navigator.pushNamed(context, MeasurementsScreen.tag, arguments: true);
                         },
                       ),
                       const SizedBox(

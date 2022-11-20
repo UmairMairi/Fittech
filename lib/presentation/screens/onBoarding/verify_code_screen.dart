@@ -1,5 +1,6 @@
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
@@ -14,9 +15,9 @@ class VerifyCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
           shrinkWrap: true,
           children: [
             Row(
@@ -82,7 +83,7 @@ class VerifyCodeScreen extends StatelessWidget {
                       isObscure: false,
                       keyboardType: TextInputType.text),
                   const SizedBox(
-                    height: 30.0,
+                    height: 50.0,
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -91,12 +92,12 @@ class VerifyCodeScreen extends StatelessWidget {
                       textColor: MyColors.whiteColor,
                       backgroundColor: MyColors.blackColor,
                       onPressed: (){
-                        Navigator.pushNamed(context, LoginWelcomeScreen.tag);
+                        Navigator.pushNamed(context, UpdatePasswordScreen.tag);
                       },
                     ),
                   ),
                   const SizedBox(
-                    height: 20.0,
+                    height: 10.0,
                   ),
                   SizedBox(
                     width: double.infinity,

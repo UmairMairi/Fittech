@@ -27,17 +27,17 @@ class _MyPlansScreenState extends State<MyPlansScreen> {
     super.initState();
     list.add(MyPlansListModel(
         image: Images.myPlansScreenGymBanner,
-        title: "Home",
-        quantity: "12 ejercicios",
-        duration: "15 minutos",
-        route: TodayTrainingScreen.tag,
-    ));
-    list.add(MyPlansListModel(
-        image: Images.myPlansScreenHomeBanner,
         title: "Gym",
         quantity: "12 ejercicios",
         duration: "15 minutos",
-      route: GymScreen.tag,
+        route: GymScreen.tag,
+    ));
+    list.add(MyPlansListModel(
+        image: Images.myPlansScreenHomeBanner,
+        title: "Home",
+        quantity: "12 ejercicios",
+        duration: "15 minutos",
+      route: TodayTrainingScreen.tag,
     ));
     list.add(MyPlansListModel(
         image: Images.myPlansScreenOutdoorBanner,
