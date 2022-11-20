@@ -462,6 +462,7 @@ class Constants{
   static const String healthIndicatorScreenTitle5 = "TMBA";
   static const String healthIndicatorScreenTitle6 = "Estrategia nutricional";
   // (health Indicators)
+  static const String measurementsScreenHeading1 = "Fotos";
   static const String measurementsScreenTitle1 = "Medidas 20 Ago";
   static const String measurementsScreenTitle2 = "Peso";
   static const String measurementsScreenTitle3 = "Altura";
@@ -475,6 +476,7 @@ class Constants{
 
   static const String measurementsScreenLabel1 = "Nuevas medidas";
   static const String measurementsScreenLabel2 = "Comparar";
+  static const String measurementsScreenLabel3 = "Guardar medidas";
 
 
   // Training Notes
@@ -606,4 +608,7 @@ class Constants{
   //couponDialogue
   static const String couponDialogueName = "Tengo un cupón";
   static const String couponDialogueLabel = "Ingresar cupón";
+
+  //AddMeasurementsScreen
+  static const String addMeasurementsScreenTitle = "Agregar medidas";
 }

@@ -4,6 +4,7 @@ import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/nutrition_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
@@ -317,9 +318,15 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const FatPercentageScreen());
       case MeasurementsScreen.tag:
+        var isNutritionTest = routeSettings.arguments as bool?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const MeasurementsScreen());
+                MeasurementsScreen(isNutritionTest: (isNutritionTest ?? false)));
+      case AddMeasurementsScreen.tag:
+        var isNutritionTest = routeSettings.arguments as bool?;
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                AddMeasurementsScreen(isNutritionTest: (isNutritionTest ?? false)));
       case OutdoorTrainingsScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

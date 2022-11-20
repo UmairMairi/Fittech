@@ -6,7 +6,9 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class MeasurementsScreen extends StatefulWidget {
-  const MeasurementsScreen({super.key});
+  final bool isNutritionTest;
+
+  const MeasurementsScreen({super.key, this.isNutritionTest = false});
 
   static const String tag = "measurements_screen";
 
@@ -22,17 +24,22 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    final Object? isNutritionTest = ModalRoute.of(context)?.settings.arguments;
-
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 10,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal:20.0),
+                child: Text(
+                  Constants.measurementsScreenHeading1,
+                  style: MyTextStyle.heading3,
+                ),
               ),
               SizedBox(
                 height: 250,
@@ -40,362 +47,446 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                   children: [
                     Expanded(
                         child: Container(
-                      color: MyColors.greyColor,
-                    )),
+                          color: MyColors.blackColor,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical:20.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: const BoxDecoration(
+                                      color: MyColors.redColor,
+                                      shape: BoxShape.circle),
+                                  child: Text(
+                                    "1",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.whiteColor),
+                                  ),
+                                ),
+                                Expanded(child: Container()),
+                                const Icon(Icons.camera_alt,color: MyColors.redColor,size: 30,),
+                                Expanded(child: Container()),
+                                Text(
+                                  "Frontal",
+                                  style: MyTextStyle.heading3.copyWith(color: MyColors.redColor,fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                     const SizedBox(
                       width: 1,
                     ),
                     Expanded(
                         child: Container(
-                      color: MyColors.greyColor,
-                    )),
+                          color: MyColors.blackColor,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical:20.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: const BoxDecoration(
+                                      color: MyColors.greyAccent,
+                                      shape: BoxShape.circle),
+                                  child: Text(
+                                    "2",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.whiteColor),
+                                  ),
+                                ),
+                                Expanded(child: Container()),
+                                const Icon(Icons.camera_alt,color: MyColors.greyAccent,size: 30,),
+                                Expanded(child: Container()),
+                                Text(
+                                  "Perfil",
+                                  style: MyTextStyle.heading3.copyWith(color: MyColors.greyAccent,fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                     const SizedBox(
                       width: 1,
                     ),
                     Expanded(
                         child: Container(
-                      color: MyColors.greyColor,
-                    )),
+                          color: MyColors.blackColor,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical:20.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: const BoxDecoration(
+                                      color: MyColors.greyAccent,
+                                      shape: BoxShape.circle),
+                                  child: Text(
+                                    "3",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.whiteColor),
+                                  ),
+                                ),
+                                Expanded(child: Container()),
+                                const Icon(Icons.camera_alt,color: MyColors.greyAccent,size: 30,),
+                                Expanded(child: Container()),
+                                Text(
+                                  "Espalda",
+                                  style: MyTextStyle.heading3.copyWith(color: MyColors.greyAccent,fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                   ],
                 ),
               ),
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: Text(
+            ],
+          ),
+          Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Text(
                           Constants.measurementsScreenTitle1,
                           style: MyTextStyle.paragraph1.copyWith(
                               color: MyColors.blackColor,
                               fontWeight: FontWeight.bold),
                         )),
-                        Text(
-                          "Ver historial",
-                          textAlign: TextAlign.end,
-                          style: MyTextStyle.paragraph1.copyWith(
-                              color: MyColors.redColor,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Divider()
-                ],
+                    Text(
+                      "Ver historial",
+                      textAlign: TextAlign.end,
+                      style: MyTextStyle.paragraph1.copyWith(
+                          color: MyColors.redColor,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle2,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "62 kg",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(
-                          context: context, category: TestResult.weight);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"62 kg",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(
+                      context: context, category: TestResult.weight);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle3,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "180cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(
-                          context: context, category: TestResult.height);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"180cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(
+                      context: context, category: TestResult.height);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle4,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(
-                          context: context, category: TestResult.minWaist);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(
+                      context: context, category: TestResult.minWaist);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle5,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(
-                          context: context, category: TestResult.maxWaist);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(
+                      context: context, category: TestResult.maxWaist);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle6,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(context: context, category: TestResult.hip);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(context: context, category: TestResult.hip);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle7,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(context: context, category: TestResult.neck);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(context: context, category: TestResult.neck);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle8,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(
-                          context: context, category: TestResult.middleThigh);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(
+                      context: context, category: TestResult.middleThigh);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle9,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(context: context, category: TestResult.arm);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                  const Divider()
-                ],
+                ),
+                onTap: () {
+                  showDialogue(context: context, category: TestResult.arm);
+                },
               ),
-              Column(
-                children: [
-                  InkWell(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Text(
+              const Divider()
+            ],
+          ),
+          Column(
+            children: [
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
                             Constants.measurementsScreenTitle10,
                             style: MyTextStyle.paragraph1
                                 .copyWith(color: MyColors.blackColor),
                           )),
-                          Text(
-                            "60cm",
-                            textAlign: TextAlign.end,
-                            style: MyTextStyle.paragraph1
-                                .copyWith(color: MyColors.greyColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () {
-                      showDialogue(
-                          context: context, category: TestResult.chest);
-                    },
+                      Text(
+                        widget.isNutritionTest?"+ Agregar":"60cm",
+                        textAlign: TextAlign.end,
+                        style: MyTextStyle.paragraph1
+                            .copyWith(color: widget.isNutritionTest?MyColors.redColor:MyColors.greyColor),
+                      )
+                    ],
                   ),
-                ],
+                ),
+                onTap: () {
+                  showDialogue(
+                      context: context, category: TestResult.chest);
+                },
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                        children: const [
-                          Expanded(
-                            child: PrimaryButton(
-                              title: Constants.measurementsScreenLabel1,
-                              backgroundColor: MyColors.blackColor,
-                              textColor: MyColors.whiteColor,
-                              borderColor: MyColors.blackColor,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: PrimaryButton(
-                              title: Constants.measurementsScreenLabel2,
-                              backgroundColor: MyColors.whiteColor,
-                              textColor: MyColors.blackColor,
-                              borderColor: MyColors.blackColor,
-                            ),
-                          ),
-                        ],
-                      ),
-              ),
-              const SizedBox(
-                height: 40,
-              )
             ],
           ),
-        ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: (widget.isNutritionTest)
+                ? const Expanded(
+              child: PrimaryButton(
+                title: Constants.measurementsScreenLabel3,
+                backgroundColor: MyColors.blackColor,
+                textColor: MyColors.whiteColor,
+                borderColor: MyColors.blackColor,
+              ),
+            )
+                : Row(
+              children: const [
+                Expanded(
+                  child: PrimaryButton(
+                    title: Constants.measurementsScreenLabel1,
+                    backgroundColor: MyColors.blackColor,
+                    textColor: MyColors.whiteColor,
+                    borderColor: MyColors.blackColor,
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: PrimaryButton(
+                    title: Constants.measurementsScreenLabel2,
+                    backgroundColor: MyColors.whiteColor,
+                    textColor: MyColors.blackColor,
+                    borderColor: MyColors.blackColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          )
+        ],
       ),
     );
   }

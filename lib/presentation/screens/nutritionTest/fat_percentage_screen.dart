@@ -9,6 +9,8 @@ import 'package:fit_tech/utils/grid_view_fat_percentage.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
+import 'add_measurements_scren.dart';
+
 class FatPercentageScreen extends StatelessWidget {
   static const String tag = "fat_percentage_screen";
 
@@ -91,7 +93,7 @@ class FatPercentageScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, MeasurementsScreen.tag, arguments: true);
+                          Navigator.pushNamed(context, AddMeasurementsScreen.tag, arguments: true);
                         },
                       ),
                       const SizedBox(
