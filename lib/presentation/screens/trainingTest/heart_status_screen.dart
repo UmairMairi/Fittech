@@ -1,4 +1,5 @@
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/toturial_usage_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/intro_screen.dart';
 import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -11,7 +12,9 @@ import 'package:flutter/material.dart';
 import 'finishing_training_test_screen.dart';
 
 class HeartStatusScreen extends StatelessWidget {
-  const HeartStatusScreen({super.key});
+  const HeartStatusScreen({super.key, this.isNutritionTest = false});
+
+  final bool isNutritionTest;
 
   static const String tag = "heart_status_screen";
 
@@ -26,31 +29,29 @@ class HeartStatusScreen extends StatelessWidget {
           height: size.height,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: size.height>size.width?
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: childrenList(context: context),
-            )
-            :ListView(
-              children:  childrenList(context: context),
-            ),
+            child: size.height > size.width
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: childrenList(context: context),
+                  )
+                : ListView(
+                    children: childrenList(context: context),
+                  ),
           ),
         ),
       ),
     );
   }
 
-  childrenList({required BuildContext context}){
+  childrenList({required BuildContext context}) {
     return <Widget>[
       Expanded(child: Container()),
       Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
-          color: MyColors.redColor,
-          shape: BoxShape.circle
-        ),
+            color: MyColors.redColor, shape: BoxShape.circle),
         child: Image.asset(
           Images.heartStatusScreenHeartIcon,
           height: 50,
@@ -82,33 +83,43 @@ class HeartStatusScreen extends StatelessWidget {
       SizedBox(
         width: double.infinity,
         child: PrimaryButton(
-          title: Constants.heartStatusScreenContinueLabel,
+          title: isNutritionTest?Constants.heartStatusScreenFinalizeLabel:Constants.heartStatusScreenContinueLabel,
           textColor: MyColors.whiteColor,
           backgroundColor: MyColors.redColor,
           borderColor: MyColors.redColor,
-          onPressed: (){
-            Navigator.pushNamed(context,FinishingTrainingTestScreen.tag);
+          onPressed: () {
+            if(isNutritionTest){
+              Navigator.pushNamed(context, TutorialUsageScreen.tag);
+            }else{
+              Navigator.pushNamed(context, FinishingTrainingTestScreen.tag);
+            }
           },
         ),
       ),
       const SizedBox(
         height: 10.0,
       ),
-      SizedBox(
-        width: double.infinity,
-        child: PrimaryButton(
-          title: Constants.heartStatusScreenTryAgainLabel,
-          textColor: MyColors.whiteColor,
-          backgroundColor: MyColors.blackColor,
-          borderColor: MyColors.whiteColor,
-          onPressed: (){
-            Navigator.pushNamed(context,DashboardScreen.tag);
-          },
-        ),
-      ),
-      const SizedBox(
-        height: 20.0,
-      ),
+      if (!isNutritionTest)
+        Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: PrimaryButton(
+                title: Constants.heartStatusScreenTryAgainLabel,
+                textColor: MyColors.whiteColor,
+                backgroundColor: MyColors.blackColor,
+                borderColor: MyColors.whiteColor,
+                onPressed: () {
+                  Navigator.pushNamed(context, DashboardScreen.tag);
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+
+          ],
+        )
     ];
   }
 }

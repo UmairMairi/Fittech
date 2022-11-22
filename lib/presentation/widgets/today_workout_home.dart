@@ -200,15 +200,30 @@ class TodayWorkoutHome extends StatelessWidget {
                                 ],
                               ),
                             )),
-                        IconButton(
-                            onPressed: () {},
-                            padding: const EdgeInsets.all(5.0),
-                            constraints: const BoxConstraints(
-                                minHeight: 0.0, minWidth: 0.0),
-                            icon: const Icon(
-                              Icons.more_horiz,
-                              color: Colors.black,
-                            ))
+                        PopupMenuButton<int>(
+                          constraints: const BoxConstraints(minWidth: 0.0,minHeight: 0.0),
+
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                              value: 1,
+                              textStyle: MyTextStyle.text1,
+                              height: 20,
+                              child: Row(
+                                children: const [
+                                  Text("+ Agregar Nota")
+                                ],
+                              ),
+                            ),
+                          ],
+                          color: Colors.white,
+                        ),
+                        // IconButton(
+                        //     onPressed: () {},
+                        //     constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
+                        //     icon: const Icon(
+                        //       Icons.more_horiz,
+                        //       color: Colors.black,
+                        //     ))
                       ],
                     ));
               },

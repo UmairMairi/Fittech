@@ -97,5 +97,9 @@ class Images {
   //OutdoorTrainingsScreen
   static const outdoorTrainingsScreenBanner1 = 'assets/images/outdoor_trainings_screen_banner1.png';
 
+  // NutritionDetailsScreen
+  static const nutritionDetailsScreenBanner1 = 'assets/images/nutrition_details_banner1.png';
+  static const nutritionDetailsScreenBanner2 = 'assets/images/nutrition_details_banner2.png';
+  static const nutritionDetailsScreenBanner3 = 'assets/images/nutrition_details_banner3.png';
 
 }

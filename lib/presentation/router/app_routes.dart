@@ -7,7 +7,10 @@ import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/toturial_usage_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
@@ -198,9 +201,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const EnterCountedBeatsScreen());
       case HeartStatusScreen.tag:
+        var isNutritionTest = routeSettings.arguments as bool?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const HeartStatusScreen());
+                HeartStatusScreen(isNutritionTest: (isNutritionTest ?? false)));
       case FinishingTrainingTestScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -321,12 +325,14 @@ class AppRoute {
         var isNutritionTest = routeSettings.arguments as bool?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                MeasurementsScreen(isNutritionTest: (isNutritionTest ?? false)));
+                MeasurementsScreen(
+                    isNutritionTest: (isNutritionTest ?? false)));
       case AddMeasurementsScreen.tag:
         var isNutritionTest = routeSettings.arguments as bool?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                AddMeasurementsScreen(isNutritionTest: (isNutritionTest ?? false)));
+                AddMeasurementsScreen(
+                    isNutritionTest: (isNutritionTest ?? false)));
       case OutdoorTrainingsScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -335,6 +341,18 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const CardioEquipmentsScreen());
+      case TutorialUsageScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TutorialUsageScreen());
+      case NutritionListScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const NutritionListScreen());
+      case NutritionDetailsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const NutritionDetailsScreen());
       default:
         return null;
     }

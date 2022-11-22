@@ -21,7 +21,7 @@ class _MyGridViewSmallState extends State<MyGridViewSmall> {
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         return Container(
-          color: MyColors.greyMediumColor,
+          color: MyColors.extraLightGreyColor,
           child: Column(
             children: [
               Image.asset("assets/images/icon_fat_percentage.png"),

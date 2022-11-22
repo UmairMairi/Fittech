@@ -347,6 +347,7 @@ class Constants{
   static const String heartStatusScreenTitle = "¡Buena!";
   static const String heartStatusScreenTitle2 = "Felicidades, tu frecuencia cardiaca en reposo es buena según tu edad y tu género.";
   static const String heartStatusScreenContinueLabel = "Continuar";
+  static const String heartStatusScreenFinalizeLabel = "Finalizar";
   static const String heartStatusScreenTryAgainLabel = "Tomar de nuevo";
 
   // FinishingTrainingTestScreen
@@ -611,4 +612,10 @@ class Constants{
 
   //AddMeasurementsScreen
   static const String addMeasurementsScreenTitle = "Agregar medidas";
+
+
+  //TutorialUsageScreen
+  static const String tutorialUsageScreenTitle = "Tutorial de uso";
+  static const String tutorialUsageScreenButtonLabel = "Continuar";
+
 }

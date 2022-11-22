@@ -1,4 +1,5 @@
 import 'package:fit_tech/presentation/screens/dialogue/test_result_dialogue.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -451,17 +452,22 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: (widget.isNutritionTest)
-                ? const Expanded(
+                ? Expanded(
               child: PrimaryButton(
                 title: Constants.measurementsScreenLabel3,
                 backgroundColor: MyColors.blackColor,
                 textColor: MyColors.whiteColor,
                 borderColor: MyColors.blackColor,
+                onPressed: (){
+                  if(widget.isNutritionTest){
+                    Navigator.pushNamed(context, HeartStatusScreen.tag,arguments: widget.isNutritionTest);
+                  }
+                },
               ),
             )
                 : Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   child: PrimaryButton(
                     title: Constants.measurementsScreenLabel1,
                     backgroundColor: MyColors.blackColor,
@@ -469,7 +475,7 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                     borderColor: MyColors.blackColor,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -478,6 +484,9 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                     backgroundColor: MyColors.whiteColor,
                     textColor: MyColors.blackColor,
                     borderColor: MyColors.blackColor,
+                    onPressed: (){
+
+                    },
                   ),
                 ),
               ],
