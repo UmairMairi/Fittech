@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
+import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -60,7 +61,8 @@ class RestScreen extends StatelessWidget {
                                       textColor: MyColors.whiteColor,
                                       borderColor: MyColors.whiteColor,
                                       onPressed: () {
-                                        Navigator.pop(context);
+                                        // Navigator.pop(context);
+                                        Navigator.pushNamed(context,ExerciseScreen.tag);
                                       },
                                     ),
                                   ),
@@ -73,7 +75,7 @@ class RestScreen extends StatelessWidget {
                                       backgroundColor: MyColors.whiteColor,
                                       textColor: MyColors.blackColor,
                                       onPressed: () {
-                                        Navigator.pop(context);
+                                        Navigator.pushNamed(context,ExerciseScreen.tag);
                                       },
                                     ),
                                   )

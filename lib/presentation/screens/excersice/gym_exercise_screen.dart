@@ -18,7 +18,7 @@ class GymExerciseScreen extends StatefulWidget {
   State<GymExerciseScreen> createState() => _GymExerciseScreenState();
 }
 
-class _GymExerciseScreenState extends State<GymExerciseScreen>{
+class _GymExerciseScreenState extends State<GymExerciseScreen> {
   var isResumed = false;
 
   @override
@@ -31,7 +31,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
           alignment: Alignment.topCenter,
           children: [
             SizedBox(
-              height: size.height * 0.5,
+              height: size.height * 0.4,
               width: size.width,
               child: Stack(
                 fit: StackFit.expand,
@@ -64,7 +64,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                       child: Column(
                         children: [
                           Container(
-                            height: size.height * 0.5,
+                            height: size.height * 0.4,
                             width: size.width,
                             alignment: Alignment.topLeft,
                             child: GestureDetector(
@@ -95,9 +95,8 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                                 color: MyColors.blackColor,
                                 fontSize: 64.0),
                           ),
-
                           Text(
-                            Constants.titleBurpeesScreen,
+                            "Nombre de Ejercicio",
                             textAlign: TextAlign.center,
                             style: MyTextStyle.heading3.copyWith(fontSize: 20),
                             // style: TextStyle(
@@ -105,6 +104,68 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                             //     color: MyColors.blackColor,
                             //     fontSize: 24.0,
                             //     fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Carga sugerida",
+                                        textAlign: TextAlign.center,
+                                        style: MyTextStyle.heading3
+                                            .copyWith(fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        "20 lb",
+                                        textAlign: TextAlign.center,
+                                        style: MyTextStyle.heading3.copyWith(
+                                            fontSize: 22,),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              "Cadencia",
+                                              textAlign: TextAlign.center,
+                                              style: MyTextStyle.heading3
+                                                  .copyWith(fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(horizontal:8.0),
+                                            child: Icon(Icons.help_outline_rounded,size: 20,),
+                                          )
+                                        ],
+                                      ),
+                                      Text(
+                                        "2-2",
+                                        textAlign: TextAlign.center,
+                                        style: MyTextStyle.heading3.copyWith(
+                                            fontSize: 22,),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(
                             height: 20.0,
@@ -123,9 +184,11 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                                 ),
                                 onPressed: () {
                                   if (isResumed) {
-                                    Navigator.pushNamed(context, RestScreen.tag);
+                                    Navigator.pushNamed(
+                                        context, RestScreen.tag);
                                   } else {
-                                    Navigator.pushNamed(context, BreakBetweenSeriesScreen.tag).then((value){
+                                    Navigator.pushNamed(context,BreakBetweenSeriesScreen.tag)
+                                        .then((value) {
                                       isResumed = true;
                                     });
                                   }
@@ -150,8 +213,9 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                                         size: 20,
                                         color: MyColors.blackColor,
                                       ),
-                                      onPressed: (){
-                                        Navigator.pushNamed(context, GymExerciseScreen.tag);
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, GymExerciseScreen.tag);
                                       },
                                     ),
                                   ),
@@ -170,8 +234,9 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                                         size: 20,
                                         color: MyColors.blackColor,
                                       ),
-                                      onPressed: (){
-                                        Navigator.pushNamed(context, RestScreen.tag);
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, RestScreen.tag);
                                       },
                                     ),
                                   ),
@@ -192,8 +257,8 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                               borderColor: MyColors.greyColor,
                               textColor: MyColors.greyColor,
                               title: Constants.burpeesReplaceExcButton,
-                              onPressed: (){
-                                Navigator.pushNamed(context,ReplaceExerciseScreen.tag);
+                              onPressed: () {
+                                Navigator.pushNamed(context, ReplaceExerciseScreen.tag);
                               },
                             ),
                           ),
@@ -203,7 +268,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
                               borderColor: MyColors.greyColor,
                               textColor: MyColors.greyColor,
                               title: Constants.burpeesAddNoteButton,
-                              onPressed: (){
+                              onPressed: () {
                                 showDialogue(context: context);
                               },
                             ),
@@ -223,7 +288,8 @@ class _GymExerciseScreenState extends State<GymExerciseScreen>{
     showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height*0.8),
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
         builder: (BuildContext context) {
           return Padding(
             padding: EdgeInsets.only(

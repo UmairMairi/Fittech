@@ -1,11 +1,14 @@
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
+import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+
+import 'warmup_screen.dart';
 
 class TodayTrainingScreen extends StatefulWidget {
   final int index;
@@ -122,7 +125,14 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                 backgroundColor: MyColors.redColor,
                 borderColor: Colors.transparent,
                 onPressed: () {
-                  Navigator.pushNamed(context, CardioEquipmentsScreen.tag);
+                  if(_controller!.index == 0){
+                    Navigator.pushNamed(context, HeatingScreen.tag);
+                  }else if(_controller!.index == 1){
+                    Navigator.pushNamed(context, CardioEquipmentsScreen.tag);
+                  }else{
+                    Navigator.pushNamed(context, GymExerciseScreen.tag);
+                  }
+
                 },
               ),
             ),

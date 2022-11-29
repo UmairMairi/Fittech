@@ -1,4 +1,6 @@
+import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
+import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -368,15 +370,35 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                     focusedDay: DateTime.now(),
                     daysOfWeekVisible: true,
                     weekNumbersVisible: false,
-                  )
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:20.0),
+              child: PrimaryButton(
+                title: "Continuar",
+                backgroundColor: MyColors.blackColor,
+                textColor: MyColors.whiteColor,
+                borderColor: MyColors.blackColor,
+                onPressed: (){
+                  Navigator.pushNamed(context, DashboardScreen.tag);
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-

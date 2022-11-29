@@ -1,3 +1,4 @@
+import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
@@ -175,13 +176,16 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
               child: PrimaryButton(
                   title:
                   Constants.replaceExerciseReplaceButton,
                 backgroundColor: MyColors.blackColor,
                 textColor: MyColors.whiteColor,
+                onPressed: (){
+                    Navigator.pushNamed(context, ExerciseScreen.tag);
+                },
               ),
             )
           ],

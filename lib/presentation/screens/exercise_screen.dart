@@ -1,7 +1,7 @@
-import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/add_note_dialogue.dart';
 import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -20,6 +20,7 @@ class ExerciseScreen extends StatefulWidget {
 class _ExerciseScreenState extends State<ExerciseScreen>
     with WidgetsBindingObserver {
   var isResumed = false;
+  var isUpdate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +117,23 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                                 backgroundColor: MyColors.redColor,
                                 textColor: MyColors.whiteColor,
                                 borderColor: MyColors.redColor,
-                                title: Constants.burpeesPauseButton,
-                                leadingChild: const Icon(
-                                  Icons.pause,
+                                title: isUpdate?" Listo":Constants.burpeesPauseButton,
+                                leadingChild: Icon(
+                                  isUpdate?Icons.done:Icons.pause,
                                   size: 20,
                                   color: MyColors.whiteColor,
                                 ),
                                 onPressed: () {
-                                  if (isResumed) {
-                                    Navigator.pushNamed(context, RestScreen.tag);
-                                  } else {
-                                    Navigator.pushNamed(context, BreakBetweenSeriesScreen.tag).then((value){
-                                      isResumed = true;
-                                    });
+                                  if(isUpdate){
+                                    Navigator.pushNamed(context, TrainingCompletedScreen.tag);
                                   }
+                                  // if (isResumed) {
+                                  //   Navigator.pushNamed(context, RestScreen.tag);
+                                  // } else {
+                                  //   Navigator.pushNamed(context, BreakBetweenSeriesScreen.tag).then((value){
+                                  //     isResumed = true;
+                                  //   });
+                                  // }
                                 },
                               )),
                           const SizedBox(
@@ -152,7 +156,10 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                                         color: MyColors.blackColor,
                                       ),
                                       onPressed: (){
-                                        Navigator.pushNamed(context, ExerciseScreen.tag);
+                                        setState(() {
+                                          isUpdate = true;
+                                        });
+                                        // Navigator.pushNamed(context, ExerciseScreen.tag);
                                       },
                                     ),
                                   ),
