@@ -7,6 +7,8 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
+import 'today_training_screen.dart';
+
 class GymScreen extends StatelessWidget {
   const GymScreen({super.key});
 
@@ -105,7 +107,9 @@ class GymScreen extends StatelessWidget {
                         title: Constants.activeLabelGymScreen,
                         textColor: MyColors.whiteColor,
                         backgroundColor: MyColors.redColor,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, TodayTrainingScreen.tag,arguments: 1);
+                        },
                       ),
                     ),
                   ],

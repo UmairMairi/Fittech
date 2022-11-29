@@ -202,7 +202,6 @@ class TodayWorkoutHome extends StatelessWidget {
                             )),
                         PopupMenuButton<int>(
                           constraints: const BoxConstraints(minWidth: 0.0,minHeight: 0.0),
-
                           itemBuilder: (context) => [
                             PopupMenuItem(
                               value: 1,

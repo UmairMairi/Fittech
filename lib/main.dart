@@ -5,10 +5,6 @@ import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scr
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'presentation/screens/nutritionTest/fat_percentage_screen.dart';
-import 'presentation/screens/nutritionTest/nutrition_details_screen.dart';
-import 'presentation/screens/nutritionTest/nutrition_list_screen.dart';
-
 void main() {
   runApp(MyApp());
 }

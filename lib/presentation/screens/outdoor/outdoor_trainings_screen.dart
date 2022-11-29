@@ -1,11 +1,4 @@
-import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/FAQs/faq_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/settings/settings_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
+import 'package:fit_tech/presentation/screens/today_training_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -104,8 +97,8 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5.0),
                                     child: Column(
                                       children: [
                                         ListTile(
@@ -116,11 +109,19 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                                           ),
                                           title: Text(
                                             list[index],
-                                            style: MyTextStyle.heading3.copyWith(fontWeight: FontWeight.w600),
+                                            style: MyTextStyle.heading3
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                           ),
                                           minLeadingWidth: 0.0,
-                                          onTap: () {},
-                                          tileColor: MyColors.extraLightGreyColor,
+                                          onTap: () {
+                                            Navigator.pushNamed(context,
+                                                TodayTrainingScreen.tag,
+                                                arguments: 2);
+                                          },
+                                          tileColor:
+                                              MyColors.extraLightGreyColor,
                                         ),
                                       ],
                                     ),
@@ -129,7 +130,9 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 50,),
+                      const SizedBox(
+                        height: 50,
+                      ),
                       Image.asset(Images.outdoorTrainingsScreenBanner1),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -146,8 +149,8 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5.0),
                                     child: Column(
                                       children: [
                                         ListTile(
@@ -158,11 +161,19 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                                           ),
                                           title: Text(
                                             list2[index],
-                                            style: MyTextStyle.heading3.copyWith(fontWeight: FontWeight.w600),
+                                            style: MyTextStyle.heading3
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                           ),
                                           minLeadingWidth: 0.0,
-                                          onTap: () {},
-                                          tileColor: MyColors.extraLightGreyColor,
+                                          onTap: () {
+                                            Navigator.pushNamed(context,
+                                                TodayTrainingScreen.tag,
+                                                arguments: 2);
+                                          },
+                                          tileColor:
+                                              MyColors.extraLightGreyColor,
                                         ),
                                       ],
                                     ),
@@ -171,8 +182,9 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 50,),
-
+                      const SizedBox(
+                        height: 50,
+                      ),
                     ],
                   ),
                 ),

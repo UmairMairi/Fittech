@@ -1,5 +1,4 @@
-import 'package:fit_tech/presentation/screens/dialogue/cadence_pause.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'dart:async';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -13,6 +12,10 @@ class BreakBetweenSeriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    Timer.periodic(const Duration(seconds: 2), (timer) {
+      timer.cancel();
+      Navigator.pop(context);
+    });
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.whiteColor,

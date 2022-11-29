@@ -8,27 +8,37 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class TestResultsDialogue extends StatelessWidget {
+class TestResultsDialogue extends StatefulWidget {
   final TestResult category;
+  final ValueChanged<dynamic>? onChange;
+  final ValueChanged<dynamic>? onSetValue;
+  final int? selectedUnit;
 
-  const TestResultsDialogue({super.key, this.category = TestResult.weight});
+  const TestResultsDialogue({super.key, this.category = TestResult.weight,this.onChange,this.onSetValue,this.selectedUnit = 0});
+
+  @override
+  State<TestResultsDialogue> createState() => _TestResultsDialogueState();
+}
+
+class _TestResultsDialogueState extends State<TestResultsDialogue> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-    var selected = 0;
+    var selected = widget.selectedUnit;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(color: MyColors.whiteColor),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        shrinkWrap: true,
+        // mainAxisSize: MainAxisSize.min,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Expanded(
                 child: Text(
-                  getName(category),
+                  getName(widget.category),
                   textAlign: TextAlign.start,
                   style:
                       MyTextStyle.heading3.copyWith(color: MyColors.blackColor),
@@ -48,12 +58,12 @@ class TestResultsDialogue extends StatelessWidget {
               )
             ],
           ),
-          if (category != TestResult.weight)
+          if (widget.category != TestResult.weight)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  getImage(cat: category),
+                  getImage(cat: widget.category),
                 ),
                 Text(
                   '*De pies a cabeza.',
@@ -72,7 +82,7 @@ class TestResultsDialogue extends StatelessWidget {
                 Expanded(
                   child: TextFieldPrimary(
                       isLabelRequired: true,
-                      title: getName(category),
+                      title: getName(widget.category),
                       isObscure: false,
                       controller: controller,
                       validator: (value) {
@@ -81,7 +91,7 @@ class TestResultsDialogue extends StatelessWidget {
                       },
                       keyboardType: TextInputType.name),
                 ),
-                (category == TestResult.weight)
+                (widget.category == TestResult.weight)
                     ? StatefulBuilder(builder: (context, myState) {
                         return Row(
                           children: [
@@ -92,8 +102,11 @@ class TestResultsDialogue extends StatelessWidget {
                               onTap: () {
                                 myState(() {
                                   selected = 0;
+                                  if(widget.onChange!=null){
+                                    widget.onChange!("Kg");
+                                  }
                                 });
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -120,8 +133,11 @@ class TestResultsDialogue extends StatelessWidget {
                               onTap: () {
                                 myState(() {
                                   selected = 1;
+                                  if(widget.onChange!=null){
+                                    widget.onChange!("lb");
+                                  }
                                 });
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -154,8 +170,11 @@ class TestResultsDialogue extends StatelessWidget {
                               onTap: () {
                                 myState(() {
                                   selected = 0;
+                                  if(widget.onChange!=null){
+                                    widget.onChange!("cm");
+                                  }
                                 });
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -182,8 +201,11 @@ class TestResultsDialogue extends StatelessWidget {
                               onTap: () {
                                 myState(() {
                                   selected = 1;
+                                  if(widget.onChange!=null){
+                                    widget.onChange!((widget.category == TestResult.height)?'ft':'in');
+                                  }
                                 });
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -195,7 +217,7 @@ class TestResultsDialogue extends StatelessWidget {
                                     border: Border.all(
                                         color: MyColors.blackColor, width: 1)),
                                 child: Text(
-                                  (category == TestResult.height)?'ft':'in',
+                                  (widget.category == TestResult.height)?'ft':'in',
                                   style: MyTextStyle.style.copyWith(
                                       color: (selected == 1)
                                           ? MyColors.whiteColor
@@ -213,16 +235,19 @@ class TestResultsDialogue extends StatelessWidget {
             height: 50,
           ),
           Row(
-            children: const [
+            children: [
               Expanded(
                 child: PrimaryButton(
                   title: Constants.ProfileDialogueButtonCancel,
                   backgroundColor: MyColors.whiteColor,
                   textColor: Colors.black,
                   borderColor: MyColors.blackColor,
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
@@ -231,6 +256,12 @@ class TestResultsDialogue extends StatelessWidget {
                   backgroundColor: MyColors.blackColor,
                   textColor: MyColors.whiteColor,
                   borderColor: MyColors.blackColor,
+                  onPressed: (){
+                    if(widget.onSetValue!=null){
+                      widget.onSetValue!(controller.text);
+                      Navigator.pop(context);
+                    }
+                  },
                 ),
               ),
             ],

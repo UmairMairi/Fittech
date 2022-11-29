@@ -6,9 +6,14 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class AddNoteDialogue extends StatelessWidget {
+class AddNoteDialogue extends StatefulWidget {
   const AddNoteDialogue({super.key});
 
+  @override
+  State<AddNoteDialogue> createState() => _AddNoteDialogueState();
+}
+
+class _AddNoteDialogueState extends State<AddNoteDialogue> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();

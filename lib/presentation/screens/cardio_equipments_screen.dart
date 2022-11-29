@@ -1,3 +1,5 @@
+import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -76,8 +78,8 @@ class _CardioEquipmentsScreenState extends State<CardioEquipmentsScreen> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5.0),
                                     child: Column(
                                       children: [
                                         ListTile(
@@ -88,11 +90,17 @@ class _CardioEquipmentsScreenState extends State<CardioEquipmentsScreen> {
                                           ),
                                           title: Text(
                                             list[index],
-                                            style: MyTextStyle.heading3.copyWith(fontWeight: FontWeight.w600),
+                                            style: MyTextStyle.heading3
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                           ),
                                           minLeadingWidth: 0.0,
-                                          onTap: () {},
-                                          tileColor: MyColors.extraLightGreyColor,
+                                          onTap: () {
+                                            Navigator.pushNamed(context, GymExerciseScreen.tag);
+                                          },
+                                          tileColor:
+                                              MyColors.extraLightGreyColor,
                                         ),
                                       ],
                                     ),
@@ -101,7 +109,9 @@ class _CardioEquipmentsScreenState extends State<CardioEquipmentsScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20,),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),

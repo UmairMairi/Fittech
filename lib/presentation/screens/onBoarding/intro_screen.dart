@@ -69,40 +69,33 @@ class _IntroScreenState extends State<IntroScreen> {
               child: Column(
                 children: [
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: size.width,
-                            width: size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: PageView(
+                            allowImplicitScrolling: true,
+                            scrollDirection: Axis.horizontal,
+                            controller: controller,
+                            onPageChanged: (index) {
+                              setState(() {
+                                currentPageIndex = index;
+                              });
+                            },
+                            children: funPagerValue(list),
                           ),
-                          Expanded(
-                            child: PageView(
-                              allowImplicitScrolling: true,
-                              scrollDirection: Axis.horizontal,
-                              controller: controller,
-                              onPageChanged: (index) {
-                                setState(() {
-                                  currentPageIndex = index;
-                                });
-                              },
-                              children: funPagerValue(list),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: _buildPageIndicator(),
-                          ),
-                          const SizedBox(
-                            height: 30.0,
-                          ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _buildPageIndicator(),
+                        ),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -194,24 +187,34 @@ class _IntroScreenState extends State<IntroScreen> {
   List<Widget> funPagerValue(List<IntroModel> list) {
     return list.map((item) {
       return SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              item.title,
-              textAlign: TextAlign.start,
-              style: MyTextStyle.heading2.copyWith(color: MyColors.whiteColor),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              item.info,
-              textAlign: TextAlign.start,
-              style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
-            ),
-          ],
+        reverse: true,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          decoration: const BoxDecoration(
+            gradient: MyColors.blackGradiant2
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                item.title,
+                textAlign: TextAlign.start,
+                style:
+                    MyTextStyle.heading2.copyWith(color: MyColors.whiteColor),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                item.info,
+                textAlign: TextAlign.start,
+                style:
+                    MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
+              ),
+            ],
+          ),
         ),
       );
     }).toList();

@@ -6,19 +6,19 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class ExerciseScreen extends StatefulWidget {
-  const ExerciseScreen({super.key});
+class GymExerciseScreen extends StatefulWidget {
+  const GymExerciseScreen({super.key});
 
-  static const String tag = "exercise_screen";
+  static const String tag = "gym_exercise_screen";
 
   @override
-  State<ExerciseScreen> createState() => _ExerciseScreenState();
+  State<GymExerciseScreen> createState() => _GymExerciseScreenState();
 }
 
-class _ExerciseScreenState extends State<ExerciseScreen>
-    with WidgetsBindingObserver {
+class _GymExerciseScreenState extends State<GymExerciseScreen>{
   var isResumed = false;
 
   @override
@@ -88,24 +88,23 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                             height: 20,
                           ),
                           const Text(
-                            Constants.titleBurpeesScreen,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          const Text(
-                            "00:30",
+                            "30x",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontFamily: 'Anton',
                                 color: MyColors.blackColor,
-                                fontSize: 58.0),
+                                fontSize: 64.0),
+                          ),
+
+                          Text(
+                            Constants.titleBurpeesScreen,
+                            textAlign: TextAlign.center,
+                            style: MyTextStyle.heading3.copyWith(fontSize: 20),
+                            // style: TextStyle(
+                            //     fontFamily: 'Open Sance',
+                            //     color: MyColors.blackColor,
+                            //     fontSize: 24.0,
+                            //     fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(
                             height: 20.0,
@@ -152,7 +151,7 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                                         color: MyColors.blackColor,
                                       ),
                                       onPressed: (){
-                                        Navigator.pushNamed(context, ExerciseScreen.tag);
+                                        Navigator.pushNamed(context, GymExerciseScreen.tag);
                                       },
                                     ),
                                   ),

@@ -10,11 +10,15 @@ import 'package:flutter/material.dart';
 
 class WeightHeightScreen extends StatelessWidget {
   static const String tag = "weight_height_screen";
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
 
-  const WeightHeightScreen({super.key});
+  WeightHeightScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var unit1 = "Kg";
+    var unit2 = "ft";
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -102,12 +106,31 @@ class WeightHeightScreen extends StatelessWidget {
                                 title: Constants.weightHeightScreenWeightLabel1,
                                 isLabelRequired: true,
                                 isObscure: false,
+                                controller: weightController,
                                 keyboardType: TextInputType.number,
-                                suffix: InkWell(
-                                  onTap: (){
-                                    showDialogue(context: context, category: TestResult.weight);
-                                  },
-                                    child: const Text("kg")),
+                                suffix: StatefulBuilder(
+                                    builder: (context, myState) {
+                                      return InkWell(
+                                          onTap: () {
+                                            showDialogue(
+                                                context: context,
+                                                category: TestResult.weight,
+                                                selectedUnit: (unit1 == 'Kg')?0:1,
+                                                onSetValue: (value){
+                                                  if (value is String) {
+                                                    weightController.text = value;
+                                                  }
+                                                },
+                                                onChange: (value) {
+                                                  if (value is String) {
+                                                    myState((){
+                                                      unit1 = value;
+                                                    });
+                                                  }
+                                                });
+                                          },
+                                          child: Text(unit1));
+                                    }),
                               ),
                             ),
                             Expanded(
@@ -130,12 +153,31 @@ class WeightHeightScreen extends StatelessWidget {
                                 title: Constants.weightHeightScreenWeightLabel2,
                                 isLabelRequired: true,
                                 isObscure: false,
+                                controller: heightController,
                                 keyboardType: TextInputType.number,
-                                suffix: InkWell(
-                                    onTap: (){
-                                      showDialogue(context: context, category: TestResult.height);
-                                    },
-                                    child: const Text("ft")),
+                                suffix: StatefulBuilder(
+                                    builder: (context, myState) {
+                                  return InkWell(
+                                      onTap: () {
+                                        showDialogue(
+                                            context: context,
+                                            category: TestResult.height,
+                                            selectedUnit: ((unit2 == 'cm'))?0:1,
+                                            onSetValue: (value){
+                                              if (value is String) {
+                                                heightController.text = value;
+                                              }
+                                            },
+                                            onChange: (value) {
+                                              if (value is String) {
+                                                myState((){
+                                                  unit2 = value;
+                                                });
+                                              }
+                                            });
+                                      },
+                                      child: Text(unit2));
+                                }),
                               ),
                             ),
                             Expanded(
@@ -169,11 +211,27 @@ class WeightHeightScreen extends StatelessWidget {
     );
   }
 
-  showDialogue({required BuildContext context, required TestResult category}) {
+  showDialogue(
+      {required BuildContext context,
+      required TestResult category,
+      ValueChanged<dynamic>? onChange,
+      ValueChanged<dynamic>? onSetValue,
+      int? selectedUnit
+      }) {
     showModalBottomSheet<void>(
       context: context,
+      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height*0.8),
       builder: (BuildContext context) {
-        return TestResultsDialogue(category: category);
+        return Padding(
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: TestResultsDialogue(
+            category: category,
+            onChange: onChange,
+            onSetValue: onSetValue,
+            selectedUnit: selectedUnit,
+          ),
+        );
       },
       isScrollControlled: true,
     );

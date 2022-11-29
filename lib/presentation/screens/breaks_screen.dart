@@ -59,7 +59,9 @@ class RestScreen extends StatelessWidget {
                                       backgroundColor: MyColors.blackColor,
                                       textColor: MyColors.whiteColor,
                                       borderColor: MyColors.whiteColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
                                     ),
                                   ),
                                   const SizedBox(
@@ -70,7 +72,9 @@ class RestScreen extends StatelessWidget {
                                       title: Constants.restScreenOmitButton,
                                       backgroundColor: MyColors.whiteColor,
                                       textColor: MyColors.blackColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
                                     ),
                                   )
                                 ],

@@ -3,6 +3,7 @@ import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/nutrition_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
+import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
@@ -121,9 +122,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const TestimonialScreen());
       case TodayTrainingScreen.tag:
+        var index = routeSettings.arguments as int?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const TodayTrainingScreen());
+                TodayTrainingScreen(index: index ?? 0,));
       case OutdoorScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -144,6 +146,10 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const ExerciseScreen());
+      case GymExerciseScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const GymExerciseScreen());
       case ReplaceExerciseScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -171,7 +177,7 @@ class AppRoute {
       case WeightHeightScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const WeightHeightScreen());
+                WeightHeightScreen());
       case AboutGoalScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -340,7 +346,7 @@ class AppRoute {
       case CardioEquipmentsScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const CardioEquipmentsScreen());
+            const CardioEquipmentsScreen());
       case TutorialUsageScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

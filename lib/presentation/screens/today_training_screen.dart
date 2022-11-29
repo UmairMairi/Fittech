@@ -1,4 +1,5 @@
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
+import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -7,7 +8,8 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class TodayTrainingScreen extends StatefulWidget {
-  const TodayTrainingScreen({super.key});
+  final int index;
+  const TodayTrainingScreen({super.key,this.index = 0});
 
   static const String tag = "today_training_screen";
 
@@ -29,7 +31,7 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
     tabNames = ["Home", "Gym", "Outdoor"];
     tabWidgets = [const TodayWorkoutHome(), Container(), Container()];
     _controller = TabController(length: tabNames!.length, vsync: this);
-
+    _controller!.index = widget.index;
     // _controller?.addListener(() {
     //   if(_controller?.index == 1){
     //     Navigator.pushNamed(context, GymScreen.tag);
@@ -119,7 +121,9 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                 textColor: MyColors.whiteColor,
                 backgroundColor: MyColors.redColor,
                 borderColor: Colors.transparent,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, CardioEquipmentsScreen.tag);
+                },
               ),
             ),
             const SizedBox(height: 20,)

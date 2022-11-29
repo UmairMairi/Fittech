@@ -82,11 +82,29 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                       color:
                                           MyColors.whiteColor.withOpacity(0.8),
                                       shape: BoxShape.circle),
-                                  child: const Icon(
-                                    Icons.more_horiz,
-                                    size: 20,
-                                    color: MyColors.blackColor,
+                                  child: PopupMenuButton<int>(
+                                    constraints: const BoxConstraints(
+                                        minWidth: 0.0, minHeight: 0.0),
+                                    itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        value: 1,
+                                        textStyle: MyTextStyle.text1,
+                                        height: 20,
+                                        child: Row(
+                                          children: const [
+                                            Text("+ Agregar Nota")
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                    color: Colors.white,
                                   ),
+
+                                  // child: const Icon(
+                                  //   Icons.more_horiz,
+                                  //   size: 20,
+                                  //   color: MyColors.blackColor,
+                                  // ),
                                 ),
                               ),
                             ),
