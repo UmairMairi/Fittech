@@ -14,7 +14,8 @@ class RegisterScreen extends StatelessWidget {
 
   static const String tag = "register_screen";
 
-  final TextEditingController fNameController = TextEditingController(text: "Angel");
+  final TextEditingController fNameController =
+      TextEditingController(text: "Angel");
   final TextEditingController lNameController =
       TextEditingController(text: "Valverde");
   final TextEditingController emailController =
@@ -25,6 +26,9 @@ class RegisterScreen extends StatelessWidget {
       TextEditingController(text: "123456");
 
   final _formKey = GlobalKey<FormState>();
+  bool cbState1 = false;
+  bool cbState2 = false;
+  bool cbState3 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,6 @@ class RegisterScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-
                   const Expanded(
                     child: Text(
                       Constants.titleRegisterScreen,
@@ -133,18 +136,28 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30.0,
                     ),
-                    TextFieldPrimary(
-                        isLabelRequired: true,
-                        title: Constants.registerPasswordLabel,
-                        isObscure: true,
-                        controller: passwordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "digite uma senha válida";
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.visiblePassword),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFieldPrimary(
+                            isLabelRequired: true,
+                            title: Constants.registerPasswordLabel,
+                            isObscure: true,
+                            controller: passwordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "digite uma senha válida";
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.visiblePassword),
+                        Text(
+                          "Debe contener mínimo 6 caracteres y un número.",
+                          style: MyTextStyle.paragraph2
+                              .copyWith(color: MyColors.greyColor),
+                        ),
+                      ],
+                    ),
                     const SizedBox(
                       height: 30.0,
                     ),
@@ -168,23 +181,29 @@ class RegisterScreen extends StatelessWidget {
                     MyCheckBox(
                         title: Constants.cb1Label,
                         isChecked: false,
-                        valueChanged: (state) {}),
+                        valueChanged: (state) {
+                          cbState1 = state;
+                        }),
                     const SizedBox(
                       height: 25.0,
                     ),
                     MyCheckBox(
                         isChecked: false,
-                        valueChanged: (state) {},
+                        valueChanged: (state) {
+                          cbState2 = state;
+                        },
                         child: RichText(
                           textAlign: TextAlign.start,
-                          text: TextSpan(text: Constants.cb2Label1,
+                          text: TextSpan(
+                              text: Constants.cb2Label1,
                               style: MyTextStyle.paragraph1,
                               children: <TextSpan>[
-                            TextSpan(
-                              text: Constants.cb2Label2,
-                              style: MyTextStyle.paragraph1.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                          ]),
+                                TextSpan(
+                                  text: Constants.cb2Label2,
+                                  style: MyTextStyle.paragraph1
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ]),
                         )),
                     const SizedBox(
                       height: 25.0,
@@ -192,7 +211,9 @@ class RegisterScreen extends StatelessWidget {
                     MyCheckBox(
                         title: Constants.cb3Label,
                         isChecked: false,
-                        valueChanged: (state) {}),
+                        valueChanged: (state) {
+                          cbState3 = state;
+                        }),
                     const SizedBox(
                       height: 25.0,
                     ),
@@ -204,7 +225,13 @@ class RegisterScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, OTPScreen.tag);
+                            if (cbState1 && cbState2 && cbState3) {
+                              Navigator.pushNamed(context, OTPScreen.tag);
+                            } else {
+                              showMessage(
+                                  context: context,
+                                  msg: "Please select the conditions first");
+                            }
                           }
                         },
                       ),

@@ -2,7 +2,6 @@ import 'package:fit_tech/data/models/intro_model.dart';
 import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -190,9 +189,7 @@ class _IntroScreenState extends State<IntroScreen> {
         reverse: true,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          decoration: const BoxDecoration(
-            gradient: MyColors.blackGradiant2
-          ),
+          decoration: const BoxDecoration(gradient: MyColors.blackGradiant2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,

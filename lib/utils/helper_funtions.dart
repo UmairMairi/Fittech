@@ -1,3 +1,5 @@
+import 'package:fit_tech/utils/colors.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 bool isEmail(String em) {
@@ -9,10 +11,14 @@ bool isEmail(String em) {
 
 showMessage({required BuildContext context, required String msg}) {
   var snackBar = SnackBar(
-    content: Text(msg),
+    content: Text(
+      msg,
+      style: MyTextStyle.paragraph1.copyWith(color: MyColors.whiteColor),
+    ),
     behavior: SnackBarBehavior.floating,
     elevation: 6.0,
     backgroundColor: Colors.black.withOpacity(0.6),
+    dismissDirection: DismissDirection.startToEnd,
   );
   ScaffoldMessenger.of(context).showSnackBar(
     snackBar,

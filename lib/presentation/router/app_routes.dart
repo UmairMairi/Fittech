@@ -85,8 +85,7 @@ class AppRoute {
                 const CreateAccountScreen());
       case LoginScreen.tag:
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                const LoginScreen());
+            page: (context, animation, secondaryAnimation) => LoginScreen());
       case RegisterScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) => RegisterScreen());
@@ -125,7 +124,9 @@ class AppRoute {
         var index = routeSettings.arguments as int?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                TodayTrainingScreen(index: index ?? 0,));
+                TodayTrainingScreen(
+                  index: index ?? 0,
+                ));
       case OutdoorScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -346,7 +347,7 @@ class AppRoute {
       case CardioEquipmentsScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-            const CardioEquipmentsScreen());
+                const CardioEquipmentsScreen());
       case TutorialUsageScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

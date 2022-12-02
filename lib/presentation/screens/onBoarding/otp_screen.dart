@@ -12,8 +12,8 @@ class OTPScreen extends StatelessWidget {
   OTPScreen({super.key});
 
   static const String tag = "otp_screen";
-  final TextEditingController otpController = TextEditingController(
-      text: "1234");
+  final TextEditingController otpController =
+      TextEditingController(text: "123456");
   final _formKey = GlobalKey<FormState>();
 
   var isInfoShown = false;
@@ -89,7 +89,6 @@ class OTPScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10.0,
                     ),
-
                     StatefulBuilder(builder: (context, myState) {
                       return Column(
                         children: [
@@ -97,13 +96,12 @@ class OTPScreen extends StatelessWidget {
                             width: double.infinity,
                             child: PrimaryButton(
                               title: Constants.resendLabel,
-                              titleStyle: MyTextStyle.buttonTitle.copyWith(
-                                  fontWeight: FontWeight.w600
-                              ),
+                              titleStyle: MyTextStyle.buttonTitle
+                                  .copyWith(fontWeight: FontWeight.w600),
                               textColor: MyColors.blackColor,
                               backgroundColor: MyColors.whiteColor,
                               onPressed: () {
-                                myState((){
+                                myState(() {
                                   isInfoShown = true;
                                 });
                               },
@@ -112,7 +110,7 @@ class OTPScreen extends StatelessWidget {
                           const SizedBox(
                             height: 50.0,
                           ),
-                          if(isInfoShown)
+                          if (isInfoShown)
                             const SizedBox(
                               width: double.infinity,
                               child: Padding(
@@ -128,7 +126,6 @@ class OTPScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-
                           const SizedBox(
                             height: 20.0,
                           ),

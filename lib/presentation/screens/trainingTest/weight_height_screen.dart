@@ -13,6 +13,9 @@ class WeightHeightScreen extends StatelessWidget {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
 
+  String weight = "";
+  String height = "";
+
   WeightHeightScreen({super.key});
 
   @override
@@ -102,42 +105,113 @@ class WeightHeightScreen extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: TextFieldPrimary(
-                                title: Constants.weightHeightScreenWeightLabel1,
-                                isLabelRequired: true,
-                                isObscure: false,
-                                controller: weightController,
-                                keyboardType: TextInputType.number,
-                                suffix: StatefulBuilder(
-                                    builder: (context, myState) {
-                                      return InkWell(
-                                          onTap: () {
-                                            showDialogue(
-                                                context: context,
-                                                category: TestResult.weight,
-                                                selectedUnit: (unit1 == 'Kg')?0:1,
-                                                onSetValue: (value){
-                                                  if (value is String) {
-                                                    weightController.text = value;
-                                                  }
-                                                },
-                                                onChange: (value) {
-                                                  if (value is String) {
-                                                    myState((){
-                                                      unit1 = value;
-                                                    });
-                                                  }
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    Constants.weightHeightScreenWeightLabel1,
+                                    textAlign: TextAlign.start,
+                                    style: MyTextStyle.inputTitle
+                                        .copyWith(color: MyColors.greyColor),
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  StatefulBuilder(builder: (context, myState) {
+                                    return InkWell(
+                                      onTap: () {
+                                        showDialogue(
+                                            context: context,
+                                            category: TestResult.weight,
+                                            selectedUnit:
+                                                (unit1 == 'Kg') ? 0 : 1,
+                                            onSetValue: (value) {
+                                              if (value is String) {
+                                                myState(() {
+                                                  weight = value;
                                                 });
-                                          },
-                                          child: Text(unit1));
-                                    }),
+                                              }
+                                            },
+                                            onChange: (value) {
+                                              if (value is String) {
+                                                myState(() {
+                                                  unit1 = value;
+                                                });
+                                              }
+                                            });
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10.0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                child: Text(
+                                              weight,
+                                              style: MyTextStyle.paragraph1,
+                                            )),
+                                            Text(
+                                              unit1,
+                                              style: MyTextStyle.paragraph1,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                  Container(
+                                    height: 1,
+                                    color: MyColors.greyMediumColor,
+                                  )
+                                ],
                               ),
                             ),
                             Expanded(
                               child: Container(),
                             ),
                           ],
-                        )
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Expanded(
+                        //       child: TextFieldPrimary(
+                        //         title: Constants.weightHeightScreenWeightLabel1,
+                        //         isLabelRequired: true,
+                        //         isObscure: false,
+                        //         isEnabled: false,
+                        //         controller: weightController,
+                        //         keyboardType: TextInputType.number,
+                        //         suffix: StatefulBuilder(
+                        //             builder: (context, myState) {
+                        //           return InkWell(
+                        //               onTap: () {
+                        //                 showDialogue(
+                        //                     context: context,
+                        //                     category: TestResult.weight,
+                        //                     selectedUnit:
+                        //                         (unit1 == 'Kg') ? 0 : 1,
+                        //                     onSetValue: (value) {
+                        //                       if (value is String) {
+                        //                         weightController.text = value;
+                        //                       }
+                        //                     },
+                        //                     onChange: (value) {
+                        //                       if (value is String) {
+                        //                         myState(() {
+                        //                           unit1 = value;
+                        //                         });
+                        //                       }
+                        //                     });
+                        //               },
+                        //               child: Text(unit1));
+                        //         }),
+                        //       ),
+                        //     ),
+                        //     Expanded(
+                        //       child: Container(),
+                        //     ),
+                        //   ],
+                        // )
                       ],
                     ),
                     const SizedBox(
@@ -149,42 +223,113 @@ class WeightHeightScreen extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: TextFieldPrimary(
-                                title: Constants.weightHeightScreenWeightLabel2,
-                                isLabelRequired: true,
-                                isObscure: false,
-                                controller: heightController,
-                                keyboardType: TextInputType.number,
-                                suffix: StatefulBuilder(
-                                    builder: (context, myState) {
-                                  return InkWell(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    Constants.weightHeightScreenWeightLabel2,
+                                    textAlign: TextAlign.start,
+                                    style: MyTextStyle.inputTitle
+                                        .copyWith(color: MyColors.greyColor),
+                                  ),
+                                  const SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  StatefulBuilder(builder: (context, myState) {
+                                    return InkWell(
                                       onTap: () {
                                         showDialogue(
                                             context: context,
                                             category: TestResult.height,
-                                            selectedUnit: ((unit2 == 'cm'))?0:1,
-                                            onSetValue: (value){
+                                            selectedUnit:
+                                                ((unit2 == 'cm')) ? 0 : 1,
+                                            onSetValue: (value) {
                                               if (value is String) {
-                                                heightController.text = value;
+                                                myState(() {
+                                                  height = value;
+                                                });
                                               }
                                             },
                                             onChange: (value) {
                                               if (value is String) {
-                                                myState((){
+                                                myState(() {
                                                   unit2 = value;
                                                 });
                                               }
                                             });
                                       },
-                                      child: Text(unit2));
-                                }),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10.0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                child: Text(
+                                              height,
+                                              style: MyTextStyle.paragraph1,
+                                            )),
+                                            Text(
+                                              unit2,
+                                              style: MyTextStyle.paragraph1,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                  Container(
+                                    height: 1,
+                                    color: MyColors.greyMediumColor,
+                                  )
+                                ],
                               ),
                             ),
                             Expanded(
                               child: Container(),
                             ),
                           ],
-                        )
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Expanded(
+                        //       child: TextFieldPrimary(
+                        //         title: Constants.weightHeightScreenWeightLabel2,
+                        //         isLabelRequired: true,
+                        //         isObscure: false,
+                        //         isEnabled: false,
+                        //         controller: heightController,
+                        //         keyboardType: TextInputType.number,
+                        //         suffix: StatefulBuilder(
+                        //             builder: (context, myState) {
+                        //           return InkWell(
+                        //               onTap: () {
+                        //                 showDialogue(
+                        //                     context: context,
+                        //                     category: TestResult.height,
+                        //                     selectedUnit:
+                        //                         ((unit2 == 'cm')) ? 0 : 1,
+                        //                     onSetValue: (value) {
+                        //                       if (value is String) {
+                        //                         heightController.text = value;
+                        //                       }
+                        //                     },
+                        //                     onChange: (value) {
+                        //                       if (value is String) {
+                        //                         myState(() {
+                        //                           unit2 = value;
+                        //                         });
+                        //                       }
+                        //                     });
+                        //               },
+                        //               child: Text(unit2));
+                        //         }),
+                        //       ),
+                        //     ),
+                        //     Expanded(
+                        //       child: Container(),
+                        //     ),
+                        //   ],
+                        // )
                       ],
                     )
                   ],
@@ -216,15 +361,15 @@ class WeightHeightScreen extends StatelessWidget {
       required TestResult category,
       ValueChanged<dynamic>? onChange,
       ValueChanged<dynamic>? onSetValue,
-      int? selectedUnit
-      }) {
+      int? selectedUnit}) {
     showModalBottomSheet<void>(
       context: context,
-      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height*0.8),
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
       builder: (BuildContext context) {
         return Padding(
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: TestResultsDialogue(
             category: category,
             onChange: onChange,
