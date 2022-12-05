@@ -67,19 +67,22 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                             height: size.height * 0.4,
                             width: size.width,
                             alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                    color: MyColors.whiteColor.withOpacity(0.8),
-                                    shape: BoxShape.circle),
-                                child: const Icon(
-                                  Icons.arrow_back,
-                                  size: 20,
-                                  color: MyColors.blackColor,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical:20.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                      color: MyColors.whiteColor.withOpacity(0.8),
+                                      shape: BoxShape.circle),
+                                  child: const Icon(
+                                    Icons.arrow_back,
+                                    size: 20,
+                                    color: MyColors.blackColor,
+                                  ),
                                 ),
                               ),
                             ),
@@ -187,8 +190,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                     Navigator.pushNamed(
                                         context, RestScreen.tag);
                                   } else {
-                                    Navigator.pushNamed(context,BreakBetweenSeriesScreen.tag)
-                                        .then((value) {
+                                    Navigator.pushNamed(context,BreakBetweenSeriesScreen.tag,arguments: 1).then((value) {
                                       isResumed = true;
                                     });
                                   }
@@ -249,31 +251,39 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                   ),
                   SizedBox(
                       width: double.infinity,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: PrimaryButton(
-                              backgroundColor: MyColors.whiteColor,
-                              borderColor: MyColors.greyColor,
-                              textColor: MyColors.greyColor,
-                              title: Constants.burpeesReplaceExcButton,
-                              onPressed: () {
-                                Navigator.pushNamed(context, ReplaceExerciseScreen.tag);
-                              },
+                      child: Container(
+                        height: 52,
+                        decoration: BoxDecoration(border: Border.all(color: MyColors.blackColor)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: PrimaryButton(
+                                backgroundColor: MyColors.whiteColor,
+                                borderColor: Colors.transparent,
+                                textColor: MyColors.greyColor,
+                                title: Constants.burpeesReplaceExcButton,
+                                onPressed: () {
+                                  Navigator.pushNamed(context, ReplaceExerciseScreen.tag);
+                                },
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: PrimaryButton(
-                              backgroundColor: MyColors.whiteColor,
-                              borderColor: MyColors.greyColor,
-                              textColor: MyColors.greyColor,
-                              title: Constants.burpeesAddNoteButton,
-                              onPressed: () {
-                                showDialogue(context: context);
-                              },
+                            Container(
+                              width: 1,
+                              decoration: BoxDecoration(border: Border.all(color: MyColors.blackColor)),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: PrimaryButton(
+                                backgroundColor: MyColors.whiteColor,
+                                borderColor: Colors.transparent,
+                                textColor: MyColors.greyColor,
+                                title: Constants.burpeesAddNoteButton,
+                                onPressed: () {
+                                  showDialogue(context: context);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ))
                 ],
               ),

@@ -85,7 +85,11 @@ class VerifyIdentityScreen extends StatelessWidget {
                           isObscure: true,
                           controller: passwordController,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {}
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 6) {
+                              return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
+                            }
                             return null;
                           },
                           keyboardType: TextInputType.name),

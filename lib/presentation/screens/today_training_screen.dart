@@ -1,7 +1,9 @@
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
+import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
 import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -35,13 +37,9 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
     tabWidgets = [const TodayWorkoutHome(), Container(), Container()];
     _controller = TabController(length: tabNames!.length, vsync: this);
     _controller!.index = widget.index;
-    // _controller?.addListener(() {
-    //   if(_controller?.index == 1){
-    //     Navigator.pushNamed(context, GymScreen.tag);
-    //   }else if(_controller?.index == 2){
-    //     print("Move to outdoor screen");
-    //   }
-    // });
+    _controller?.addListener(() {
+      selectedIndex = _controller!.index;
+    });
   }
 
   @override
@@ -54,44 +52,7 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: MyColors.blackColor,
-                          size: 24.0,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const Expanded(
-                        child: Text(
-                          Constants.titleVerifyCodeScreen,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Open Sance',
-                              color: MyColors.blackColor,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Opacity(
-                        opacity: 0.0,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: MyColors.blackColor,
-                            size: 24.0,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                  const MyAppBar(title: Constants.titleVerifyCodeScreen,),
                   TabBar(
                     labelColor: Colors.black,
                     unselectedLabelStyle: const TextStyle(
@@ -110,6 +71,13 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                     indicatorColor: Colors.black,
                     padding: EdgeInsets.zero,
                     labelStyle: const TextStyle(fontSize: 12.0),
+                    onTap: (index){
+                      if(index == 1){
+                        Navigator.pushNamed(context, GymScreen.tag);
+                      }else if(index == 2){
+                        Navigator.pushNamed(context, OutdoorScreen.tag);
+                      }
+                    },
                   ),
                   const TodayWorkoutHome()
                 ],

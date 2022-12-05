@@ -4,18 +4,59 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class BreakBetweenSeriesScreen extends StatelessWidget {
-  const BreakBetweenSeriesScreen({super.key});
+class BreakBetweenSeriesScreen extends StatefulWidget {
+  final int? restType;
+  const BreakBetweenSeriesScreen({super.key,this.restType = 0});
 
   static const String tag = "break_between_series_screen";
 
   @override
+  State<BreakBetweenSeriesScreen> createState() => _BreakBetweenSeriesScreenState();
+}
+
+class _BreakBetweenSeriesScreenState extends State<BreakBetweenSeriesScreen> {
+
+  Timer? countdownTimer;
+  Duration myDuration = const Duration(seconds: 30);
+
+  void startTimer() {
+    countdownTimer =
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  // Step 4
+  void stopTimer() {
+    setState(() => countdownTimer!.cancel());
+  }
+
+  // Step 5
+  void resetTimer() {
+    stopTimer();
+    setState(() => myDuration = const Duration(seconds: 30));
+  }
+
+  // Step 6
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        countdownTimer!.cancel();
+        Navigator.pop(context);
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      timer.cancel();
-      Navigator.pop(context);
-    });
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.whiteColor,
@@ -80,8 +121,8 @@ class BreakBetweenSeriesScreen extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             Constants.breakBetweenSeriesScreenTitle,
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -89,24 +130,24 @@ class BreakBetweenSeriesScreen extends StatelessWidget {
                                 color: MyColors.whiteColor,
                                 fontSize: 32.0,),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20.0,
                           ),
                           Text(
-                            "00:30",
+                            "00:${myDuration.inSeconds}",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'Anton',
                                 color: MyColors.whiteColor,
                                 fontSize: 59.0),
                           ),
-                          SizedBox(
+                          const  SizedBox(
                             height: 20.0,
                           ),
                           Text(
-                            "(2/2)",
+                            "(${widget.restType}/2)",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'Open Sance',
                                 color: MyColors.whiteColor,
                                 fontSize: 24.0,

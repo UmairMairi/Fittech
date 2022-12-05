@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class CreateAccountScreen extends StatelessWidget {
   static const String tag = "create_account_screen";
 
-  const CreateAccountScreen({super.key});
+  CreateAccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

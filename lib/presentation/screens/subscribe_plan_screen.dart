@@ -1,3 +1,4 @@
+import 'package:fit_tech/data/models/subscription_plans_Model.dart';
 import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
@@ -9,11 +10,10 @@ import 'package:flutter/material.dart';
 
 import 'profile/my_data_screen.dart';
 
-class SubscribePlanScreen extends StatelessWidget {
+class SubscribePlanScreen extends StatefulWidget {
   SubscribePlanScreen({super.key});
 
   static const String tag = "subscribe_plan_screen";
-  static const list = [1, 2, 3];
   static List<SubscriptionPlansTileModel> list2 = [
     SubscriptionPlansTileModel(
         title: Constants.subscribePlanScreenTileTitle1,
@@ -52,6 +52,18 @@ class SubscribePlanScreen extends StatelessWidget {
         gratis: false,
         fitTechPlus: true),
   ];
+
+  @override
+  State<SubscribePlanScreen> createState() => _SubscribePlanScreenState();
+}
+
+class _SubscribePlanScreenState extends State<SubscribePlanScreen> {
+  var list = [
+    SubscriptionPlansModel(heading: "Plan mensual", price: "USD 9.99", info: "x USD 0.30 diario",),
+    SubscriptionPlansModel(heading: "Plan trimestral", price: "USD 19.99", info: "x USD 6.60 mensual",),
+    SubscriptionPlansModel(heading: "Plan anual", price: "USD 54.99", info: "x USD 4.60 mensual",)
+  ];
+
   var currentIndex = 0;
 
   @override
@@ -143,9 +155,9 @@ class SubscribePlanScreen extends StatelessWidget {
                               horizontal: 20, vertical: 10),
                           color: MyColors.blackColor,
                           child: Row(
-                            children: const [
-                              Expanded(
-                                flex: 3,
+                            children: [
+                              const Expanded(
+                                flex: 5,
                                 child: Text(
                                   "",
                                   maxLines: 2,
@@ -156,8 +168,8 @@ class SubscribePlanScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                flex: 1,
+                              const Expanded(
+                                flex: 2,
                                 child: Center(
                                   child:
                                       Text(
@@ -171,16 +183,21 @@ class SubscribePlanScreen extends StatelessWidget {
                                   ),
                                 ),),
                               Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "FITTECH",
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    color: MyColors.whiteColor,
-                                    fontSize: 15,
-                                    fontFamily: 'Open Sance',
-                                    fontStyle: FontStyle.italic
-                                  ),
+                                flex: 3,
+                                child: Row(
+                                  children: const [
+                                    Text(
+                                      "FITTECH ",
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        color: MyColors.whiteColor,
+                                        fontSize: 15,
+                                        fontFamily: 'Open Sance',
+                                        fontStyle: FontStyle.italic
+                                      ),
+                                    ),
+                                    Icon(Icons.add,color: Colors.red,size: 15,)
+                                  ],
                                 ),
                               )
                             ],
@@ -188,7 +205,7 @@ class SubscribePlanScreen extends StatelessWidget {
                         ),
                         ListView.builder(
                             shrinkWrap: true,
-                            itemCount: list2.length,
+                            itemCount: SubscribePlanScreen.list2.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Container(
@@ -201,9 +218,9 @@ class SubscribePlanScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      flex: 3,
+                                      flex: 5,
                                       child: Text(
-                                        list2[index].title,
+                                        SubscribePlanScreen.list2[index].title,
                                         maxLines: 2,
                                         style: const TextStyle(
                                           color: MyColors.whiteColor,
@@ -213,9 +230,9 @@ class SubscribePlanScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 1,
+                                      flex: 2,
                                       child: Center(
-                                        child: (list2[index].gratis is bool)
+                                        child: (SubscribePlanScreen.list2[index].gratis is bool)
                                             ? Container(
                                                 padding:
                                                     const EdgeInsets.all(5.0),
@@ -231,15 +248,15 @@ class SubscribePlanScreen extends StatelessWidget {
                                                 ),
                                               )
                                             : Text(
-                                                list2[index].gratis,
+                                                SubscribePlanScreen.list2[index].gratis,
                                                 maxLines: 2,
                                                 style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor),
                                               ),
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 1,
-                                      child: (list2[index].fitTechPlus is bool)
+                                      flex: 3,
+                                      child: (SubscribePlanScreen.list2[index].fitTechPlus is bool)
                                           ? Container(
                                         padding:
                                         const EdgeInsets.all(5.0),
@@ -253,7 +270,7 @@ class SubscribePlanScreen extends StatelessWidget {
                                         ),
                                       )
                                           : Text(
-                                        list2[index].fitTechPlus,
+                                        SubscribePlanScreen.list2[index].fitTechPlus,
                                         maxLines: 2,
                                         style: MyTextStyle.paragraph2.copyWith(color: MyColors.whiteColor),
                                       ),
@@ -326,8 +343,15 @@ class SubscribePlanScreen extends StatelessWidget {
                             textColor: MyColors.whiteColor,
                             backgroundColor: MyColors.blackColor,
                             onPressed: () {
-                              showModalBottomSheet<void>(context: context, builder: (BuildContext context){
-                                return const ProfileDialogue(category: Profile.coupon);
+                              showModalBottomSheet<void>(context: context,
+                                  constraints:
+                                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+                                  isScrollControlled: true,
+                                  builder: (BuildContext context){
+                                return Padding(
+                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                  child: const ProfileDialogue(category: Profile.coupon),
+                                );
                               });
                             },
                           ),
@@ -373,14 +397,14 @@ class SubscribePlanScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          "Plan trimestral",
+                          item.heading,
                           textAlign: TextAlign.center,
                           style: MyTextStyle.paragraph2.copyWith(color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,fontSize: 13,),
                         ),
                         Expanded(child: Container()),
                         Center(
                             child: Text(
-                          "USD 9.99",
+                              item.price,
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -390,7 +414,7 @@ class SubscribePlanScreen extends StatelessWidget {
                         )),
                         Expanded(child: Container()),
                         Text(
-                          "27.000 COP x mes",
+                          item.info,
                           textAlign: TextAlign.center,
                           style: MyTextStyle.paragraph2.copyWith(color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,fontSize: 13,),
                         ),

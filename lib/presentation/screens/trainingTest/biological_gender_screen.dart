@@ -154,7 +154,9 @@ class BiologicalGenderScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, WeightHeightScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, WeightHeightScreen.tag);
+                          }
                         },
                       )
                     ],

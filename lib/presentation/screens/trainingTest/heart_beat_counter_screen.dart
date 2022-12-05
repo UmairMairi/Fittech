@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -7,10 +9,55 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'enter_counted_beats_screen.dart';
 
-class HeartBeatCounterScreen extends StatelessWidget {
+class HeartBeatCounterScreen extends StatefulWidget {
   static const String tag = "heart_beat_counter_screen";
 
   const HeartBeatCounterScreen({super.key});
+
+  @override
+  State<HeartBeatCounterScreen> createState() => _HeartBeatCounterScreenState();
+}
+
+class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
+  Timer? countdownTimer;
+
+  Duration myDuration = const Duration(seconds: 10);
+
+  void startTimer() {
+    countdownTimer =
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  // Step 4
+  void stopTimer() {
+    setState(() => countdownTimer!.cancel());
+  }
+
+  // Step 5
+  void resetTimer() {
+    stopTimer();
+    setState(() => myDuration = const Duration(seconds: 10));
+  }
+
+  // Step 6
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        countdownTimer!.cancel();
+        Navigator.pushNamed(context, EnterCountedBeatsScreen.tag);
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +97,7 @@ class HeartBeatCounterScreen extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: MyColors.redColor,width: 5.0)
                   ),
-                  child: const Text("10",
+                  child: Text("${myDuration.inSeconds}",
                     style: MyTextStyle.heading1,
                     ),
                   ),

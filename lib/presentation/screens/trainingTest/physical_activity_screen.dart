@@ -146,7 +146,9 @@ class PhysicalActivityScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: (){
-                          Navigator.pushNamed(context, MedicalHistoryScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, MedicalHistoryScreen.tag);
+                          }
                         },
                       ),
                       const SizedBox(height: 10.0,),
@@ -156,7 +158,7 @@ class PhysicalActivityScreen extends StatelessWidget {
                         textColor: MyColors.blackColor,
                         borderColor: MyColors.blackColor,
                         onPressed: (){
-                          Navigator.pushNamed(context, DashboardScreen.tag);
+                            Navigator.pushNamed(context, DashboardScreen.tag);
                         },
                       ),
                       const SizedBox(height: 20.0,),

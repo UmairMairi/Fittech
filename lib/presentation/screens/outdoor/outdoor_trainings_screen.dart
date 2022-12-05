@@ -87,10 +87,12 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 20,),
                             const Text(
                               Constants.outdoorTrainingScreenHeading1,
                               style: MyTextStyle.heading1,
                             ),
+                            const SizedBox(height: 10,),
                             ListView.builder(
                                 itemCount: list.length,
                                 shrinkWrap: true,
@@ -139,10 +141,12 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 20,),
                             const Text(
                               Constants.outdoorTrainingScreenHeading2,
                               style: MyTextStyle.heading1,
                             ),
+                            const SizedBox(height: 10,),
                             ListView.builder(
                                 itemCount: list2.length,
                                 shrinkWrap: true,

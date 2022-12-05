@@ -1,6 +1,7 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -19,44 +20,7 @@ class HeartRateScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            SizedBox(
-              height: 65.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: MyColors.blackColor,
-                      size: 24.0,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  const Expanded(
-                    child: Text(
-                      Constants.heartRateScreenTitle,
-                      textAlign: TextAlign.center,
-                      style: MyTextStyle.heading3,
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0.0,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: MyColors.blackColor,
-                        size: 24.0,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const MyAppBar(title: Constants.heartRateScreenTitle,),
             const LinearProgressIndicator(
               minHeight: 5,
               backgroundColor: MyColors.lightGreyColor,

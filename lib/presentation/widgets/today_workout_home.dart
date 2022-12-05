@@ -60,16 +60,17 @@ class TodayWorkoutHome extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Intermedio",
                             textAlign: TextAlign.start,
-                            style: MyTextStyle.heading3,
+                            maxLines: 1,
+                            style: MyTextStyle.heading3.copyWith(fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           ),
-                          Text(
+                          const Text(
                             "Nivel",
                             textAlign: TextAlign.start,
                             style: MyTextStyle.paragraph2,
@@ -88,16 +89,16 @@ class TodayWorkoutHome extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "≈150.5",
                             textAlign: TextAlign.start,
-                            style: MyTextStyle.heading3,
+                            style: MyTextStyle.heading3.copyWith(fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           ),
-                          Text(
+                          const Text(
                             "Kcal",
                             textAlign: TextAlign.start,
                             style: MyTextStyle.paragraph2,
@@ -117,17 +118,17 @@ class TodayWorkoutHome extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "9 min",
                             textAlign: TextAlign.start,
-                            style: MyTextStyle.heading3,
+                            style: MyTextStyle.heading3.copyWith(fontSize: 16),
 
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           ),
-                          Text(
+                          const Text(
                             "Duración",
                             textAlign: TextAlign.start,
                             style: MyTextStyle.paragraph2,

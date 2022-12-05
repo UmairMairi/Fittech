@@ -137,7 +137,9 @@ class ChooseTrainingModeScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: (){
-                          Navigator.pushNamed(context, BiologicalGenderScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, BiologicalGenderScreen.tag);
+                          }
                         },
                       ),
                       const SizedBox(height: 20,)

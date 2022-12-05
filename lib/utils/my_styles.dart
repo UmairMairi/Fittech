@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MyTextStyle {
   static const heading1 = TextStyle(
     fontFamily: 'Anton',
-    fontSize: 42,
+    fontSize: 40,
   );
 
   static const heading2 = TextStyle(

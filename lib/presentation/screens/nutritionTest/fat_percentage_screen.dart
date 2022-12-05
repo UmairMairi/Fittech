@@ -13,8 +13,8 @@ import 'add_measurements_scren.dart';
 
 class FatPercentageScreen extends StatelessWidget {
   static const String tag = "fat_percentage_screen";
-
-  const FatPercentageScreen({super.key});
+  var selectedIndex = -1;
+  FatPercentageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,11 @@ class FatPercentageScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      const MyGridViewSmall(),
+                      MyGridViewSmall(
+                        onChange: (val) {
+                          selectedIndex = val;
+                        },
+                      ),
                       const SizedBox(
                         height: 50,
                       ),
@@ -93,7 +97,11 @@ class FatPercentageScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, AddMeasurementsScreen.tag, arguments: true);
+                          if(selectedIndex!=-1){
+                            Navigator.pushNamed(
+                                context, AddMeasurementsScreen.tag,
+                                arguments: true);
+                          }
                         },
                       ),
                       const SizedBox(

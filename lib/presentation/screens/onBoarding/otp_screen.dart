@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -8,15 +10,63 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class OTPScreen extends StatelessWidget {
+class OTPScreen extends StatefulWidget {
   OTPScreen({super.key});
 
   static const String tag = "otp_screen";
+
+  @override
+  State<OTPScreen> createState() => _OTPScreenState();
+}
+
+class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController otpController =
       TextEditingController(text: "123456");
+
   final _formKey = GlobalKey<FormState>();
 
-  var isInfoShown = false;
+  var hideResend = true;
+
+  Timer? countdownTimer;
+  Duration myDuration = const Duration(seconds: 30);
+
+  void startTimer() {
+    countdownTimer =
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  // Step 4
+  void stopTimer() {
+    setState(() => countdownTimer!.cancel());
+  }
+
+  // Step 5
+  void resetTimer() {
+    stopTimer();
+    setState(() => myDuration = const Duration(seconds: 30));
+  }
+
+  // Step 6
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        setState(() {
+          hideResend = false;
+        });
+        countdownTimer!.cancel();
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +119,11 @@ class OTPScreen extends StatelessWidget {
                         isObscure: false,
                         controller: otpController,
                         validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              value.length < 6) {
+                            return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
+                          }
                           return null;
                         },
                         keyboardType: TextInputType.number),
@@ -82,7 +137,10 @@ class OTPScreen extends StatelessWidget {
                         textColor: MyColors.whiteColor,
                         backgroundColor: MyColors.blackColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, LoginWelcomeScreen.tag);
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushNamed(
+                                context, LoginWelcomeScreen.tag);
+                          }
                         },
                       ),
                     ),
@@ -92,33 +150,37 @@ class OTPScreen extends StatelessWidget {
                     StatefulBuilder(builder: (context, myState) {
                       return Column(
                         children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: PrimaryButton(
-                              title: Constants.resendLabel,
-                              titleStyle: MyTextStyle.buttonTitle
-                                  .copyWith(fontWeight: FontWeight.w600),
-                              textColor: MyColors.blackColor,
-                              backgroundColor: MyColors.whiteColor,
-                              onPressed: () {
-                                myState(() {
-                                  isInfoShown = true;
-                                });
-                              },
+                          if (!hideResend)
+                            SizedBox(
+                              width: double.infinity,
+                              child: PrimaryButton(
+                                title: Constants.resendLabel,
+                                titleStyle: MyTextStyle.buttonTitle
+                                    .copyWith(fontWeight: FontWeight.w600),
+                                textColor: MyColors.blackColor,
+                                backgroundColor: MyColors.whiteColor,
+                                onPressed: () {
+                                  resetTimer();
+                                  startTimer();
+                                  myState(() {
+                                    hideResend = true;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
                           const SizedBox(
                             height: 50.0,
                           ),
-                          if (isInfoShown)
-                            const SizedBox(
+                          if (hideResend)
+                            SizedBox(
                               width: double.infinity,
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
                                 child: Text(
-                                  Constants.resendTimerInfo,
+                                  "${Constants.resendTimerInfo}${myDuration.inSeconds}s",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontFamily: 'Open Sance',
                                       color: MyColors.blackColor,
                                       fontWeight: FontWeight.bold,

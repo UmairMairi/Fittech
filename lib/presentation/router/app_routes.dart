@@ -82,7 +82,7 @@ class AppRoute {
       case CreateAccountScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const CreateAccountScreen());
+                CreateAccountScreen());
       case LoginScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) => LoginScreen());
@@ -103,7 +103,7 @@ class AppRoute {
       case RecoverPasswordScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const RecoverPasswordScreen());
+                RecoverPasswordScreen());
       case VerifyCodeScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -160,9 +160,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const TrainingCompletedScreen());
       case BreakBetweenSeriesScreen.tag:
+        var index = routeSettings.arguments as int?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const BreakBetweenSeriesScreen());
+                BreakBetweenSeriesScreen(restType: index,));
       case TrainingTestScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -327,7 +328,7 @@ class AppRoute {
       case FatPercentageScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const FatPercentageScreen());
+                FatPercentageScreen());
       case MeasurementsScreen.tag:
         var isNutritionTest = routeSettings.arguments as bool?;
         return SlideRightRoute(

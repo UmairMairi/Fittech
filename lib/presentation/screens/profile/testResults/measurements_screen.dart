@@ -452,19 +452,17 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: (widget.isNutritionTest)
-                ? Expanded(
-              child: PrimaryButton(
-                title: Constants.measurementsScreenLabel3,
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                borderColor: MyColors.blackColor,
-                onPressed: (){
-                  if(widget.isNutritionTest){
-                    Navigator.pushNamed(context, HeartStatusScreen.tag,arguments: widget.isNutritionTest);
-                  }
-                },
-              ),
-            )
+                ? PrimaryButton(
+                  title: Constants.measurementsScreenLabel3,
+                  backgroundColor: MyColors.blackColor,
+                  textColor: MyColors.whiteColor,
+                  borderColor: MyColors.blackColor,
+                  onPressed: (){
+                    if(widget.isNutritionTest){
+                      Navigator.pushNamed(context, HeartStatusScreen.tag,arguments: widget.isNutritionTest);
+                    }
+                  },
+                )
                 : Row(
               children: [
                 const Expanded(
@@ -520,5 +518,5 @@ enum TestResult {
   neck,
   middleThigh,
   arm,
-  chest
+  chest,
 }

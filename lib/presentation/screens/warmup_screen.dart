@@ -13,10 +13,10 @@ class HeatingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: MyColors.whiteColor,
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.whiteColor,
+        body: Stack(
           alignment: Alignment.topCenter,
           children: [
             SizedBox(
@@ -44,87 +44,85 @@ class HeatingScreen extends StatelessWidget {
             SizedBox(
               height: size.height,
               width: size.width,
-              child: Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: size.height *0.4,
-                        width: size.width,
-                        alignment: Alignment.topLeft,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                                color: MyColors.whiteColor.withOpacity(0.8),
-                                shape: BoxShape.circle),
-                            child: const Icon(
-                              Icons.arrow_back,
-                              size: 20,
-                              color: MyColors.blackColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        Constants.titleHeatingScreen,
-                        textAlign: TextAlign.center,
-                        style: MyTextStyle.heading1,
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Container(
+                      height: size.height *0.4,
+                      width: size.width,
+                      alignment: Alignment.topLeft,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                         child: Container(
+                          padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: MyColors.redColor, width: 5.0)),
-                          padding: const EdgeInsets.all(30.0),
-                          child: const Text(
-                            "24",
-                            textAlign: TextAlign.center,
-                            style: MyTextStyle.heading1,
+                              color: MyColors.whiteColor.withOpacity(0.8),
+                              shape: BoxShape.circle),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            size: 20,
+                            color: MyColors.blackColor,
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20.0,
+                    ),
+                    const Text(
+                      Constants.titleHeatingScreen,
+                      textAlign: TextAlign.center,
+                      style: MyTextStyle.heading1,
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: MyColors.redColor, width: 5.0)),
+                        padding: const EdgeInsets.all(30.0),
+                        child: const Text(
+                          "24",
+                          textAlign: TextAlign.center,
+                          style: MyTextStyle.heading1,
+                        ),
                       ),
-                      const Text(
-                        Constants.heatingScreenSubHeading,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(child: Container()),
-                      SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButton(
-                            backgroundColor: MyColors.redColor,
-                            textColor: MyColors.whiteColor,
-                            borderColor: MyColors.redColor,
-                            title: Constants.burpeesPauseButton,
-                            leadingChild: const Icon(
-                              Icons.pause,
-                              size: 20,
-                              color: MyColors.whiteColor,
-                            ),
-                            onPressed: () {
-                            },
-                          )),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    const Text(
+                      Constants.heatingScreenSubHeading,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Open Sance',
+                          color: MyColors.blackColor,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(child: Container()),
+                    SizedBox(
+                        width: double.infinity,
+                        child: PrimaryButton(
+                          backgroundColor: MyColors.redColor,
+                          textColor: MyColors.whiteColor,
+                          borderColor: MyColors.redColor,
+                          title: Constants.burpeesPauseButton,
+                          leadingChild: const Icon(
+                            Icons.pause,
+                            size: 20,
+                            color: MyColors.whiteColor,
+                          ),
+                          onPressed: () {
+                          },
+                        )),
 
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                    ],
-                  ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                  ],
                 ),
               ),
             ),

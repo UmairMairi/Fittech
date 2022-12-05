@@ -76,9 +76,9 @@ class LoginScreen extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       validator: (val) {
                         if (val == null && val!.isEmpty) {
-                          return "Please enter a valid email";
+                          return "El correo ingresado no está registrado";
                         } else if (!isEmail(val)) {
-                          return "Please enter a valid email";
+                          return "El correo ingresado no está registrado";
                         } else {
                           return null;
                         }

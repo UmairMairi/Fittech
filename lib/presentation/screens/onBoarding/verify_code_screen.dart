@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
@@ -6,12 +8,67 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class VerifyCodeScreen extends StatelessWidget {
+class VerifyCodeScreen extends StatefulWidget {
   const VerifyCodeScreen({super.key});
 
   static const String tag = "verify_code_screen";
+
+  @override
+  State<VerifyCodeScreen> createState() => _VerifyCodeScreenState();
+}
+
+class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
+  final TextEditingController otpController =
+      TextEditingController(text: "123456");
+
+  final _formKey = GlobalKey<FormState>();
+
+  var hideResend = true;
+
+  Timer? countdownTimer;
+
+  Duration myDuration = const Duration(seconds: 30);
+
+  void startTimer() {
+    countdownTimer =
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  // Step 4
+  void stopTimer() {
+    setState(() => countdownTimer!.cancel());
+  }
+
+  // Step 5
+  void resetTimer() {
+    stopTimer();
+    setState(() => myDuration = const Duration(seconds: 30));
+  }
+
+  // Step 6
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        setState(() {
+          hideResend = false;
+        });
+        countdownTimer!.cancel();
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +77,12 @@ class VerifyCodeScreen extends StatelessWidget {
         body: ListView(
           shrinkWrap: true,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.titleVerifyCodeScreen,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
+            SizedBox(
+              height: 65.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
                       color: MyColors.blackColor,
@@ -55,9 +92,30 @@ class VerifyCodeScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                ),
-              ],
+                  const Expanded(
+                    child: Text(
+                      Constants.titleVerifyCodeScreen,
+                      textAlign: TextAlign.center,
+                      style: MyTextStyle.heading3,
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: MyColors.blackColor,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
@@ -69,19 +127,28 @@ class VerifyCodeScreen extends StatelessWidget {
                   ),
                   const Text(
                     Constants.verifyCodeScreenInfo,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 18.0),
+                    style: MyTextStyle.paragraph1,
                   ),
                   const SizedBox(
                     height: 30.0,
                   ),
-                  const TextFieldPrimary(
+                  Form(
+                    key: _formKey,
+                    child: TextFieldPrimary(
                       isLabelRequired: true,
                       title: Constants.verifyCodeScreenCodeLabel,
                       isObscure: false,
-                      keyboardType: TextInputType.text),
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length < 6) {
+                          return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
                   const SizedBox(
                     height: 50.0,
                   ),
@@ -91,21 +158,73 @@ class VerifyCodeScreen extends StatelessWidget {
                       title: Constants.verifyCodeScreenContinueLabel,
                       textColor: MyColors.whiteColor,
                       backgroundColor: MyColors.blackColor,
-                      onPressed: (){
-                        Navigator.pushNamed(context, UpdatePasswordScreen.tag);
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.pushNamed(
+                              context, UpdatePasswordScreen.tag);
+                        }
                       },
                     ),
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  SizedBox(
+                  StatefulBuilder(builder: (context, myState) {
+                    return Column(
+                      children: [
+                        if (!hideResend)
+                          SizedBox(
+                            width: double.infinity,
+                            child: PrimaryButton(
+                              title: Constants.resendLabel,
+                              titleStyle: MyTextStyle.buttonTitle
+                                  .copyWith(fontWeight: FontWeight.w600),
+                              textColor: MyColors.blackColor,
+                              backgroundColor: MyColors.whiteColor,
+                              onPressed: () {
+                                resetTimer();
+                                startTimer();
+                                myState(() {
+                                  hideResend = true;
+                                });
+                              },
+                            ),
+                          ),
+                        const SizedBox(
+                          height: 50.0,
+                        ),
+                        if (hideResend)
+                          SizedBox(
+                            width: double.infinity,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Text(
+                                "${Constants.verifyCodeScreenResendTimerInfo}${myDuration.inSeconds}s",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0),
+                              ),
+                            ),
+                          ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                      ],
+                    );
+                  })
+
+                  /*SizedBox(
                     width: double.infinity,
                     child: PrimaryButton(
                       title: Constants.verifyCodeScreenResendCodeLabel,
                       textColor: MyColors.blackColor,
                       backgroundColor: MyColors.whiteColor,
                       onPressed: () {
+
                       },
                     ),
                   ),
@@ -130,7 +249,7 @@ class VerifyCodeScreen extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 20.0,
-                  ),
+                  ),*/
                 ],
               ),
             ),

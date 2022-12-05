@@ -151,8 +151,9 @@ class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, ChooseFoodScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, ChooseFoodScreen.tag);
+                          }
                         },
                       ),
                       const SizedBox(

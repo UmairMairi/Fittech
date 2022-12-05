@@ -6,6 +6,7 @@ import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
+import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -22,6 +23,8 @@ class ReplaceExerciseScreen extends StatefulWidget {
 
 class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
     with TickerProviderStateMixin {
+  var selectedIndex = -1;
+
   @override
   void initState() {
     super.initState();
@@ -33,44 +36,7 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
       child: Scaffold(
         body: Column(
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: MyColors.blackColor,
-                    size: 24.0,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    Constants.titleReplaceExercise,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: MyColors.blackColor,
-                      size: 24.0,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-              ],
-            ),
+            const MyAppBar(title: Constants.titleReplaceExercise),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -115,6 +81,7 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                           return Container(
                               margin: const EdgeInsets.only(bottom: 10.0),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     height: 80,
@@ -123,49 +90,60 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                                   ),
                                   Expanded(
                                       child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
-                                    child: Column(
-                                      crossAxisAlignment:
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          "Escalada de Montaña",
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              fontFamily: 'Open Sance',
-                                              color: MyColors.blackColor,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18.0),
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          children: const [
+                                            Text(
+                                              "Escalada de Montaña",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontFamily: 'Open Sance',
+                                                  color: MyColors.blackColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Ver ejercicio",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontFamily: 'Open Sance',
+                                                  color: MyColors.redColor,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16.0),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          "Ver ejercicio",
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              fontFamily: 'Open Sance',
-                                              color: MyColors.redColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 16.0),
-                                        ),
-                                      ],
+                                      )),
+                                  InkWell(
+                                    onTap: (){
+                                      setState(() {
+                                        selectedIndex = index;
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        height: 20,
+                                        width: 20,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                color: (index == selectedIndex)
+                                                    ? MyColors.redColor
+                                                    : MyColors.blackColor,
+                                                width: 2)),
+                                      ),
                                     ),
-                                  )),
-                                  Container(
-                                    height: 80,
-                                    alignment: Alignment.topRight,
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        padding: const EdgeInsets.all(5.0),
-                                        constraints: const BoxConstraints(
-                                            minHeight: 0.0, minWidth: 0.0),
-                                        icon: const Icon(
-                                          Icons.circle_outlined,
-                                          color: Colors.black,
-                                        )),
                                   )
                                 ],
                               ));
@@ -179,12 +157,13 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: PrimaryButton(
-                  title:
-                  Constants.replaceExerciseReplaceButton,
+                title: Constants.replaceExerciseReplaceButton,
                 backgroundColor: MyColors.blackColor,
                 textColor: MyColors.whiteColor,
-                onPressed: (){
+                onPressed: () {
+                  if(selectedIndex!=-1){
                     Navigator.pushNamed(context, ExerciseScreen.tag);
+                  }
                 },
               ),
             )

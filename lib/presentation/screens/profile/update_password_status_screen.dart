@@ -14,10 +14,10 @@ class UpdatePasswordStatusScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: MyColors.blackColor,
-      body: SafeArea(
-        child: SizedBox(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.blackColor,
+        body: SizedBox(
           width: size.width,
           height: size.height,
           child: Padding(

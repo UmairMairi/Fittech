@@ -155,7 +155,9 @@ class FamilyHistoryScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: (){
-                          Navigator.pushNamed(context, HeartRateScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, HeartRateScreen.tag);
+                          }
                         },
                       ),
                       const SizedBox(height: 10,),

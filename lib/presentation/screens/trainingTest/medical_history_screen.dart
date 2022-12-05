@@ -184,7 +184,9 @@ class MedicalHistoryScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: (){
-                          Navigator.pushNamed(context, FamilyHistoryScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, FamilyHistoryScreen.tag);
+                          }
                         },
                       ),
                       const SizedBox(height: 10,),

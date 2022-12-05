@@ -148,7 +148,9 @@ class AboutGoalScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: (){
-                          Navigator.pushNamed(context, PhysicalActivityScreen.tag);
+                          if(currentSelectedItem!=-1){
+                            Navigator.pushNamed(context, PhysicalActivityScreen.tag);
+                          }
                         },
                       )
 

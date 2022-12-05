@@ -6,12 +6,18 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class RecoverPasswordScreen extends StatelessWidget {
-  const RecoverPasswordScreen({super.key});
+  RecoverPasswordScreen({super.key});
 
   static const String tag = "recover_password_screen";
+
+  final TextEditingController emailController =
+      TextEditingController(text: "test@mail.com");
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,29 +56,37 @@ class RecoverPasswordScreen extends StatelessWidget {
                     children: [
                       const Text(
                         Constants.titleRecoverPasswordScreen,
-                        style: TextStyle(
-                            fontFamily: 'Anton',
-                            color: MyColors.blackColor,
-                            fontSize: 42.0),
+                        style: MyTextStyle.heading1,
                       ),
                       const SizedBox(
                         height: 10.0,
                       ),
                       const Text(
                         Constants.recoverPasswordScreenInfo,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 18.0),
+                        style: MyTextStyle.paragraph1,
                       ),
                       const SizedBox(
                         height: 30.0,
                       ),
-                      const TextFieldPrimary(
+                      Form(
+                        key: _formKey,
+                        child: TextFieldPrimary(
                           isLabelRequired: true,
                           title: Constants.recoverPasswordScreenMailLabel,
                           isObscure: false,
-                          keyboardType: TextInputType.text),
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (val) {
+                            if (val == null && val!.isEmpty) {
+                              return "El correo ingresado no está registrado";
+                            } else if (!isEmail(val)) {
+                              return "El correo ingresado no está registrado";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                      ),
                       const SizedBox(
                         height: 100.0,
                       ),
@@ -82,8 +96,11 @@ class RecoverPasswordScreen extends StatelessWidget {
                           title: Constants.recoverPasswordScreenContinueLabel,
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
-                          onPressed: (){
-                            Navigator.pushNamed(context, VerifyCodeScreen.tag);
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.pushNamed(
+                                  context, VerifyCodeScreen.tag);
+                            }
                           },
                         ),
                       ),

@@ -55,7 +55,7 @@ class Constants {
   static const String verifyLabel = "Verificar";
   static const String resendLabel = "Reenviar código";
   static const String resendTimerInfo =
-      "¡Código reenviado! Podrás reenviar el código en 30s.";
+      "¡Código reenviado! Podrás reenviar el código en ";
 
   //LoginWelcomeScreen screen
 
@@ -119,7 +119,7 @@ class Constants {
   static const String verifyCodeScreenContinueLabel = "Continuar";
   static const String verifyCodeScreenResendCodeLabel = "Reenviar código";
   static const String verifyCodeScreenResendTimerInfo =
-      "¡Código reenviado! Podrás reenviar el código en 30s.";
+      "¡Código reenviado! Podrás reenviar el código en ";
 
   //TestIncomplete screen
 

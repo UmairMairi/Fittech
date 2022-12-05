@@ -17,6 +17,7 @@ class UpdatePasswordScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,11 @@ class UpdatePasswordScreen extends StatelessWidget {
                           isObscure: true,
                           controller: passwordController,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {}
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 6) {
+                              return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
+                            }
                             return null;
                           },
                           keyboardType: TextInputType.name),
@@ -96,12 +101,16 @@ class UpdatePasswordScreen extends StatelessWidget {
                       ),
                       TextFieldPrimary(
                           isLabelRequired: true,
-                          title: Constants
-                              .updatePasswordScreenConfirmPasswordLabel,
+                          title: Constants.updatePasswordScreenConfirmPasswordLabel,
                           isObscure: true,
-                          controller: passwordController,
+                          controller: confirmPasswordController,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {}
+                            if (value == null || value.isEmpty || value.length < 6) {
+                              return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
+                            }
+                            else if (passwordController.text != confirmPasswordController.text) {
+                              return "Las contraseñas no coinciden.";
+                            }
                             return null;
                           },
                           keyboardType: TextInputType.name),
@@ -119,10 +128,9 @@ class UpdatePasswordScreen extends StatelessWidget {
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           onPressed: () {
-                            Navigator.pushNamed(
-                                context, UpdatePasswordStatusScreen.tag);
-                            // if (_formKey.currentState!.validate()) {
-                            // }
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
+                            }
                           },
                         ),
                       ),
