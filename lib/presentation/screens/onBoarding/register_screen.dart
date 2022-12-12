@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/create_account_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -7,7 +8,9 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -15,15 +18,15 @@ class RegisterScreen extends StatelessWidget {
   static const String tag = "register_screen";
 
   final TextEditingController fNameController =
-      TextEditingController(text: "Angel");
+      TextEditingController(text: Singleton.isDev?"Angel":"");
   final TextEditingController lNameController =
-      TextEditingController(text: "Valverde");
+      TextEditingController(text: Singleton.isDev?"Valverde":"");
   final TextEditingController emailController =
-      TextEditingController(text: "angelvalverde@gmail.com");
+      TextEditingController(text: Singleton.isDev?"angelvalverde@gmail.com":"");
   final TextEditingController passwordController =
-      TextEditingController(text: "123456");
+      TextEditingController(text: Singleton.isDev?"123456":"");
   final TextEditingController confirmPasswordController =
-      TextEditingController(text: "123456");
+      TextEditingController(text: Singleton.isDev?"123456":"");
 
   final _formKey = GlobalKey<FormState>();
   bool cbState1 = false;
@@ -98,6 +101,11 @@ class RegisterScreen extends StatelessWidget {
                         title: Constants.nameLabel,
                         isObscure: false,
                         controller: fNameController,
+                        onChanged: (val) {
+                          context
+                              .read<RegisterProvider>()
+                              .setFirstName(val = val);
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {}
                           return null;
@@ -111,6 +119,11 @@ class RegisterScreen extends StatelessWidget {
                         title: Constants.surNameLabel,
                         isObscure: false,
                         controller: lNameController,
+                        onChanged: (val) {
+                          context
+                              .read<RegisterProvider>()
+                              .setLastName(val = val);
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {}
                           return null;
@@ -124,6 +137,9 @@ class RegisterScreen extends StatelessWidget {
                         title: Constants.registerEmailLabel,
                         isObscure: false,
                         controller: emailController,
+                        onChanged: (val) {
+                          context.read<RegisterProvider>().setEmail(val = val);
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Entre com um email válido";
@@ -144,6 +160,11 @@ class RegisterScreen extends StatelessWidget {
                             title: Constants.registerPasswordLabel,
                             isObscure: true,
                             controller: passwordController,
+                            onChanged: (val) {
+                              context
+                                  .read<RegisterProvider>()
+                                  .setPassword(val = val);
+                            },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "digite uma senha válida";
@@ -166,6 +187,11 @@ class RegisterScreen extends StatelessWidget {
                         title: Constants.confirmPasswordLabel,
                         isObscure: true,
                         controller: confirmPasswordController,
+                        onChanged: (val) {
+                          context
+                              .read<RegisterProvider>()
+                              .setConfirmPassword(val = val);
+                        },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "digite uma senha válida";
@@ -183,6 +209,7 @@ class RegisterScreen extends StatelessWidget {
                         isChecked: false,
                         valueChanged: (state) {
                           cbState1 = state;
+                          context.read<RegisterProvider>().setInfo1(val: state);
                         }),
                     const SizedBox(
                       height: 25.0,
@@ -191,6 +218,7 @@ class RegisterScreen extends StatelessWidget {
                         isChecked: false,
                         valueChanged: (state) {
                           cbState2 = state;
+                          context.read<RegisterProvider>().setInfo2(val: state);
                         },
                         child: RichText(
                           textAlign: TextAlign.start,
@@ -213,28 +241,45 @@ class RegisterScreen extends StatelessWidget {
                         isChecked: false,
                         valueChanged: (state) {
                           cbState3 = state;
+                          context.read<RegisterProvider>().setInfo3(val: state);
                         }),
                     const SizedBox(
                       height: 25.0,
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: PrimaryButton(
-                        title: Constants.continueLabel,
-                        textColor: MyColors.whiteColor,
-                        backgroundColor: MyColors.blackColor,
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            if (cbState1 && cbState2 && cbState3) {
-                              Navigator.pushNamed(context, OTPScreen.tag);
-                            } else {
-                              showMessage(
-                                  context: context,
-                                  msg: "Please select the conditions first");
+                      child: Builder(builder: (context) {
+                        var bloc = context.watch<RegisterProvider>();
+                        bool isEnabled = false;
+                        if ((bloc.firstName.isNotEmpty &&
+                            bloc.lastName.isNotEmpty &&
+                            isEmail(bloc.email) &&
+                            (bloc.password.length >= 6) &&
+                            (bloc.confirmPassword.length >=
+                                6) /* && (bloc.password==bloc.confirmPassword)*/ &&
+                            bloc.info1Checked &&
+                            bloc.info2Checked &&
+                            bloc.info3Checked)||Singleton.isDev) {
+                          isEnabled = true;
+                        }
+                        return PrimaryButton(
+                          title: Constants.continueLabel,
+                          textColor: MyColors.whiteColor,
+                          backgroundColor: MyColors.blackColor,
+                          enabled: isEnabled,
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() && isEnabled) {
+                              if (cbState1 && cbState2 && cbState3) {
+                                Navigator.pushNamed(context, OTPScreen.tag);
+                              } else {
+                                showMessage(
+                                    context: context,
+                                    msg: "Please select the conditions first");
+                              }
                             }
-                          }
-                        },
-                      ),
+                          },
+                        );
+                      }),
                     ),
                     const SizedBox(
                       height: 20.0,

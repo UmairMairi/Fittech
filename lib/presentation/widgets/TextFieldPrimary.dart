@@ -14,6 +14,7 @@ class TextFieldPrimary extends StatefulWidget {
   final String? suffixText;
   final Widget? suffix;
   final int? lines;
+  final Function(String)? onChanged;
 
   const TextFieldPrimary({
     Key? key,
@@ -27,6 +28,7 @@ class TextFieldPrimary extends StatefulWidget {
     this.hintText,
     this.suffix,
     this.lines,
+    this.onChanged,
     this.suffixText,
   }) : super(key: key);
 
@@ -115,6 +117,11 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
                   : null),
           style: MyTextStyle.paragraph1,
           obscureText: widget.isObscure! ? _isPasswordVisible : false,
+          onChanged: (val){
+            if(widget.onChanged!=null){
+              widget.onChanged!(val);
+            }
+          },
         )
       ],
     );

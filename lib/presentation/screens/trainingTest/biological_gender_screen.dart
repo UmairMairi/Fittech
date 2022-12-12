@@ -1,10 +1,13 @@
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
+import 'package:fit_tech/logic/biological_gender_provider.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/weight_height_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BiologicalGenderScreen extends StatelessWidget {
   static const String tag = "biological_gender_screen";
@@ -106,6 +109,7 @@ class BiologicalGenderScreen extends StatelessWidget {
                               onTap: () {
                                 myState(() {
                                   currentSelectedItem = index;
+                                  context.read<BiologicalGenderProvider>().setSelectItem(val: list[index]);
                                 });
                               },
                               child: Container(
@@ -149,15 +153,25 @@ class BiologicalGenderScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      PrimaryButton(
-                        title: Constants.chooseTrainingModeContinueLabel,
-                        backgroundColor: MyColors.blackColor,
-                        textColor: MyColors.whiteColor,
-                        onPressed: () {
-                          if(currentSelectedItem!=-1){
-                            Navigator.pushNamed(context, WeightHeightScreen.tag);
+                      Builder(
+                        builder: (context) {
+                          var bloc = context.watch<BiologicalGenderProvider>();
+                          bool isEnabled = false;
+                          if((bloc.selectedItem!=null)||Singleton.isDev){
+                            isEnabled = true;
                           }
-                        },
+                          return PrimaryButton(
+                            title: Constants.chooseTrainingModeContinueLabel,
+                            backgroundColor: MyColors.blackColor,
+                            textColor: MyColors.whiteColor,
+                            enabled: isEnabled,
+                            onPressed: () {
+                              if(currentSelectedItem!=-1){
+                                Navigator.pushNamed(context, WeightHeightScreen.tag);
+                              }
+                            },
+                          );
+                        }
                       )
                     ],
                   ),

@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/recover_password_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
@@ -8,7 +9,9 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecoverPasswordScreen extends StatelessWidget {
   RecoverPasswordScreen({super.key});
@@ -16,7 +19,7 @@ class RecoverPasswordScreen extends StatelessWidget {
   static const String tag = "recover_password_screen";
 
   final TextEditingController emailController =
-      TextEditingController(text: "test@mail.com");
+      TextEditingController(text: Singleton.isDev?"test@mail.com":"");
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -76,6 +79,9 @@ class RecoverPasswordScreen extends StatelessWidget {
                           isObscure: false,
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
+                          onChanged: (val){
+                            context.read<RecoverPasswordProvider>().setEmail(val: val);
+                          },
                           validator: (val) {
                             if (val == null && val!.isEmpty) {
                               return "El correo ingresado no está registrado";
@@ -92,16 +98,26 @@ class RecoverPasswordScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: PrimaryButton(
-                          title: Constants.recoverPasswordScreenContinueLabel,
-                          textColor: MyColors.whiteColor,
-                          backgroundColor: MyColors.blackColor,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(
-                                  context, VerifyCodeScreen.tag);
+                        child: Builder(
+                          builder: (context) {
+                            var bloc = context.watch<RecoverPasswordProvider>();
+                            bool isEnabled = false;
+                            if((isEmail(bloc.email))||Singleton.isDev){
+                              isEnabled = true;
                             }
-                          },
+                            return PrimaryButton(
+                              title: Constants.recoverPasswordScreenContinueLabel,
+                              textColor: MyColors.whiteColor,
+                              backgroundColor: MyColors.blackColor,
+                              enabled: isEnabled,
+                              onPressed: () {
+                                if (_formKey.currentState!.validate() && isEnabled) {
+                                  Navigator.pushNamed(
+                                      context, VerifyCodeScreen.tag);
+                                }
+                              },
+                            );
+                          }
                         ),
                       ),
                       const SizedBox(

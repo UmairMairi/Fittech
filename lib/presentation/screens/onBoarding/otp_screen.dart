@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fit_tech/logic/otp_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -8,7 +9,9 @@ import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OTPScreen extends StatefulWidget {
   OTPScreen({super.key});
@@ -21,7 +24,7 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController otpController =
-      TextEditingController(text: "123456");
+      TextEditingController(text: Singleton.isDev?"123456":"");
 
   final _formKey = GlobalKey<FormState>();
 
@@ -118,6 +121,9 @@ class _OTPScreenState extends State<OTPScreen> {
                         title: Constants.codeLabel,
                         isObscure: false,
                         controller: otpController,
+                        onChanged: (val) {
+                          context.read<OTPProvider>().setPassword(val: val);
+                        },
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
@@ -132,17 +138,25 @@ class _OTPScreenState extends State<OTPScreen> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: PrimaryButton(
-                        title: Constants.verifyLabel,
-                        textColor: MyColors.whiteColor,
-                        backgroundColor: MyColors.blackColor,
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(
-                                context, LoginWelcomeScreen.tag);
-                          }
-                        },
-                      ),
+                      child: Builder(builder: (context) {
+                        var bloc = context.watch<OTPProvider>();
+                        bool isEnabled = false;
+                        if ((bloc.otp.length >= 6)||Singleton.isDev) {
+                          isEnabled = true;
+                        }
+                        return PrimaryButton(
+                          title: Constants.verifyLabel,
+                          textColor: MyColors.whiteColor,
+                          backgroundColor: MyColors.blackColor,
+                          enabled: isEnabled,
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() && isEnabled) {
+                              Navigator.pushNamed(
+                                  context, LoginWelcomeScreen.tag);
+                            }
+                          },
+                        );
+                      }),
                     ),
                     const SizedBox(
                       height: 10.0,

@@ -1,5 +1,4 @@
-import 'package:fit_tech/data/models/choose_training_mode_model.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
+import 'package:fit_tech/logic/counted_beats_provider.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_beat_counter_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -7,7 +6,9 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EnterCountedBeatsScreen extends StatelessWidget {
   static const String tag = "counted_beats_screen";
@@ -87,12 +88,15 @@ class EnterCountedBeatsScreen extends StatelessWidget {
                       children: [
                       Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: TextFieldPrimary(
                               title: Constants.enterCountedBeatsScreenBeatsLabel,
                               isLabelRequired: true,
                               isObscure: false,
                               keyboardType: TextInputType.number,
+                              onChanged: (val){
+                                context.read<CountedBeatsProvider>().setCountedBeats(val: val);
+                              },
                             ),
                           ),
                           Expanded(child: Container(),),
@@ -106,13 +110,23 @@ class EnterCountedBeatsScreen extends StatelessWidget {
             const SizedBox(height:20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: Constants.enterCountedBeatsScreenContinueLabel,
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                onPressed: (){
-                  Navigator.pushNamed(context, HeartStatusScreen.tag);
-                },
+              child: Builder(
+                builder: (context) {
+                  var bloc = context.watch<CountedBeatsProvider>();
+                  bool isEnabled = false;
+                  if((bloc.beats!=null && bloc.beats!.isNotEmpty)||Singleton.isDev){
+                    isEnabled = true;
+                  }
+                  return PrimaryButton(
+                    title: Constants.enterCountedBeatsScreenContinueLabel,
+                    backgroundColor: MyColors.blackColor,
+                    textColor: MyColors.whiteColor,
+                    enabled: isEnabled,
+                    onPressed: (){
+                      Navigator.pushNamed(context, HeartStatusScreen.tag);
+                    },
+                  );
+                }
               ),
             ),
             const SizedBox(height:10.0),

@@ -5,8 +5,10 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'enter_counted_beats_screen.dart';
 
 class HeartBeatCounterScreen extends StatefulWidget {
@@ -106,14 +108,18 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
             const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: "Iniciar",
-                backgroundColor: MyColors.redColor,
-                textColor: MyColors.whiteColor,
-                borderColor: MyColors.redColor,
-                onPressed: (){
-                  Navigator.pushNamed(context, EnterCountedBeatsScreen.tag);
-                },
+              child: Builder(
+                builder: (context) {
+                  return PrimaryButton(
+                    title: "Iniciar",
+                    backgroundColor: MyColors.redColor,
+                    textColor: MyColors.whiteColor,
+                    borderColor: MyColors.redColor,
+                    onPressed: (){
+                      Navigator.pushNamed(context, EnterCountedBeatsScreen.tag);
+                    },
+                  );
+                }
               ),
             ),
             const SizedBox(height: 20,),

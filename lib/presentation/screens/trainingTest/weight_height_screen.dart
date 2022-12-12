@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/screens/dialogue/test_result_dialogue.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/about_goal_screen.dart';
@@ -7,7 +8,9 @@ import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WeightHeightScreen extends StatelessWidget {
   static const String tag = "weight_height_screen";
@@ -89,6 +92,7 @@ class WeightHeightScreen extends StatelessWidget {
                                               if (value is String) {
                                                 myState(() {
                                                   weight = value;
+                                                  context.read<WeightHeightProvider>().setWeight(val: weight);
                                                 });
                                               }
                                             },
@@ -207,6 +211,7 @@ class WeightHeightScreen extends StatelessWidget {
                                               if (value is String) {
                                                 myState(() {
                                                   height = value;
+                                                  context.read<WeightHeightProvider>().setHeight(val: height);
                                                 });
                                               }
                                             },
@@ -300,15 +305,25 @@ class WeightHeightScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: PrimaryButton(
-                  title: Constants.weightHeightScreenContinueLabel,
-                  backgroundColor: MyColors.blackColor,
-                  textColor: MyColors.whiteColor,
-                  onPressed: () {
-                    if(height.isNotEmpty && weight.isNotEmpty){
-                      Navigator.pushNamed(context, AboutGoalScreen.tag);
+                child: Builder(
+                  builder: (context) {
+                    var bloc = context.watch<WeightHeightProvider>();
+                    bool isEnabled = false;
+                    if((bloc.weight!=null && bloc.height!=null && bloc.weight!.isNotEmpty && bloc.height!.isNotEmpty)||Singleton.isDev){
+                      isEnabled = true;
                     }
-                  },
+                    return PrimaryButton(
+                      title: Constants.weightHeightScreenContinueLabel,
+                      backgroundColor: MyColors.blackColor,
+                      textColor: MyColors.whiteColor,
+                      enabled: isEnabled,
+                      onPressed: () {
+                        if(height.isNotEmpty && weight.isNotEmpty && isEnabled){
+                          Navigator.pushNamed(context, AboutGoalScreen.tag);
+                        }
+                      },
+                    );
+                  }
                 ),
               )
             ],

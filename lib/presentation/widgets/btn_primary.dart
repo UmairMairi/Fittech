@@ -14,6 +14,7 @@ class PrimaryButton extends StatelessWidget {
   final Color borderColor;
   final Widget? leadingChild;
   final Widget? trailingChild;
+  final bool enabled;
 
   const PrimaryButton({
     super.key,
@@ -24,6 +25,7 @@ class PrimaryButton extends StatelessWidget {
     this.backgroundColor = MyColors.whiteColor,
     this.textColor = MyColors.blackColor,
     this.isLeading = false,
+    this.enabled = true,
     this.borderColor = MyColors.blackColor,
     this.leadingChild,
     this.trailingChild,
@@ -31,29 +33,33 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RawMaterialButton(
-      fillColor: backgroundColor,
-      elevation: 0.0,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: borderColor),
-        borderRadius: BorderRadius.circular(2.0),
-      ),
-      onPressed: onPressed,
-      padding: EdgeInsets.zero,
-      constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if(leadingChild!=null) leadingChild!,
-            Text(
-              title,
-              style: titleStyle??MyTextStyle.buttonTitle.copyWith(color: textColor),
-            ),
-            if(trailingChild!=null) trailingChild!,
-          ],
+    return Opacity(
+      opacity: enabled ? 1 : 0.5,
+      child: RawMaterialButton(
+        fillColor: backgroundColor,
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: borderColor),
+          borderRadius: BorderRadius.circular(2.0),
+        ),
+        onPressed: enabled ? onPressed : null,
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (leadingChild != null) leadingChild!,
+              Text(
+                title,
+                style: titleStyle ??
+                    MyTextStyle.buttonTitle.copyWith(color: textColor),
+              ),
+              if (trailingChild != null) trailingChild!,
+            ],
+          ),
         ),
       ),
     );

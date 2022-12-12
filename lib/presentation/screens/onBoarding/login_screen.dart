@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/recover_password_screen.dart';
@@ -8,21 +9,24 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   static const String tag = "login_screen";
   final TextEditingController emailController =
-      TextEditingController(text: "test@mail.com");
+      TextEditingController(text: Singleton.isDev?"test@mail.com":"");
   final TextEditingController passwordController =
-      TextEditingController(text: "123456");
+      TextEditingController(text: Singleton.isDev?"123456":"");
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         body: Form(
@@ -74,15 +78,21 @@ class LoginScreen extends StatelessWidget {
                       isObscure: false,
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
+                      onChanged: (val){
+                        context.read<LoginProvider>().setEmail(val = val);
+                      },
                       validator: (val) {
                         if (val == null && val!.isEmpty) {
                           return "El correo ingresado no está registrado";
-                        } else if (!isEmail(val)) {
+                        }
+                        else if (!isEmail(val)) {
                           return "El correo ingresado no está registrado";
-                        } else {
+                        }
+                        else {
                           return null;
                         }
                       },
+
                     ),
                     const SizedBox(
                       height: 30.0,
@@ -93,11 +103,14 @@ class LoginScreen extends StatelessWidget {
                       isObscure: true,
                       controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
+                      onChanged: (val){
+                        context.read<LoginProvider>().setPassword(val =val);
+                      },
                       validator: (val) {
                         if (val == null && val!.isEmpty) {
-                          return "Please enter a valid password";
+                          return "Por favor introduce una contraseña válida";
                         } else if (val.length < 6) {
-                          return "Password length math not be less then 6 digits";
+                          return "La longitud de la contraseña no debe ser inferior a 6 dígitos";
                         } else {
                           return null;
                         }
@@ -108,15 +121,25 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: PrimaryButton(
-                        title: Constants.signIn,
-                        textColor: MyColors.whiteColor,
-                        backgroundColor: MyColors.blackColor,
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, DashboardScreen.tag);
+                      child: Builder(
+                        builder: (context) {
+                          var bloc = context.watch<LoginProvider>();
+                          bool isEnabled = false;
+                          if((isEmail(bloc.email) && bloc.password.length>=6)||Singleton.isDev){
+                            isEnabled = true;
                           }
-                        },
+                          return PrimaryButton(
+                            title: Constants.signIn,
+                            textColor: MyColors.whiteColor,
+                            backgroundColor: MyColors.blackColor,
+                            enabled: isEnabled,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate() && isEnabled) {
+                                Navigator.pushNamed(context, DashboardScreen.tag);
+                              }
+                            },
+                          );
+                        }
                       ),
                     ),
                     const SizedBox(

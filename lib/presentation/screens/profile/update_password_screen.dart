@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -6,7 +7,9 @@ import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'update_password_status_screen.dart';
 
@@ -17,7 +20,8 @@ class UpdatePasswordScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +91,11 @@ class UpdatePasswordScreen extends StatelessWidget {
                           title: Constants.updatePasswordScreenPasswordLabel,
                           isObscure: true,
                           controller: passwordController,
+                          onChanged: (val) {
+                            context
+                                .read<UpdatePasswordProvider>()
+                                .setPassword(val: val);
+                          },
                           validator: (value) {
                             if (value == null ||
                                 value.isEmpty ||
@@ -101,14 +110,22 @@ class UpdatePasswordScreen extends StatelessWidget {
                       ),
                       TextFieldPrimary(
                           isLabelRequired: true,
-                          title: Constants.updatePasswordScreenConfirmPasswordLabel,
+                          title: Constants
+                              .updatePasswordScreenConfirmPasswordLabel,
                           isObscure: true,
                           controller: confirmPasswordController,
+                          onChanged: (val) {
+                            context
+                                .read<UpdatePasswordProvider>()
+                                .setConfirmPassword(val: val);
+                          },
                           validator: (value) {
-                            if (value == null || value.isEmpty || value.length < 6) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 6) {
                               return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
-                            }
-                            else if (passwordController.text != confirmPasswordController.text) {
+                            } else if (passwordController.text !=
+                                confirmPasswordController.text) {
                               return "Las contraseñas no coinciden.";
                             }
                             return null;
@@ -123,16 +140,28 @@ class UpdatePasswordScreen extends StatelessWidget {
                       Expanded(child: Container()),
                       SizedBox(
                         width: double.infinity,
-                        child: PrimaryButton(
-                          title: Constants.verifyIdentityScreenContinue,
-                          textColor: MyColors.whiteColor,
-                          backgroundColor: MyColors.blackColor,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
-                            }
-                          },
-                        ),
+                        child: Builder(builder: (context) {
+                          var bloc = context.watch<UpdatePasswordProvider>();
+                          bool isEnabled = false;
+                          if ((bloc.password.length >= 6 &&
+                                  bloc.confirmPassword.length >= 6) ||
+                              Singleton.isDev) {
+                            isEnabled = true;
+                          }
+                          return PrimaryButton(
+                            title: Constants.verifyIdentityScreenContinue,
+                            textColor: MyColors.whiteColor,
+                            backgroundColor: MyColors.blackColor,
+                            enabled: isEnabled,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate() &&
+                                  isEnabled) {
+                                Navigator.pushNamed(
+                                    context, UpdatePasswordStatusScreen.tag);
+                              }
+                            },
+                          );
+                        }),
                       ),
                       const SizedBox(
                         height: 20.0,
