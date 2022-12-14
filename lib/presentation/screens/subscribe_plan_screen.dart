@@ -403,15 +403,19 @@ class _SubscribePlanScreenState extends State<SubscribePlanScreen> {
                         ),
                         Expanded(child: Container()),
                         Center(
-                            child: Text(
-                              item.price,
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Text(
+                                item.price,
                           maxLines: 1,
                           textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,
-                              fontSize: 25,
-                              fontFamily: 'Anton',),
-                        )),
+                                color: (currentIndex == index)?MyColors.blackColor:MyColors.whiteColor,
+                                fontSize: 25,
+                                fontFamily: 'Anton',),
+                        ),
+                            )),
                         Expanded(child: Container()),
                         Text(
                           item.info,

@@ -10,6 +10,7 @@ import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class ReplaceExerciseScreen extends StatefulWidget {
@@ -49,11 +50,7 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                     const Text(
                       Constants.replaceExerciseInfo,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontFamily: 'Open Sance',
-                          color: MyColors.blackColor,
-                          fontSize: 18.0,
-                          height: 1.5),
+                      style: MyTextStyle.paragraph1,
                     ),
                     const SizedBox(
                       height: 20.0,
@@ -90,42 +87,46 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                                   ),
                                   Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20.0),
-                                        child: Column(
-                                          crossAxisAlignment:
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0),
+                                    child: Column(
+                                      crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                          mainAxisAlignment:
+                                      mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                          children: const [
-                                            Text(
-                                              "Escalada de Montaña",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontFamily: 'Open Sance',
-                                                  color: MyColors.blackColor,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18.0),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Ver ejercicio",
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontFamily: 'Open Sance',
-                                                  color: MyColors.redColor,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16.0),
-                                            ),
-                                          ],
+                                      children: const [
+                                        Text(
+                                          "Escalada de Montaña",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontFamily: 'Open Sance',
+                                              color: MyColors.blackColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18.0),
                                         ),
-                                      )),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          "Ver ejercicio",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontFamily: 'Open Sance',
+                                              color: MyColors.redColor,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16.0),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
                                   InkWell(
-                                    onTap: (){
+                                    onTap: () {
                                       setState(() {
-                                        selectedIndex = index;
+                                        if (selectedIndex == index) {
+                                          selectedIndex = -1;
+                                        } else {
+                                          selectedIndex = index;
+                                        }
                                       });
                                     },
                                     child: Container(
@@ -141,7 +142,7 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                                                 color: (index == selectedIndex)
                                                     ? MyColors.redColor
                                                     : MyColors.blackColor,
-                                                width: 2)),
+                                                width: (index == selectedIndex)?5:2)),
                                       ),
                                     ),
                                   )
@@ -160,8 +161,9 @@ class _ReplaceExerciseScreenState extends State<ReplaceExerciseScreen>
                 title: Constants.replaceExerciseReplaceButton,
                 backgroundColor: MyColors.blackColor,
                 textColor: MyColors.whiteColor,
+                enabled: (selectedIndex != -1),
                 onPressed: () {
-                  if(selectedIndex!=-1){
+                  if (selectedIndex != -1) {
                     Navigator.pushNamed(context, ExerciseScreen.tag);
                   }
                 },

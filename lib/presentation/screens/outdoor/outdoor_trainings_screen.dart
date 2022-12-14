@@ -81,18 +81,22 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                   width: double.infinity,
                   child: Column(
                     children: [
-                      Image.asset(Images.outdoorTrainingsScreenBanner1),
+                      Image.asset(Images.outdoorTrainingsScreenBanner2),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 20,),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             const Text(
                               Constants.outdoorTrainingScreenHeading1,
                               style: MyTextStyle.heading1,
                             ),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             ListView.builder(
                                 itemCount: list.length,
                                 shrinkWrap: true,
@@ -109,12 +113,37 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                                             color: MyColors.greyMediumColor,
                                             size: 18,
                                           ),
-                                          title: Text(
-                                            list[index],
-                                            style: MyTextStyle.heading3
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                          title: Row(
+                                            children: [
+                                              Text(
+                                                list[index],
+                                                style: MyTextStyle.heading3
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              ),
+                                              if (index == 0)
+                                                Expanded(
+                                                    child: Container(
+                                                  color: MyColors.redColor,
+                                                  margin: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 5.0),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    'ÚLTIMA SELECCIONADA',
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: MyTextStyle.normal
+                                                        .copyWith(
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                ))
+                                            ],
                                           ),
                                           minLeadingWidth: 0.0,
                                           onTap: () {
@@ -141,12 +170,16 @@ class _OutdoorTrainingsScreenState extends State<OutdoorTrainingsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 20,),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             const Text(
                               Constants.outdoorTrainingScreenHeading2,
                               style: MyTextStyle.heading1,
                             ),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             ListView.builder(
                                 itemCount: list2.length,
                                 shrinkWrap: true,

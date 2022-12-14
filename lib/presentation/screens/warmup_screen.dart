@@ -1,14 +1,78 @@
+import 'dart:async';
+
+import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_rate_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/circular_progress_bar.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
-class HeatingScreen extends StatelessWidget {
+class HeatingScreen extends StatefulWidget {
   const HeatingScreen({super.key});
 
   static const String tag = "warmup_screen";
+
+  @override
+  State<HeatingScreen> createState() => _HeatingScreenState();
+}
+
+class _HeatingScreenState extends State<HeatingScreen> {
+  Timer? countdownTimer;
+  bool isCountDown = true;
+  bool isStopped = false;
+  bool isCompleted = false;
+  var max = 3;
+  Duration myDuration = const Duration(seconds: 3);
+
+  void startTimer() {
+    countdownTimer =
+        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
+  }
+
+  // Step 4
+  void stopTimer() {
+    setState(() => countdownTimer!.cancel());
+  }
+
+  // Step 5
+  void resetTimer() {
+    stopTimer();
+    myDuration = const Duration(seconds: 30);
+  }
+
+  // Step 6
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = myDuration.inSeconds - reduceSecondsBy;
+      if (seconds == 0 && isCountDown == true) {
+        isCountDown = false;
+        max = 30;
+        resetTimer();
+        startTimer();
+      } else if (seconds < 0 && isCountDown == false) {
+        isCompleted = true;
+        countdownTimer!.cancel();
+      } else {
+        myDuration = Duration(seconds: seconds);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    stopTimer();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +84,7 @@ class HeatingScreen extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: [
             SizedBox(
-              height: size.height *0.4,
+              height: size.height * 0.4,
               width: size.width,
               child: Stack(
                 fit: StackFit.expand,
@@ -35,7 +99,8 @@ class HeatingScreen extends StatelessWidget {
                       minHeight: 8,
                       backgroundColor: Colors.transparent,
                       value: 0.5,
-                      valueColor: AlwaysStoppedAnimation<Color>(MyColors.redColor),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(MyColors.redColor),
                     ),
                   )
                 ],
@@ -49,12 +114,20 @@ class HeatingScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      height: size.height *0.4,
+                      height: size.height * 0.4,
                       width: size.width,
                       alignment: Alignment.topLeft,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          // Navigator.pop(context);
+                          if (isStopped) {
+                            isStopped = false;
+                            startTimer();
+                          } else {
+                            isStopped = true;
+                            stopTimer();
+                          }
+                          showDialogue(context: context);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(10.0),
@@ -74,17 +147,16 @@ class HeatingScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading1,
                     ),
-                    const SizedBox(
+                    Expanded(
+                        child: Container(
                       height: 20.0,
-                    ),
-                    Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: MyColors.redColor, width: 5.0)),
-                        padding: const EdgeInsets.all(30.0),
-                        child: const Text(
-                          "24",
+                    )),
+                    CircularProgress(
+                      maxLength: max.toDouble(),
+                      progress: myDuration.inSeconds.toDouble(),
+                      child: Center(
+                        child: Text(
+                          "${myDuration.inSeconds}",
                           textAlign: TextAlign.center,
                           style: MyTextStyle.heading1,
                         ),
@@ -93,32 +165,47 @@ class HeatingScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    const Text(
-                      Constants.heatingScreenSubHeading,
+                    Text(
+                      isCountDown
+                          ? "CountDown"
+                          : Constants.heatingScreenSubHeading,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: 'Open Sance',
                           color: MyColors.blackColor,
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold),
                     ),
-                    Expanded(child: Container()),
+                    Expanded(
+                        child: Container(
+                      height: 20.0,
+                    )),
                     SizedBox(
                         width: double.infinity,
                         child: PrimaryButton(
                           backgroundColor: MyColors.redColor,
                           textColor: MyColors.whiteColor,
                           borderColor: MyColors.redColor,
-                          title: Constants.burpeesPauseButton,
-                          leadingChild: const Icon(
-                            Icons.pause,
+                          title: isStopped
+                              ? Constants.continueLabel
+                              : Constants.burpeesPauseButton,
+                          enabled: !isCountDown,
+                          leadingChild: Icon(
+                            isStopped ? Icons.play_arrow_rounded : Icons.pause,
                             size: 20,
                             color: MyColors.whiteColor,
                           ),
                           onPressed: () {
+                            if (isStopped) {
+                              isStopped = false;
+                              startTimer();
+                            } else {
+                              isStopped = true;
+                              stopTimer();
+                            }
+                            showDialogue(context: context);
                           },
                         )),
-
                     const SizedBox(
                       height: 20.0,
                     ),
@@ -130,5 +217,38 @@ class HeatingScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  showDialogue({required BuildContext context}) {
+    showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: DialoguePause(
+              onPause: () {
+                Navigator.pushNamed(context, HeartRateScreen.tag);
+              },
+              onRestart: () {
+                Navigator.pop(context);
+              },
+              onExit: () {
+                Navigator.pop(context);
+              },
+            ),
+          );
+        }).then((value) {
+      if (isStopped) {
+        isStopped = false;
+        startTimer();
+      } else {
+        isStopped = true;
+        stopTimer();
+      }
+    });
   }
 }

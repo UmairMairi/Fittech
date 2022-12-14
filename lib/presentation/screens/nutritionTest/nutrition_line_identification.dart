@@ -1,10 +1,13 @@
 import 'package:fit_tech/data/models/nutrition_training_model.dart';
+import 'package:fit_tech/logic/nutrition/nutrition_line_identification_provider.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
   static const String tag = "nutrition_training_line_identification_screen";
@@ -100,6 +103,7 @@ class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
                               onTap: () {
                                 myState(() {
                                   currentSelectedItem = index;
+                                  context.read<NutritionLineIdentificationProvider>().setSelectItem(val: list[index]);
                                 });
                               },
                               child: Container(
@@ -146,15 +150,25 @@ class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
                       const SizedBox(
                         height: 50,
                       ),
-                      PrimaryButton(
-                        title: Constants.chooseTrainingModeContinueLabel,
-                        backgroundColor: MyColors.blackColor,
-                        textColor: MyColors.whiteColor,
-                        onPressed: () {
-                          if(currentSelectedItem!=-1){
-                            Navigator.pushNamed(context, ChooseFoodScreen.tag);
+                      Builder(
+                        builder: (context) {
+                          var bloc = context.watch<NutritionLineIdentificationProvider>();
+                          bool isEnabled = false;
+                          if((bloc.selectedItem!=null)||Singleton.isDev){
+                            isEnabled = true;
                           }
-                        },
+                          return PrimaryButton(
+                            title: Constants.chooseTrainingModeContinueLabel,
+                            backgroundColor: MyColors.blackColor,
+                            textColor: MyColors.whiteColor,
+                            enabled: isEnabled,
+                            onPressed: () {
+                              if(currentSelectedItem!=-1){
+                                Navigator.pushNamed(context, ChooseFoodScreen.tag);
+                              }
+                            },
+                          );
+                        }
                       ),
                       const SizedBox(
                         height: 20,

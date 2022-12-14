@@ -27,7 +27,7 @@ class NutritionTestScreen extends StatelessWidget {
               height: size.width,
               width: size.width,
               child: Image.asset(
-                Images.trainingTestScreenBanner,
+                Images.banner1NutritionTestScreen,
                 fit: BoxFit.cover,
               ),
             ),

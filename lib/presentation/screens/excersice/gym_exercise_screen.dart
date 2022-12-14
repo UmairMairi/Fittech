@@ -1,13 +1,17 @@
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/add_note_dialogue.dart';
+import 'package:fit_tech/presentation/screens/dialogue/cadence_pause.dart';
+import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_rate_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GymExerciseScreen extends StatefulWidget {
   const GymExerciseScreen({super.key});
@@ -71,7 +75,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                               padding: const EdgeInsets.symmetric(vertical:20.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.pop(context);
+                                  showDialoguePause(context: context);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(10.0),
@@ -102,14 +106,9 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                             "Nombre de Ejercicio",
                             textAlign: TextAlign.center,
                             style: MyTextStyle.heading3.copyWith(fontSize: 20),
-                            // style: TextStyle(
-                            //     fontFamily: 'Open Sance',
-                            //     color: MyColors.blackColor,
-                            //     fontSize: 24.0,
-                            //     fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(
-                            height: 20.0,
+                            height: 10.0,
                           ),
                           Row(
                             children: [
@@ -139,24 +138,29 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              "Cadencia",
-                                              textAlign: TextAlign.center,
-                                              style: MyTextStyle.heading3
-                                                  .copyWith(fontWeight: FontWeight.w500),
+                                      InkWell(
+                                        onTap: (){
+                                          showCadenceDialogue(context: context);
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                "Cadencia",
+                                                textAlign: TextAlign.center,
+                                                style: MyTextStyle.heading3
+                                                    .copyWith(fontWeight: FontWeight.w500),
+                                              ),
                                             ),
-                                          ),
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(horizontal:8.0),
-                                            child: Icon(Icons.help_outline_rounded,size: 20,),
-                                          )
-                                        ],
+                                            const Padding(
+                                              padding: EdgeInsets.symmetric(horizontal:8.0),
+                                              child: Icon(Icons.help_outline_rounded,size: 20,),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                       Text(
                                         "2-2",
@@ -171,7 +175,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                             ],
                           ),
                           const SizedBox(
-                            height: 20.0,
+                            height: 10.0,
                           ),
                           SizedBox(
                               width: double.infinity,
@@ -244,7 +248,9 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                   ),
                                 ],
                               )),
-                          Expanded(child: Container()),
+                          Expanded(child: Container(
+                            height: 20.0,
+                          )),
                         ],
                       ),
                     ),
@@ -308,4 +314,45 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
           );
         });
   }
+  showCadenceDialogue({required BuildContext context}) {
+    showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        constraints:
+        BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: const DialogueCadence(),
+          );
+        });
+  }
+  showDialoguePause({required BuildContext context}) {
+    showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        constraints:
+        BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: DialoguePause(
+              onPause: () {
+                Navigator.pushNamed(context, HeartRateScreen.tag);
+              },
+              onRestart: () {
+                Navigator.pop(context);
+              },
+              onExit: () {
+                Navigator.pop(context);
+              },
+            ),
+          );
+        }).then((value) {
+
+    });
+  }
+
 }

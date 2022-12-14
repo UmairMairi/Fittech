@@ -30,8 +30,8 @@ class _AddNoteDialogueState extends State<AddNoteDialogue> {
                 child: Text(
                   "Agregar nota",
                   textAlign: TextAlign.start,
-                  style: MyTextStyle.heading3
-                      .copyWith(color: MyColors.blackColor),
+                  style:
+                      MyTextStyle.heading3.copyWith(color: MyColors.blackColor),
                 ),
               ),
               IconButton(
@@ -56,7 +56,9 @@ class _AddNoteDialogueState extends State<AddNoteDialogue> {
               title: 'Escribir nota',
               isObscure: false,
               controller: controller,
-              lines: 8,
+              lines: 5,
+              showCounter: true,
+              maxLength: 250,
               validator: (value) {
                 if (value == null || value.isEmpty) {}
                 return null;

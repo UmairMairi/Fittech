@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/profile/verify_Identity_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
@@ -7,7 +8,9 @@ import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class VerifyIdentityScreen extends StatelessWidget {
   static const String tag = "verify_identity_screen";
@@ -84,6 +87,11 @@ class VerifyIdentityScreen extends StatelessWidget {
                           title: Constants.verifyIdentityScreenPasswordLabel,
                           isObscure: true,
                           controller: passwordController,
+                          onChanged: (val) {
+                            context
+                                .read<VerifyIdentityProvider>()
+                                .setPassword(val: val);
+                          },
                           validator: (value) {
                             if (value == null ||
                                 value.isEmpty ||
@@ -102,15 +110,26 @@ class VerifyIdentityScreen extends StatelessWidget {
                       Expanded(child: Container()),
                       SizedBox(
                         width: double.infinity,
-                        child: PrimaryButton(
-                          title: Constants.verifyIdentityScreenContinue,
-                          textColor: MyColors.whiteColor,
-                          backgroundColor: MyColors.blackColor,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(context, UpdatePasswordScreen.tag);
+                        child: Builder(
+                          builder: (context) {
+                            var bloc = context.watch<VerifyIdentityProvider>();
+                            bool isEnabled = false;
+                            if ((bloc.password.length >= 6) ||
+                                Singleton.isDev) {
+                              isEnabled = true;
                             }
-                          },
+                            return PrimaryButton(
+                              title: Constants.verifyIdentityScreenContinue,
+                              textColor: MyColors.whiteColor,
+                              backgroundColor: MyColors.blackColor,
+                              enabled: isEnabled,
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.pushNamed(context, UpdatePasswordScreen.tag);
+                                }
+                              },
+                            );
+                          }
                         ),
                       ),
                       const SizedBox(

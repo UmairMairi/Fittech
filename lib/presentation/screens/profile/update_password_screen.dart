@@ -105,6 +105,7 @@ class UpdatePasswordScreen extends StatelessWidget {
                             return null;
                           },
                           keyboardType: TextInputType.name),
+                      Text("Debe contener mínimo 6 caracteres y un número.",style: MyTextStyle.normal.copyWith(fontSize: 15,color: null),),
                       const SizedBox(
                         height: 30.0,
                       ),

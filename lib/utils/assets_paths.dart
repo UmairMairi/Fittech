@@ -30,6 +30,9 @@ class Images {
   // TrainingCompletedScreen
   static const trainingTestScreenBanner = 'assets/images/training_test_banner.png';
 
+  // NutritionTestScreen
+  static const banner1NutritionTestScreen = 'assets/images/nutrition_test_screen_banner1.png';
+
   // TrainingCompletedScreen
   static const heartStatusScreenHeartIcon = 'assets/images/heart_flash.png';
 
@@ -96,8 +99,13 @@ class Images {
 
   //OutdoorTrainingsScreen
   static const outdoorTrainingsScreenBanner1 = 'assets/images/outdoor_trainings_screen_banner1.png';
+  static const outdoorTrainingsScreenBanner2 = 'assets/images/outdoor_trainings_screen_banner2.png';
 
   // NutritionDetailsScreen
+  static const nutritionDetailsScreenIcon1 = 'assets/images/icon_protain.png';
+  static const nutritionDetailsScreenIcon2 = 'assets/images/icon_carbs.png';
+  static const nutritionDetailsScreenIcon3 = 'assets/images/icon_grasas.png';
+
   static const nutritionDetailsScreenBanner1 = 'assets/images/nutrition_details_banner1.png';
   static const nutritionDetailsScreenBanner2 = 'assets/images/nutrition_details_banner2.png';
   static const nutritionDetailsScreenBanner3 = 'assets/images/nutrition_details_banner3.png';

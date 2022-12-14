@@ -11,8 +11,7 @@ class NutritionDetailsScreen extends StatefulWidget {
   static const String tag = "nutrition_details_screen";
 
   @override
-  State<NutritionDetailsScreen> createState() =>
-      _MyNutritionDetailsScreenState();
+  State<NutritionDetailsScreen> createState() => _MyNutritionDetailsScreenState();
 }
 
 class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
@@ -69,42 +68,45 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                             Expanded(
                               child: Container(),
                             ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.all(20.0),
-                                  padding: const EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                      color:
-                                          MyColors.whiteColor.withOpacity(0.8),
-                                      shape: BoxShape.circle),
-                                  child: PopupMenuButton<int>(
-                                    constraints: const BoxConstraints(
-                                        minWidth: 0.0, minHeight: 0.0),
-                                    itemBuilder: (context) => [
-                                      PopupMenuItem(
-                                        value: 1,
-                                        textStyle: MyTextStyle.text1,
-                                        height: 20,
-                                        child: Row(
-                                          children: const [
-                                            Text("+ Agregar Nota")
-                                          ],
+                            Opacity(
+                              opacity: 0,
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            MyColors.whiteColor.withOpacity(0.8),
+                                        shape: BoxShape.circle),
+                                    child: PopupMenuButton<int>(
+                                      constraints: const BoxConstraints(
+                                          minWidth: 0.0, minHeight: 0.0),
+                                      itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          value: 1,
+                                          textStyle: MyTextStyle.text1,
+                                          height: 20,
+                                          child: Row(
+                                            children: const [
+                                              Text("+ Agregar Nota")
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                    color: Colors.white,
-                                  ),
+                                      ],
+                                      color: Colors.white,
+                                    ),
 
-                                  // child: const Icon(
-                                  //   Icons.more_horiz,
-                                  //   size: 20,
-                                  //   color: MyColors.blackColor,
-                                  // ),
+                                    // child: const Icon(
+                                    //   Icons.more_horiz,
+                                    //   size: 20,
+                                    //   color: MyColors.blackColor,
+                                    // ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -148,6 +150,8 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                   child: Stack(
                                     fit: StackFit.expand,
                                     children: [
+
+
                                       const CircularProgressIndicator(
                                         backgroundColor: Colors.grey,
                                         valueColor:
@@ -185,17 +189,19 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                       Column(
                                         children: [
                                           Row(
-                                            children: const [
-                                              Icon(
-                                                Icons.ac_unit,
-                                                size: 18.0,
-                                              ),
-                                              Expanded(
+                                            children: [
+                                              Image.asset(Images.nutritionDetailsScreenIcon1,height: 20,width: 20,),
+                                              // Icon(
+                                              //   Icons.ac_unit,
+                                              //   size: 18.0,
+                                              // ),
+                                              const SizedBox(width: 10,),
+                                              const Expanded(
                                                   child: Text(
                                                 "Proteinas",
                                                 style: MyTextStyle.text1,
                                               )),
-                                              Text(
+                                              const Text(
                                                 "102/200 g.",
                                                 style: MyTextStyle.text1,
                                               )
@@ -215,17 +221,15 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                       Column(
                                         children: [
                                           Row(
-                                            children: const [
-                                              Icon(
-                                                Icons.ac_unit,
-                                                size: 18.0,
-                                              ),
-                                              Expanded(
+                                            children: [
+                                              Image.asset(Images.nutritionDetailsScreenIcon2,height: 20,width: 20,),
+                                              const SizedBox(width: 10,),
+                                              const Expanded(
                                                   child: Text(
                                                 "Carbs",
                                                 style: MyTextStyle.text1,
                                               )),
-                                              Text(
+                                              const Text(
                                                 "27/100 g.",
                                                 style: MyTextStyle.text1,
                                               )
@@ -245,17 +249,16 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                       Column(
                                         children: [
                                           Row(
-                                            children: const [
-                                              Icon(
-                                                Icons.ac_unit,
-                                                size: 18.0,
-                                              ),
-                                              Expanded(
+                                            children: [
+                                              Image.asset(Images.nutritionDetailsScreenIcon3,height: 20,width: 20),
+                                              const SizedBox(width: 10,),
+
+                                              const Expanded(
                                                   child: Text(
                                                 "Grasas",
                                                 style: MyTextStyle.text1,
                                               )),
-                                              Text(
+                                              const Text(
                                                 "21/78 g.",
                                                 style: MyTextStyle.text1,
                                               )

@@ -70,4 +70,20 @@ class MyTextStyle {
       fontSize: 16,
       fontWeight: FontWeight.w500,
       color: MyColors.blackColor);
+
+
+  static const normal = TextStyle(
+      fontFamily: 'Open Sance',
+      fontWeight: FontWeight.w400,
+      color: MyColors.blackColor);
+
+  static const medium = TextStyle(
+      fontFamily: 'Open Sance',
+      fontWeight: FontWeight.w600,
+      color: MyColors.blackColor);
+
+  static const bold = TextStyle(
+      fontFamily: 'Open Sance',
+      fontWeight: FontWeight.w700,
+      color: MyColors.blackColor);
 }

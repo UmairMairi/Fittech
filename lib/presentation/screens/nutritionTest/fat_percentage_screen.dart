@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/nutrition_training_model.dart';
+import 'package:fit_tech/logic/nutrition/fat_Percentage_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/biological_gender_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -7,14 +8,29 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/grid_view_fat_percentage.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'add_measurements_scren.dart';
 
-class FatPercentageScreen extends StatelessWidget {
+class FatPercentageScreen extends StatefulWidget {
   static const String tag = "fat_percentage_screen";
+
+  const FatPercentageScreen({super.key});
+
+  @override
+  State<FatPercentageScreen> createState() => _FatPercentageScreenState();
+}
+
+class _FatPercentageScreenState extends State<FatPercentageScreen> {
   var selectedIndex = -1;
-  FatPercentageScreen({super.key});
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<FatPercentageProvider>().setSelectItem(val: selectedIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,22 +103,33 @@ class FatPercentageScreen extends StatelessWidget {
                       MyGridViewSmall(
                         onChange: (val) {
                           selectedIndex = val;
+                          context.read<FatPercentageProvider>().setSelectItem(val: selectedIndex);
                         },
                       ),
                       const SizedBox(
                         height: 50,
                       ),
-                      PrimaryButton(
-                        title: Constants.chooseTrainingModeContinueLabel,
-                        backgroundColor: MyColors.blackColor,
-                        textColor: MyColors.whiteColor,
-                        onPressed: () {
-                          if(selectedIndex!=-1){
-                            Navigator.pushNamed(
-                                context, AddMeasurementsScreen.tag,
-                                arguments: true);
+                      Builder(
+                        builder: (context) {
+                          var bloc = context.watch<FatPercentageProvider>();
+                          bool isEnabled = false;
+                          if((bloc.selectedItem!=null && bloc.selectedItem!=-1)||Singleton.isDev){
+                            isEnabled = true;
                           }
-                        },
+                          return PrimaryButton(
+                            title: Constants.chooseTrainingModeContinueLabel,
+                            backgroundColor: MyColors.blackColor,
+                            textColor: MyColors.whiteColor,
+                            enabled: isEnabled,
+                            onPressed: () {
+                              if(selectedIndex!=-1){
+                                Navigator.pushNamed(
+                                    context, AddMeasurementsScreen.tag,
+                                    arguments: true);
+                              }
+                            },
+                          );
+                        }
                       ),
                       const SizedBox(
                         height: 20,

@@ -164,7 +164,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     StatefulBuilder(builder: (context, myState) {
                       return Column(
                         children: [
-                          if (!hideResend)
+                          // if (!hideResend)
                             SizedBox(
                               width: double.infinity,
                               child: PrimaryButton(
@@ -173,6 +173,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                     .copyWith(fontWeight: FontWeight.w600),
                                 textColor: MyColors.blackColor,
                                 backgroundColor: MyColors.whiteColor,
+                                enabled: !hideResend,
                                 onPressed: () {
                                   resetTimer();
                                   startTimer();

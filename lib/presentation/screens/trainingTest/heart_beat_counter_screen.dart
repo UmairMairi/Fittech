@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/circular_progress_bar.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -22,7 +23,7 @@ class HeartBeatCounterScreen extends StatefulWidget {
 
 class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
   Timer? countdownTimer;
-
+  var max = 10;
   Duration myDuration = const Duration(seconds: 10);
 
   void startTimer() {
@@ -53,12 +54,6 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
         myDuration = Duration(seconds: seconds);
       }
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    startTimer();
   }
 
   @override
@@ -93,18 +88,31 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
             ),
             Expanded(
               child: Center(
-                child: Container(
-                  padding: const EdgeInsets.all(40.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: MyColors.redColor,width: 5.0)
+                child: CircularProgress(
+                  progress: myDuration.inSeconds.toDouble(),
+                  maxLength: max.toDouble(),
+                  child: Center(
+                    child: Text("${myDuration.inSeconds}",
+                      style: MyTextStyle.heading1,
+                      ),
                   ),
-                  child: Text("${myDuration.inSeconds}",
-                    style: MyTextStyle.heading1,
-                    ),
                   ),
                 ),
               ),
+            // Expanded(
+            //   child: Center(
+            //     child: Container(
+            //       padding: const EdgeInsets.all(40.0),
+            //       decoration: BoxDecoration(
+            //         shape: BoxShape.circle,
+            //         border: Border.all(color: MyColors.redColor,width: 5.0)
+            //       ),
+            //       child: Text("${myDuration.inSeconds}",
+            //         style: MyTextStyle.heading1,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
             const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
@@ -116,7 +124,7 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
                     textColor: MyColors.whiteColor,
                     borderColor: MyColors.redColor,
                     onPressed: (){
-                      Navigator.pushNamed(context, EnterCountedBeatsScreen.tag);
+                      startTimer();
                     },
                   );
                 }

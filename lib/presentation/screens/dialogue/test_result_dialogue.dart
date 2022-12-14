@@ -89,7 +89,7 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                         if (value == null || value.isEmpty) {}
                         return null;
                       },
-                      keyboardType: TextInputType.name),
+                      keyboardType: TextInputType.number),
                 ),
                 (widget.category == TestResult.weight)
                     ? StatefulBuilder(builder: (context, myState) {

@@ -1,18 +1,16 @@
-import 'package:fit_tech/data/models/intro_model.dart';
-import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/dialogue/cadence_pause.dart';
+import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
 import 'package:fit_tech/presentation/screens/profile/verify_identity_screen.dart';
-import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/info_checks.dart';
+import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class MyDataScreen extends StatefulWidget {
   const MyDataScreen({super.key});
@@ -24,7 +22,6 @@ class MyDataScreen extends StatefulWidget {
 }
 
 class _MyDataScreenState extends State<MyDataScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -32,196 +29,264 @@ class _MyDataScreenState extends State<MyDataScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = context.read<MyDataProvider>();
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 65.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: MyColors.blackColor,
-                        size: 24.0,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    const Expanded(
-                      child: Text(
-                        Constants.myDataScreenTitle,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.blackColor,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Opacity(
-                      opacity: 0.0,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: MyColors.blackColor,
-                          size: 24.0,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              Container(
+                  color: MyColors.whiteColor,
+                  child: const MyAppBar(
+                    title: Constants.myDataScreenTitle,
+                  )),
               SizedBox(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: 100,
-                      width: 100,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: MyColors.greyColor,
+                      width: double.infinity,
+                      decoration:
+                          const BoxDecoration(color: MyColors.whiteColor),
+                      child: Column(
+                        children: [
+                          Builder(builder: (context) {
+                            var bloc = context.watch<MyDataProvider>();
+                            return Container(
+                              height: 100,
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: MyColors.greyColor,
+                              ),
+                              child: (bloc.imageFile != null)
+                                  ? CircleAvatar(
+                                      foregroundImage: FileImage(
+                                      bloc.imageFile!,
+                                    ))
+                                  : Image.asset(
+                                      Images.profileScreenProfileIcon),
+                            );
+                          }),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: 150,
+                            alignment: Alignment.center,
+                            child: PrimaryButton(
+                              title: Constants.myDataScreenUpdatePhoto,
+                              backgroundColor: MyColors.whiteColor,
+                              textColor: Colors.black,
+                              onPressed: () {
+                                provider.pickImageFromGallery(context: context);
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
-                      child: Image.asset(Images.profileScreenProfileIcon),
                     ),
-                    const SizedBox(height: 20,),
-                    Container(
-                      width: 150,
-                      alignment: Alignment.center,
-                      child: const PrimaryButton(
-                        title: Constants.myDataScreenUpdatePhoto,
-                        backgroundColor: MyColors.whiteColor,
-                        textColor: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(height: 20,),
-                    Container(
+                    const SizedBox(
                       height: 20,
-                      color: MyColors.extraLightGreyColor,
-                    ),
-                    Column(
-                      children: [
-                        InkWell(
-                          onTap: (){
-                            showDialogue(context: context,category: Profile.name);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                            child: Row(
-                              children: [
-                                Expanded(child: Text(
-                                  Constants.myDataScreenName, style: MyTextStyle
-                                    .paragraph1.copyWith(color: MyColors.blackColor),)),
-                                Expanded(child: Text(
-                                  "Angle",
-                                  textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),))
-                              ],
-                            ),
-                          ),
-                        ),
-                        const Divider()
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        InkWell(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                            child: Row(
-                              children: [
-                                Expanded(child: Text(
-                                  Constants.myDataScreenLastName, style: MyTextStyle
-                                    .paragraph1.copyWith(color: MyColors.blackColor),)),
-                                Expanded(child: Text(
-                                  "Castañeda",
-                                  textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),))
-                              ],
-                            ),
-                          ),
-                          onTap: (){
-                            showDialogue(context: context,category: Profile.lastName);
-                          },
-                        ),
-                        const Divider()
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        InkWell(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                            child: Row(
-                              children: [
-                                Expanded(child: Text(
-                                  Constants.myDataScreenMail, style: MyTextStyle
-                                    .paragraph1.copyWith(color: MyColors.blackColor),)),
-                                Text(
-                                  "ejemplo@gmail.com",
-                                  textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),)
-                              ],
-                            ),
-                          ),
-                          onTap: (){
-                            showDialogue(context: context,category: Profile.email);
-                          },
-                        ),
-                        const Divider()
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        InkWell(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                            child: Row(
-                              children: [
-                                Expanded(child: Text(
-                                  Constants.myDataScreenGander, style: MyTextStyle
-                                    .paragraph1.copyWith(color: MyColors.blackColor),)),
-                                Expanded(child: Text(
-                                  "Hombre",
-                                  textAlign: TextAlign.end,
-                                  style:MyTextStyle.paragraph1.copyWith(color: MyColors.greyColor),))
-                              ],
-                            ),
-                          ),
-                          onTap: (){
-                            showDialogue(context: context,category: Profile.gender);
-                          },
-                        ),
-                      ],
                     ),
                     Container(
-                      height: 20,
-                      color: MyColors.extraLightGreyColor,
+                      width: double.infinity,
+                      decoration:
+                          const BoxDecoration(color: MyColors.whiteColor),
+                      child: Column(
+                        children: [
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showDialogue(
+                                      context: context,
+                                      category: Profile.name,
+                                      inputText:
+                                          context.read<MyDataProvider>().name);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Text(
+                                        Constants.myDataScreenName,
+                                        style: MyTextStyle.paragraph1.copyWith(
+                                            color: MyColors.blackColor),
+                                      )),
+                                      Builder(builder: (context) {
+                                        var bloc =
+                                            context.watch<MyDataProvider>();
+                                        return Expanded(
+                                            child: Text(
+                                          bloc.name,
+                                          textAlign: TextAlign.end,
+                                          style: MyTextStyle.paragraph1
+                                              .copyWith(
+                                                  color: MyColors.greyColor),
+                                        ));
+                                      })
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const Divider()
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Text(
+                                        Constants.myDataScreenLastName,
+                                        style: MyTextStyle.paragraph1.copyWith(
+                                            color: MyColors.blackColor),
+                                      )),
+                                      Builder(builder: (context) {
+                                        var bloc =
+                                            context.watch<MyDataProvider>();
+                                        return Expanded(
+                                            child: Text(
+                                          bloc.lastName,
+                                          textAlign: TextAlign.end,
+                                          style: MyTextStyle.paragraph1
+                                              .copyWith(
+                                                  color: MyColors.greyColor),
+                                        ));
+                                      })
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  showDialogue(
+                                      context: context,
+                                      category: Profile.lastName,
+                                      inputText: context
+                                          .read<MyDataProvider>()
+                                          .lastName);
+                                },
+                              ),
+                              const Divider()
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Text(
+                                        Constants.myDataScreenMail,
+                                        style: MyTextStyle.paragraph1.copyWith(
+                                            color: MyColors.blackColor),
+                                      )),
+                                      Builder(builder: (context) {
+                                        var bloc =
+                                            context.watch<MyDataProvider>();
+                                        return Text(
+                                          bloc.email,
+                                          textAlign: TextAlign.end,
+                                          style: MyTextStyle.paragraph1
+                                              .copyWith(
+                                                  color: MyColors.greyColor),
+                                        );
+                                      })
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  showDialogue(
+                                      context: context,
+                                      category: Profile.email,
+                                      inputText:
+                                          context.read<MyDataProvider>().email);
+                                },
+                              ),
+                              const Divider()
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Text(
+                                        Constants.myDataScreenGander,
+                                        style: MyTextStyle.paragraph1.copyWith(
+                                            color: MyColors.blackColor),
+                                      )),
+                                      Expanded(
+                                          child: Builder(builder: (context) {
+                                        var bloc =
+                                            context.watch<MyDataProvider>();
+                                        return Text(
+                                          bloc.gender,
+                                          textAlign: TextAlign.end,
+                                          style: MyTextStyle.paragraph1
+                                              .copyWith(
+                                                  color: MyColors.greyColor),
+                                        );
+                                      }))
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  showDialogue(
+                                      context: context,
+                                      category: Profile.gender,
+                                    inputText: context.read<MyDataProvider>().gender
+
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    ListTile(
-                      trailing: const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: MyColors.greyMediumColor,
-                        size: 18,
-                      ),
-                      title: const Text(
-                        Constants.myDataScreenUpdatePassword,
-                        style: MyTextStyle.paragraph1,
-                      ),
-                      minLeadingWidth: 0.0,
-                      onTap: () {
-                        Navigator.pushNamed(context, VerifyIdentityScreen.tag);
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration:
+                          const BoxDecoration(color: MyColors.whiteColor),
+                      child: ListTile(
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: MyColors.greyMediumColor,
+                          size: 18,
+                        ),
+                        title: const Text(
+                          Constants.myDataScreenUpdatePassword,
+                          style: MyTextStyle.paragraph1,
+                        ),
+                        minLeadingWidth: 0.0,
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, VerifyIdentityScreen.tag);
                         },
+                      ),
                     ),
                   ],
                 ),
@@ -232,11 +297,62 @@ class _MyDataScreenState extends State<MyDataScreen> {
       ),
     );
   }
-  showDialogue({required BuildContext context,required Profile category}){
-    showModalBottomSheet<void>(context: context, builder: (BuildContext context){
-      return ProfileDialogue(category: category);
-    });
+
+  showDialogue(
+      {required BuildContext context,
+      required Profile category,
+      String inputText = ""}) {
+    showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: ProfileDialogue(
+              category: category,
+              inputText: inputText,
+              onChange: (val) {
+                switch (category) {
+                  case Profile.name:
+                    {
+                      context.read<MyDataProvider>().setName(val: val);
+                    }
+                    break;
+                  case Profile.lastName:
+                    {
+                      context.read<MyDataProvider>().setLastName(val: val);
+                    }
+                    break;
+                  case Profile.email:
+                    {
+                      context.read<MyDataProvider>().setEmail(val: val);
+                    }
+                    break;
+                  case Profile.gender:
+                    {
+                      context.read<MyDataProvider>().setGender(val: val);
+                    }
+                    break;
+                  default:
+                    {}
+                }
+              },
+            ),
+          );
+        });
   }
 }
 
-enum Profile {name,lastName,email,gender,updatePassword,deleteAccount,logout,coupon}
+enum Profile {
+  name,
+  lastName,
+  email,
+  gender,
+  updatePassword,
+  deleteAccount,
+  logout,
+  coupon
+}
