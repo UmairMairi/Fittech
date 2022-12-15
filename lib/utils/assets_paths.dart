@@ -1,7 +1,6 @@
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 
 class Images {
-
   // WelcomeScreen
   static const appLogo = 'assets/images/app_logo.png';
   static const welcomeBackground = 'assets/images/welcome_background.png';
@@ -25,13 +24,16 @@ class Images {
   static const heatingScreenBanner = 'assets/images/subscribe_plan_banner.png';
 
   // TrainingCompletedScreen
-  static const trainingCompletedScreenBanner = 'assets/images/training_complete_banner.png';
+  static const trainingCompletedScreenBanner =
+      'assets/images/training_complete_banner.png';
 
   // TrainingCompletedScreen
-  static const trainingTestScreenBanner = 'assets/images/training_test_banner.png';
+  static const trainingTestScreenBanner =
+      'assets/images/training_test_banner.png';
 
   // NutritionTestScreen
-  static const banner1NutritionTestScreen = 'assets/images/nutrition_test_screen_banner1.png';
+  static const banner1NutritionTestScreen =
+      'assets/images/nutrition_test_screen_banner1.png';
 
   // TrainingCompletedScreen
   static const heartStatusScreenHeartIcon = 'assets/images/heart_flash.png';
@@ -65,7 +67,8 @@ class Images {
   static const settingsIcon = 'assets/images/icon_settings.png';
 
   static const profileScreenMyDataIcon = 'assets/images/icon_my_data.png';
-  static const profileScreenPerformanceIcon = 'assets/images/icon_performance.png';
+  static const profileScreenPerformanceIcon =
+      'assets/images/icon_performance.png';
   static const profileScreenResultsIcon = 'assets/images/icon_test_results.png';
   static const profileScreenNotesIcon = 'assets/images/icon_notes.png';
   static const profileScreenFaqIcon = 'assets/images/icon_faq.png';
@@ -87,7 +90,8 @@ class Images {
   static const testResultDialogueMaxWaist = 'assets/images/icon_max_waist.png';
   static const testResultDialogueHip = 'assets/images/icon_hip.png';
   static const testResultDialogueNeck = 'assets/images/icon_neck.png';
-  static const testResultDialogueMiddleThigh = 'assets/images/icon_middle_thigh.png';
+  static const testResultDialogueMiddleThigh =
+      'assets/images/icon_middle_thigh.png';
   static const testResultDialogueArm = 'assets/images/icon_arm.png';
   static const testResultDialogueChest = 'assets/images/icon_chest.png';
 
@@ -95,19 +99,26 @@ class Images {
   static const currentPlanScreenIcon1 = 'assets/images/icon_actual_plan.png';
 
   //CurrentPerformanceScreen
-  static const currentPerformanceScreenIcon1 = 'assets/images/current_performance_icon1.png';
+  static const currentPerformanceScreenIcon1 =
+      'assets/images/current_performance_icon1.png';
 
   //OutdoorTrainingsScreen
-  static const outdoorTrainingsScreenBanner1 = 'assets/images/outdoor_trainings_screen_banner1.png';
-  static const outdoorTrainingsScreenBanner2 = 'assets/images/outdoor_trainings_screen_banner2.png';
+  static const outdoorTrainingsScreenBanner1 =
+      'assets/images/outdoor_trainings_screen_banner1.png';
+  static const outdoorTrainingsScreenBanner2 =
+      'assets/images/outdoor_trainings_screen_banner2.png';
 
   // NutritionDetailsScreen
   static const nutritionDetailsScreenIcon1 = 'assets/images/icon_protain.png';
   static const nutritionDetailsScreenIcon2 = 'assets/images/icon_carbs.png';
   static const nutritionDetailsScreenIcon3 = 'assets/images/icon_grasas.png';
 
-  static const nutritionDetailsScreenBanner1 = 'assets/images/nutrition_details_banner1.png';
-  static const nutritionDetailsScreenBanner2 = 'assets/images/nutrition_details_banner2.png';
-  static const nutritionDetailsScreenBanner3 = 'assets/images/nutrition_details_banner3.png';
-
+  static const nutritionDetailsScreenBanner1 =
+      'assets/images/nutrition_details_banner1.png';
+  static const nutritionDetailsScreenBanner2 =
+      'assets/images/nutrition_details_banner2.png';
+  static const nutritionDetailsScreenBanner3 =
+      'assets/images/nutrition_details_banner3.png';
+  static const nutritionDetailsScreenBanner4 =
+      'assets/images/nutrition_details_banner4.png';
 }

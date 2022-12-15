@@ -19,14 +19,7 @@ import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
-import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
-import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
-import 'package:fit_tech/presentation/screens/today_training_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/weight_height_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,26 +36,45 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<LoginProvider>( create: (context) => LoginProvider()),
-        ChangeNotifierProvider<RegisterProvider>( create: (context) => RegisterProvider()),
-        ChangeNotifierProvider<OTPProvider>( create: (context) => OTPProvider()),
-        ChangeNotifierProvider<RecoverPasswordProvider>( create: (context) => RecoverPasswordProvider()),
-        ChangeNotifierProvider<VerifyCodeProvider>( create: (context) => VerifyCodeProvider()),
-        ChangeNotifierProvider<UpdatePasswordProvider>( create: (context) => UpdatePasswordProvider()),
-        ChangeNotifierProvider<ChooseTrainingProvider>( create: (context) => ChooseTrainingProvider()),
-        ChangeNotifierProvider<BiologicalGenderProvider>( create: (context) => BiologicalGenderProvider()),
-        ChangeNotifierProvider<WeightHeightProvider>( create: (context) => WeightHeightProvider()),
-        ChangeNotifierProvider<AboutGoalProvider>( create: (context) => AboutGoalProvider()),
-        ChangeNotifierProvider<PhysicalActivityProvider>( create: (context) => PhysicalActivityProvider()),
-        ChangeNotifierProvider<MedicalHistoryProvider>( create: (context) => MedicalHistoryProvider()),
-        ChangeNotifierProvider<FamilyHistoryProvider>( create: (context) => FamilyHistoryProvider()),
-        ChangeNotifierProvider<HeartRateProvider>( create: (context) => HeartRateProvider()),
-        ChangeNotifierProvider<CountedBeatsProvider>( create: (context) => CountedBeatsProvider()),
-        ChangeNotifierProvider<NutritionLineIdentificationProvider>( create: (context) => NutritionLineIdentificationProvider()),
-        ChangeNotifierProvider<FatPercentageProvider>( create: (context) => FatPercentageProvider()),
-        ChangeNotifierProvider<MyDataProvider>( create: (context) => MyDataProvider()),
-        ChangeNotifierProvider<VerifyIdentityProvider>( create: (context) => VerifyIdentityProvider()),
-        ChangeNotifierProvider<GymExerciseProvider>( create: (context) => GymExerciseProvider()),
+        ChangeNotifierProvider<LoginProvider>(
+            create: (context) => LoginProvider()),
+        ChangeNotifierProvider<RegisterProvider>(
+            create: (context) => RegisterProvider()),
+        ChangeNotifierProvider<OTPProvider>(create: (context) => OTPProvider()),
+        ChangeNotifierProvider<RecoverPasswordProvider>(
+            create: (context) => RecoverPasswordProvider()),
+        ChangeNotifierProvider<VerifyCodeProvider>(
+            create: (context) => VerifyCodeProvider()),
+        ChangeNotifierProvider<UpdatePasswordProvider>(
+            create: (context) => UpdatePasswordProvider()),
+        ChangeNotifierProvider<ChooseTrainingProvider>(
+            create: (context) => ChooseTrainingProvider()),
+        ChangeNotifierProvider<BiologicalGenderProvider>(
+            create: (context) => BiologicalGenderProvider()),
+        ChangeNotifierProvider<WeightHeightProvider>(
+            create: (context) => WeightHeightProvider()),
+        ChangeNotifierProvider<AboutGoalProvider>(
+            create: (context) => AboutGoalProvider()),
+        ChangeNotifierProvider<PhysicalActivityProvider>(
+            create: (context) => PhysicalActivityProvider()),
+        ChangeNotifierProvider<MedicalHistoryProvider>(
+            create: (context) => MedicalHistoryProvider()),
+        ChangeNotifierProvider<FamilyHistoryProvider>(
+            create: (context) => FamilyHistoryProvider()),
+        ChangeNotifierProvider<HeartRateProvider>(
+            create: (context) => HeartRateProvider()),
+        ChangeNotifierProvider<CountedBeatsProvider>(
+            create: (context) => CountedBeatsProvider()),
+        ChangeNotifierProvider<NutritionLineIdentificationProvider>(
+            create: (context) => NutritionLineIdentificationProvider()),
+        ChangeNotifierProvider<FatPercentageProvider>(
+            create: (context) => FatPercentageProvider()),
+        ChangeNotifierProvider<MyDataProvider>(
+            create: (context) => MyDataProvider()),
+        ChangeNotifierProvider<VerifyIdentityProvider>(
+            create: (context) => VerifyIdentityProvider()),
+        ChangeNotifierProvider<GymExerciseProvider>(
+            create: (context) => GymExerciseProvider()),
       ],
       child: MaterialApp(
         title: 'FITTECH',
