@@ -9,10 +9,13 @@ import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scr
 import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/food_list_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/food_type_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/toturial_usage_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
@@ -373,6 +376,18 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const CreateRecipeScreen());
+      case FoodListScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FoodListScreen());
+      case FoodTypeScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const FoodTypeScreen());
+      case SelectRecipeScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const SelectRecipeScreen());
       default:
         return null;
     }

@@ -723,4 +723,26 @@ class Constants {
 
   //CreateRecipeScreen
   static const String titleCreateRecipeScreen = "Crear receta";
+  static const String inputLabelCreateRecipeScreen = "Nombre de receta";
+  static const String heading1CreateRecipeScreen = "Alimentos";
+  static const String heading1Value1CreateRecipeScreen = "Ingrediente";
+  static const String heading1Value2CreateRecipeScreen = "Cantidad (g./ml.)";
+  static const String heading2CreateRecipeScreen = "Manzana";
+
+
+  //FoodListScreen
+  static const String titleFoodListScreen = "Buscar alimento";
+
+  //FoodTypeScreen
+  static const String titleFoodTypeScreen = "Manzana";
+
+  //FoodDialogue
+  static const String titleFoodDialogue = "Manzana";
+  static const String infoFoodDialogue = "Medidas";
+  static const String label1FoodDialogue = "Casera";
+  static const String label1ValueFoodDialogue = "Media Taza";
+  static const String label2FoodDialogue = "Gramos";
+  static const String label2ValueFoodDialogue = "90 g.";
+  static const String btnLabelFoodDialogue = "Agregar";
+
 }

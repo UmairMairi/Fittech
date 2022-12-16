@@ -3,19 +3,18 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class CounterWidget extends StatefulWidget {
-  // final String item;
-  // final bool selected;
-  // final Color selectedColor;
-  // final Color unselectedColor;
-  // final ValueChanged<bool> currentValue;
+  final Color selectedColor;
+  final Color unselectedColor;
+  final bool showUnit;
+  final String unit;
+  final ValueChanged<int>? onChange;
 
   const CounterWidget(
-      {
-      //   required this.item,
-      // required this.selected,
-      // this.selectedColor = MyColors.blackColor,
-      // this.unselectedColor = MyColors.whiteColor,
-      // required this.currentValue,
+      {this.selectedColor = MyColors.blackColor,
+      this.unselectedColor = MyColors.whiteColor,
+      this.showUnit =false,
+      this.unit ="gr.",
+      this.onChange,
       Key? key})
       : super(key: key);
 
@@ -34,7 +33,7 @@ class _CounterWidgetState extends State<CounterWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50.0),
           border: Border.all(color: MyColors.lightGreyColor)),
@@ -45,7 +44,11 @@ class _CounterWidgetState extends State<CounterWidget> {
               setState(() {
                 if (count > 0) {
                   count--;
+                  if(widget.onChange!=null){
+                    widget.onChange!(count);
+                  }
                 }
+
               });
             },
             child: Container(
@@ -69,9 +72,10 @@ class _CounterWidgetState extends State<CounterWidget> {
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const Text(
-                  "gr.",
-                  style: TextStyle(fontSize: 12),
+                if(widget.showUnit)
+                  Text(
+                    widget.unit,
+                  style: const TextStyle(fontSize: 12),
                 ),
               ],
             ),
@@ -80,6 +84,9 @@ class _CounterWidgetState extends State<CounterWidget> {
             onTap: () {
               setState(() {
                 count++;
+                if(widget.onChange!=null){
+                  widget.onChange!(count);
+                }
               });
             },
             child: Container(

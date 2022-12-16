@@ -1,6 +1,7 @@
 import 'package:fit_tech/data/models/my_plans_list_model.dart';
 import 'package:fit_tech/data/models/nutritions_list_model.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -53,7 +54,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
           children: [
             Container(
               height: 65.0,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(left: 20,right: 10),
               child: Row(
                 children: [
                   const Expanded(
@@ -81,16 +82,20 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                         value: 1,
                         textStyle: MyTextStyle.text1,
                         height: 25,
-                        child: const Text(
-                          "+ Carer recetas",
-                          style: MyTextStyle.paragraph1,
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(
+                                context, CreateRecipeScreen.tag);
+                          },
+                          child: const Text(
+                            "+ Carer recetas",
+                            style: MyTextStyle.paragraph1,
+                          ),
                         ),
-                        onTap: () {},
                       ),
                       PopupMenuItem(
                         value: 1,
                         textStyle: MyTextStyle.text1,
-                        height: 25,
                         child: InkWell(
                             onTap: () {
                               Navigator.pushNamed(
@@ -162,6 +167,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                   children: [
                                     Column(
                                       children: [
+                                        const SizedBox(height: 5.0,),
                                         Row(
                                           children: [
                                             Image.asset(
@@ -201,6 +207,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                     ),
                                     Column(
                                       children: [
+                                        const SizedBox(height: 5.0,),
                                         Row(
                                           children: [
                                             Image.asset(
@@ -236,6 +243,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                     ),
                                     Column(
                                       children: [
+                                        const SizedBox(height: 5.0,),
                                         Row(
                                           children: [
                                             Image.asset(
@@ -312,7 +320,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                                 children: [
                                                   Text(
                                                     list[index].title,
-                                                    style: MyTextStyle.style
+                                                    style: MyTextStyle.bold
                                                         .copyWith(
                                                       color:
                                                           MyColors.whiteColor,

@@ -30,6 +30,7 @@ class MyDataProvider extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+    return null;
   }
 
   setName({required String val}){

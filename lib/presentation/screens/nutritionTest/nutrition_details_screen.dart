@@ -1,4 +1,7 @@
 import 'package:fit_tech/data/models/nutritions_list_model.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/food_list_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'package:fit_tech/presentation/widgets/counter_widget.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -11,7 +14,8 @@ class NutritionDetailsScreen extends StatefulWidget {
   static const String tag = "nutrition_details_screen";
 
   @override
-  State<NutritionDetailsScreen> createState() => _MyNutritionDetailsScreenState();
+  State<NutritionDetailsScreen> createState() =>
+      _MyNutritionDetailsScreenState();
 }
 
 class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
@@ -27,110 +31,109 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.extraLightGreyColor,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              AspectRatio(
-                aspectRatio: 3 / 1.5,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(
-                      Images.nutritionDetailsScreenBanner1,
-                      fit: BoxFit.cover,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.all(20.0),
-                                  padding: const EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                      color:
-                                          MyColors.whiteColor.withOpacity(0.8),
-                                      shape: BoxShape.circle),
-                                  child: const Icon(
-                                    Icons.arrow_back,
-                                    size: 20,
-                                    color: MyColors.blackColor,
-                                  ),
+        body: Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 3 / 1.5,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    Images.nutritionDetailsScreenBanner1,
+                    fit: BoxFit.cover,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                    color:
+                                        MyColors.whiteColor.withOpacity(0.8),
+                                    shape: BoxShape.circle),
+                                child: const Icon(
+                                  Icons.arrow_back,
+                                  size: 20,
+                                  color: MyColors.blackColor,
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Container(),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(10.0),
+                            decoration: const BoxDecoration(
+                              color: MyColors.whiteColor,
+                              shape: BoxShape.circle
                             ),
-                            Opacity(
-                              opacity: 0,
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.all(20.0),
-                                    padding: const EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                        color:
-                                            MyColors.whiteColor.withOpacity(0.8),
-                                        shape: BoxShape.circle),
-                                    child: PopupMenuButton<int>(
-                                      constraints: const BoxConstraints(
-                                          minWidth: 0.0, minHeight: 0.0),
-                                      itemBuilder: (context) => [
-                                        PopupMenuItem(
-                                          value: 1,
-                                          textStyle: MyTextStyle.text1,
-                                          height: 20,
-                                          child: Row(
-                                            children: const [
-                                              Text("+ Agregar Nota")
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                      color: Colors.white,
+                            child: PopupMenuButton<int>(constraints:
+                              const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                              icon: const Icon(Icons.more_horiz),
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  value: 1,
+                                  textStyle: MyTextStyle.text1,
+                                  height: 25,
+                                  child: InkWell(
+                                    onTap: (){
+                                      Navigator.pushNamed(
+                                          context, SelectRecipeScreen.tag);
+                                    },
+                                    child: const Text(
+                                      "Colocar mi receta",
+                                      style: MyTextStyle.paragraph1,
                                     ),
-
-                                    // child: const Icon(
-                                    //   Icons.more_horiz,
-                                    //   size: 20,
-                                    //   color: MyColors.blackColor,
-                                    // ),
                                   ),
                                 ),
-                              ),
+                                PopupMenuItem(
+                                  value: 1,
+                                  textStyle: MyTextStyle.text1,
+                                  child: InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, CreateRecipeScreen.tag);
+                                      },
+                                      child: const Text(
+                                        "Guardar como receta",
+                                        style: MyTextStyle.paragraph1,
+                                      )),
+                                ),
+                              ],
+                              color: Colors.white,
                             ),
-                          ],
-                        ),
-                        Expanded(child: Container()),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              "Desayuno",
-                              style: MyTextStyle.heading2
-                                  .copyWith(color: MyColors.whiteColor),
-                            )),
-                        const SizedBox(
-                          height: 20,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: Container()),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            "Desayuno",
+                            style: MyTextStyle.heading2
+                                .copyWith(color: MyColors.whiteColor),
+                          )),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  ),
+                ],
               ),
-              ListView(
+            ),
+            Expanded(
+              child: ListView(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Container(
                     color: MyColors.whiteColor,
@@ -150,8 +153,6 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                   child: Stack(
                                     fit: StackFit.expand,
                                     children: [
-
-
                                       const CircularProgressIndicator(
                                         backgroundColor: Colors.grey,
                                         valueColor:
@@ -188,14 +189,24 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                     children: [
                                       Column(
                                         children: [
+                                          const SizedBox(
+                                            height: 5.0,
+                                          ),
                                           Row(
                                             children: [
-                                              Image.asset(Images.nutritionDetailsScreenIcon1,height: 20,width: 20,),
+                                              Image.asset(
+                                                Images
+                                                    .nutritionDetailsScreenIcon1,
+                                                height: 20,
+                                                width: 20,
+                                              ),
                                               // Icon(
                                               //   Icons.ac_unit,
                                               //   size: 18.0,
                                               // ),
-                                              const SizedBox(width: 10,),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
                                               const Expanded(
                                                   child: Text(
                                                 "Proteinas",
@@ -220,10 +231,20 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                       ),
                                       Column(
                                         children: [
+                                          const SizedBox(
+                                            height: 5.0,
+                                          ),
                                           Row(
                                             children: [
-                                              Image.asset(Images.nutritionDetailsScreenIcon2,height: 20,width: 20,),
-                                              const SizedBox(width: 10,),
+                                              Image.asset(
+                                                Images
+                                                    .nutritionDetailsScreenIcon2,
+                                                height: 20,
+                                                width: 20,
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
                                               const Expanded(
                                                   child: Text(
                                                 "Carbs",
@@ -248,11 +269,19 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                       ),
                                       Column(
                                         children: [
+                                          const SizedBox(
+                                            height: 5.0,
+                                          ),
                                           Row(
                                             children: [
-                                              Image.asset(Images.nutritionDetailsScreenIcon3,height: 20,width: 20),
-                                              const SizedBox(width: 10,),
-
+                                              Image.asset(
+                                                  Images
+                                                      .nutritionDetailsScreenIcon3,
+                                                  height: 20,
+                                                  width: 20),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
                                               const Expanded(
                                                   child: Text(
                                                 "Grasas",
@@ -365,10 +394,15 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "+Agregar alimento",
-                              style: MyTextStyle.heading3
-                                  .copyWith(color: MyColors.redColor),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, FoodListScreen.tag);
+                              },
+                              child: Text(
+                                "+Agregar alimento",
+                                style: MyTextStyle.heading3
+                                    .copyWith(color: MyColors.redColor),
+                              ),
                             ),
                             Expanded(child: Container()),
                           ],
@@ -379,54 +413,54 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 1,
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 1,
+            ),
+            Container(
+              color: MyColors.whiteColor,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 20, vertical: 10),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "Inf. Nutricional",
+                        style: MyTextStyle.heading3,
+                      ),
+                      Expanded(child: Container()),
+                    ],
                   ),
-                  Container(
-                    color: MyColors.whiteColor,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Text(
-                              "Inf. Nutricional",
-                              style: MyTextStyle.heading3,
-                            ),
-                            Expanded(child: Container()),
-                          ],
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Expanded(
+                        child: Text("245 kcal", style: MyTextStyle.text1),
+                      ),
+                      Expanded(
+                        child: Text(
+                          "P. 102g",
+                          style: MyTextStyle.text1,
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Expanded(
-                              child: Text("245 kcal", style: MyTextStyle.text1),
-                            ),
-                            Expanded(
-                              child: Text(
-                                "P. 102g",
-                                style: MyTextStyle.text1,
-                              ),
-                            ),
-                            Expanded(
-                              child: Text("C. 27g", style: MyTextStyle.text1),
-                            ),
-                            Expanded(
-                              child: Text("G. 21g", style: MyTextStyle.text1),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: Text("C. 27g", style: MyTextStyle.text1),
+                      ),
+                      Expanded(
+                        child: Text("G. 21g", style: MyTextStyle.text1),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

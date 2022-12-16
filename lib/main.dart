@@ -1,4 +1,5 @@
 import 'package:fit_tech/logic/about_goal_provider.dart';
+import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/logic/biological_gender_provider.dart';
 import 'package:fit_tech/logic/choose_training_provider.dart';
 import 'package:fit_tech/logic/counted_beats_provider.dart';
@@ -20,10 +21,14 @@ import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/today_training_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'presentation/screens/nutritionTest/add_measurements_scren.dart';
 
 void main() {
   runApp(MyApp());
@@ -77,6 +82,8 @@ class MyApp extends StatelessWidget {
             create: (context) => VerifyIdentityProvider()),
         ChangeNotifierProvider<GymExerciseProvider>(
             create: (context) => GymExerciseProvider()),
+        ChangeNotifierProvider<AddMeasurementsProviders>(
+            create: (context) => AddMeasurementsProviders()),
       ],
       child: MaterialApp(
         title: 'FITTECH',
