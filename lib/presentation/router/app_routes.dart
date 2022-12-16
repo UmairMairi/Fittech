@@ -7,10 +7,12 @@ import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/toturial_usage_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
@@ -163,7 +165,9 @@ class AppRoute {
         var index = routeSettings.arguments as int?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                BreakBetweenSeriesScreen(restType: index,));
+                BreakBetweenSeriesScreen(
+                  restType: index,
+                ));
       case TrainingTestScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -361,6 +365,14 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const NutritionDetailsScreen());
+      case RecipeListScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const RecipeListScreen());
+      case CreateRecipeScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const CreateRecipeScreen());
       default:
         return null;
     }

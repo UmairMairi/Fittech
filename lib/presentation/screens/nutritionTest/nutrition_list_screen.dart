@@ -2,11 +2,14 @@ import 'package:fit_tech/data/models/my_plans_list_model.dart';
 import 'package:fit_tech/data/models/nutritions_list_model.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+
+import 'toturial_usage_screen.dart';
 
 class NutritionListScreen extends StatefulWidget {
   const NutritionListScreen({super.key});
@@ -66,15 +69,40 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                       color: MyColors.blackColor,
                       size: 24.0,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, TutorialUsageScreen.tag);
+                    },
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.more_horiz,
-                      color: MyColors.blackColor,
-                      size: 24.0,
-                    ),
-                    onPressed: () {},
+                  PopupMenuButton<int>(
+                    constraints:
+                        const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: 1,
+                        textStyle: MyTextStyle.text1,
+                        height: 25,
+                        child: const Text(
+                          "+ Carer recetas",
+                          style: MyTextStyle.paragraph1,
+                        ),
+                        onTap: () {},
+                      ),
+                      PopupMenuItem(
+                        value: 1,
+                        textStyle: MyTextStyle.text1,
+                        height: 25,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RecipeListScreen.tag);
+                            },
+                            child: const Text(
+                              "Lista de recetas",
+                              style: MyTextStyle.paragraph1,
+                            )),
+                      ),
+                    ],
+                    color: Colors.white,
                   ),
                 ],
               ),

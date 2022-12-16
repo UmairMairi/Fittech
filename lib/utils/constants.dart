@@ -717,4 +717,10 @@ class Constants {
   //TutorialUsageScreen
   static const String tutorialUsageScreenTitle = "Tutorial de uso";
   static const String tutorialUsageScreenButtonLabel = "Continuar";
+
+  //RecipeListScreen
+  static const String titleRecipeListScreen = "Lista de recetas";
+
+  //CreateRecipeScreen
+  static const String titleCreateRecipeScreen = "Crear receta";
 }
