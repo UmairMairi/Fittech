@@ -2,6 +2,11 @@ import 'package:fit_tech/data/models/intro_model.dart';
 import 'package:fit_tech/data/models/profile_model.dart';
 import 'package:fit_tech/presentation/screens/dialogue/cadence_pause.dart';
 import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/body_mass_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/nutrition_stategy_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/tmba_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/weist_circumference_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/weist_height_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/verify_identity_screen.dart';
 import 'package:fit_tech/presentation/screens/testimonial_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
@@ -13,6 +18,8 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'weist_hip_ratio_screen.dart';
 
 class HealthIndicatorsScreen extends StatefulWidget {
   const HealthIndicatorsScreen({super.key});
@@ -31,8 +38,9 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Container(
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -70,7 +78,9 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, BodyMassScreen.tag);
+                  },
                 ),
                 const Divider()
               ],
@@ -109,7 +119,9 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, WaistHipRatioScreen.tag);
+                  },
                 ),
                 const Divider()
               ],
@@ -148,7 +160,9 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, WaistHeightScreen.tag);
+                  },
                 ),
                 const Divider()
               ],
@@ -184,7 +198,9 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, WaistCircumferenceScreen.tag);
+                  },
                 ),
                 const Divider()
               ],
@@ -220,7 +236,9 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, TMBAScreen.tag);
+                  },
                 ),
                 const Divider()
               ],
@@ -256,14 +274,14 @@ class _HealthIndicatorsScreenState extends State<HealthIndicatorsScreen> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, NutritionStrategyScreen.tag);
+                  },
                 ),
-                const Divider()
+                const Divider(
+                  color: Colors.transparent,
+                )
               ],
-            ),
-            Container(
-              height: 20,
-              color: MyColors.extraLightGreyColor,
             ),
           ],
         ),

@@ -34,40 +34,24 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: MyColors.extraLightGreyColor,
+        backgroundColor: MyColors.backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                color: MyColors.whiteColor,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 65.0,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              color: MyColors.blackColor,
-                              size: 24.0,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          const Expanded(
-                            child: Text(
-                              Constants.deleteAccountTitle,
-                              textAlign: TextAlign.center,
-                              style: MyTextStyle.heading3,
-                            ),
-                          ),
-                          Opacity(
-                            opacity: 0.0,
-                            child: IconButton(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  color: MyColors.whiteColor,
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 65.0,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconButton(
                               icon: const Icon(
                                 Icons.arrow_back,
                                 color: MyColors.blackColor,
@@ -77,31 +61,51 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                                 Navigator.pop(context);
                               },
                             ),
-                          ),
-                        ],
+                            const Expanded(
+                              child: Text(
+                                Constants.deleteAccountTitle,
+                                textAlign: TextAlign.center,
+                                style: MyTextStyle.heading3,
+                              ),
+                            ),
+                            Opacity(
+                              opacity: 0.0,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.arrow_back,
+                                  color: MyColors.blackColor,
+                                  size: 24.0,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20.0),
-                      child: const Text(
-                        Constants.deleteAccountInfo,
-                        textAlign: TextAlign.start,
-                        style: MyTextStyle.paragraph1,
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20.0),
+                        child: const Text(
+                          Constants.deleteAccountInfo,
+                          textAlign: TextAlign.start,
+                          style: MyTextStyle.paragraph1,
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: PrimaryButton(
-                        title: Constants.deleteAccountButtonLabel,
-                        backgroundColor: MyColors.whiteColor,
-                        textColor: MyColors.blackColor,
-                        onPressed: (){
-                          showDialogue(context: context, category: Profile.deleteAccount);
-                        },
-                      ),
-                    )
-                  ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: PrimaryButton(
+                          title: Constants.deleteAccountButtonLabel,
+                          backgroundColor: MyColors.whiteColor,
+                          textColor: MyColors.blackColor,
+                          onPressed: (){
+                            showDialogue(context: context, category: Profile.deleteAccount);
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

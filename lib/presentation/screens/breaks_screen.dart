@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
+import 'package:fit_tech/logic/excercise/rest_between_sequence_provider.dart';
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/info_checks.dart';
@@ -6,13 +7,25 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class RestScreen extends StatelessWidget {
+class RestScreen extends StatefulWidget {
   const RestScreen({super.key});
 
   static const String tag = "break_screen";
 
+  @override
+  State<RestScreen> createState() => _RestScreenState();
+}
+
+class _RestScreenState extends State<RestScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<BreakBetweenSequenceProvider>().startTimer(context:context);
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -42,10 +55,15 @@ class RestScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            Text("00:12",
-                                textAlign: TextAlign.center,
-                                style: MyTextStyle.heading1.copyWith(
-                                    color: MyColors.whiteColor, fontSize: 52)),
+                            Builder(
+                              builder: (context) {
+                                var duration = context.watch<BreakBetweenSequenceProvider>().myDuration;
+                                return Text(MyUtils.printDuration(duration: duration),
+                                    textAlign: TextAlign.center,
+                                    style: MyTextStyle.heading1.copyWith(
+                                        color: MyColors.whiteColor, fontSize: 52));
+                              }
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -61,8 +79,7 @@ class RestScreen extends StatelessWidget {
                                       textColor: MyColors.whiteColor,
                                       borderColor: MyColors.whiteColor,
                                       onPressed: () {
-                                        // Navigator.pop(context);
-                                        Navigator.pushNamed(context,ExerciseScreen.tag);
+                                        context.read<BreakBetweenSequenceProvider>().addDuration();
                                       },
                                     ),
                                   ),
@@ -75,6 +92,7 @@ class RestScreen extends StatelessWidget {
                                       backgroundColor: MyColors.whiteColor,
                                       textColor: MyColors.blackColor,
                                       onPressed: () {
+                                        context.read<BreakBetweenSequenceProvider>().resetTimer();
                                         Navigator.pushNamed(context,ExerciseScreen.tag);
                                       },
                                     ),

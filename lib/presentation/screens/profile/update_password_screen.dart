@@ -144,10 +144,8 @@ class UpdatePasswordScreen extends StatelessWidget {
                         child: Builder(builder: (context) {
                           var bloc = context.watch<UpdatePasswordProvider>();
                           bool isEnabled = false;
-                          if ((bloc.password.length >= 6 &&
-                                  bloc.confirmPassword.length >= 6) ||
-                              Singleton.isDev) {
-                            isEnabled = true;
+                          if ((bloc.password.length >= 6 && bloc.confirmPassword.length >= 6) || Singleton.isDev) {
+                              isEnabled = true;
                           }
                           return PrimaryButton(
                             title: Constants.verifyIdentityScreenContinue,

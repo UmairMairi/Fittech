@@ -28,7 +28,6 @@ class _TrainingNotesDetailScreenState
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -102,19 +101,31 @@ class _TrainingNotesDetailScreenState
                                         'NOTA# 123123:',
                                         style: MyTextStyle.heading3,
                                       )),
-                                      IconButton(
-                                        onPressed: () {
+                                      PopupMenuButton<int>(
+                                        constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                                        icon: const Icon(Icons.more_horiz,),
+                                        onSelected: (val){
+                                          if(val == 1){
+                                            showDialogue(context: context);
+                                          }
                                         },
-                                        icon: const Icon(
-                                          Icons.more_horiz,
-                                          color: Colors.black,
-                                        ),
-                                      )
+                                        onCanceled: (){},
+                                        itemBuilder: (context) => [
+                                          const PopupMenuItem(
+                                            value: 1,
+                                            textStyle: MyTextStyle.text1,
+                                            height: 25,
+                                            child: Text(
+                                              "Editar Nota",
+                                              style: MyTextStyle.paragraph1,
+                                            ),
+                                          ),
+                                        ],
+                                        color: Colors.white,
+                                      ),
                                     ],
                                   ),
                                   Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 20),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: MyColors.greyMediumColor,
@@ -137,6 +148,7 @@ class _TrainingNotesDetailScreenState
                                       ],
                                     ),
                                   ),
+                                  const SizedBox(height: 10,),
                                   const Text(
                                     'FITTECH, es una aplicación virtual con uso en Colombia; con fundamento en lo dispuesto en la Constitución Política de Colombia, la Ley 1266 de 2008.',
                                     style: MyTextStyle.paragraph1,
@@ -163,8 +175,13 @@ class _TrainingNotesDetailScreenState
   showDialogue({required BuildContext context}) {
     showModalBottomSheet<void>(
         context: context,
+        isScrollControlled: true,
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
         builder: (BuildContext context) {
-          return const AddNoteDialogue();
+          return Padding(
+            padding:EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: const SingleChildScrollView(child: AddNoteDialogue()),
+          );
         });
   }
 }

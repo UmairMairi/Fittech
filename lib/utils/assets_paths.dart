@@ -16,6 +16,7 @@ class Images {
 
   // GymScreen
   static const gymScreenBanner = 'assets/images/subscribe_plan_banner.png';
+  // static const gymScreenBanner = 'assets/images/gym_exercise_banner1.png';
 
   // OutdoorScreen
   static const outdoorScreenBanner = 'assets/images/subscribe_plan_banner.png';
@@ -121,4 +122,15 @@ class Images {
       'assets/images/nutrition_details_banner3.png';
   static const nutritionDetailsScreenBanner4 =
       'assets/images/nutrition_details_banner4.png';
+
+
+  // BodyMassScreen
+  static const detailsBodyMassScreen = 'assets/images/body_mass_details.png';
+
+  // WaistHipRatioScreen
+  static const detailsWaistHipRatioScreen = 'assets/images/waist_hip_ratio_details.png';
+
+  // WaistHeightScreen
+  static const detailsWaistHeightScreen = 'assets/images/waist_height_screen.png';
+
 }

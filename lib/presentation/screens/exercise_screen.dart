@@ -1,12 +1,18 @@
+import 'package:fit_tech/logic/excercise/excersice_provider.dart';
 import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/add_note_dialogue.dart';
+import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_rate_screen.dart';
 import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/my_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExerciseScreen extends StatefulWidget {
   const ExerciseScreen({super.key});
@@ -21,6 +27,13 @@ class _ExerciseScreenState extends State<ExerciseScreen>
     with WidgetsBindingObserver {
   var isResumed = false;
   var isUpdate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Provider.of<ExerciseProvider>(context,listen: false).changeType(type: 0);
+    Provider.of<ExerciseProvider>(context,listen: false).startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,59 +98,74 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
+                          const Expanded(
+                            child: SizedBox(
+                              height: 20,
+                            ),
+                          ),
+                          Builder(
+                            builder: (context) {
+                              var duration  = context.watch<ExerciseProvider>().myDuration;
+                              var type = context.watch<ExerciseProvider>().type;
+                              if(type == 0){
+                                return Text(
+                                  MyUtils.printDuration(duration: duration),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontFamily: 'Anton',
+                                      color: MyColors.blackColor,
+                                      fontSize: 58.0),
+                                );
+                              }else{
+                                return const Text(
+                                  "30x",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'Anton',
+                                      color: MyColors.blackColor,
+                                      fontSize: 58.0),
+                                );
+                              }
+                            }
                           ),
                           const Text(
-                            Constants.titleBurpeesScreen,
+                            "Nombre de Ejercicio",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.w600),
+                            style: MyTextStyle.heading3,
                           ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          const Text(
-                            "00:30",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'Anton',
-                                color: MyColors.blackColor,
-                                fontSize: 58.0),
-                          ),
-                          const SizedBox(
-                            height: 20.0,
+                          const Expanded(
+                            child: SizedBox(
+                              height: 20.0,
+                            ),
                           ),
                           SizedBox(
                               width: double.infinity,
-                              child: PrimaryButton(
-                                backgroundColor: MyColors.redColor,
-                                textColor: MyColors.whiteColor,
-                                borderColor: MyColors.redColor,
-                                title: isUpdate?" Listo":Constants.burpeesPauseButton,
-                                leadingChild: Icon(
-                                  isUpdate?Icons.done:Icons.pause,
-                                  size: 20,
-                                  color: MyColors.whiteColor,
-                                ),
-                                onPressed: () {
-                                  if(isUpdate){
-                                    Navigator.pushNamed(context, TrainingCompletedScreen.tag);
-                                  }
-                                  // if (isResumed) {
-                                  //   Navigator.pushNamed(context, RestScreen.tag);
-                                  // } else {
-                                  //   Navigator.pushNamed(context, BreakBetweenSeriesScreen.tag).then((value){
-                                  //     isResumed = true;
-                                  //   });
-                                  // }
-                                },
+                              child: Builder(
+                                builder: (context) {
+                                  var type  = context.watch<ExerciseProvider>().type;
+                                  return PrimaryButton(
+                                    backgroundColor: MyColors.redColor,
+                                    textColor: MyColors.whiteColor,
+                                    borderColor: MyColors.redColor,
+                                    title: (type == 1)?" Listo":Constants.burpeesPauseButton,
+                                    leadingChild: Icon(
+                                      (type == 1)?Icons.done:Icons.pause,
+                                      size: 20,
+                                      color: MyColors.whiteColor,
+                                    ),
+                                    onPressed: () {
+                                      if(type ==1){
+                                        Navigator.pushNamed(context, TrainingCompletedScreen.tag);
+                                      }else{
+                                        context.read<ExerciseProvider>().stopTimer();
+                                        showDialoguePause(context: context);
+                                      }
+                                    },
+                                  );
+                                }
                               )),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           SizedBox(
                               width: double.infinity,
@@ -156,10 +184,7 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                                         color: MyColors.blackColor,
                                       ),
                                       onPressed: (){
-                                        setState(() {
-                                          isUpdate = true;
-                                        });
-                                        // Navigator.pushNamed(context, ExerciseScreen.tag);
+                                        context.read<ExerciseProvider>().changeType(type :1);
                                       },
                                     ),
                                   ),
@@ -185,7 +210,9 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                                   ),
                                 ],
                               )),
-                          Expanded(child: Container()),
+                          const SizedBox(
+                            height: 10,
+                          ),
                         ],
                       ),
                     ),
@@ -227,6 +254,33 @@ class _ExerciseScreenState extends State<ExerciseScreen>
     );
   }
 
+
+  showDialoguePause({required BuildContext context}) {
+    showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        constraints:
+        BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: DialoguePause(
+              onPause: () {
+                Navigator.pushNamed(context, HeartRateScreen.tag);
+              },
+              onRestart: () {
+                Navigator.pop(context);
+              },
+              onExit: () {
+                Navigator.pop(context);
+              },
+            ),
+          );
+        }).then((value) {
+      context.read<ExerciseProvider>().startTimer();
+    });
+  }
   showDialogue({required BuildContext context}) {
     showModalBottomSheet<void>(
         context: context,
@@ -239,5 +293,12 @@ class _ExerciseScreenState extends State<ExerciseScreen>
             child: const AddNoteDialogue(),
           );
         });
+  }
+
+  @override
+  void dispose() {
+    Provider.of<ExerciseProvider>(context,listen: false).resetTimer();
+    Provider.of<ExerciseProvider>(context,listen: false).changeType(type: 0);
+    super.dispose();
   }
 }

@@ -1,7 +1,7 @@
+import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:fit_tech/presentation/screens/dashboard/nutrition_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/store_screen.dart';
 import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
@@ -11,9 +11,11 @@ import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/food_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/food_type_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/measurement_history_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipe_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/toturial_usage_screen.dart';
@@ -38,8 +40,16 @@ import 'package:fit_tech/presentation/screens/profile/settings/Privacy_screen.da
 import 'package:fit_tech/presentation/screens/profile/settings/current_plan_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/delete_acount_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/settings_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/body_mass_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/choose_dates_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/comparison_measurements_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/image_viewer_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/nutrition_stategy_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/tmba_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/weist_circumference_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/weist_height_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/weist_hip_ratio_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/training_notes_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_status_screen.dart';
@@ -165,12 +175,9 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const TrainingCompletedScreen());
       case BreakBetweenSeriesScreen.tag:
-        var index = routeSettings.arguments as int?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                BreakBetweenSeriesScreen(
-                  restType: index,
-                ));
+                const BreakBetweenSeriesScreen());
       case TrainingTestScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -335,19 +342,17 @@ class AppRoute {
       case FatPercentageScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                FatPercentageScreen());
-      case MeasurementsScreen.tag:
-        var isNutritionTest = routeSettings.arguments as bool?;
-        return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                MeasurementsScreen(
-                    isNutritionTest: (isNutritionTest ?? false)));
+                const FatPercentageScreen());
+      // case MeasurementsScreen.tag:
+      //   var isNutritionTest = routeSettings.arguments as bool?;
+      //   return SlideRightRoute(
+      //       page: (context, animation, secondaryAnimation) =>
+      //           MeasurementsScreen(isNutritionTest: (isNutritionTest ?? false)));
       case AddMeasurementsScreen.tag:
-        var isNutritionTest = routeSettings.arguments as bool?;
+        var type = routeSettings.arguments as MeasurementsType?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                AddMeasurementsScreen(
-                    isNutritionTest: (isNutritionTest ?? false)));
+                AddMeasurementsScreen(type: type ?? MeasurementsType.addNew));
       case OutdoorTrainingsScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -388,6 +393,50 @@ class AppRoute {
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
                 const SelectRecipeScreen());
+      case RecipeDetailsScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const RecipeDetailsScreen());
+      case BodyMassScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const BodyMassScreen());
+      case WaistHipRatioScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const WaistHipRatioScreen());
+      case WaistHeightScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const WaistHeightScreen());
+      case WaistCircumferenceScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const WaistCircumferenceScreen());
+      case TMBAScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const TMBAScreen());
+      case NutritionStrategyScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const NutritionStrategyScreen());
+      case ImageViewerScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ImageViewerScreen());
+      case MeasurementHistoryScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const MeasurementHistoryScreen());
+      case ChooseDatesScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const ChooseDatesScreen());
+      case MeasurementsComparisonScreen.tag:
+        return SlideRightRoute(
+            page: (context, animation, secondaryAnimation) =>
+                const MeasurementsComparisonScreen());
       default:
         return null;
     }

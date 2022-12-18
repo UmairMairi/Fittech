@@ -1,6 +1,8 @@
+import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/health_indicator_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -26,7 +28,8 @@ class _TestResultsScreenState extends State<TestResultsScreen>
   void initState() {
     super.initState();
     tabNames = ["Indicadores de salud", "Mis medidas"];
-    tabWidgets = [const HealthIndicatorsScreen(), const MeasurementsScreen()];
+    tabWidgets = [const HealthIndicatorsScreen(),
+      const MeasurementsScreen(type: MeasurementsType.testResult,)];
     _controller = TabController(length: tabNames!.length, vsync: this);
     _controller?.addListener(() {
       setState(() {
@@ -39,71 +42,43 @@ class _TestResultsScreenState extends State<TestResultsScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.extraLightGreyColor,
         body: Column(
           children: [
             Expanded(
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
+                  Container(
+                    color: Colors.white,
+                      child: const MyAppBar(title: Constants.titleVerifyCodeScreen,)),
+                  Container(
+                    color: Colors.white,
+                    child: TabBar(
+                      labelColor: Colors.black,
+                      unselectedLabelStyle: const TextStyle(
+                          fontFamily: 'Open Sance',
                           color: MyColors.blackColor,
-                          size: 24.0,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const Expanded(
-                        child: Text(
-                          Constants.titleVerifyCodeScreen,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Open Sance',
-                              color: MyColors.blackColor,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Opacity(
-                        opacity: 0.0,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: MyColors.blackColor,
-                            size: 24.0,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.0),
+                      tabs: tabNames!.map((item) {
+                        return Tab(
+                          height: 50.0,
+                          child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(item,
+                                style: const TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16.0)),
                           ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  TabBar(
-                    labelColor: Colors.black,
-                    unselectedLabelStyle: const TextStyle(
-                        fontFamily: 'Open Sance',
-                        color: MyColors.blackColor,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16.0),
-                    tabs: tabNames!.map((item) {
-                      return Tab(
-                        height: 50.0,
-                        child: Text(item,
-                            style: const TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.blackColor,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16.0)),
-                      );
-                    }).toList(),
-                    controller: _controller!,
-                    indicatorColor: Colors.black,
-                    padding: EdgeInsets.zero,
-                    labelStyle: const TextStyle(fontSize: 12.0),
+                        );
+                      }).toList(),
+                      controller: _controller!,
+                      indicatorColor: Colors.black,
+                      padding: EdgeInsets.zero,
+                      labelStyle: const TextStyle(fontSize: 12.0),
+                    ),
                   ),
                   Expanded(child: tabWidgets![selectedIndex])
                 ],

@@ -1,3 +1,4 @@
+import 'package:fit_tech/logic/excercise/gym_excercise_provider.dart';
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/add_note_dialogue.dart';
@@ -26,8 +27,14 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
   var isResumed = false;
 
   @override
+  void initState() {
+    super.initState();
+    context.read<GymExerciseProvider>().setCurrentSet(val: 1);
+  }
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var provider = Provider.of<GymExerciseProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.whiteColor,
@@ -162,11 +169,15 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                           ],
                                         ),
                                       ),
-                                      Text(
-                                        "2-2",
-                                        textAlign: TextAlign.center,
-                                        style: MyTextStyle.heading3.copyWith(
-                                            fontSize: 22,),
+                                      Builder(
+                                        builder: (context) {
+                                          return Text(
+                                            "2-2",
+                                            textAlign: TextAlign.center,
+                                            style: MyTextStyle.heading3.copyWith(
+                                                fontSize: 22,),
+                                          );
+                                        }
                                       ),
                                     ],
                                   ),
@@ -179,26 +190,31 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                           ),
                           SizedBox(
                               width: double.infinity,
-                              child: PrimaryButton(
-                                backgroundColor: MyColors.redColor,
-                                textColor: MyColors.whiteColor,
-                                borderColor: MyColors.redColor,
-                                title: Constants.burpeesPauseButton,
-                                leadingChild: const Icon(
-                                  Icons.pause,
-                                  size: 20,
-                                  color: MyColors.whiteColor,
-                                ),
-                                onPressed: () {
-                                  if (isResumed) {
-                                    Navigator.pushNamed(
-                                        context, RestScreen.tag);
-                                  } else {
-                                    Navigator.pushNamed(context,BreakBetweenSeriesScreen.tag,arguments: 1).then((value) {
-                                      isResumed = true;
-                                    });
-                                  }
-                                },
+                              child: Builder(
+                                builder: (context) {
+                                  var sets =  context.watch<GymExerciseProvider>().currentSet;
+                                  return PrimaryButton(
+                                    backgroundColor: MyColors.redColor,
+                                    textColor: MyColors.whiteColor,
+                                    borderColor: MyColors.redColor,
+                                    title: "Completado ($sets/${provider.totalSets})",
+                                    // title: (sets!=provider.totalSets)?"Completado ($sets/${provider.totalSets})":Constants.burpeesPauseButton,
+                                    leadingChild: const Icon(
+                                      Icons.done,
+                                      // (sets!=provider.totalSets)?Icons.done:Icons.pause,
+                                      size: 20,
+                                      color: MyColors.whiteColor,
+                                    ),
+                                    onPressed: () {
+                                      if (sets == provider.totalSets) {
+                                        Navigator.pushNamed(context, RestScreen.tag);
+                                      } else {
+                                        context.read<GymExerciseProvider>().setCurrentSet(val: 2);
+                                        Navigator.pushNamed(context,BreakBetweenSeriesScreen.tag);
+                                      }
+                                    },
+                                  );
+                                }
                               )),
                           const SizedBox(
                             height: 20,
@@ -231,7 +247,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                   Expanded(
                                     child: PrimaryButton(
                                       backgroundColor:
-                                          MyColors.extraLightGreyColor,
+                                      MyColors.extraLightGreyColor,
                                       borderColor: MyColors.extraLightGreyColor,
                                       textColor: MyColors.blackColor,
                                       title: Constants.burpeesOmitButton,
@@ -353,6 +369,12 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
         }).then((value) {
 
     });
+  }
+
+  @override
+  void dispose() {
+    context.read<GymExerciseProvider>().setCurrentSet(val: null);
+    super.dispose();
   }
 
 }

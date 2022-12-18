@@ -1,10 +1,13 @@
+import 'package:fit_tech/logic/excercise/training_completed_provider.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
+import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TrainingCompletedScreen extends StatefulWidget {
@@ -28,6 +31,7 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.backgroundColor,
         body: ListView(
           shrinkWrap: true,
           children: [
@@ -219,99 +223,196 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                         fontWeight: FontWeight.w700,
                         fontSize: 20.0),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text(
-                              Constants.trainingCompletedScreenReview1,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: 'Open Sance',
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30.0),
+                  Builder(
+                    builder: (context) {
+                      var bloc = context.watch<TrainingCompletedProvider>();
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  Constants.trainingCompletedScreenReview1,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: 'Open Sance',
+                                      color: MyColors.blackColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 30.0),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    bloc.setSelected(val: 1);
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: (bloc.selected == 1)
+                                                  ? MyColors.redColor
+                                                  : MyColors.blackColor,
+                                              width: (bloc.selected == 1)?5:2)),
+                                    ),
+                                  ),
+                                )
+
+                              ],
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.circle_outlined))
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text(
-                              Constants.trainingCompletedScreenReview2,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: 'Open Sance',
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30.0),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  Constants.trainingCompletedScreenReview2,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: 'Open Sance',
+                                      color: MyColors.blackColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 30.0),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    bloc.setSelected(val: 2);
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: (bloc.selected == 2)
+                                                  ? MyColors.redColor
+                                                  : MyColors.blackColor,
+                                              width: (bloc.selected == 2)?5:2)),
+                                    ),
+                                  ),
+                                )
+
+                              ],
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.circle_outlined))
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text(
-                              Constants.trainingCompletedScreenReview3,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: 'Open Sance',
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30.0),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  Constants.trainingCompletedScreenReview3,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: 'Open Sance',
+                                      color: MyColors.blackColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 30.0),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    bloc.setSelected(val: 3);
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: (bloc.selected == 3)
+                                                  ? MyColors.redColor
+                                                  : MyColors.blackColor,
+                                              width: (bloc.selected == 3)?5:2)),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.circle_outlined))
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text(
-                              Constants.trainingCompletedScreenReview4,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: 'Open Sance',
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30.0),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  Constants.trainingCompletedScreenReview4,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: 'Open Sance',
+                                      color: MyColors.blackColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 30.0),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    bloc.setSelected(val: 4);
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: (bloc.selected == 4)
+                                                  ? MyColors.redColor
+                                                  : MyColors.blackColor,
+                                              width: (bloc.selected == 4)?5:2)),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.circle_outlined))
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text(
-                              Constants.trainingCompletedScreenReview5,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: 'Open Sance',
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30.0),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  Constants.trainingCompletedScreenReview5,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: 'Open Sance',
+                                      color: MyColors.blackColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 30.0),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    bloc.setSelected(val: 5);
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: (bloc.selected == 5)
+                                                  ? MyColors.redColor
+                                                  : MyColors.blackColor,
+                                              width: (bloc.selected == 5)?5:2)),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.circle_outlined))
-                          ],
-                        ),
-                      ),
-                    ],
+                          ),
+                        ],
+                      );
+                    }
                   )
                 ],
               ),
@@ -338,14 +439,19 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                             fontSize: 20.0),
                       ),
                       Expanded(child: Container()),
-                      const Text(
-                        Constants.trainingCompletedScreenSeeMore,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Open Sance',
-                            color: MyColors.redColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16.0),
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, CurrentPerformanceScreen.tag);
+                        },
+                        child: const Text(
+                          Constants.trainingCompletedScreenSeeMore,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              fontFamily: 'Open Sance',
+                              color: MyColors.redColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.0),
+                        ),
                       ),
                     ],
                   ),
@@ -383,14 +489,24 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: PrimaryButton(
-                title: "Continuar",
-                backgroundColor: MyColors.blackColor,
-                textColor: MyColors.whiteColor,
-                borderColor: MyColors.blackColor,
-                onPressed: (){
-                  Navigator.pushNamed(context, DashboardScreen.tag);
-                },
+              child: Builder(
+                builder: (context) {
+                  var isEnabled = false;
+                  var bloc = context.watch<TrainingCompletedProvider>();
+                  if(bloc.selected!=-1) {
+                    isEnabled = true;
+                  }
+                  return PrimaryButton(
+                    title: "Continuar",
+                    backgroundColor: MyColors.blackColor,
+                    textColor: MyColors.whiteColor,
+                    borderColor: MyColors.blackColor,
+                    enabled: isEnabled,
+                    onPressed: (){
+                      Navigator.pushNamed(context, DashboardScreen.tag);
+                    },
+                  );
+                }
               ),
             ),
             const SizedBox(

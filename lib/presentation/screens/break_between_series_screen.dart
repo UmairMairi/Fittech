@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'package:fit_tech/logic/excercise/gym_excercise_provider.dart';
+import 'package:fit_tech/logic/excercise/rest_between_series_provider.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/my_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BreakBetweenSeriesScreen extends StatefulWidget {
-  final int? restType;
-  const BreakBetweenSeriesScreen({super.key,this.restType = 0});
+  const BreakBetweenSeriesScreen({super.key});
 
   static const String tag = "break_between_series_screen";
 
@@ -16,47 +19,17 @@ class BreakBetweenSeriesScreen extends StatefulWidget {
 
 class _BreakBetweenSeriesScreenState extends State<BreakBetweenSeriesScreen> {
 
-  Timer? countdownTimer;
-  Duration myDuration = const Duration(seconds: 30);
-
-  void startTimer() {
-    countdownTimer =
-        Timer.periodic(const Duration(seconds: 1), (_) => setCountDown());
-  }
-
-  // Step 4
-  void stopTimer() {
-    setState(() => countdownTimer!.cancel());
-  }
-
-  // Step 5
-  void resetTimer() {
-    stopTimer();
-    setState(() => myDuration = const Duration(seconds: 30));
-  }
-
-  // Step 6
-  void setCountDown() {
-    const reduceSecondsBy = 1;
-    setState(() {
-      final seconds = myDuration.inSeconds - reduceSecondsBy;
-      if (seconds < 0) {
-        countdownTimer!.cancel();
-        Navigator.pop(context);
-      } else {
-        myDuration = Duration(seconds: seconds);
-      }
-    });
-  }
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    context.read<BreakBetweenSeriesProvider>().startTimer();
   }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var provider = Provider.of<BreakBetweenSeriesProvider>(context);
+    var gymProvider = Provider.of<GymExerciseProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.whiteColor,
@@ -95,6 +68,7 @@ class _BreakBetweenSeriesScreenState extends State<BreakBetweenSeriesScreen> {
                     height: size.height * 0.5,
                     width: size.width,
                     alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(10.0),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -133,19 +107,27 @@ class _BreakBetweenSeriesScreenState extends State<BreakBetweenSeriesScreen> {
                           const SizedBox(
                             height: 20.0,
                           ),
-                          Text(
-                            "00:${myDuration.inSeconds}",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontFamily: 'Anton',
-                                color: MyColors.whiteColor,
-                                fontSize: 59.0),
+                          Builder(
+                            builder: (context) {
+                              var duration = context.watch<BreakBetweenSeriesProvider>().myDuration;
+                              if(duration.inSeconds<=0){
+                                context.read<BreakBetweenSeriesProvider>().resetTimer();
+                                Navigator.pop(context);
+                              }
+                              return Text(MyUtils.printDuration(duration: duration),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontFamily: 'Anton',
+                                    color: MyColors.whiteColor,
+                                    fontSize: 59.0),
+                              );
+                            }
                           ),
                           const  SizedBox(
                             height: 20.0,
                           ),
                           Text(
-                            "(${widget.restType}/2)",
+                            "(${gymProvider.currentSet}/${gymProvider.totalSets})",
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                                 fontFamily: 'Open Sance',

@@ -1,5 +1,6 @@
 import 'package:fit_tech/presentation/screens/exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipe_details_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
@@ -101,12 +102,17 @@ class _RecipeListScreenState extends State<RecipeListScreen>
                               const Text("4 ingredients",
                                   style: MyTextStyle.inputTitle),
                               Expanded(child: Container()),
-                              Text(
-                                "Ver receta",
-                                style: MyTextStyle.bold.copyWith(
-                                    color: MyColors.redColor,
-                                    fontSize: 18,
-                                    height: 1.5),
+                              InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, RecipeDetailsScreen.tag);
+                                },
+                                child: Text(
+                                  "Ver receta",
+                                  style: MyTextStyle.bold.copyWith(
+                                      color: MyColors.redColor,
+                                      fontSize: 18,
+                                      height: 1.5),
+                                ),
                               ),
                             ],
                           ),

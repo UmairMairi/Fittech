@@ -2,6 +2,7 @@ import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
 import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
 import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/outdoor/outdoor_trainings_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
@@ -14,7 +15,8 @@ import 'warmup_screen.dart';
 
 class TodayTrainingScreen extends StatefulWidget {
   final int index;
-  const TodayTrainingScreen({super.key,this.index = 0});
+
+  const TodayTrainingScreen({super.key, this.index = 0});
 
   static const String tag = "today_training_screen";
 
@@ -29,6 +31,7 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
   TabController? _controller;
   var selectedIndex = 0;
   var tabSelectedIndex = 0;
+  var showOutdoorTraining = true;
 
   @override
   void initState() {
@@ -52,7 +55,9 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  const MyAppBar(title: Constants.titleVerifyCodeScreen,),
+                  const MyAppBar(
+                    title: Constants.titleVerifyCodeScreen,
+                  ),
                   TabBar(
                     labelColor: Colors.black,
                     unselectedLabelStyle: const TextStyle(
@@ -64,27 +69,39 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                       return Tab(
                         height: 30.0,
                         child: Text(item,
-                            style: MyTextStyle.inputTitle.copyWith(color: MyColors.blackColor)),
+                            style: MyTextStyle.inputTitle
+                                .copyWith(color: MyColors.blackColor)),
                       );
                     }).toList(),
                     controller: _controller!,
                     indicatorColor: Colors.black,
                     padding: EdgeInsets.zero,
                     labelStyle: const TextStyle(fontSize: 12.0),
-                    onTap: (index){
-                      if(index == 1){
+                    onTap: (index) {
+                      if (index == 1) {
                         Navigator.pushNamed(context, GymScreen.tag);
-                      }else if(index == 2){
+                      } else if (index == 2) {
                         Navigator.pushNamed(context, OutdoorScreen.tag);
                       }
                     },
                   ),
-                  const TodayWorkoutHome()
+                  (showOutdoorTraining && (widget.index ==2))
+                      ? OutdoorTrainingsScreen(
+                          onSelect: () {
+                            setState(() {
+                              showOutdoorTraining = false;
+                            });
+                          },
+                        )
+                      : const TodayWorkoutHome()
                 ],
               ),
             ),
-            const SizedBox(height: 20,),
-            Container(
+            const SizedBox(
+              height: 20,
+            ),
+            if(!(showOutdoorTraining && (widget.index ==2)))
+              Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: PrimaryButton(
@@ -93,24 +110,22 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                 backgroundColor: MyColors.redColor,
                 borderColor: Colors.transparent,
                 onPressed: () {
-                  if(_controller!.index == 0){
+                  if (_controller!.index == 0) {
                     Navigator.pushNamed(context, HeatingScreen.tag);
-                  }else if(_controller!.index == 1){
+                  } else if (_controller!.index == 1) {
                     Navigator.pushNamed(context, CardioEquipmentsScreen.tag);
-                  }else{
+                  } else {
                     Navigator.pushNamed(context, GymExerciseScreen.tag);
                   }
-
                 },
               ),
             ),
-            const SizedBox(height: 20,)
-
+            const SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
     );
   }
-
-
 }

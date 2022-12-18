@@ -1,10 +1,15 @@
 import 'package:fit_tech/logic/about_goal_provider.dart';
 import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/logic/biological_gender_provider.dart';
+import 'package:fit_tech/logic/choose_date_provider.dart';
 import 'package:fit_tech/logic/choose_training_provider.dart';
 import 'package:fit_tech/logic/counted_beats_provider.dart';
 import 'package:fit_tech/logic/create_account_provider.dart';
+import 'package:fit_tech/logic/excercise/excersice_provider.dart';
 import 'package:fit_tech/logic/excercise/gym_excercise_provider.dart';
+import 'package:fit_tech/logic/excercise/rest_between_sequence_provider.dart';
+import 'package:fit_tech/logic/excercise/rest_between_series_provider.dart';
+import 'package:fit_tech/logic/excercise/training_completed_provider.dart';
 import 'package:fit_tech/logic/family_history_provider.dart';
 import 'package:fit_tech/logic/heart_rate_provider.dart';
 import 'package:fit_tech/logic/login_provider.dart';
@@ -14,21 +19,38 @@ import 'package:fit_tech/logic/nutrition/nutrition_line_identification_provider.
 import 'package:fit_tech/logic/otp_provider.dart';
 import 'package:fit_tech/logic/physical_activity_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
+import 'package:fit_tech/logic/profile/test_after_training_provider.dart';
 import 'package:fit_tech/logic/profile/verify_Identity_provider.dart';
 import 'package:fit_tech/logic/recover_password_provider.dart';
 import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
+import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/dashboard/profile_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/image_viewer_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'presentation/screens/nutritionTest/add_measurements_scren.dart';
+import 'presentation/screens/profile/FAQs/faq_details_screen.dart';
+import 'presentation/screens/profile/FAQs/faq_screen.dart';
+import 'presentation/screens/profile/about/privacy_policy_screen.dart';
+import 'presentation/screens/profile/settings/Privacy_screen.dart';
+import 'presentation/screens/profile/settings/delete_acount_screen.dart';
+import 'presentation/screens/profile/testResults/choose_dates_screen.dart';
+import 'presentation/screens/profile/testResults/comparison_measurements_screen.dart';
+import 'presentation/screens/profile/testResults/test_result_screen.dart';
+import 'presentation/screens/trainingTest/test_after_training_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,6 +63,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LoginProvider>(
@@ -84,6 +110,18 @@ class MyApp extends StatelessWidget {
             create: (context) => GymExerciseProvider()),
         ChangeNotifierProvider<AddMeasurementsProviders>(
             create: (context) => AddMeasurementsProviders()),
+        ChangeNotifierProvider<ChooseDateProviders>(
+            create: (context) => ChooseDateProviders()),
+        ChangeNotifierProvider<TestAfterTrainingProvider>(
+            create: (context) => TestAfterTrainingProvider()),
+        ChangeNotifierProvider<BreakBetweenSeriesProvider>(
+            create: (context) => BreakBetweenSeriesProvider()),
+        ChangeNotifierProvider<BreakBetweenSequenceProvider>(
+            create: (context) => BreakBetweenSequenceProvider()),
+        ChangeNotifierProvider<ExerciseProvider>(
+            create: (context) => ExerciseProvider()),
+        ChangeNotifierProvider<TrainingCompletedProvider>(
+            create: (context) => TrainingCompletedProvider()),
       ],
       child: MaterialApp(
         title: 'FITTECH',
@@ -91,7 +129,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute: NutritionListScreen.tag,
+        initialRoute:TodayTrainingScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

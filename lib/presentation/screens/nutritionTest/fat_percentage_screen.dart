@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/nutrition_training_model.dart';
+import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/logic/nutrition/fat_Percentage_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/biological_gender_screen.dart';
@@ -116,7 +117,7 @@ class _FatPercentageScreenState extends State<FatPercentageScreen> {
                         builder: (context) {
                           var bloc = context.watch<FatPercentageProvider>();
                           bool isEnabled = false;
-                          if((bloc.selectedItem!=null && bloc.selectedItem!=-1)||Singleton.isDev){
+                          if((bloc.selectedItem!=-1)||Singleton.isDev){
                             isEnabled = true;
                           }
                           return PrimaryButton(
@@ -128,7 +129,7 @@ class _FatPercentageScreenState extends State<FatPercentageScreen> {
                               if(selectedIndex!=-1){
                                 Navigator.pushNamed(
                                     context, AddMeasurementsScreen.tag,
-                                    arguments: true);
+                                    arguments: MeasurementsType.addNew);
                               }
                             },
                           );

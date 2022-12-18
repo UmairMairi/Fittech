@@ -1,5 +1,6 @@
 import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
 import 'package:fit_tech/presentation/screens/outdoor/outdoor_trainings_screen.dart';
+import 'package:fit_tech/presentation/screens/today_training_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -115,7 +116,10 @@ class OutdoorScreen extends StatelessWidget {
                         textColor: MyColors.whiteColor,
                         backgroundColor: MyColors.redColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, OutdoorTrainingsScreen.tag);
+                          Navigator.pushNamed(context,
+                              TodayTrainingScreen.tag,
+                              arguments: 2);
+                          // Navigator.pushNamed(context, OutdoorTrainingsScreen.tag);
                         },
                       ),
                     ),

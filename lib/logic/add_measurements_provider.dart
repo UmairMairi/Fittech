@@ -11,22 +11,28 @@ class AddMeasurementsProviders extends ChangeNotifier {
   File? backImage;
 
   getFrontImage() async {
-    var file = await FileUtils.getImageFromGallery();
+    var file = await FileUtils.getImageFromCamera();
     frontImage = file;
     notifyListeners();
   }
 
   getSideImage() async {
-    var file = await FileUtils.getImageFromGallery();
+    var file = await FileUtils.getImageFromCamera();
     sideImage = file;
     notifyListeners();
   }
 
   getBackImage() async {
-    var file = await FileUtils.getImageFromGallery();
+    var file = await FileUtils.getImageFromCamera();
     backImage = file;
     notifyListeners();
   }
 
-
 }
+enum MeasurementsType{
+  history,
+  testResult,
+  addNew,
+  addNewFromHistory,
+}
+

@@ -71,6 +71,33 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
+                  var isExpanded = false;
+                  return StatefulBuilder(builder: (context, myState) {
+                    return Column(
+                      children: [
+                        Theme(
+                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                          child: ExpansionTile(
+                            title: Text(
+                              "Ejemplo de pregunta",
+                              style: MyTextStyle.paragraph1.copyWith(
+                                  color: isExpanded
+                                      ? MyColors.redColor
+                                      : MyColors.blackColor),
+                            ),
+                            onExpansionChanged: (val) {
+                              myState(() {
+                                isExpanded = val;
+                              });
+                            },
+                            iconColor: MyColors.redColor,
+                            children: [getContent()],
+                          ),
+                        ),
+                        const Divider(height: 5,)
+                      ],
+                    );
+                  });
                   return Column(
                     children: [
                       Padding(
@@ -78,7 +105,8 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                             vertical: 10.0, horizontal: 20),
                         child: Row(
                           children: const [
-                            Expanded(child: Text(
+                            Expanded(
+                                child: Text(
                               "Ejemplo de pregunta",
                               style: MyTextStyle.paragraph1,
                             )),
@@ -96,6 +124,24 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                 }),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget getContent() {
+    return Theme(
+      data: Theme.of(context),
+      child: Column(
+        children: [
+          const Divider(height: 1,),
+          Container(
+            padding: const EdgeInsets.all(20.0),
+            child: const Text(
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              style: MyTextStyle.text1,
+            ),
+          ),
+        ],
       ),
     );
   }

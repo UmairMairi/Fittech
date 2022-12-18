@@ -548,6 +548,8 @@ class Constants {
   static const String healthIndicatorScreenTitle6 = "Estrategia nutricional";
   // (health Indicators)
   static const String measurementsScreenHeading1 = "Fotos";
+  static const String measurementsScreenHeading2 = "Para finalizar, agrega tus medidas para ver cambios con una mejor nutrición";
+  static const String measurementsScreenHeading3 = "Ingresar medidas";
   static const String measurementsScreenTitle1 = "Medidas 20 Ago";
   static const String measurementsScreenTitle2 = "Peso";
   static const String measurementsScreenTitle3 = "Altura";
@@ -662,7 +664,7 @@ class Constants {
 
   // PerformanceTrainingNotesScreen
   static const String performanceTrainingNotesScreenTitle =
-      "Notas de entrenamiento (2)";
+      "22 de Ago 2022 (2)";
 
   //NutritionTestScreen
   static const String nutritionTestScreenTitle = "TEST DE NUTRICIÓN";
@@ -713,6 +715,7 @@ class Constants {
 
   //AddMeasurementsScreen
   static const String addMeasurementsScreenTitle = "Agregar medidas";
+  static const String nutritionAddMeasurementsScreenTitle = "Test de nutrición (4/4)";
 
   //TutorialUsageScreen
   static const String tutorialUsageScreenTitle = "Tutorial de uso";
@@ -744,5 +747,54 @@ class Constants {
   static const String label2FoodDialogue = "Gramos";
   static const String label2ValueFoodDialogue = "90 g.";
   static const String btnLabelFoodDialogue = "Agregar";
+
+  //RecipeDetailsScreen
+  static const String titleRecipeDetailsScreen = "Detalles de receta";
+  static const String inputTitleRecipeDetailsScreen = "Nombre de receta";
+  static const String label1RecipeDetailsScreen = "Alimentos";
+  static const String label1Value1RecipeDetailsScreen = "Ingrediente";
+  static const String label1Value2RecipeDetailsScreen = "Cantidad (g./ml.)";
+  static const String editTitleRecipeDetailsScreen = "Editar Receta";
+
+
+  //BodyMassScreen
+  static const String titleBodyMassScreen = "Índice de masa corporal";
+  static const String infoBodyMassScreen = "Solo aplica en los casos donde el porcentaje graso está más elevado de lo que debería, pero es un parámetro general a tomar en cuenta pero que su veracidad depende de muchos factores.";
+
+  //WaistHipRatioScreen
+  static const String titleWaistHipRatioScreen = "Índice cintura/cadera";
+  static const String infoWaistHipRatioScreen = "El índice cintura cadera (ICC) es el cálculo que se realiza a partir de las medidas de la cintura y de la cadera para verificar el riesgo que una persona tiene de desarrollar una enfermedad cardiovascular. Esto sucede debido a que, cuanto mayor es la concentración de grasa abdominal, mayor es el riesgo de padecer problemas como colesterol alto, diabetes, presión alta o aterosclerosis.";
+
+  //WaistHeightScreen
+  static const String titleWaistHeightScreen = "Índice cintura/altura";
+  static const String infoWaistHeightScreen = "Varios estudios han demostrado que este índice muestra una mayor correlación con enfermedades cardiovasculares que el índice de masa corporal, los niveles saludables generalmente son inferiores a 0.5 aunque puede aceptarse un poco más para edades avanzadas";
+
+  //WaistCircumferenceScreen
+  static const String titleWaistCircumferenceScreen = "Perímetro de cintura";
+  static const String infoWaistCircumferenceScreen = "En función de la localización del exceso de grasa, existen dos tipos de obesidad; la llamada periférica (el exceso de grasa está situado en glúteos, muslos y brazos), y la central (el exceso de grasa se concentra en el abdomen). Esta última es la que tiene peores consecuencias para el organismo, ya que diversos estudios han demostrado que el exceso de grasa abdominal puede multiplicar por dos el riesgo de padecer una enfermedad cardiovascular. La Organización Mundial de la Salud (OMS) establece el valor máximo saludable del perímetro abdominal en 88 centímetros en la mujer, mientras que en el hombre el valor es de 102 centímetros.";
+
+  //TMBAScreen
+  static const String titleTMBAScreen = "TMBA";
+  static const String infoTMBAScreen = "La tasa metabólica basal activa cuantifica cuántas calorías o energía necesitas en un dia para llevar a cabo todas tus actividades, a partir de ahí se calcula la estrategia nutricional";
+
+  //NutritionStrategyScreen
+  static const String titleNutritionStrategyScreen = "Estrategia nutricional";
+  static const String infoNutritionStrategyScreen = "(viene dado por cuestionarios de nutrición)";
+
+  //ImageViewerScreen
+  static const String titleImageViewerScreen = "Foto frontal";
+  static const String btn1ImageViewerScreen = "Tomar de nuevo";
+  static const String btn2ImageViewerScreen = "Continuar";
+
+  //MeasurementHistoryScreen
+  static const String titleMeasurementHistoryScreen = "Historial";
+
+  //ChooseDatesScreen
+  static const String titleChooseDatesScreen = "Elige dos fechas";
+  static const String btnChooseDatesScreen = "Comparar medidas";
+
+  //MeasurementsComparisonScreen
+  static const String titleMeasurementsComparisonScreen = "Comparación";
+  static const String btnMeasurementsComparisonScreen = "Comparar medidas";
 
 }

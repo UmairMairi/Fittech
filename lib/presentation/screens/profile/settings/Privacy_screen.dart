@@ -88,9 +88,36 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                           return Column(
                             children: [
                               InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, DeleteAccountScreen.tag);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                                  child: Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(
+                                            Constants.privacyScreenLabel1,
+                                            style: MyTextStyle.paragraph1,
+                                          )),
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: MyColors.greyColor,
+                                        size: 18,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 15,)
+                            ],
+                          );
+
+                          return Column(
+                            children: [
+                              InkWell(
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                   child: Row(
                                     children: [
                                       Expanded(
