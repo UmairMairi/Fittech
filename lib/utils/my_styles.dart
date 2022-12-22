@@ -84,6 +84,6 @@ class MyTextStyle {
 
   static const bold = TextStyle(
       fontFamily: 'Open Sance',
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.bold,
       color: MyColors.blackColor);
 }

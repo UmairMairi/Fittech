@@ -69,27 +69,29 @@ class _MeasurementHistoryScreenState extends State<MeasurementHistoryScreen>
             ),
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 itemCount: 5,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ListTile(
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: MyColors.greyMediumColor,
-                          size: 18,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: ListTile(
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: MyColors.greyMediumColor,
+                            size: 18,
+                          ),
+                          title: const Text(
+                            "20 Ago 2022",
+                            style: MyTextStyle.text1,
+                          ),
+                          minLeadingWidth: 0.0,
+                          onTap: () {
+                            Navigator.pushNamed(context, AddMeasurementsScreen.tag,arguments: MeasurementsType.history);
+                          },
                         ),
-                        title: const Text(
-                          "20 Ago 2022",
-                          style: MyTextStyle.text1,
-                        ),
-                        minLeadingWidth: 0.0,
-                        onTap: () {
-                          Navigator.pushNamed(context, AddMeasurementsScreen.tag,arguments: MeasurementsType.history);
-                        },
                       ),
                       const Divider()
                     ],

@@ -18,6 +18,7 @@ class TextFieldPrimary extends StatefulWidget {
   final bool showCounter;
   final int? maxLength;
   final TextAlign? textAlign;
+  final bool hideBorder;
 
   const TextFieldPrimary(
       {Key? key,
@@ -35,6 +36,7 @@ class TextFieldPrimary extends StatefulWidget {
       this.suffixText,
       this.showCounter = false,
       this.maxLength,
+      this.hideBorder = false,
       this.textAlign})
       : super(key: key);
 
@@ -96,13 +98,13 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
               constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
               contentPadding: EdgeInsets.zero,
               fillColor: MyColors.whiteColor,
-              border: const UnderlineInputBorder(
+              border: (widget.hideBorder)?InputBorder.none:const UnderlineInputBorder(
                 borderSide: BorderSide(color: MyColors.greyColor),
               ),
-              focusedBorder: const UnderlineInputBorder(
+              focusedBorder: (widget.hideBorder)?InputBorder.none:const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black, width: 2.0),
               ),
-              errorBorder: const UnderlineInputBorder(
+              errorBorder: (widget.hideBorder)?InputBorder.none:const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.red, width: 2.0),
               ),
               suffix: widget.suffix,

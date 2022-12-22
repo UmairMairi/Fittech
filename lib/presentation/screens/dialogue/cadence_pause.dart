@@ -27,7 +27,9 @@ class DialogueCadence extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(
                     Icons.close,
                     color: MyColors.blackColor,

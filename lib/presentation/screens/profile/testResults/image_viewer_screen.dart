@@ -1,10 +1,10 @@
+import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ImageViewerScreen extends StatelessWidget {
   static const String tag = "image_viewer_screen";
@@ -34,12 +34,15 @@ class ImageViewerScreen extends StatelessWidget {
                     },
                   ),
                   Expanded(
-                    child: Text(
-                      Constants.titleImageViewerScreen,
-                      textAlign: TextAlign.center,
-                      style: MyTextStyle.heading3
-                          .copyWith(color: MyColors.whiteColor),
-                    ),
+                    child: Builder(builder: (context) {
+                      var bloc = context.watch<AddMeasurementsProviders>();
+                      return Text(
+                        bloc.title ?? Constants.titleImageViewerScreen,
+                        textAlign: TextAlign.center,
+                        style: MyTextStyle.heading3
+                            .copyWith(color: MyColors.whiteColor),
+                      );
+                    }),
                   ),
                   Opacity(
                     opacity: 0.0,
@@ -58,22 +61,20 @@ class ImageViewerScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(shrinkWrap: true, children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(
-                    Constants.infoBodyMassScreen,
-                    style: MyTextStyle.paragraph1,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Image.asset(
-                  Images.detailsBodyMassScreen,
-                  width: double.infinity,
-                ),
-              ]),
+              child: Builder(builder: (context) {
+                var bloc = context.watch<AddMeasurementsProviders>();
+                if (bloc.imageFile != null) {
+                  return Image.file(
+                    bloc.imageFile!,
+                    width: double.infinity,
+                  );
+                } else {
+                  return Container();
+                }
+              }),
+            ),
+            const SizedBox(
+              height: 20.0,
             ),
             Row(
               children: [
@@ -85,7 +86,7 @@ class ImageViewerScreen extends StatelessWidget {
                     borderColor: MyColors.whiteColor,
                     enabled: true,
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, false);
                     },
                   ),
                 ),
@@ -100,7 +101,7 @@ class ImageViewerScreen extends StatelessWidget {
                       borderColor: MyColors.whiteColor,
                       enabled: true,
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, true);
                       }),
                 ),
               ],

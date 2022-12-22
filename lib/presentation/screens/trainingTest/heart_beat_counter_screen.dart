@@ -99,20 +99,6 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
                   ),
                 ),
               ),
-            // Expanded(
-            //   child: Center(
-            //     child: Container(
-            //       padding: const EdgeInsets.all(40.0),
-            //       decoration: BoxDecoration(
-            //         shape: BoxShape.circle,
-            //         border: Border.all(color: MyColors.redColor,width: 5.0)
-            //       ),
-            //       child: Text("${myDuration.inSeconds}",
-            //         style: MyTextStyle.heading1,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
             const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
@@ -123,6 +109,7 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
                     backgroundColor: MyColors.redColor,
                     textColor: MyColors.whiteColor,
                     borderColor: MyColors.redColor,
+                    enabled: countdownTimer == null,
                     onPressed: (){
                       startTimer();
                     },

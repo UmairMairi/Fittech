@@ -17,7 +17,6 @@ class ChooseDatesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedIndex = -1;
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.whiteColor,
@@ -26,32 +25,31 @@ class ChooseDatesScreen extends StatelessWidget {
             const MyAppBar(
               title: Constants.titleChooseDatesScreen,
             ),
-            SizedBox(
-              height: 70,
-              child: Column(
-                children: [
-                  const Divider(
-                    height: 1,
-                  ),
-                  Row(
-                    children: [
-
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10.0),
-                          child: Builder(
-                            builder: (context) {
-                              var bloc = context.watch<ChooseDateProviders>();
-                              return bloc.dates.isNotEmpty
-                                  ?Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 2.0, horizontal: 10.0),
-                                decoration: BoxDecoration(
-                                    color: MyColors.backgroundColor,
-                                    borderRadius: BorderRadius.circular(20.0)),
+            Column(
+              children: [
+                const Divider(
+                  height: 1,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal:10.0),
+                        child: Builder(
+                          builder: (context) {
+                            var bloc = context.watch<ChooseDateProviders>();
+                            return bloc.dates.isNotEmpty
+                                ?Container(
+                              padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 5.0),
+                              decoration: BoxDecoration(
+                                  color: MyColors.backgroundColor,
+                                  borderRadius: BorderRadius.circular(50.0)),
+                              child: FittedBox(
+                                fit: BoxFit.fitWidth,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: const [
                                     Text(
                                       "29 Ago 2022",
@@ -64,62 +62,65 @@ class ChooseDatesScreen extends StatelessWidget {
                                     Icon(
                                       Icons.close,
                                       color: Colors.black,
-                                    )
+                                      size: 20,
+                                    ),
                                   ],
                                 ),
-                              )
-                                  :Container();
-                            }
-                          ),
+                              ),
+                            )
+                                :Container();
+                          }
                         ),
                       ),
-                      const SizedBox(height: 68, child: VerticalDivider()),
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10.0),
-                          child: Builder(
-                            builder: (context) {
-                              var bloc = context.watch<ChooseDateProviders>();
-                              return (bloc.dates.length==2)
-                                  ?Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 2.0, horizontal: 10.0),
-                                decoration: BoxDecoration(
-                                    color: MyColors.backgroundColor,
-                                    borderRadius: BorderRadius.circular(20.0)),
+                    ),
+                    const SizedBox(height: 60, child: VerticalDivider()),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal:10.0),
+                        child: Builder(
+                          builder: (context) {
+                            var bloc = context.watch<ChooseDateProviders>();
+                            return (bloc.dates.length==2)
+                                ?Container(
+                              padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 5.0),
+                              decoration: BoxDecoration(
+                                  color: MyColors.backgroundColor,
+                                  borderRadius: BorderRadius.circular(20.0)),
+                              child: FittedBox(
+                                fit: BoxFit.fitWidth,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
-                                    Expanded(
-                                        child: Text(
+                                    Text(
                                       textAlign: TextAlign.center,
                                       "29 Ago 2022",
                                       style: MyTextStyle.heading3,
-                                    )),
+                                    ),
                                     SizedBox(
                                       width: 5.0,
                                     ),
                                     Icon(
                                       Icons.close,
                                       color: Colors.black,
+                                      size: 20,
                                     )
                                   ],
                                 ),
-                              )
-                                  :Container();
-                            }
-                          ),
+                              ),
+                            )
+                                :Container();
+                          }
                         ),
-                      )
-                    ],
-                  ),
-                  const Divider(
-                    height: 1,
-                  ),
-                ],
-              ),
+                      ),
+                    )
+                  ],
+                ),
+                const Divider(
+                  height: 1,
+                ),
+              ],
             ),
             Expanded(
               child: ListView.builder(

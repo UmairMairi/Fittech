@@ -54,7 +54,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
           children: [
             Container(
               height: 65.0,
-              padding: const EdgeInsets.only(left: 20,right: 10),
+              padding: const EdgeInsets.only(left: 20, right: 10),
               child: Row(
                 children: [
                   const Expanded(
@@ -83,7 +83,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                         textStyle: MyTextStyle.text1,
                         height: 25,
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushNamed(
                                 context, CreateRecipeScreen.tag);
                           },
@@ -133,11 +133,11 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                   fit: StackFit.expand,
                                   children: [
                                     const CircularProgressIndicator(
-                                      backgroundColor: Colors.grey,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.red),
+                                      backgroundColor: MyColors.extraLightGreyColor,
+                                      valueColor:
+                                      AlwaysStoppedAnimation<Color>(MyColors.redColor),
                                       value: 0.25,
-                                      color: Colors.grey,
+                                      color: MyColors.extraLightGreyColor,
                                       strokeWidth: 5.0,
                                     ),
                                     Column(
@@ -167,7 +167,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                   children: [
                                     Column(
                                       children: [
-                                        const SizedBox(height: 5.0,),
+                                        const SizedBox(
+                                          height: 5.0,
+                                        ),
                                         Row(
                                           children: [
                                             Image.asset(
@@ -207,7 +209,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                     ),
                                     Column(
                                       children: [
-                                        const SizedBox(height: 5.0,),
+                                        const SizedBox(
+                                          height: 5.0,
+                                        ),
                                         Row(
                                           children: [
                                             Image.asset(
@@ -243,7 +247,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                     ),
                                     Column(
                                       children: [
-                                        const SizedBox(height: 5.0,),
+                                        const SizedBox(
+                                          height: 5.0,
+                                        ),
                                         Row(
                                           children: [
                                             Image.asset(
@@ -293,7 +299,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                       context, NutritionDetailsScreen.tag);
                                 },
                                 child: AspectRatio(
-                                    aspectRatio: 3 / 1.5,
+                                    aspectRatio: 3 / 1.8,
                                     child: Stack(
                                       fit: StackFit.expand,
                                       children: [
@@ -324,7 +330,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                                         .copyWith(
                                                       color:
                                                           MyColors.whiteColor,
-                                                      fontSize: 24,
+                                                      fontSize: 22,
                                                     ),
                                                   ),
                                                   const Icon(
@@ -333,49 +339,48 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                                   )
                                                 ],
                                               ),
+                                              const SizedBox(height: 10.0,),
                                               Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      "245 kcal",
-                                                      style: MyTextStyle
-                                                          .paragraph1
-                                                          .copyWith(
-                                                        color:
-                                                            MyColors.whiteColor,
-                                                      ),
+                                                  Text(
+                                                    "245 kcal",
+                                                    style: MyTextStyle
+                                                        .paragraph2
+                                                        .copyWith(
+                                                      color:
+                                                          MyColors.whiteColor,
                                                     ),
                                                   ),
-                                                  const Expanded(
-                                                    child: Text(
-                                                      "P. 102g",
-                                                      style: TextStyle(
-                                                          color: MyColors
-                                                              .whiteColor),
+                                                  Expanded(child: Container()),
+                                                  Text(
+                                                    "P. 102g",
+                                                    style: MyTextStyle
+                                                        .paragraph2
+                                                        .copyWith(
+                                                      color:
+                                                          MyColors.whiteColor,
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      "C. 27g",
-                                                      style: MyTextStyle
-                                                          .paragraph1
-                                                          .copyWith(
-                                                        color:
-                                                            MyColors.whiteColor,
-                                                      ),
+                                                  Expanded(child: Container()),
+                                                  Text(
+                                                    "C. 27g",
+                                                    style: MyTextStyle
+                                                        .paragraph2
+                                                        .copyWith(
+                                                      color:
+                                                          MyColors.whiteColor,
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      "G. 21g",
-                                                      style: MyTextStyle
-                                                          .paragraph1
-                                                          .copyWith(
-                                                        color:
-                                                            MyColors.whiteColor,
-                                                      ),
+                                                  Expanded(child: Container()),
+                                                  Text(
+                                                    "G. 21g",
+                                                    style: MyTextStyle
+                                                        .paragraph2
+                                                        .copyWith(
+                                                      color:
+                                                          MyColors.whiteColor,
                                                     ),
                                                   ),
                                                 ],

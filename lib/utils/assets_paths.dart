@@ -133,4 +133,8 @@ class Images {
   // WaistHeightScreen
   static const detailsWaistHeightScreen = 'assets/images/waist_height_screen.png';
 
+
+  // MeasurementsScreen
+  static const iconCameraMeasurementsScreen = 'assets/images/icon_camera.png';
+
 }

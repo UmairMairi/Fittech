@@ -230,6 +230,11 @@ class Constants {
   static const String dialoguePauseRestartLabel = "Reiniciar ejercicio";
   static const String dialoguePauseExitLabel = "Salir de entrenamiento";
 
+  //ImageSource
+  static const String titleImageSource = "Tipo de fuente";
+  static const String btnCameraTitleImageSource = "obtener de la cámara";
+  static const String btnGalleryTitleImageSource = "obtener de la galería";
+
   //BreakBetweenSeriesScreen
   static const String breakBetweenSeriesScreenTitle = "DESCANSO";
 
@@ -485,6 +490,9 @@ class Constants {
   static const String myPlanScreenWatchTutorialTitle = "Ver Tutorial";
 
   static const String myPlanScreenTodayTrainingTitle = "ENTRENAMIENTO DE HOY";
+
+  //MyPlanScreen
+  static const String titleTodayTrainingScreen = "Entrenamiento de hoy";
 
   //NutritionScreen
   static const String nutritionScreenTitle = "Vive saludable con Fittech";

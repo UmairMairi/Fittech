@@ -1,10 +1,12 @@
 import 'package:fit_tech/logic/add_measurements_provider.dart';
+import 'package:fit_tech/presentation/screens/dialogue/image_source.dart';
 import 'package:fit_tech/presentation/screens/dialogue/test_result_dialogue.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/measurement_history_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/choose_dates_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -40,16 +42,13 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const SizedBox(
-            //   height: 10,
-            // ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (widget.type == MeasurementsType.addNew)
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                     child: Text(
                       Constants.measurementsScreenHeading2,
                       style: MyTextStyle.heading2,
@@ -69,209 +68,207 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                     children: [
                       Expanded(
                           child: InkWell(
-                        onTap: () {
-                          // Navigator.pushNamed(context, ImageViewerScreen.tag);
-                          context
-                              .read<AddMeasurementsProviders>()
-                              .getFrontImage();
-                        },
-                        child: Builder(builder: (context) {
-                          var img = context
-                              .watch<AddMeasurementsProviders>()
-                              .frontImage;
-                          return img != null
-                              ? Container(
-                                  color: Colors.red,
-                                  child: Image.file(
-                                    img,
-                                    fit: BoxFit.cover,
-                                    height: 250,
-                                  ),
-                                )
-                              : (widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                            onTap: () {
+                              showDialogueSourceType(context: context, imageAspect: "0");
+                            },
+                            child: Builder(builder: (context) {
+                              var img = context
+                                  .watch<AddMeasurementsProviders>()
+                                  .frontImage;
+                              return img != null
                                   ? Container(
-                                      color: MyColors.blackColor,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 20.0),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              decoration: const BoxDecoration(
-                                                  color: MyColors.redColor,
-                                                  shape: BoxShape.circle),
-                                              child: Text(
-                                                "1",
-                                                style: MyTextStyle.paragraph1
-                                                    .copyWith(
-                                                        color: MyColors
-                                                            .whiteColor),
-                                              ),
-                                            ),
-                                            Expanded(child: Container()),
-                                            const Icon(
-                                              Icons.camera_alt,
-                                              color: MyColors.redColor,
-                                              size: 30,
-                                            ),
-                                            Expanded(child: Container()),
-                                            Text(
-                                              "Frontal",
-                                              style: MyTextStyle.heading3
-                                                  .copyWith(
-                                                      color: MyColors.redColor,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                          ],
+                                color: Colors.red,
+                                child: Image.file(
+                                  img,
+                                  fit: BoxFit.cover,
+                                  height: 250,
+                                ),
+                              )
+                                  : (widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                  ? Container(
+                                color: MyColors.blackColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 20.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        padding:
+                                        const EdgeInsets.all(10.0),
+                                        decoration: const BoxDecoration(
+                                            color: MyColors.redColor,
+                                            shape: BoxShape.circle),
+                                        child: Text(
+                                          "1",
+                                          style: MyTextStyle.paragraph1
+                                              .copyWith(
+                                              color: MyColors
+                                                  .whiteColor),
                                         ),
                                       ),
-                                    )
+                                      Expanded(child: Container()),
+                                      const ImageIcon(
+                                        AssetImage(Images.iconCameraMeasurementsScreen),
+                                        color: MyColors.redColor,
+                                        size: 30,
+                                      ),
+                                      Expanded(child: Container()),
+                                      Text(
+                                        "Frontal",
+                                        style: MyTextStyle.heading3
+                                            .copyWith(
+                                            color: MyColors.redColor,
+                                            fontWeight:
+                                            FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
                                   : Container(color: MyColors.greyColor);
-                        }),
-                      )),
+                            }),
+                          )),
                       const SizedBox(
                         width: 1,
                       ),
                       Expanded(child: Builder(builder: (context) {
                         var provider =
-                            Provider.of<AddMeasurementsProviders>(context);
+                        Provider.of<AddMeasurementsProviders>(context);
                         var isSelected = provider.frontImage != null;
                         return InkWell(
                             onTap: () {
-                              provider.getSideImage();
+                              showDialogueSourceType(context: context, imageAspect: "1");
+
                             },
                             child: (provider.sideImage != null)
                                 ? Container(
-                                    color: Colors.red,
-                                    child: Image.file(
-                                      provider.sideImage!,
-                                      fit: BoxFit.cover,
-                                      height: 250,
-                                    ),
-                                  )
+                              color: Colors.red,
+                              child: Image.file(
+                                provider.sideImage!,
+                                fit: BoxFit.cover,
+                                height: 250,
+                              ),
+                            )
                                 : (widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                    ? Container(
-                                        color: MyColors.blackColor,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 20.0),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                decoration: BoxDecoration(
-                                                    color: isSelected
-                                                        ? MyColors.redColor
-                                                        : MyColors.greyAccent,
-                                                    shape: BoxShape.circle),
-                                                child: Text(
-                                                  "2",
-                                                  style: MyTextStyle.paragraph1
-                                                      .copyWith(
-                                                          color: MyColors
-                                                              .whiteColor),
-                                                ),
-                                              ),
-                                              Expanded(child: Container()),
-                                              Icon(
-                                                Icons.camera_alt,
-                                                color: isSelected
-                                                    ? MyColors.redColor
-                                                    : MyColors.greyAccent,
-                                                size: 30,
-                                              ),
-                                              Expanded(child: Container()),
-                                              Text(
-                                                "Perfil",
-                                                style: MyTextStyle.heading3
-                                                    .copyWith(
-                                                        color: isSelected
-                                                            ? MyColors.redColor
-                                                            : MyColors
-                                                                .greyAccent,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    : Container(color: MyColors.greyColor));
+                                ? Container(
+                              color: MyColors.blackColor,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding:
+                                      const EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                          color: isSelected
+                                              ? MyColors.redColor
+                                              : MyColors.greyAccent,
+                                          shape: BoxShape.circle),
+                                      child: Text(
+                                        "2",
+                                        style: MyTextStyle.paragraph1
+                                            .copyWith(
+                                            color: MyColors
+                                                .whiteColor),
+                                      ),
+                                    ),
+                                    Expanded(child: Container()),
+                                    ImageIcon(
+                                      const AssetImage(Images.iconCameraMeasurementsScreen),
+                                      color: isSelected
+                                          ? MyColors.redColor
+                                          : MyColors.greyAccent,
+                                      size: 30,
+                                    ),
+                                    Expanded(child: Container()),
+                                    Text(
+                                      "Perfil",
+                                      style: MyTextStyle.heading3
+                                          .copyWith(
+                                          color: isSelected
+                                              ? MyColors.redColor
+                                              : MyColors
+                                              .greyAccent,
+                                          fontWeight:
+                                          FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                                : Container(color: MyColors.greyColor));
                       })),
                       const SizedBox(
                         width: 1,
                       ),
                       Expanded(child: Builder(builder: (context) {
                         var provider =
-                            Provider.of<AddMeasurementsProviders>(context);
+                        Provider.of<AddMeasurementsProviders>(context);
                         var isSelected = ((provider.frontImage != null) &&
                             (provider.sideImage != null));
                         return InkWell(
                           onTap: () {
-                            provider.getBackImage();
+                            showDialogueSourceType(context: context, imageAspect: "2");
                           },
                           child: (provider.backImage != null)
                               ? Container(
-                                  color: Colors.red,
-                                  child: Image.file(
-                                    provider.backImage!,
-                                    fit: BoxFit.cover,
-                                    height: 250,
-                                  ),
-                                )
+                            color: Colors.red,
+                            child: Image.file(
+                              provider.backImage!,
+                              fit: BoxFit.cover,
+                              height: 250,
+                            ),
+                          )
                               : (widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                  ? Container(
-                                      color: MyColors.blackColor,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 20.0),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              decoration: BoxDecoration(
-                                                  color: isSelected
-                                                      ? MyColors.redColor
-                                                      : MyColors.greyAccent,
-                                                  shape: BoxShape.circle),
-                                              child: Text(
-                                                "3",
-                                                style: MyTextStyle.paragraph1
-                                                    .copyWith(
-                                                        color: MyColors
-                                                            .whiteColor),
-                                              ),
-                                            ),
-                                            Expanded(child: Container()),
-                                            Icon(
-                                              Icons.camera_alt,
-                                              color: isSelected
-                                                  ? MyColors.redColor
-                                                  : MyColors.greyAccent,
-                                              size: 30,
-                                            ),
-                                            Expanded(child: Container()),
-                                            Text(
-                                              "Espalda",
-                                              style: MyTextStyle
-                                                  .heading3
-                                                  .copyWith(
-                                                      color: isSelected
-                                                          ? MyColors.redColor
-                                                          : MyColors.greyAccent,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  : Container(color: MyColors.greyColor),
+                              ? Container(
+                            color: MyColors.blackColor,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding:
+                                    const EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? MyColors.redColor
+                                            : MyColors.greyAccent,
+                                        shape: BoxShape.circle),
+                                    child: Text(
+                                      "3",
+                                      style: MyTextStyle.paragraph1
+                                          .copyWith(
+                                          color: MyColors
+                                              .whiteColor),
+                                    ),
+                                  ),
+                                  Expanded(child: Container()),
+                                  ImageIcon(
+                                    const AssetImage(Images.iconCameraMeasurementsScreen),
+                                    color: isSelected
+                                        ? MyColors.redColor
+                                        : MyColors.greyAccent,
+                                    size: 30,
+                                  ),
+                                  Expanded(child: Container()),
+                                  Text(
+                                    "Espalda",
+                                    style: MyTextStyle
+                                        .heading3
+                                        .copyWith(
+                                        color: isSelected
+                                            ? MyColors.redColor
+                                            : MyColors.greyAccent,
+                                        fontWeight:
+                                        FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                              : Container(color: MyColors.greyColor),
                         );
                       })),
                     ],
@@ -286,17 +283,15 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                     ? Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
-                        child: Expanded(
-                            child: Text(
+                        child: Text(
                           Constants.measurementsScreenHeading3,
                           style: MyTextStyle.paragraph1.copyWith(
-                              color: MyColors.greyAccent,
-                              fontWeight: FontWeight.bold),
-                        )),
+                          color: MyColors.greyAccent,
+                          fontWeight: FontWeight.bold),
+                        ),
                       )
                     : Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Row(
                           children: [
                             Expanded(
@@ -309,8 +304,7 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                             if (widget.type == MeasurementsType.testResult)
                               InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(
-                                      context, MeasurementHistoryScreen.tag);
+                                  Navigator.pushNamed(context, MeasurementHistoryScreen.tag);
                                 },
                                 child: Text(
                                   "Ver historial",
@@ -710,49 +704,6 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       Navigator.pop(context);
                     },
                   )),
-/*
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: (widget.type == MeasurementsType.addNew)
-                  ? PrimaryButton(
-                      title: Constants.measurementsScreenLabel3,
-                      backgroundColor: MyColors.blackColor,
-                      textColor: MyColors.whiteColor,
-                      borderColor: MyColors.blackColor,
-                      onPressed: () {
-                        if (widget.type == MeasurementsType.addNew) {
-                          Navigator.pushNamed(context, HeartStatusScreen.tag,
-                              arguments:
-                                  (widget.type == MeasurementsType.addNew));
-                        }
-                      },
-                    )
-                  : Row(
-                      children: [
-                        const Expanded(
-                          child: PrimaryButton(
-                            title: Constants.measurementsScreenLabel1,
-                            backgroundColor: MyColors.blackColor,
-                            textColor: MyColors.whiteColor,
-                            borderColor: MyColors.blackColor,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: PrimaryButton(
-                            title: Constants.measurementsScreenLabel2,
-                            backgroundColor: MyColors.whiteColor,
-                            textColor: MyColors.blackColor,
-                            borderColor: MyColors.blackColor,
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
-*/
             const SizedBox(
               height: 40,
             )
@@ -766,17 +717,52 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      constraints:
-          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
       builder: (BuildContext context) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: TestResultsDialogue(category: category),
         );
       },
     );
   }
+
+  showDialogueSourceType({required BuildContext context,required String imageAspect,}) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: ImageSource(
+            onCamera: (){
+              if(imageAspect == "0"){
+                context.read<AddMeasurementsProviders>().getFrontImage(context:context);
+              }else if(imageAspect == "1"){
+                context.read<AddMeasurementsProviders>().getSideImage(context:context);
+              }else{
+                context.read<AddMeasurementsProviders>().getBackImage(context:context);
+              }
+              Navigator.pop(context);
+            },
+            onGallery: (){
+              if(imageAspect == "0"){
+                context.read<AddMeasurementsProviders>().getFrontImage(context:context,source: SourceType.gallery);
+              }else if(imageAspect == "1"){
+                context.read<AddMeasurementsProviders>().getSideImage(context:context,source: SourceType.gallery);
+              }else{
+                context.read<AddMeasurementsProviders>().getBackImage(context:context,source: SourceType.gallery);
+              }
+              Navigator.pop(context);
+            },
+          ),
+        );
+      },
+    );
+  }
+
+
 }
 
 enum TestResult {

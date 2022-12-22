@@ -2,8 +2,6 @@ import 'package:fit_tech/data/models/my_plans_list_model.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';

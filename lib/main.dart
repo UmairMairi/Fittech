@@ -16,6 +16,7 @@ import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/medical_history_provider.dart';
 import 'package:fit_tech/logic/nutrition/fat_Percentage_provider.dart';
 import 'package:fit_tech/logic/nutrition/nutrition_line_identification_provider.dart';
+import 'package:fit_tech/logic/nutrition/select_recipe_screen.dart';
 import 'package:fit_tech/logic/otp_provider.dart';
 import 'package:fit_tech/logic/physical_activity_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
@@ -26,31 +27,25 @@ import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
-import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:fit_tech/presentation/screens/dashboard/profile_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
+import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/testResults/image_viewer_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
+import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'presentation/screens/nutritionTest/add_measurements_scren.dart';
-import 'presentation/screens/profile/FAQs/faq_details_screen.dart';
-import 'presentation/screens/profile/FAQs/faq_screen.dart';
-import 'presentation/screens/profile/about/privacy_policy_screen.dart';
-import 'presentation/screens/profile/settings/Privacy_screen.dart';
-import 'presentation/screens/profile/settings/delete_acount_screen.dart';
+import 'presentation/screens/breaks_screen.dart';
+import 'presentation/screens/nutritionTest/food_list_screen.dart';
+import 'presentation/screens/nutritionTest/measurement_history_screen.dart';
+import 'presentation/screens/nutritionTest/recipie_list_screen.dart';
+import 'presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'presentation/screens/profile/testResults/choose_dates_screen.dart';
-import 'presentation/screens/profile/testResults/comparison_measurements_screen.dart';
-import 'presentation/screens/profile/testResults/test_result_screen.dart';
-import 'presentation/screens/trainingTest/test_after_training_screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -122,6 +117,8 @@ class MyApp extends StatelessWidget {
             create: (context) => ExerciseProvider()),
         ChangeNotifierProvider<TrainingCompletedProvider>(
             create: (context) => TrainingCompletedProvider()),
+        ChangeNotifierProvider<SelectRecipeProvider>(
+            create: (context) => SelectRecipeProvider()),
       ],
       child: MaterialApp(
         title: 'FITTECH',
@@ -129,7 +126,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute:TodayTrainingScreen.tag,
+        initialRoute:FatPercentageScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

@@ -60,10 +60,13 @@ class _FoodListScreenState extends State<FoodListScreen>
                         },
                       ),
                       const Expanded(
-                        child: Text(
-                          Constants.titleFoodListScreen,
-                          textAlign: TextAlign.start,
-                          style: MyTextStyle.text1,
+                        child: TextFieldPrimary(
+                          isLabelRequired: false,
+                          title: "",
+                          hintText: "Buscar alimento",
+                          isObscure: false,
+                          keyboardType: TextInputType.text,
+                          hideBorder: true,
                         ),
                       ),
                       Opacity(
@@ -74,10 +77,7 @@ class _FoodListScreenState extends State<FoodListScreen>
                             color: MyColors.blackColor,
                             size: 24.0,
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, CreateRecipeScreen.tag);
-                          },
+                          onPressed: () {},
                         ),
                       ),
                     ],

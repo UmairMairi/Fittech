@@ -79,7 +79,6 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                             ),
                             child: PopupMenuButton<int>(constraints:
                               const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
-                              icon: const Icon(Icons.more_horiz),
                               itemBuilder: (context) => [
                                 PopupMenuItem(
                                   value: 1,
@@ -144,168 +143,174 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 20.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 100,
-                                  width: 100,
-                                  child: Stack(
-                                    fit: StackFit.expand,
-                                    children: [
-                                      const CircularProgressIndicator(
-                                        backgroundColor: Colors.grey,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Colors.red),
-                                        value: 0.25,
-                                        color: Colors.grey,
-                                        strokeWidth: 5.0,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: const [
-                                          Text(
-                                            "1500",
-                                            style: MyTextStyle.paragraph1,
-                                          ),
-                                          Text(
-                                            "kcal restant",
-                                            style: MyTextStyle.paragraph2,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Column(
+                                const Text("Conteo General de Macros",style: MyTextStyle.heading3,),
+                                const SizedBox(height: 15.0,),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: Stack(
+                                        fit: StackFit.expand,
                                         children: [
-                                          const SizedBox(
-                                            height: 5.0,
+                                          const CircularProgressIndicator(
+                                            backgroundColor: MyColors.extraLightGreyColor,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(MyColors.redColor),
+                                            value: 0.25,
+                                            color: MyColors.extraLightGreyColor,
+                                            strokeWidth: 5.0,
                                           ),
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                Images
-                                                    .nutritionDetailsScreenIcon1,
-                                                height: 20,
-                                                width: 20,
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: const [
+                                              Text(
+                                                "1500",
+                                                style: MyTextStyle.paragraph1,
                                               ),
-                                              // Icon(
-                                              //   Icons.ac_unit,
-                                              //   size: 18.0,
-                                              // ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              const Expanded(
-                                                  child: Text(
-                                                "Proteinas",
-                                                style: MyTextStyle.text1,
-                                              )),
-                                              const Text(
-                                                "102/200 g.",
-                                                style: MyTextStyle.text1,
+                                              Text(
+                                                "kcal restant",
+                                                style: MyTextStyle.paragraph2,
                                               )
                                             ],
                                           ),
-                                          const LinearProgressIndicator(
-                                            backgroundColor:
-                                                MyColors.lightGreyColor,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.red),
-                                            value: 0.5,
-                                            minHeight: 3.0,
-                                          ),
                                         ],
                                       ),
-                                      Column(
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Expanded(
+                                      child: Column(
                                         children: [
-                                          const SizedBox(
-                                            height: 5.0,
-                                          ),
-                                          Row(
+                                          Column(
                                             children: [
-                                              Image.asset(
-                                                Images
-                                                    .nutritionDetailsScreenIcon2,
-                                                height: 20,
-                                                width: 20,
-                                              ),
                                               const SizedBox(
-                                                width: 10,
+                                                height: 5.0,
                                               ),
-                                              const Expanded(
-                                                  child: Text(
-                                                "Carbs",
-                                                style: MyTextStyle.text1,
-                                              )),
-                                              const Text(
-                                                "27/100 g.",
-                                                style: MyTextStyle.text1,
-                                              )
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    Images
+                                                        .nutritionDetailsScreenIcon1,
+                                                    height: 20,
+                                                    width: 20,
+                                                  ),
+                                                  // Icon(
+                                                  //   Icons.ac_unit,
+                                                  //   size: 18.0,
+                                                  // ),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  const Expanded(
+                                                      child: Text(
+                                                    "Proteinas",
+                                                    style: MyTextStyle.text1,
+                                                  )),
+                                                  const Text(
+                                                    "102/200 g.",
+                                                    style: MyTextStyle.text1,
+                                                  )
+                                                ],
+                                              ),
+                                              const LinearProgressIndicator(
+                                                backgroundColor:
+                                                    MyColors.lightGreyColor,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<Color>(
+                                                        Colors.red),
+                                                value: 0.5,
+                                                minHeight: 3.0,
+                                              ),
                                             ],
                                           ),
-                                          const LinearProgressIndicator(
-                                            backgroundColor:
-                                                MyColors.lightGreyColor,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    MyColors.blackColor),
-                                            value: 0.5,
-                                            minHeight: 3.0,
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        children: [
-                                          const SizedBox(
-                                            height: 5.0,
-                                          ),
-                                          Row(
+                                          Column(
                                             children: [
-                                              Image.asset(
-                                                  Images
-                                                      .nutritionDetailsScreenIcon3,
-                                                  height: 20,
-                                                  width: 20),
                                               const SizedBox(
-                                                width: 10,
+                                                height: 5.0,
                                               ),
-                                              const Expanded(
-                                                  child: Text(
-                                                "Grasas",
-                                                style: MyTextStyle.text1,
-                                              )),
-                                              const Text(
-                                                "21/78 g.",
-                                                style: MyTextStyle.text1,
-                                              )
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    Images
+                                                        .nutritionDetailsScreenIcon2,
+                                                    height: 20,
+                                                    width: 20,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  const Expanded(
+                                                      child: Text(
+                                                    "Carbs",
+                                                    style: MyTextStyle.text1,
+                                                  )),
+                                                  const Text(
+                                                    "27/100 g.",
+                                                    style: MyTextStyle.text1,
+                                                  )
+                                                ],
+                                              ),
+                                              const LinearProgressIndicator(
+                                                backgroundColor:
+                                                    MyColors.lightGreyColor,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<Color>(
+                                                        MyColors.blackColor),
+                                                value: 0.5,
+                                                minHeight: 3.0,
+                                              ),
                                             ],
                                           ),
-                                          const LinearProgressIndicator(
-                                            backgroundColor:
-                                                MyColors.lightGreyColor,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    MyColors.greyColor),
-                                            value: 0.5,
-                                            minHeight: 3.0,
+                                          Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 5.0,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                      Images
+                                                          .nutritionDetailsScreenIcon3,
+                                                      height: 20,
+                                                      width: 20),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  const Expanded(
+                                                      child: Text(
+                                                    "Grasas",
+                                                    style: MyTextStyle.text1,
+                                                  )),
+                                                  const Text(
+                                                    "21/78 g.",
+                                                    style: MyTextStyle.text1,
+                                                  )
+                                                ],
+                                              ),
+                                              const LinearProgressIndicator(
+                                                backgroundColor:
+                                                    MyColors.lightGreyColor,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<Color>(
+                                                        MyColors.greyColor),
+                                                value: 0.5,
+                                                minHeight: 3.0,
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

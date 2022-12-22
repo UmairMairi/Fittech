@@ -30,13 +30,11 @@ class _FatPercentageScreenState extends State<FatPercentageScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero,()async{
-      selectedIndex = context.read<FatPercentageProvider>().setSelectItem(val: selectedIndex);
     });
     return SafeArea(
       child: Scaffold(

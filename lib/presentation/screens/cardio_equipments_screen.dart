@@ -97,7 +97,7 @@ class _CardioEquipmentsScreenState extends State<CardioEquipmentsScreen> {
                                           ),
                                           minLeadingWidth: 0.0,
                                           onTap: () {
-                                            Navigator.pushNamed(context, GymExerciseScreen.tag);
+                                            Navigator.pushNamed(context, GymExerciseScreen.tag,arguments: GymExerciseScreenTypes.gym);
                                           },
                                           tileColor:
                                               MyColors.extraLightGreyColor,

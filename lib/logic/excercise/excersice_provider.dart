@@ -29,6 +29,8 @@ class ExerciseProvider extends ChangeNotifier {
         final seconds = myDuration.inSeconds - reduceSecondsBy;
         myDuration = Duration(seconds: seconds);
         notifyListeners();
+      }else{
+        stopTimer();
       }
   }
   void changeType({int type = 0}) {

@@ -24,8 +24,9 @@ class _RestScreenState extends State<RestScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<BreakBetweenSequenceProvider>().startTimer(context:context);
+    context.read<BreakBetweenSequenceProvider>().startTimer(context: context);
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -35,140 +36,125 @@ class _RestScreenState extends State<RestScreen> {
         body: SizedBox(
           height: size.height,
           width: size.width,
-          child: Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        decoration:
-                            const BoxDecoration(color: MyColors.blackColor),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(Constants.titleRestScreen,
-                                textAlign: TextAlign.center,
-                                style: MyTextStyle.heading1
-                                    .copyWith(color: MyColors.whiteColor)),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Builder(
-                              builder: (context) {
-                                var duration = context.watch<BreakBetweenSequenceProvider>().myDuration;
-                                return Text(MyUtils.printDuration(duration: duration),
-                                    textAlign: TextAlign.center,
-                                    style: MyTextStyle.heading1.copyWith(
-                                        color: MyColors.whiteColor, fontSize: 52));
-                              }
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 40),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      title: Constants.restScreenAddButton,
-                                      backgroundColor: MyColors.blackColor,
-                                      textColor: MyColors.whiteColor,
-                                      borderColor: MyColors.whiteColor,
-                                      onPressed: () {
-                                        context.read<BreakBetweenSequenceProvider>().addDuration();
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: PrimaryButton(
-                                      title: Constants.restScreenOmitButton,
-                                      backgroundColor: MyColors.whiteColor,
-                                      textColor: MyColors.blackColor,
-                                      onPressed: () {
-                                        context.read<BreakBetweenSequenceProvider>().resetTimer();
-                                        Navigator.pushNamed(context,ExerciseScreen.tag);
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const Align(
-                        alignment: Alignment.bottomCenter,
-                        child: LinearProgressIndicator(
-                          minHeight: 8,
-                          backgroundColor: Colors.transparent,
-                          value: 0.5,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(MyColors.redColor),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          child: Column(
+            children: [
+              Expanded(
+                child: Stack(
                   children: [
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    Container(
+                      alignment: Alignment.center,
+                      decoration:
+                          const BoxDecoration(color: MyColors.blackColor),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: const [
-                          Text(
-                            "Próximo 2/12",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.greyColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.0),
+                        children: [
+                          Text(Constants.titleRestScreen,
+                              textAlign: TextAlign.center,
+                              style: MyTextStyle.heading1
+                                  .copyWith(color: MyColors.whiteColor)),
+                          const SizedBox(
+                            height: 20,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10.0),
-                            child: Text(
-                              "Escalada de Montaña",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontFamily: 'Open Sance',
-                                  color: MyColors.blackColor,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.0),
+                          Builder(builder: (context) {
+                            var duration = context
+                                .watch<BreakBetweenSequenceProvider>()
+                                .myDuration;
+                            return Text(
+                                MyUtils.printDuration(duration: duration),
+                                textAlign: TextAlign.center,
+                                style: MyTextStyle.heading1.copyWith(
+                                    color: MyColors.whiteColor, fontSize: 52));
+                          }),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: PrimaryButton(
+                                    title: Constants.restScreenAddButton,
+                                    backgroundColor: MyColors.blackColor,
+                                    textColor: MyColors.whiteColor,
+                                    borderColor: MyColors.whiteColor,
+                                    onPressed: () {
+                                      context
+                                          .read<BreakBetweenSequenceProvider>()
+                                          .addDuration();
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Expanded(
+                                  child: PrimaryButton(
+                                    title: Constants.restScreenOmitButton,
+                                    backgroundColor: MyColors.whiteColor,
+                                    textColor: MyColors.blackColor,
+                                    onPressed: () {
+                                      context
+                                          .read<BreakBetweenSequenceProvider>()
+                                          .resetTimer();
+                                      Navigator.pushNamed(
+                                          context, ExerciseScreen.tag);
+                                    },
+                                  ),
+                                )
+                              ],
                             ),
-                          ),
-                          Text(
-                            "X12",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontFamily: 'Open Sance',
-                                color: MyColors.redColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20.0),
-                          ),
+                          )
                         ],
                       ),
-                    )),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      color: MyColors.greyColor,
                     ),
+                    const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: LinearProgressIndicator(
+                        minHeight: 8,
+                        backgroundColor: Colors.transparent,
+                        value: 0.5,
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(MyColors.redColor),
+                      ),
+                    )
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const Text(
+                          "Próximo 2/12",
+                          textAlign: TextAlign.start,
+                          style: MyTextStyle.inputTitle,
+                        ),
+                        const Text("Escalada de Montaña",
+                            textAlign: TextAlign.start,
+                            style: MyTextStyle.heading3),
+                        const SizedBox(height: 5.0,),
+                        Text("x12",
+                            textAlign: TextAlign.start,
+                            style: MyTextStyle.bold.copyWith(fontSize: 20,color: MyColors.redColor)),
+                      ],
+                    ),
+                  )),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: MyColors.greyColor,
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),

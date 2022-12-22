@@ -56,7 +56,7 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                 shrinkWrap: true,
                 children: [
                   const MyAppBar(
-                    title: Constants.titleVerifyCodeScreen,
+                    title: Constants.titleTodayTrainingScreen,
                   ),
                   TabBar(
                     labelColor: Colors.black,
@@ -115,7 +115,7 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
                   } else if (_controller!.index == 1) {
                     Navigator.pushNamed(context, CardioEquipmentsScreen.tag);
                   } else {
-                    Navigator.pushNamed(context, GymExerciseScreen.tag);
+                    Navigator.pushNamed(context, GymExerciseScreen.tag,arguments: GymExerciseScreenTypes.outdoor);
                   }
                 },
               ),
@@ -127,5 +127,10 @@ class _TodayTrainingScreenState extends State<TodayTrainingScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

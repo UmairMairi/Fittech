@@ -12,7 +12,9 @@ class BreakBetweenSequenceProvider extends ChangeNotifier {
     countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) => setCountDown(context:context));
   }
   void stopTimer() {
-    countdownTimer!.cancel();
+    if(countdownTimer!=null){
+      countdownTimer!.cancel();
+    }
   }
 
   void resetTimer() {

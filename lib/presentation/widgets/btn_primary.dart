@@ -15,6 +15,8 @@ class PrimaryButton extends StatelessWidget {
   final Widget? leadingChild;
   final Widget? trailingChild;
   final bool enabled;
+  final EdgeInsetsGeometry? padding;
+
 
   const PrimaryButton({
     super.key,
@@ -29,6 +31,7 @@ class PrimaryButton extends StatelessWidget {
     this.borderColor = MyColors.blackColor,
     this.leadingChild,
     this.trailingChild,
+    this.padding,
   });
 
   @override
@@ -46,7 +49,7 @@ class PrimaryButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          padding: padding??const EdgeInsets.symmetric(vertical: 15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
