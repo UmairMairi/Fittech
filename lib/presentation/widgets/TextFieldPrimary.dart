@@ -88,6 +88,8 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
               : null,
           decoration: InputDecoration(
               hintText: widget.hintText ?? "",
+              hintStyle:
+                  MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
               labelText: widget.title!,
               labelStyle:
                   MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
@@ -98,17 +100,24 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
               constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
               contentPadding: EdgeInsets.zero,
               fillColor: MyColors.whiteColor,
-              border: (widget.hideBorder)?InputBorder.none:const UnderlineInputBorder(
-                borderSide: BorderSide(color: MyColors.greyColor),
-              ),
-              focusedBorder: (widget.hideBorder)?InputBorder.none:const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black, width: 2.0),
-              ),
-              errorBorder: (widget.hideBorder)?InputBorder.none:const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2.0),
-              ),
+              border: (widget.hideBorder)
+                  ? InputBorder.none
+                  : const UnderlineInputBorder(
+                      borderSide: BorderSide(color: MyColors.greyColor),
+                    ),
+              focusedBorder: (widget.hideBorder)
+                  ? InputBorder.none
+                  : const UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2.0),
+                    ),
+              errorBorder: (widget.hideBorder)
+                  ? InputBorder.none
+                  : const UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2.0),
+                    ),
               suffix: widget.suffix,
               suffixText: widget.suffixText,
+              alignLabelWithHint: true,
               counterText: widget.showCounter
                   ? "${_enteredText.length}/${widget.maxLength}"
                   : null,

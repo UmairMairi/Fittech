@@ -59,16 +59,16 @@ class _FoodListScreenState extends State<FoodListScreen>
                           Navigator.pushNamed(context, FoodTypeScreen.tag);
                         },
                       ),
-                      const Expanded(
-                        child: TextFieldPrimary(
-                          isLabelRequired: false,
-                          title: "",
-                          hintText: "Buscar alimento",
-                          isObscure: false,
-                          keyboardType: TextInputType.text,
-                          hideBorder: true,
-                        ),
-                      ),
+                      Expanded(
+                          child: TextFormField(
+                        maxLines: 1,
+                        decoration: const InputDecoration(
+                            hintText: "Buscar alimento",
+                            border: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none),
+                      )),
                       Opacity(
                         opacity: 0,
                         child: IconButton(

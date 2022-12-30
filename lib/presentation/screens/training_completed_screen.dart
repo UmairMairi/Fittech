@@ -29,6 +29,7 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var selectedDate = DateTime.now();
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.backgroundColor,
@@ -36,7 +37,7 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
           shrinkWrap: true,
           children: [
             SizedBox(
-              height: size.width * 0.8,
+              height: size.width * 0.72,
               child: Stack(
                 fit: StackFit.expand,
                 alignment: Alignment.bottomCenter,
@@ -61,7 +62,7 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 30,
+                          height: 20,
                         ),
                         const Text(
                           Constants.trainingCompletedScreenInfo,
@@ -79,10 +80,10 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                           style: TextStyle(
                               fontFamily: 'Anton',
                               color: MyColors.whiteColor,
-                              fontSize: 42.0),
+                              fontSize: 40.0),
                         ),
                         const SizedBox(
-                          height: 30.0,
+                          height: 20.0,
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 15),
@@ -205,11 +206,11 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: const BoxDecoration(color: MyColors.whiteColor),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,204 +222,223 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                         fontFamily: 'Open Sance',
                         color: MyColors.blackColor,
                         fontWeight: FontWeight.w700,
-                        fontSize: 20.0),
+                        fontSize: 18.0),
                   ),
-                  Builder(
-                    builder: (context) {
-                      var bloc = context.watch<TrainingCompletedProvider>();
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  Constants.trainingCompletedScreenReview1,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      color: MyColors.blackColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30.0),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    bloc.setSelected(val: 1);
-                                  },
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Builder(builder: (context) {
+                    var bloc = context.watch<TrainingCompletedProvider>();
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text(
+                                Constants.trainingCompletedScreenReview1,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30.0),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  bloc.setSelected(val: 1);
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.center,
                                   child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (bloc.selected == 1)
-                                                  ? MyColors.redColor
-                                                  : MyColors.blackColor,
-                                              width: (bloc.selected == 1)?5:2)),
-                                    ),
+                                    height: 20,
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (bloc.selected == 1)
+                                                ? MyColors.redColor
+                                                : MyColors.blackColor,
+                                            width:
+                                                (bloc.selected == 1) ? 5 : 2)),
                                   ),
-                                )
-
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  Constants.trainingCompletedScreenReview2,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      color: MyColors.blackColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30.0),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    bloc.setSelected(val: 2);
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (bloc.selected == 2)
-                                                  ? MyColors.redColor
-                                                  : MyColors.blackColor,
-                                              width: (bloc.selected == 2)?5:2)),
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  Constants.trainingCompletedScreenReview3,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      color: MyColors.blackColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30.0),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text(
+                                Constants.trainingCompletedScreenReview2,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30.0),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  bloc.setSelected(val: 2);
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (bloc.selected == 2)
+                                                ? MyColors.redColor
+                                                : MyColors.blackColor,
+                                            width:
+                                                (bloc.selected == 2) ? 5 : 2)),
+                                  ),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    bloc.setSelected(val: 3);
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (bloc.selected == 3)
-                                                  ? MyColors.redColor
-                                                  : MyColors.blackColor,
-                                              width: (bloc.selected == 3)?5:2)),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  Constants.trainingCompletedScreenReview4,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      color: MyColors.blackColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30.0),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text(
+                                Constants.trainingCompletedScreenReview3,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30.0),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  bloc.setSelected(val: 3);
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (bloc.selected == 3)
+                                                ? MyColors.redColor
+                                                : MyColors.blackColor,
+                                            width:
+                                                (bloc.selected == 3) ? 5 : 2)),
+                                  ),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    bloc.setSelected(val: 4);
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (bloc.selected == 4)
-                                                  ? MyColors.redColor
-                                                  : MyColors.blackColor,
-                                              width: (bloc.selected == 4)?5:2)),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  Constants.trainingCompletedScreenReview5,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      color: MyColors.blackColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30.0),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text(
+                                Constants.trainingCompletedScreenReview4,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30.0),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  bloc.setSelected(val: 4);
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (bloc.selected == 4)
+                                                ? MyColors.redColor
+                                                : MyColors.blackColor,
+                                            width:
+                                                (bloc.selected == 4) ? 5 : 2)),
+                                  ),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    bloc.setSelected(val: 5);
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: (bloc.selected == 5)
-                                                  ? MyColors.redColor
-                                                  : MyColors.blackColor,
-                                              width: (bloc.selected == 5)?5:2)),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                        ],
-                      );
-                    }
-                  )
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text(
+                                Constants.trainingCompletedScreenReview5,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontFamily: 'Open Sance',
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 30.0),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  bloc.setSelected(val: 5);
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (bloc.selected == 5)
+                                                ? MyColors.redColor
+                                                : MyColors.blackColor,
+                                            width:
+                                                (bloc.selected == 5) ? 5 : 2)),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  })
                 ],
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -436,12 +456,13 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                             fontFamily: 'Open Sance',
                             color: MyColors.blackColor,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20.0),
+                            fontSize: 18.0),
                       ),
                       Expanded(child: Container()),
                       InkWell(
-                        onTap: (){
-                          Navigator.pushNamed(context, CurrentPerformanceScreen.tag);
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, CurrentPerformanceScreen.tag);
                         },
                         child: const Text(
                           Constants.trainingCompletedScreenSeeMore,
@@ -468,19 +489,39 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                         fontSize: 16.0),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 40,
                   ),
-                  TableCalendar(
-                    firstDay: DateTime.utc(2010, 10, 16),
-                    lastDay: DateTime.utc(2030, 3, 14),
-                    focusedDay: DateTime.now(),
-                    daysOfWeekVisible: true,
-                    weekNumbersVisible: false,
-                  ),
+                  StatefulBuilder(builder: (context, myState) {
+                    return TableCalendar(
+                      firstDay: DateTime.utc(2010, 10, 16),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      focusedDay: selectedDate,
+                      daysOfWeekVisible: true,
+                      weekNumbersVisible: false,
+                      calendarFormat: CalendarFormat.week,
+                      calendarStyle: CalendarStyle(
+                        selectedDecoration: BoxDecoration(
+                            color: MyColors.redColor,
+                            borderRadius: BorderRadius.circular(30)),
+                        todayDecoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: MyColors.blackColor),
+                        todayTextStyle: const TextStyle(color: Colors.white),
+                      ),
+                      headerStyle: const HeaderStyle(
+                          formatButtonVisible: false, titleCentered: true),
+                      headerVisible: false,
+                      onDaySelected: (dateTime, dateTime2) {
+                        myState(() {
+                          selectedDate = dateTime;
+                        });
+                      },
+
+                      // onDaySelected: ,
+                    );
+                  }),
                   const SizedBox(
                     height: 10,
                   ),
-
                 ],
               ),
             ),
@@ -488,26 +529,24 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: Builder(
-                builder: (context) {
-                  var isEnabled = false;
-                  var bloc = context.watch<TrainingCompletedProvider>();
-                  if(bloc.selected!=-1) {
-                    isEnabled = true;
-                  }
-                  return PrimaryButton(
-                    title: "Continuar",
-                    backgroundColor: MyColors.blackColor,
-                    textColor: MyColors.whiteColor,
-                    borderColor: MyColors.blackColor,
-                    enabled: isEnabled,
-                    onPressed: (){
-                      Navigator.pushNamed(context, DashboardScreen.tag);
-                    },
-                  );
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Builder(builder: (context) {
+                var isEnabled = false;
+                var bloc = context.watch<TrainingCompletedProvider>();
+                if (bloc.selected != -1) {
+                  isEnabled = true;
                 }
-              ),
+                return PrimaryButton(
+                  title: "Continuar",
+                  backgroundColor: MyColors.blackColor,
+                  textColor: MyColors.whiteColor,
+                  borderColor: MyColors.blackColor,
+                  enabled: isEnabled,
+                  onPressed: () {
+                    Navigator.pushNamed(context, DashboardScreen.tag);
+                  },
+                );
+              }),
             ),
             const SizedBox(
               height: 20,

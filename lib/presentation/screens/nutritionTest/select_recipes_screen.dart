@@ -64,122 +64,124 @@ class _SelectRecipeScreenState extends State<SelectRecipeScreen> {
             ),
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 itemCount: 5,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+                  return Column(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.only(bottom: 10.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Desayuno ligero",
-                                style: MyTextStyle.medium.copyWith(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    height: 1.5),
-                              ),
-                              Expanded(child: Container()),
-                              Builder(
-                                builder: (context) {
-                                  var bloc =  context.watch<SelectRecipeProvider>();
-                                  return InkWell(
-                                    onTap: () {
-                                      bloc.setSelectItem(val: index);
-                                    },
-                                    child: Container(
-                                      height: 30,
-                                      width: 30,
-                                      alignment: Alignment.center,
+                              Row(
+                                children: [
+                                  Text(
+                                    "Desayuno ligero",
+                                    style: MyTextStyle.medium.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        height: 1.5),
+                                  ),
+                                  Expanded(child: Container()),
+                                  Builder(builder: (context) {
+                                    var bloc =
+                                        context.watch<SelectRecipeProvider>();
+                                    return InkWell(
+                                      onTap: () {
+                                        bloc.setSelectItem(val: index);
+                                      },
                                       child: Container(
-                                        height: 20,
-                                        width: 20,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: (bloc.selectedItem==index)
-                                                    ? MyColors.redColor
-                                                    : MyColors.blackColor,
-                                                width: (bloc.selectedItem==index)?5:1)),
+                                        height: 30,
+                                        width: 30,
+                                        alignment: Alignment.center,
+                                        child: Container(
+                                          height: 20,
+                                          width: 20,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: (bloc.selectedItem ==
+                                                          index)
+                                                      ? MyColors.redColor
+                                                      : MyColors.blackColor,
+                                                  width: (bloc.selectedItem ==
+                                                          index)
+                                                      ? 5
+                                                      : 1)),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
+                                    );
+                                  }),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text("4 ingredients",
+                                      style: MyTextStyle.inputTitle),
+                                  Expanded(child: Container()),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Expanded(
+                                    child: Text("245 kcal",
+                                        style: MyTextStyle.paragraph1),
+                                  ),
+                                  Expanded(
+                                    child: Text("P. 102g",
+                                        style: MyTextStyle.paragraph1),
+                                  ),
+                                  Expanded(
+                                    child: Text("C. 27g",
+                                        style: MyTextStyle.paragraph1),
+                                  ),
+                                  Expanded(
+                                    child: Text("G. 21g",
+                                        style: MyTextStyle.paragraph1),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10.0,
                               ),
                             ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: [
-                              const Text("4 ingredients",
-                                  style: MyTextStyle.inputTitle),
-                              Expanded(child: Container()),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.center,
-                            children: const [
-                              Expanded(
-                                child: Text("245 kcal",
-                                    style: MyTextStyle.paragraph1),
-                              ),
-                              Expanded(
-                                child: Text("P. 102g",
-                                    style: MyTextStyle.paragraph1),
-                              ),
-                              Expanded(
-                                child: Text("C. 27g",
-                                    style: MyTextStyle.paragraph1),
-                              ),
-                              Expanded(
-                                child: Text("G. 21g",
-                                    style: MyTextStyle.paragraph1),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          const Divider()
-                        ],
-                      ));
+                          )),
+                      const Divider()
+                    ],
+                  );
                 },
               ),
             ),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20.0),
-              child: Builder(
-                builder: (context) {
-                  var bloc =  context.watch<SelectRecipeProvider>();
-                  var isEnabled = false;
-                  if(bloc.selectedItem!=-1){
-                    isEnabled = true;
-                  }
-                  return PrimaryButton(
-                    title: "Colocar receta",
-                    textColor: MyColors.whiteColor,
-                    backgroundColor: MyColors.redColor,
-                    borderColor: MyColors.redColor,
-                    enabled: isEnabled,
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, NutritionDetailsScreen.tag);
-                    },
-                  );
+              child: Builder(builder: (context) {
+                var bloc = context.watch<SelectRecipeProvider>();
+                var isEnabled = false;
+                if (bloc.selectedItem != -1) {
+                  isEnabled = true;
                 }
-              ),
+                return PrimaryButton(
+                  title: "Colocar receta",
+                  textColor: MyColors.whiteColor,
+                  backgroundColor: MyColors.redColor,
+                  borderColor: MyColors.redColor,
+                  enabled: isEnabled,
+                  onPressed: () {
+                    Navigator.pushNamed(context, NutritionDetailsScreen.tag);
+                  },
+                );
+              }),
             ),
           ],
         ),

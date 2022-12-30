@@ -31,21 +31,23 @@ import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
+import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'presentation/screens/breaks_screen.dart';
+import 'presentation/screens/dashboard/nutrition_screen.dart';
 import 'presentation/screens/nutritionTest/food_list_screen.dart';
 import 'presentation/screens/nutritionTest/measurement_history_screen.dart';
 import 'presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'presentation/screens/profile/testResults/choose_dates_screen.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -126,7 +128,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute:FatPercentageScreen.tag,
+        initialRoute: ChooseDatesScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

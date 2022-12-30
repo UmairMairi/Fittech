@@ -35,84 +35,98 @@ class ChooseDatesScreen extends StatelessWidget {
                     Expanded(
                       child: Container(
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(horizontal:10.0),
-                        child: Builder(
-                          builder: (context) {
-                            var bloc = context.watch<ChooseDateProviders>();
-                            return bloc.dates.isNotEmpty
-                                ?Container(
-                              padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 5.0),
-                              decoration: BoxDecoration(
-                                  color: MyColors.backgroundColor,
-                                  borderRadius: BorderRadius.circular(50.0)),
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      "29 Ago 2022",
-                                      textAlign: TextAlign.center,
-                                      style: MyTextStyle.heading3,
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Builder(builder: (context) {
+                          var bloc = context.watch<ChooseDateProviders>();
+                          return bloc.dates.isNotEmpty
+                              ? Container(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 10.0, bottom: 5.0),
+                                  decoration: BoxDecoration(
+                                      color: MyColors.backgroundColor,
+                                      borderRadius:
+                                          BorderRadius.circular(50.0)),
+                                  child: FittedBox(
+                                    fit: BoxFit.fitWidth,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "29 Ago 2022",
+                                          textAlign: TextAlign.center,
+                                          style: MyTextStyle.heading3,
+                                        ),
+                                        const SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            bloc.removeDate(val: 0);
+                                          },
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Icon(
-                                      Icons.close,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                                :Container();
-                          }
-                        ),
+                                  ),
+                                )
+                              : Container();
+                        }),
                       ),
                     ),
                     const SizedBox(height: 60, child: VerticalDivider()),
                     Expanded(
                       child: Container(
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(horizontal:10.0),
-                        child: Builder(
-                          builder: (context) {
-                            var bloc = context.watch<ChooseDateProviders>();
-                            return (bloc.dates.length==2)
-                                ?Container(
-                              padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 5.0),
-                              decoration: BoxDecoration(
-                                  color: MyColors.backgroundColor,
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      "29 Ago 2022",
-                                      style: MyTextStyle.heading3,
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Builder(builder: (context) {
+                          var bloc = context.watch<ChooseDateProviders>();
+                          return (bloc.dates.length == 2)
+                              ? Container(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 10.0, bottom: 5.0),
+                                  decoration: BoxDecoration(
+                                      color: MyColors.backgroundColor,
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                  child: FittedBox(
+                                    fit: BoxFit.fitWidth,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          textAlign: TextAlign.center,
+                                          "29 Ago 2022",
+                                          style: MyTextStyle.heading3,
+                                        ),
+                                        const SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            bloc.removeDate(val: 1);
+                                          },
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Icon(
-                                      Icons.close,
-                                      color: Colors.black,
-                                      size: 20,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                                :Container();
-                          }
-                        ),
+                                  ),
+                                )
+                              : Container();
+                        }),
                       ),
                     )
                   ],
@@ -196,7 +210,8 @@ class ChooseDatesScreen extends StatelessWidget {
                   borderColor: MyColors.blackColor,
                   enabled: isEnabled,
                   onPressed: () {
-                    Navigator.pushNamed(context, MeasurementsComparisonScreen.tag);
+                    Navigator.pushNamed(
+                        context, MeasurementsComparisonScreen.tag);
                   },
                 );
               }),
