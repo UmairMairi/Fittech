@@ -55,6 +55,17 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
             Container(
               height: 65.0,
               padding: const EdgeInsets.only(left: 20, right: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(0,1),
+                    blurRadius: 2,
+                    spreadRadius: 2,
+                    color: MyColors.greyColor.withOpacity(0.2)
+                  )
+                ]
+              ),
               child: Row(
                 children: [
                   const Expanded(
@@ -74,40 +85,45 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                       Navigator.pushNamed(context, TutorialUsageScreen.tag);
                     },
                   ),
-                  PopupMenuButton<int>(
-                    constraints:
-                        const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        value: 1,
-                        textStyle: MyTextStyle.text1,
-                        height: 25,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, CreateRecipeScreen.tag);
-                          },
-                          child: const Text(
-                            "+ Carer recetas",
-                            style: MyTextStyle.paragraph1,
-                          ),
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: 1,
-                        textStyle: MyTextStyle.text1,
-                        child: InkWell(
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: PopupMenuButton<int>(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+                      constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: 1,
+                          textStyle: MyTextStyle.text1,
+                          height: 30,
+                          child: InkWell(
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, RecipeListScreen.tag);
+                                  context, CreateRecipeScreen.tag);
                             },
-                            child: const Text(
-                              "Lista de recetas",
-                              style: MyTextStyle.paragraph1,
-                            )),
-                      ),
-                    ],
-                    color: Colors.white,
+                            child: Text(
+                              "+ Carer recetas",
+                              style: MyTextStyle.paragraph1.copyWith(height: 1),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 1,
+                          textStyle: MyTextStyle.text1,
+                          height: 30,
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, RecipeListScreen.tag);
+                              },
+                              child: Text(
+                                "Lista de recetas",
+                                style:
+                                    MyTextStyle.paragraph1.copyWith(height: 1),
+                              )),
+                        ),
+                      ],
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -133,9 +149,10 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                   fit: StackFit.expand,
                                   children: [
                                     const CircularProgressIndicator(
-                                      backgroundColor: MyColors.extraLightGreyColor,
-                                      valueColor:
-                                      AlwaysStoppedAnimation<Color>(MyColors.redColor),
+                                      backgroundColor:
+                                          MyColors.extraLightGreyColor,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          MyColors.redColor),
                                       value: 0.25,
                                       color: MyColors.extraLightGreyColor,
                                       strokeWidth: 5.0,
@@ -339,7 +356,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                                                   )
                                                 ],
                                               ),
-                                              const SizedBox(height: 10.0,),
+                                              const SizedBox(
+                                                height: 10.0,
+                                              ),
                                               Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,

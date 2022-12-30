@@ -231,9 +231,9 @@ class Constants {
   static const String dialoguePauseExitLabel = "Salir de entrenamiento";
 
   //ImageSource
-  static const String titleImageSource = "Tipo de fuente";
-  static const String btnCameraTitleImageSource = "obtener de la cámara";
-  static const String btnGalleryTitleImageSource = "obtener de la galería";
+  static const String titleImageSource = "Subir tu foto";
+  static const String btnCameraTitleImageSource = "Cámara";
+  static const String btnGalleryTitleImageSource = "Galería";
 
   //BreakBetweenSeriesScreen
   static const String breakBetweenSeriesScreenTitle = "DESCANSO";

@@ -295,7 +295,8 @@ class _ExerciseScreenState extends State<ExerciseScreen>
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: DialoguePause(
               onPause: () {
-                Navigator.pushNamed(context, HeartRateScreen.tag);
+                // Navigator.pushNamed(context, HeartRateScreen.tag);
+                Navigator.pop(context);
               },
               onRestart: () {
                 Navigator.pop(context);

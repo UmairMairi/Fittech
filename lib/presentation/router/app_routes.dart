@@ -425,7 +425,7 @@ class AppRoute {
       case ImageViewerScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const ImageViewerScreen());
+            const ImageViewerScreen());
       case MeasurementHistoryScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

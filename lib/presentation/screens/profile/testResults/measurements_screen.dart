@@ -4,6 +4,7 @@ import 'package:fit_tech/presentation/screens/dialogue/test_result_dialogue.dart
 import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/measurement_history_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/choose_dates_screen.dart';
+import 'package:fit_tech/presentation/screens/profile/testResults/image_viewer_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
@@ -352,9 +353,7 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                                   .copyWith(color: MyColors.blackColor),
                             )),
                             Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
+                              (widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
                                   ? provider.weightTest??"+ Agregar"
                                   : "62 kg",
                               textAlign: TextAlign.end,
@@ -369,7 +368,13 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {
-                        showDialogue(context: context, category: TestResult.weight);
+                        showDialogue(
+                            context: context,
+                            category: TestResult.weight,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "62"
+                        );
                       },
                     ),
                     const Divider()
@@ -407,7 +412,12 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {
-                        showDialogue(context: context, category: TestResult.height);
+                        showDialogue(
+                            context: context,
+                            category: TestResult.height,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "180");
                       },
                     ),
                     const Divider()
@@ -446,7 +456,11 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       ),
                       onTap: () {
                         showDialogue(
-                            context: context, category: TestResult.minWaist);
+                            context: context, category: TestResult.minWaist,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60"
+                        );
                       },
                     ),
                     const Divider()
@@ -485,7 +499,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       ),
                       onTap: () {
                         showDialogue(
-                            context: context, category: TestResult.maxWaist);
+                            context: context, category: TestResult.maxWaist,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60");
                       },
                     ),
                     const Divider()
@@ -523,7 +540,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {
-                        showDialogue(context: context, category: TestResult.hip);
+                        showDialogue(context: context, category: TestResult.hip,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60");
                       },
                     ),
                     const Divider()
@@ -561,7 +581,11 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {
-                        showDialogue(context: context, category: TestResult.neck);
+                        showDialogue(context: context, category: TestResult.neck,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60"
+                        );
                       },
                     ),
                     const Divider()
@@ -600,7 +624,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                       ),
                       onTap: () {
                         showDialogue(
-                            context: context, category: TestResult.middleThigh);
+                            context: context, category: TestResult.middleThigh,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60");
                       },
                     ),
                     const Divider()
@@ -637,7 +664,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {
-                        showDialogue(context: context, category: TestResult.arm);
+                        showDialogue(context: context, category: TestResult.arm,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60");
                       },
                     ),
                     const Divider()
@@ -674,7 +704,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {
-                        showDialogue(context: context, category: TestResult.chest);
+                        showDialogue(context: context, category: TestResult.chest,
+                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
+                                ? ""
+                                : "60");
                       },
                     ),
                   ],
@@ -748,15 +781,23 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                 if (widget.type == MeasurementsType.addNewFromHistory)
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: PrimaryButton(
-                        title: Constants.measurementsScreenLabel3,
-                        backgroundColor: MyColors.blackColor,
-                        textColor: MyColors.whiteColor,
-                        borderColor: MyColors.blackColor,
-                        onPressed: () {
-                          context.read<AddMeasurementsProviders>().setData();
-                          Navigator.pop(context);
-                        },
+                      child: Builder(
+                        builder: (context) {
+                          var bloc = context.watch<AddMeasurementsProviders>();
+                          bool isEnabled = false;
+                          isEnabled = bloc.isDataChanged();
+                          return PrimaryButton(
+                            title: Constants.measurementsScreenLabel3,
+                            backgroundColor: MyColors.blackColor,
+                            textColor: MyColors.whiteColor,
+                            borderColor: MyColors.blackColor,
+                            enabled: isEnabled,
+                            onPressed: () {
+                              context.read<AddMeasurementsProviders>().setData();
+                              Navigator.pop(context);
+                            },
+                          );
+                        }
                       )),
                 const SizedBox(
                   height: 40,
@@ -769,18 +810,18 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
     );
   }
 
-  showDialogue({required BuildContext context, required TestResult category}) {
+  showDialogue({required BuildContext context, required TestResult category,String? initialValue}) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      constraints:
-          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
       builder: (BuildContext context) {
         return Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: TestResultsDialogue(
             category: category,
+            initialValue: initialValue,
             onSetValue: (val) {
               switch(category){
                 case TestResult.weight:{
@@ -848,34 +889,72 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
           child: ImageSource(
             onCamera: () {
               if (imageAspect == "0") {
-                context
-                    .read<AddMeasurementsProviders>()
-                    .getFrontImage(context: context);
-              } else if (imageAspect == "1") {
-                context
-                    .read<AddMeasurementsProviders>()
-                    .getSideImage(context: context);
-              } else {
-                context
-                    .read<AddMeasurementsProviders>()
-                    .getBackImage(context: context);
+                context.read<AddMeasurementsProviders>().getFrontImage(context: context,onSelect: (file){
+                  Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
+                    if(value == true){
+                      context.read<AddMeasurementsProviders>().setFrontImage(file);
+                      Navigator.pop(context);
+                    }
+                  });
+                });
               }
-              Navigator.pop(context);
+              else if (imageAspect == "1") {
+                context.read<AddMeasurementsProviders>().getSideImage(context: context,
+                onSelect: (file){
+                    Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
+                      if(value == true){
+                        context.read<AddMeasurementsProviders>().setSideImage(file);
+                        Navigator.pop(context);
+                      }
+                    });
+                });
+              }
+              else {
+                context.read<AddMeasurementsProviders>().getBackImage(context: context,onSelect: (file){
+                    Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
+                      if(value == true){
+                        context.read<AddMeasurementsProviders>().setBackImage(file);
+                        Navigator.pop(context);
+                      }
+                    });
+                });
+              }
             },
             onGallery: () {
               if (imageAspect == "0") {
-                context.read<AddMeasurementsProviders>().getFrontImage(
-                    context: context, source: SourceType.gallery);
-              } else if (imageAspect == "1") {
-                context
-                    .read<AddMeasurementsProviders>()
-                    .getSideImage(context: context, source: SourceType.gallery);
-              } else {
-                context
-                    .read<AddMeasurementsProviders>()
-                    .getBackImage(context: context, source: SourceType.gallery);
+                context.read<AddMeasurementsProviders>().getFrontImage(context: context,source: SourceType.gallery,onSelect: (file){
+                  Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
+                    if(value == true){
+                      context.read<AddMeasurementsProviders>().setFrontImage(file);
+                      Navigator.pop(context);
+                    }
+                  });
+                });
               }
-              Navigator.pop(context);
+              else if (imageAspect == "1") {
+                context.read<AddMeasurementsProviders>().getSideImage(context: context,
+                    source: SourceType.gallery,
+                    onSelect: (file){
+                      Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
+                        if(value == true){
+                          context.read<AddMeasurementsProviders>().setSideImage(file);
+                          Navigator.pop(context);
+                        }
+                      });
+                    });
+              }
+              else {
+                context.read<AddMeasurementsProviders>().getBackImage(context: context,
+                    source: SourceType.gallery,
+                    onSelect: (file){
+                  Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
+                    if(value == true){
+                      context.read<AddMeasurementsProviders>().setBackImage(file);
+                      Navigator.pop(context);
+                    }
+                  });
+                });
+              }
             },
           ),
         );

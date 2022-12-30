@@ -57,8 +57,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                 margin: const EdgeInsets.all(10.0),
                                 padding: const EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
-                                    color:
-                                        MyColors.whiteColor.withOpacity(0.8),
+                                    color: MyColors.whiteColor.withOpacity(0.8),
                                     shape: BoxShape.circle),
                                 child: const Icon(
                                   Icons.arrow_back,
@@ -74,18 +73,17 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                           Container(
                             margin: const EdgeInsets.all(10.0),
                             decoration: const BoxDecoration(
-                              color: MyColors.whiteColor,
-                              shape: BoxShape.circle
-                            ),
-                            child: PopupMenuButton<int>(constraints:
-                              const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                                color: MyColors.whiteColor,
+                                shape: BoxShape.circle),
+                            child: PopupMenuButton<int>(
+                              constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
                               itemBuilder: (context) => [
                                 PopupMenuItem(
                                   value: 1,
                                   textStyle: MyTextStyle.text1,
-                                  height: 25,
+                                  height: 30,
                                   child: InkWell(
-                                    onTap: (){
+                                    onTap: () {
                                       Navigator.pushNamed(
                                           context, SelectRecipeScreen.tag);
                                     },
@@ -98,10 +96,11 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                 PopupMenuItem(
                                   value: 1,
                                   textStyle: MyTextStyle.text1,
+                                  height: 30,
                                   child: InkWell(
                                       onTap: () {
-                                        Navigator.pushNamed(
-                                            context, CreateRecipeScreen.tag);
+                                        Navigator.pushNamed(context,
+                                            CreateRecipeScreen.tag);
                                       },
                                       child: const Text(
                                         "Guardar como receta",
@@ -146,8 +145,13 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Conteo General de Macros",style: MyTextStyle.heading3,),
-                                const SizedBox(height: 15.0,),
+                                const Text(
+                                  "Conteo General de Macros",
+                                  style: MyTextStyle.heading3,
+                                ),
+                                const SizedBox(
+                                  height: 15.0,
+                                ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -158,9 +162,11 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                         fit: StackFit.expand,
                                         children: [
                                           const CircularProgressIndicator(
-                                            backgroundColor: MyColors.extraLightGreyColor,
+                                            backgroundColor:
+                                                MyColors.extraLightGreyColor,
                                             valueColor:
-                                                AlwaysStoppedAnimation<Color>(MyColors.redColor),
+                                                AlwaysStoppedAnimation<Color>(
+                                                    MyColors.redColor),
                                             value: 0.25,
                                             color: MyColors.extraLightGreyColor,
                                             strokeWidth: 5.0,
@@ -225,8 +231,8 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                                 backgroundColor:
                                                     MyColors.lightGreyColor,
                                                 valueColor:
-                                                    AlwaysStoppedAnimation<Color>(
-                                                        Colors.red),
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.red),
                                                 value: 0.5,
                                                 minHeight: 3.0,
                                               ),
@@ -263,7 +269,8 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                                 backgroundColor:
                                                     MyColors.lightGreyColor,
                                                 valueColor:
-                                                    AlwaysStoppedAnimation<Color>(
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
                                                         MyColors.blackColor),
                                                 value: 0.5,
                                                 minHeight: 3.0,
@@ -300,7 +307,8 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                                                 backgroundColor:
                                                     MyColors.lightGreyColor,
                                                 valueColor:
-                                                    AlwaysStoppedAnimation<Color>(
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
                                                         MyColors.greyColor),
                                                 value: 0.5,
                                                 minHeight: 3.0,
@@ -360,7 +368,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                               style: MyTextStyle.text1,
                             ),
                             Expanded(child: Container()),
-                            const CounterWidget()
+                            const CounterWidget(
+                              showUnit: true,
+                            )
                           ],
                         )
                       ],
@@ -382,7 +392,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                               style: MyTextStyle.text1,
                             ),
                             Expanded(child: Container()),
-                            const CounterWidget()
+                            const CounterWidget(
+                              showUnit: true,
+                            )
                           ],
                         )
                       ],
@@ -401,7 +413,8 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, FoodListScreen.tag);
+                                Navigator.pushNamed(
+                                    context, FoodListScreen.tag);
                               },
                               child: Text(
                                 "+Agregar alimento",
@@ -426,8 +439,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
             ),
             Container(
               color: MyColors.whiteColor,
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: [
                   Row(

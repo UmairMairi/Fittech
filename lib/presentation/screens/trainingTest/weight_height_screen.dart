@@ -91,7 +91,7 @@ class WeightHeightScreen extends StatelessWidget {
                                             onSetValue: (value) {
                                               if (value is String) {
                                                 myState(() {
-                                                  weight = value;
+                                                  weight = value.substring(0,value.length-2);
                                                   context.read<WeightHeightProvider>().setWeight(val: weight);
                                                 });
                                               }
@@ -211,6 +211,7 @@ class WeightHeightScreen extends StatelessWidget {
                                               if (value is String) {
                                                 myState(() {
                                                   height = value;
+                                                  height = value.substring(0,value.length-2);
                                                   context.read<WeightHeightProvider>().setHeight(val: height);
                                                 });
                                               }

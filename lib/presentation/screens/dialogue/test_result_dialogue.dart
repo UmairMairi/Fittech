@@ -13,12 +13,14 @@ class TestResultsDialogue extends StatefulWidget {
   final ValueChanged<dynamic>? onChange;
   final ValueChanged<dynamic>? onSetValue;
   final int? selectedUnit;
+  final String? initialValue;
 
   const TestResultsDialogue(
       {super.key,
       this.category = TestResult.weight,
       this.onChange,
       this.onSetValue,
+      this.initialValue,
       this.selectedUnit = 0});
 
   @override
@@ -37,7 +39,7 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
     } else {
       unit = "cm";
     }
-
+    controller.text = widget.initialValue??"";
   }
   @override
   Widget build(BuildContext context) {

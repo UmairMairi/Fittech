@@ -10,11 +10,8 @@ class AddMeasurementsProviders extends ChangeNotifier {
   File? frontImage;
   File? sideImage;
   File? backImage;
-
   File? imageFile;
   String? title = "";
-
-
   String? weight;
   String? height;
   String? minWaist;
@@ -24,9 +21,6 @@ class AddMeasurementsProviders extends ChangeNotifier {
   String? middleThigh;
   String? arm;
   String? chest;
-
-
-
   String? weightTest;
   String? heightTest;
   String? minWaistTest;
@@ -98,71 +92,95 @@ class AddMeasurementsProviders extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool isDataChanged(){
+    return(
+    weightTest != null ||
+    heightTest != null ||
+    minWaistTest != null ||
+    maxWaistTest != null ||
+    hipTest != null ||
+    neckTest != null ||
+    middleThighTest != null ||
+    armTest != null ||
+    chestTest != null
+    );
+  }
 
 
 
-  getFrontImage({required BuildContext context,SourceType source = SourceType.camera}) async {
+
+  getFrontImage({required BuildContext context,SourceType source = SourceType.camera,ValueChanged<File>? onSelect}) async {
     var file = source==SourceType.camera?await FileUtils.getImageFromCamera():await FileUtils.getImageFromGallery();
     imageFile = file;
     title = "Foto frontal";
     notifyListeners();
-    if(file!=null){
-      Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-        if(value == true){
-          frontImage = file;
-          notifyListeners();
-        }else{
-          frontImage = null;
-          notifyListeners();
-        }
-      });
+    if(imageFile!=null){
+      if(onSelect!=null){
+        onSelect(imageFile!);
+      }
     }
   }
-
-  getSideImage({required BuildContext context,SourceType source = SourceType.camera}) async {
+  setFrontImage(File file){
+    frontImage = file;
+    notifyListeners();
+  }
+  getSideImage({required BuildContext context,SourceType source = SourceType.camera,ValueChanged<File>? onSelect}) async {
     var file = source==SourceType.camera?await FileUtils.getImageFromCamera():await FileUtils.getImageFromGallery();
-    // sideImage = file;
-    // notifyListeners();
     imageFile = file;
     title = "Foto de perfil";
     notifyListeners();
-    if(file!=null){
-      Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-        if(value == true){
-          sideImage = file;
-          notifyListeners();
-        }else{
-          sideImage = null;
-          notifyListeners();
-        }
-      });
+    if(imageFile!=null){
+      if(onSelect!=null){
+        onSelect(imageFile!);
+      }
     }
   }
-
-  getBackImage({required BuildContext context,SourceType source = SourceType.camera}) async {
+  setSideImage(File file){
+    sideImage = file;
+    notifyListeners();
+  }
+  getBackImage({required BuildContext context,SourceType source = SourceType.camera,ValueChanged<File>? onSelect}) async {
     var file = source==SourceType.camera?await FileUtils.getImageFromCamera():await FileUtils.getImageFromGallery();
-    // backImage = file;
-    // notifyListeners();
     imageFile = file;
     title = "Foto de espalda";
     notifyListeners();
-    if(file!=null){
-      Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-        if(value == true){
-          backImage = file;
-          notifyListeners();
-        }else{
-          backImage = null;
-          notifyListeners();
-        }
-      });
+    if(imageFile!=null){
+      if(onSelect!=null){
+        onSelect(imageFile!);
+      }
     }
-
+  }
+  setBackImage(File file){
+    backImage = file;
+    notifyListeners();
   }
 
-
-
-
+  resetData(){
+    frontImage = null;
+    sideImage = null;
+    backImage = null;
+    imageFile = null;
+    title = null;
+    weight = null;
+    height = null;
+    minWaist = null;
+    maxWaist = null;
+    hip = null;
+    neck = null;
+    middleThigh = null;
+    arm = null;
+    chest = null;
+    weightTest = null;
+    heightTest = null;
+    minWaistTest = null;
+    maxWaistTest = null;
+    hipTest = null;
+    neckTest = null;
+    middleThighTest = null;
+    armTest = null;
+    chestTest = null;
+    notifyListeners();
+  }
 }
 enum MeasurementsType{
   history,

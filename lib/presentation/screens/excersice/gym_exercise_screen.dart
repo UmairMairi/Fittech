@@ -26,6 +26,7 @@ class GymExerciseScreen extends StatefulWidget {
   @override
   State<GymExerciseScreen> createState() => _GymExerciseScreenState();
 }
+
 class _GymExerciseScreenState extends State<GymExerciseScreen> {
   var isResumed = false;
   GymExerciseProvider? provider;
@@ -114,43 +115,43 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                               child: Container(
                             height: 20.0,
                           )),
-                          if(widget.type == GymExerciseScreenTypes.outdoor)
-                            Builder(
-                              builder: (context) {
-                                var bloc = context.watch<GymExerciseProvider>();
-                                return Column(
-                                  children: [
-                                    SizedBox(
-                                      width: 150,
-                                      child: LinearProgressIndicator(
-                                        minHeight: 8,
-                                        backgroundColor: Colors.transparent,
-                                        value: (1/30)*bloc.myDuration.inSeconds,
-                                        valueColor:
-                                        AlwaysStoppedAnimation<Color>(MyColors.redColor.withOpacity(0.2)),
-                                      ),
+                          if (widget.type == GymExerciseScreenTypes.outdoor)
+                            Builder(builder: (context) {
+                              var bloc = context.watch<GymExerciseProvider>();
+                              return Column(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: LinearProgressIndicator(
+                                      minHeight: 8,
+                                      backgroundColor: Colors.transparent,
+                                      // value:(1 / 30) * bloc.myDuration.inSeconds,
+                                      value: 1,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          MyColors.redColor.withOpacity(0.2)),
                                     ),
-                                    Text(
-                                      MyUtils.printDuration(duration: bloc.myDuration),
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          fontFamily: 'Anton',
-                                          color: MyColors.blackColor,
-                                          fontSize: 58.0),
-                                    )
-                                  ],
-                                );
-                              }
-                            ),
-                          if(widget.type == GymExerciseScreenTypes.gym)
+                                  ),
+                                  Text(
+                                    MyUtils.printDuration(
+                                        duration: bloc.myDuration),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontFamily: 'Anton',
+                                        color: MyColors.blackColor,
+                                        fontSize: 58.0),
+                                  )
+                                ],
+                              );
+                            }),
+                          if (widget.type == GymExerciseScreenTypes.gym)
                             const Text(
-                            "30x",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: 'Anton',
-                                color: MyColors.blackColor,
-                                fontSize: 64.0),
-                          ),
+                              "30x",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: 'Anton',
+                                  color: MyColors.blackColor,
+                                  fontSize: 64.0),
+                            ),
                           Text(
                             "Nombre de Ejercicio",
                             textAlign: TextAlign.center,
@@ -160,14 +161,14 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                               child: Container(
                             height: 20.0,
                           )),
-                          if(widget.type == GymExerciseScreenTypes.outdoor)
+                          if (widget.type == GymExerciseScreenTypes.outdoor)
                             Row(
                               children: [
                                 Expanded(
                                   child: Center(
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Text(
                                           "Tiempo de set",
@@ -190,23 +191,24 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                   child: Center(
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Row(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                              CrossAxisAlignment.center,
                                           mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
                                                 "Intensidad",
                                                 textAlign: TextAlign.center,
                                                 style: MyTextStyle.heading3
                                                     .copyWith(
-                                                    fontWeight:
-                                                    FontWeight.w500),
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                               ),
                                             ),
                                             InkWell(
@@ -229,7 +231,8 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                           return Text(
                                             "2-2",
                                             textAlign: TextAlign.center,
-                                            style: MyTextStyle.heading3.copyWith(
+                                            style:
+                                                MyTextStyle.heading3.copyWith(
                                               fontSize: 22,
                                             ),
                                           );
@@ -240,86 +243,88 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                 ),
                               ],
                             ),
-                          if(widget.type == GymExerciseScreenTypes.gym)
+                          if (widget.type == GymExerciseScreenTypes.gym)
                             Row(
-                            children: [
-                              Expanded(
-                                child: Center(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Carga sugerida",
-                                        textAlign: TextAlign.center,
-                                        style: MyTextStyle.heading3.copyWith(
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Text(
-                                        "20 lb",
-                                        textAlign: TextAlign.center,
-                                        style: MyTextStyle.heading3.copyWith(
-                                          fontSize: 22,
+                              children: [
+                                Expanded(
+                                  child: Center(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Carga sugerida",
+                                          textAlign: TextAlign.center,
+                                          style: MyTextStyle.heading3.copyWith(
+                                              fontWeight: FontWeight.w500),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              "Cadencia",
-                                              textAlign: TextAlign.center,
-                                              style: MyTextStyle.heading3
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              showCadenceDialogue(
-                                                  context: context);
-                                            },
-                                            child: const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 8.0),
-                                              child: Icon(
-                                                Icons.help_outline_rounded,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Builder(builder: (context) {
-                                        return Text(
-                                          "2-2",
+                                        Text(
+                                          "20 lb",
                                           textAlign: TextAlign.center,
                                           style: MyTextStyle.heading3.copyWith(
                                             fontSize: 22,
                                           ),
-                                        );
-                                      }),
-                                    ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                                Expanded(
+                                  child: Center(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                "Cadencia",
+                                                textAlign: TextAlign.center,
+                                                style: MyTextStyle.heading3
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                showCadenceDialogue(
+                                                    context: context);
+                                              },
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0),
+                                                child: Icon(
+                                                  Icons.help_outline_rounded,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Builder(builder: (context) {
+                                          return Text(
+                                            "2-2",
+                                            textAlign: TextAlign.center,
+                                            style:
+                                                MyTextStyle.heading3.copyWith(
+                                              fontSize: 22,
+                                            ),
+                                          );
+                                        }),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           Expanded(
                               child: Container(
                             height: 20.0,
@@ -346,9 +351,14 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                                       Navigator.pushNamed(
                                           context, RestScreen.tag);
                                     } else {
-                                      context.read<GymExerciseProvider>().setCurrentSet(val: 2);
-                                      Navigator.pushNamed(context, BreakBetweenSeriesScreen.tag).whenComplete((){
-                                        if(widget.type == GymExerciseScreenTypes.outdoor){
+                                      context
+                                          .read<GymExerciseProvider>()
+                                          .setCurrentSet(val: 2);
+                                      Navigator.pushNamed(context,
+                                              BreakBetweenSeriesScreen.tag)
+                                          .whenComplete(() {
+                                        if (widget.type ==
+                                            GymExerciseScreenTypes.outdoor) {
                                           provider?.resetTimer();
                                           provider?.startTimer();
                                         }
@@ -518,7 +528,10 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
                 Navigator.pop(context);
               },
               onExit: () {
-                Navigator.pushNamed(context, TodayTrainingScreen.tag,arguments: (widget.type == GymExerciseScreenTypes.outdoor)?2:1);
+                Navigator.pushNamed(context, TodayTrainingScreen.tag,
+                    arguments: (widget.type == GymExerciseScreenTypes.outdoor)
+                        ? 2
+                        : 1);
               },
             ),
           );
@@ -532,4 +545,4 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
   }
 }
 
-enum GymExerciseScreenTypes{gym,outdoor}
+enum GymExerciseScreenTypes { gym, outdoor }

@@ -125,9 +125,7 @@ class _FatPercentageScreenState extends State<FatPercentageScreen> {
                             enabled: isEnabled,
                             onPressed: () {
                               if(selectedIndex!=-1){
-                                Navigator.pushNamed(
-                                    context, AddMeasurementsScreen.tag,
-                                    arguments: MeasurementsType.addNew);
+                                Navigator.pushNamed(context, AddMeasurementsScreen.tag, arguments: MeasurementsType.addNew);
                               }
                             },
                           );
