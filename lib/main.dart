@@ -126,7 +126,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute:FatPercentageScreen.tag,
+        initialRoute:ChooseDatesScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

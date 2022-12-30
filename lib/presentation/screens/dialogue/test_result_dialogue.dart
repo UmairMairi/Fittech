@@ -14,7 +14,12 @@ class TestResultsDialogue extends StatefulWidget {
   final ValueChanged<dynamic>? onSetValue;
   final int? selectedUnit;
 
-  const TestResultsDialogue({super.key, this.category = TestResult.weight,this.onChange,this.onSetValue,this.selectedUnit = 0});
+  const TestResultsDialogue(
+      {super.key,
+      this.category = TestResult.weight,
+      this.onChange,
+      this.onSetValue,
+      this.selectedUnit = 0});
 
   @override
   State<TestResultsDialogue> createState() => _TestResultsDialogueState();
@@ -22,7 +27,18 @@ class TestResultsDialogue extends StatefulWidget {
 
 class _TestResultsDialogueState extends State<TestResultsDialogue> {
   final TextEditingController controller = TextEditingController();
+  var unit = "";
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.category == TestResult.weight) {
+      unit = "kg";
+    } else {
+      unit = "cm";
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     var selected = widget.selectedUnit;
@@ -31,8 +47,6 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
       decoration: const BoxDecoration(color: MyColors.whiteColor),
       child: ListView(
         shrinkWrap: true,
-        // mainAxisSize: MainAxisSize.min,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -102,8 +116,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                               onTap: () {
                                 myState(() {
                                   selected = 0;
-                                  if(widget.onChange!=null){
+                                  if (widget.onChange != null) {
                                     widget.onChange!("Kg");
+                                    unit = "Kg";
                                   }
                                 });
                                 // Navigator.pop(context);
@@ -133,8 +148,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                               onTap: () {
                                 myState(() {
                                   selected = 1;
-                                  if(widget.onChange!=null){
+                                  if (widget.onChange != null) {
                                     widget.onChange!("lb");
+                                    unit = "lb";
                                   }
                                 });
                                 // Navigator.pop(context);
@@ -170,7 +186,8 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                               onTap: () {
                                 myState(() {
                                   selected = 0;
-                                  if(widget.onChange!=null){
+                                  unit = "cm";
+                                  if (widget.onChange != null) {
                                     widget.onChange!("cm");
                                   }
                                 });
@@ -200,9 +217,14 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                             InkWell(
                               onTap: () {
                                 myState(() {
+                                  unit = (widget.category == TestResult.height) ? 'ft' : 'in';
                                   selected = 1;
-                                  if(widget.onChange!=null){
-                                    widget.onChange!((widget.category == TestResult.height)?'ft':'in');
+
+                                  if (widget.onChange != null) {
+                                    widget.onChange!(
+                                        (widget.category == TestResult.height)
+                                            ? 'ft'
+                                            : 'in');
                                   }
                                 });
                                 // Navigator.pop(context);
@@ -217,7 +239,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                                     border: Border.all(
                                         color: MyColors.blackColor, width: 1)),
                                 child: Text(
-                                  (widget.category == TestResult.height)?'ft':'in',
+                                  (widget.category == TestResult.height)
+                                      ? 'ft'
+                                      : 'in',
                                   style: MyTextStyle.style.copyWith(
                                       color: (selected == 1)
                                           ? MyColors.whiteColor
@@ -242,7 +266,7 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                   backgroundColor: MyColors.whiteColor,
                   textColor: Colors.black,
                   borderColor: MyColors.blackColor,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
@@ -256,9 +280,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                   backgroundColor: MyColors.blackColor,
                   textColor: MyColors.whiteColor,
                   borderColor: MyColors.blackColor,
-                  onPressed: (){
-                    if(widget.onSetValue!=null){
-                      widget.onSetValue!(controller.text);
+                  onPressed: () {
+                    if (widget.onSetValue != null) {
+                      widget.onSetValue!("${controller.text}$unit");
                       Navigator.pop(context);
                     }
                   },
