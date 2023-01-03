@@ -499,8 +499,7 @@ class _GymExerciseScreenState extends State<GymExerciseScreen> {
     showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        constraints:
-            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
         builder: (BuildContext context) {
           return Padding(
             padding: EdgeInsets.only(

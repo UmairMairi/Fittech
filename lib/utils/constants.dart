@@ -209,7 +209,7 @@ class Constants {
   static const String replaceExerciseReplaceButton = "Reemplazar";
 
   //TrainingCompletedScreen
-  static const String trainingCompletedScreenTitle = "Entrenamiento completado";
+  static const String trainingCompletedScreenTitle = "Entrenamiento\ncompletado";
   static const String trainingCompletedScreenInfo = "¡Felicidades!";
   static const String trainingCompletedScreenExerciseLabel = "Ejercicios";
   static const String trainingCompletedScreenKclLabel = "Kcal";

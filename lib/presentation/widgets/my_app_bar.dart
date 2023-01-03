@@ -5,15 +5,18 @@ import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
   final String title;
+  final Color? backgroundColor;
 
   const MyAppBar({
     super.key,
     required this.title,
+    this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: backgroundColor,
       height: 65.0,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

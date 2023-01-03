@@ -129,7 +129,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute: WelcomeScreen.tag,
+        initialRoute: TrainingCompletedScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

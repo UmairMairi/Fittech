@@ -50,81 +50,82 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: MyColors.whiteColor,
         body: Column(
           children: [
-            Container(
+            SizedBox(
               height: 65.0,
-              padding: const EdgeInsets.only(left: 20, right: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0,1),
-                    blurRadius: 2,
-                    spreadRadius: 2,
-                    color: MyColors.greyColor.withOpacity(0.2)
-                  )
-                ]
-              ),
-              child: Row(
+              child: Column(
                 children: [
-                  const Expanded(
-                    child: Text(
-                      "Lunes 22 Ago",
-                      textAlign: TextAlign.start,
-                      style: MyTextStyle.heading2,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.help_outline_rounded,
-                      color: MyColors.blackColor,
-                      size: 24.0,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, TutorialUsageScreen.tag);
-                    },
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: PopupMenuButton<int>(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
-                      constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: 1,
-                          textStyle: MyTextStyle.text1,
-                          height: 30,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, CreateRecipeScreen.tag);
-                            },
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 20, right: 10),
+                      child: Row(
+                        children: [
+                          const Expanded(
                             child: Text(
-                              "+ Carer recetas",
-                              style: MyTextStyle.paragraph1.copyWith(height: 1),
+                              "Lunes 22 Ago",
+                              textAlign: TextAlign.start,
+                              style: MyTextStyle.heading2,
                             ),
                           ),
-                        ),
-                        PopupMenuItem(
-                          value: 1,
-                          textStyle: MyTextStyle.text1,
-                          height: 30,
-                          child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, RecipeListScreen.tag);
+                          IconButton(
+                            icon: const Icon(
+                              Icons.help_outline_rounded,
+                              color: MyColors.blackColor,
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, TutorialUsageScreen.tag);
+                            },
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: PopupMenuButton<int>(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+                              constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                              onSelected: (val){
+                                if(val ==1){
+                                  Navigator.pushNamed(context, CreateRecipeScreen.tag);
+                                }else if(val ==2){
+                                  Navigator.pushNamed(context, RecipeListScreen.tag);
+                                }
                               },
-                              child: Text(
-                                "Lista de recetas",
-                                style:
-                                    MyTextStyle.paragraph1.copyWith(height: 1),
-                              )),
-                        ),
-                      ],
-                      color: Colors.white,
+                              itemBuilder: (ctx) => [
+                                PopupMenuItem(
+                                  value: 1,
+                                  textStyle: MyTextStyle.text1,
+                                  height: 40,
+                                  // onTap: (){
+                                  //   Navigator.pushNamed(context, CreateRecipeScreen.tag);
+                                  // },
+                                  child: Text(
+                                    "+ Carer recetas",
+                                    style: MyTextStyle.paragraph1.copyWith(height: 1),
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  value: 2,
+                                  textStyle: MyTextStyle.text1,
+                                  height: 40,
+                                  // onTap: (){
+                                  //   Navigator.pushNamed(context, RecipeListScreen.tag);
+                                  // },
+                                  child: Text(
+                                    "Lista de recetas",
+                                    style:
+                                        MyTextStyle.paragraph1.copyWith(height: 1),
+                                  ),
+                                ),
+                              ],
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  Container(width: double.infinity,height: 1,color: MyColors.greyBorderColor,)
                 ],
               ),
             ),

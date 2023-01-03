@@ -17,10 +17,8 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   static const String tag = "login_screen";
-  final TextEditingController emailController =
-      TextEditingController(text: Singleton.isDev?"test@mail.com":"");
-  final TextEditingController passwordController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+  final TextEditingController emailController = TextEditingController(text: Singleton.isDev?"test@mail.com":"");
+  final TextEditingController passwordController = TextEditingController(text: Singleton.isDev?"123456":"");
 
   final _formKey = GlobalKey<FormState>();
 

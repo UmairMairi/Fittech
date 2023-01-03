@@ -3,9 +3,11 @@ import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/calender/table_calendar.dart' as mc;
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/extentions/datetime_extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -79,8 +81,10 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                           Constants.trainingCompletedScreenTitle,
                           style: TextStyle(
                               fontFamily: 'Anton',
+                              height: 1.3,
                               color: MyColors.whiteColor,
-                              fontSize: 40.0),
+                              fontSize: 32.0,
+                          ),
                         ),
                         const SizedBox(
                           height: 20.0,
@@ -491,38 +495,109 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                   const SizedBox(
                     height: 40,
                   ),
+                  // StatefulBuilder(builder: (context, myState) {
+                  //   return TableCalendar(
+                  //     firstDay: DateTime.utc(2010, 10, 16),
+                  //     lastDay: DateTime.utc(2030, 3, 14),
+                  //     focusedDay: selectedDate,
+                  //     daysOfWeekVisible: true,
+                  //     weekNumbersVisible: false,
+                  //     calendarFormat: CalendarFormat.week,
+                  //     calendarStyle: CalendarStyle(
+                  //       selectedDecoration: BoxDecoration(color: MyColors.redColor, borderRadius: BorderRadius.circular(30)),
+                  //       todayDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.blackColor),
+                  //       todayTextStyle: const TextStyle(color: Colors.white),
+                  //       defaultDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                  //       weekendDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                  //     ),
+                  //     calendarBuilders:CalendarBuilders(
+                  //       markerBuilder: (context,dateTime,focusDateTime){
+                  //         if(dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 2)) ||
+                  //             dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 1))) {
+                  //           return const Icon(Icons.more_horiz,color: MyColors.blackColor,);
+                  //         }
+                  //         else{
+                  //           return null;
+                  //         }
+                  //       },
+                  //         defaultBuilder: (context,dateTime,focusDateTime){
+                  //         if(dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 2))||dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 1))) {
+                  //           return Padding(
+                  //             padding: const EdgeInsets.symmetric(horizontal: 5),
+                  //             child: Container(
+                  //               decoration: const BoxDecoration(color: MyColors.redColor,shape: BoxShape.circle),
+                  //               child: Center(
+                  //                 child: Text(
+                  //                   dateTime.day.toString(),
+                  //                   style: const TextStyle(color: MyColors.whiteColor),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           );
+                  //         }
+                  //         else{
+                  //           return null;
+                  //         }
+                  //       }
+                  //     ),
+                  //     headerStyle: const HeaderStyle(
+                  //         formatButtonVisible: false, titleCentered: true),
+                  //     headerVisible: false,
+                  //     onDaySelected: (dateTime, dateTime2) {
+                  //     },
+                  //     // onDaySelected: ,
+                  //   );
+                  // }),
+
                   StatefulBuilder(builder: (context, myState) {
-                    return TableCalendar(
+                    return mc.TableCalendar(
                       firstDay: DateTime.utc(2010, 10, 16),
                       lastDay: DateTime.utc(2030, 3, 14),
                       focusedDay: selectedDate,
                       daysOfWeekVisible: true,
                       weekNumbersVisible: false,
-                      calendarFormat: CalendarFormat.week,
-                      calendarStyle: CalendarStyle(
-                        selectedDecoration: BoxDecoration(
-                            color: MyColors.redColor,
-                            borderRadius: BorderRadius.circular(30)),
-                        todayDecoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: MyColors.blackColor),
+                      calendarFormat: mc.CalendarFormat.week,
+                      calendarStyle: mc.CalendarStyle(
+                        selectedDecoration: BoxDecoration(color: MyColors.redColor, borderRadius: BorderRadius.circular(30)),
+                        todayDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.blackColor),
                         todayTextStyle: const TextStyle(color: Colors.white),
-                        defaultDecoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: MyColors.lightGreyColor),
-                        weekendDecoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                        defaultDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                        weekendDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.lightGreyColor),
                       ),
-                      calendarBuilders:CalendarBuilders(
-                        defaultBuilder: (context,dateTime,dateTime2){
-
-                        }
+                      calendarBuilders:mc.CalendarBuilders(
+                          markerBuilder: (context,dateTime,focusDateTime){
+                            if(dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 2)) ||
+                                dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 1))) {
+                              return const Icon(Icons.more_horiz,color: MyColors.blackColor,);
+                            }
+                            else{
+                              return null;
+                            }
+                          },
+                          defaultBuilder: (context,dateTime,focusDateTime){
+                            if(dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 2))||dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 1))) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: Container(
+                                  decoration: const BoxDecoration(color: MyColors.redColor,shape: BoxShape.circle),
+                                  child: Center(
+                                    child: Text(
+                                      dateTime.day.toString(),
+                                      style: const TextStyle(color: MyColors.whiteColor),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            else{
+                              return null;
+                            }
+                          }
                       ),
-                      headerStyle: const HeaderStyle(
+                      headerStyle: const mc. HeaderStyle(
                           formatButtonVisible: false, titleCentered: true),
                       headerVisible: false,
                       onDaySelected: (dateTime, dateTime2) {
-                        myState(() {
-                          selectedDate = dateTime;
-                        });
                       },
                       // onDaySelected: ,
                     );

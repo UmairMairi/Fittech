@@ -72,40 +72,35 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                           ),
                           Container(
                             margin: const EdgeInsets.all(10.0),
-                            decoration: const BoxDecoration(
-                                color: MyColors.whiteColor,
-                                shape: BoxShape.circle),
+                            constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                            decoration: const BoxDecoration(color: MyColors.whiteColor, shape: BoxShape.circle),
                             child: PopupMenuButton<int>(
                               constraints: const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                              onSelected: (val){
+                                if(val ==1){
+                                  Navigator.pushNamed(context, SelectRecipeScreen.tag);
+                                }else if(val ==2){
+                                  Navigator.pushNamed(context, CreateRecipeScreen.tag);
+                                }
+                              },
                               itemBuilder: (context) => [
-                                PopupMenuItem(
+                                const PopupMenuItem(
                                   value: 1,
                                   textStyle: MyTextStyle.text1,
-                                  height: 30,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, SelectRecipeScreen.tag);
-                                    },
-                                    child: const Text(
-                                      "Colocar mi receta",
-                                      style: MyTextStyle.paragraph1,
-                                    ),
+                                  height: 40,
+                                  child: Text(
+                                    "Colocar mi receta",
+                                    style: MyTextStyle.paragraph1,
                                   ),
                                 ),
-                                PopupMenuItem(
-                                  value: 1,
+                                const PopupMenuItem(
+                                  value: 2,
                                   textStyle: MyTextStyle.text1,
-                                  height: 30,
-                                  child: InkWell(
-                                      onTap: () {
-                                        Navigator.pushNamed(context,
-                                            CreateRecipeScreen.tag);
-                                      },
-                                      child: const Text(
-                                        "Guardar como receta",
-                                        style: MyTextStyle.paragraph1,
-                                      )),
+                                  height: 40,
+                                  child: Text(
+                                    "Guardar como receta",
+                                    style: MyTextStyle.paragraph1,
+                                  ),
                                 ),
                               ],
                               color: Colors.white,
