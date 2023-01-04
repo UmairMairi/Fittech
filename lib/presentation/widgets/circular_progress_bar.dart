@@ -36,6 +36,7 @@ class _CircularProgressState extends State<CircularProgress> {
         fit: StackFit.expand,
         alignment: Alignment.center,
         children: [
+
           CircularProgressIndicator(
             backgroundColor: widget.trackColor,
             valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor),
