@@ -40,7 +40,6 @@ class _CircularProgressState extends State<CircularProgress> {
         fit: StackFit.expand,
         alignment: Alignment.center,
         children: [
-<<<<<<< HEAD
           TweenAnimationBuilder(
               tween: Tween<double>(begin: widget.startAnimation??0.0, end: progress),
               duration: const Duration(milliseconds: 1000),
@@ -53,16 +52,6 @@ class _CircularProgressState extends State<CircularProgress> {
                   strokeWidth: 5.0,
                 );
               }),
-=======
-
-          CircularProgressIndicator(
-            backgroundColor: widget.trackColor,
-            valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor),
-            value: progress,
-            color: Colors.grey,
-            strokeWidth: 5.0,
-          ),
->>>>>>> c461a5bfcf150dc53b2c52789a49c14ed4b35184
           widget.child,
         ],
       ),

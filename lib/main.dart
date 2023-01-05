@@ -131,11 +131,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-<<<<<<< HEAD
         initialRoute: HeartBeatCounterScreen.tag,
-=======
-        initialRoute: NutritionDetailsScreen.tag,
->>>>>>> c461a5bfcf150dc53b2c52789a49c14ed4b35184
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );
