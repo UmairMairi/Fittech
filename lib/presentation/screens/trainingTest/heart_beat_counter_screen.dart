@@ -90,6 +90,7 @@ class _HeartBeatCounterScreenState extends State<HeartBeatCounterScreen> {
               child: Center(
                 child: CircularProgress(
                   progress: myDuration.inSeconds.toDouble(),
+                  startAnimation: (myDuration.inSeconds.toDouble()-1),
                   maxLength: max.toDouble(),
                   child: Center(
                     child: Text("${myDuration.inSeconds}",
