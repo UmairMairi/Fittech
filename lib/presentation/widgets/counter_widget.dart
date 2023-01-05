@@ -13,8 +13,8 @@ class CounterWidget extends StatefulWidget {
   const CounterWidget(
       {this.selectedColor = MyColors.blackColor,
       this.unselectedColor = MyColors.whiteColor,
-      this.showUnit =false,
-      this.unit ="gr.",
+      this.showUnit = false,
+      this.unit = "gr.",
       this.onChange,
       Key? key})
       : super(key: key);
@@ -46,11 +46,11 @@ class _CounterWidgetState extends State<CounterWidget> {
               setState(() {
                 if (count > 0) {
                   count--;
-                  if(widget.onChange!=null){
+                  valueController.text = "$count";
+                  if (widget.onChange != null) {
                     widget.onChange!(count);
                   }
                 }
-
               });
             },
             child: Container(
@@ -72,12 +72,23 @@ class _CounterWidgetState extends State<CounterWidget> {
               child: Column(
                 children: [
                   TextFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        count = int.parse(value);
+                      });
+                    },
                     maxLines: 1,
-                    controller:valueController ,
+                    keyboardType: TextInputType.number,
+                    controller: valueController,
                     scrollPadding: EdgeInsets.zero,
-                    inputFormatters: [LengthLimitingTextInputFormatter(2)],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(3),
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: const InputDecoration(
-                      constraints: BoxConstraints(minHeight: 0.0,minWidth: 0.0),
+                        constraints:
+                            BoxConstraints(minHeight: 0.0, minWidth: 0.0),
                         contentPadding: EdgeInsets.zero,
                         hintText: "0",
                         border: InputBorder.none,
@@ -87,11 +98,11 @@ class _CounterWidgetState extends State<CounterWidget> {
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  if(widget.showUnit)
-                    Text(
-                      widget.unit,
-                    style: const TextStyle(fontSize: 12),
-                  ),
+                  // if(widget.showUnit)
+                  //   Text(
+                  //     widget.unit,
+                  //   style: const TextStyle(fontSize: 8),
+                  // ),
                 ],
               ),
             ),
@@ -100,7 +111,8 @@ class _CounterWidgetState extends State<CounterWidget> {
             onTap: () {
               setState(() {
                 count++;
-                if(widget.onChange!=null){
+                valueController.text = "$count";
+                if (widget.onChange != null) {
                   widget.onChange!(count);
                 }
               });
