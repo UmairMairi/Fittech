@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_rate_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -35,6 +36,8 @@ class _HeatingScreenState extends State<HeatingScreen> {
   // Step 4
   void stopTimer() {
     setState(() => countdownTimer!.cancel());
+    Navigator.pushNamed(context,
+        RestScreen.tag);
   }
 
   // Step 5

@@ -37,7 +37,9 @@ import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_scree
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
+import 'package:fit_tech/presentation/screens/trainingTest/heart_beat_counter_screen.dart';
 import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
+import 'package:fit_tech/presentation/screens/warmup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -129,7 +131,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute: TrainingCompletedScreen.tag,
+<<<<<<< HEAD
+        initialRoute: HeartBeatCounterScreen.tag,
+=======
+        initialRoute: NutritionDetailsScreen.tag,
+>>>>>>> c461a5bfcf150dc53b2c52789a49c14ed4b35184
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );
