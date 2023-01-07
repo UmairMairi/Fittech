@@ -1,19 +1,23 @@
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CounterWidget extends StatefulWidget {
   final Color selectedColor;
   final Color unselectedColor;
   final bool showUnit;
+  final bool isEditable;
   final String unit;
   final ValueChanged<int>? onChange;
 
   const CounterWidget(
       {this.selectedColor = MyColors.blackColor,
       this.unselectedColor = MyColors.whiteColor,
-      this.showUnit =false,
-      this.unit ="gr.",
+      this.showUnit = false,
+      this.isEditable = true,
+      this.unit = "gr.",
       this.onChange,
       Key? key})
       : super(key: key);
@@ -24,19 +28,21 @@ class CounterWidget extends StatefulWidget {
 
 class _CounterWidgetState extends State<CounterWidget> {
   var count = 0;
+  final TextEditingController textController = TextEditingController();
+
 
   @override
   void initState() {
     super.initState();
+    textController.text = "$count";
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 130,
       padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50.0),
-          border: Border.all(color: MyColors.lightGreyColor)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50.0), border: Border.all(color: MyColors.lightGreyColor)),
       child: Row(
         children: [
           InkWell(
@@ -44,60 +50,94 @@ class _CounterWidgetState extends State<CounterWidget> {
               setState(() {
                 if (count > 0) {
                   count--;
-                  if(widget.onChange!=null){
+                  textController.text = "$count";
+                  if (widget.onChange != null) {
                     widget.onChange!(count);
                   }
                 }
-
               });
             },
-            child: Container(
-              height: 30.0,
-              width: 30.0,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: MyColors.lightGreyColor),
-              child: const Text(
-                "-",
-                style: TextStyle(fontSize: 20),
+            child: Opacity(
+              opacity: (count == 0)?0.5:1,
+              child: Container(
+                height: 30.0,
+                width: 30.0,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                child: const Text(
+                  "-",
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              children: [
-                Text(
-                  "$count",
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                if(widget.showUnit)
-                  Text(
-                    widget.unit,
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                children: [
+                  !widget.isEditable
+                      ?Text(
+                    "$count",
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  )
+                      :TextFormField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: [LengthLimitingTextInputFormatter(3)],
+                    controller: textController,
+                    onChanged: (val){
+                      if(val.isNotEmpty){
+                        setState(() {
+                          count = int.parse(val);
+                        });
+                      }
+                    },
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      isDense: true,
+                      contentPadding:EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      border: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      focusedErrorBorder: InputBorder.none,
+                    ),
+                  ),
+                  if (widget.showUnit)
+                    Text(
+                      widget.unit,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                ],
+              ),
             ),
           ),
           InkWell(
             onTap: () {
-              setState(() {
-                count++;
-                if(widget.onChange!=null){
-                  widget.onChange!(count);
-                }
-              });
+              if(count<999){
+                setState(() {
+                  count++;
+                  textController.text = "$count";
+                  if (widget.onChange != null) {
+                    widget.onChange!(count);
+                  }
+                });
+              }
             },
-            child: Container(
-              height: 30.0,
-              width: 30.0,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: MyColors.blackColor),
-              child: const Text(
-                "+",
-                style: TextStyle(fontSize: 20, color: MyColors.whiteColor),
+            child: Opacity(
+              opacity: (count == 999)?0.5:1,
+              child: Container(
+                height: 30.0,
+                width: 30.0,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.blackColor),
+                child: const Text(
+                  "+",
+                  style: TextStyle(fontSize: 20, color: MyColors.whiteColor),
+                ),
               ),
             ),
           )

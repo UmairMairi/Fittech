@@ -183,7 +183,7 @@ class ChooseDatesScreen extends StatelessWidget {
                                             color: ((bloc.date1 == index) || (bloc.date2 == index))
                                                 ? MyColors.redColor
                                                 : MyColors.blackColor,
-                                            width: (bloc.dates.contains(index))
+                                            width: ((bloc.date1 == index) || (bloc.date2 == index))
                                                 ? 5
                                                 : 2)),
                                   );
