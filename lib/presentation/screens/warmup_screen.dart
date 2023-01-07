@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:fit_tech/logic/excercise/rest_between_sequence_provider.dart';
+import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/breaks_screen.dart';
 import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_rate_screen.dart';
@@ -51,14 +53,15 @@ class _HeatingScreenState extends State<HeatingScreen> {
     const reduceSecondsBy = 1;
     setState(() {
       final seconds = myDuration.inSeconds - reduceSecondsBy;
-      if (seconds == 0 && isCountDown == true) {
+      if (seconds < 0 && isCountDown == true) {
         isCountDown = false;
         max = 30;
         resetTimer();
         startTimer();
       } else if (seconds < 0 && isCountDown == false) {
         isCompleted = true;
-        countdownTimer!.cancel();
+        countdownTimer?.cancel();
+        Navigator.pushNamed(context,RestScreen.tag);
       } else {
         myDuration = Duration(seconds: seconds);
       }
@@ -157,6 +160,7 @@ class _HeatingScreenState extends State<HeatingScreen> {
                     CircularProgress(
                       maxLength: max.toDouble(),
                       progress: myDuration.inSeconds.toDouble(),
+                      startAnimation: myDuration.inSeconds.toDouble()-1,
                       child: Center(
                         child: Text(
                           "${myDuration.inSeconds}",
@@ -208,7 +212,8 @@ class _HeatingScreenState extends State<HeatingScreen> {
                             }
                             showDialogue(context: context);
                           },
-                        )),
+                        )
+                    ),
                     const SizedBox(
                       height: 20.0,
                     ),
