@@ -41,6 +41,7 @@ import 'package:fit_tech/presentation/screens/trainingTest/heart_beat_counter_sc
 import 'package:fit_tech/presentation/screens/trainingTest/test_after_training_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
 import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
+import 'package:fit_tech/presentation/screens/warmup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

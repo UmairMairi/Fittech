@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:fit_tech/data/models/choose_training_mode_model.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/circular_progress_bar.dart';
 import 'package:fit_tech/utils/colors.dart';

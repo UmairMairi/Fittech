@@ -5,10 +5,11 @@ import 'package:fit_tech/presentation/screens/today_training_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/extentions/datetime_extentions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-
+import 'package:fit_tech/presentation/widgets/calender/table_calendar.dart' as mc;
 import 'performance_training_notes_screen.dart';
 
 class CurrentPerformanceScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class CurrentPerformanceScreen extends StatefulWidget {
 
 class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
   List<MyPlansListModel> list = [];
+  var selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -211,18 +213,75 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
               ),
             ),
             const SizedBox(height: 20,),
+            // Container(
+            //   color: MyColors.whiteColor,
+            //   padding: const EdgeInsets.symmetric(horizontal: 20),
+            //   child: TableCalendar(
+            //     firstDay: DateTime.utc(2010, 10, 16),
+            //     lastDay: DateTime.utc(2030, 3, 14),
+            //     focusedDay: DateTime.now(),
+            //     daysOfWeekVisible: true,
+            //     weekNumbersVisible: false,
+            //   ),
+            // ),
             Container(
-              color: MyColors.whiteColor,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TableCalendar(
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: DateTime.now(),
-                daysOfWeekVisible: true,
-                weekNumbersVisible: false,
-              ),
+                color: MyColors.whiteColor,
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20.0),
+              child: StatefulBuilder(builder: (context, myState) {
+                return mc.TableCalendar(
+                  firstDay: DateTime.utc(2010, 10, 16),
+                  lastDay: DateTime.utc(2030, 3, 14),
+                  focusedDay: selectedDate,
+                  daysOfWeekVisible: true,
+                  weekNumbersVisible: false,
+                  calendarStyle: mc.CalendarStyle(
+                    selectedDecoration: BoxDecoration(color: MyColors.redColor, borderRadius: BorderRadius.circular(30)),
+                    todayDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.blackColor),
+                    todayTextStyle: const TextStyle(color: Colors.white),
+                    defaultDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                    weekendDecoration: const BoxDecoration(shape: BoxShape.circle, color: MyColors.lightGreyColor),
+                  ),
+                  calendarBuilders:mc.CalendarBuilders(
+                      markerBuilder: (context,dateTime,focusDateTime){
+                        if(dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 2)) ||
+                            dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 1))) {
+                          return const Icon(Icons.more_horiz,color: MyColors.blackColor,);
+                        }
+                        else{
+                          return null;
+                        }
+                      },
+                      defaultBuilder: (context,dateTime,focusDateTime){
+                        if(dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 2))||dateTime.isDateBeforeDuration(selectedDate,const Duration(days: 1))) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Container(
+                              decoration: const BoxDecoration(color: MyColors.redColor,shape: BoxShape.circle),
+                              child: Center(
+                                child: Text(
+                                  dateTime.day.toString(),
+                                  style: const TextStyle(color: MyColors.whiteColor),
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        else{
+                          return null;
+                        }
+                      }
+                  ),
+                  headerStyle: const mc. HeaderStyle(formatButtonVisible: false, titleCentered: true),
+                  // headerVisible: false,
+                  onDaySelected: (dateTime, dateTime2) {
+                  },
+                  // onDaySelected: ,
+                );
+              }),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
               color: MyColors.whiteColor,
               child: Column(
@@ -285,7 +344,7 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "4",
+                                                  "6:28 p.m",
                                                   textAlign: TextAlign.start,
                                                   maxLines: 1,
                                                   style: MyTextStyle.style.copyWith(color: MyColors.blackColor,fontSize: 15,fontWeight: FontWeight.w600),
@@ -423,7 +482,7 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  "1er Entrenamiento",
+                                  "2do Entrenamiento",
                                   textAlign: TextAlign.start,
                                   style: MyTextStyle.heading3,
                                   maxLines: 1,
@@ -436,7 +495,7 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "4",
+                                              "6:28 p.m",
                                               textAlign: TextAlign.start,
                                               maxLines: 1,
                                               style: MyTextStyle.style.copyWith(color: MyColors.blackColor,fontSize: 15,fontWeight: FontWeight.w600),
@@ -523,6 +582,9 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 70,
             ),
           ],
         ),

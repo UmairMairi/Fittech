@@ -30,7 +30,6 @@ class _CounterWidgetState extends State<CounterWidget> {
   var count = 0;
   final TextEditingController textController = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
@@ -72,6 +71,7 @@ class _CounterWidgetState extends State<CounterWidget> {
               ),
             ),
           ),
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
