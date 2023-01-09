@@ -8,11 +8,38 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   static const String tag = "welcome_screen";
 
   const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
+    _controller.addListener(() {
+      setState(() {});
+    });
+    _controller.setLooping(true);
+    _controller.initialize().then((_) => setState(() {}));
+    _controller.play();
+  }
+
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +49,11 @@ class WelcomeScreen extends StatelessWidget {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              Images.welcomeBackground,
-              fit: BoxFit.cover,
-            ),
+            // Image.asset(
+            //   Images.welcomeBackground,
+            //   fit: BoxFit.cover,
+            // ),
+            VideoPlayer(_controller),
             Container(
               decoration: const BoxDecoration(),
               child: Padding(
