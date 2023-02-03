@@ -363,7 +363,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                               style: MyTextStyle.text1,
                             ),
                             Expanded(child: Container()),
-                            const CounterWidget(
+                            CounterWidget(
                               showUnit: true,
                             )
                           ],
@@ -387,7 +387,7 @@ class _MyNutritionDetailsScreenState extends State<NutritionDetailsScreen> {
                               style: MyTextStyle.text1,
                             ),
                             Expanded(child: Container()),
-                            const CounterWidget(
+                            CounterWidget(
                               showUnit: true,
                             )
                           ],

@@ -71,7 +71,6 @@ class _CounterWidgetState extends State<CounterWidget> {
               ),
             ),
           ),
-
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),

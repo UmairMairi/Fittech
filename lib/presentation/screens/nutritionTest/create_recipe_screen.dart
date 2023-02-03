@@ -90,7 +90,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                                   children: [
                                     const Text(Constants.heading2CreateRecipeScreen,style: MyTextStyle.text1,),
                                     Expanded(child: Container()),
-                                    const CounterWidget(
+                                    CounterWidget(
                                       showUnit: false,
                                     )
                                   ],

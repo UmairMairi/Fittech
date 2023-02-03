@@ -38,8 +38,6 @@ class _HeatingScreenState extends State<HeatingScreen> {
   // Step 4
   void stopTimer() {
     setState(() => countdownTimer!.cancel());
-    Navigator.pushNamed(context,
-        RestScreen.tag);
   }
 
   // Step 5
