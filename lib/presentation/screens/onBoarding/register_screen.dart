@@ -1,5 +1,5 @@
 import 'package:fit_tech/logic/create_account_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
+import 'package:fit_tech/logic/oboarding/create_account_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -18,15 +18,15 @@ class RegisterScreen extends StatelessWidget {
   static const String tag = "register_screen";
 
   final TextEditingController fNameController =
-      TextEditingController(text: Singleton.isDev?"Angel":"");
+      TextEditingController(text: Singleton.isDev ? "Angel" : "");
   final TextEditingController lNameController =
-      TextEditingController(text: Singleton.isDev?"Valverde":"");
-  final TextEditingController emailController =
-      TextEditingController(text: Singleton.isDev?"angelvalverde@gmail.com":"");
+      TextEditingController(text: Singleton.isDev ? "Valverde" : "");
+  final TextEditingController emailController = TextEditingController(
+      text: Singleton.isDev ? "angelvalverde@gmail.com" : "");
   final TextEditingController passwordController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
   final TextEditingController confirmPasswordController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
   bool cbState1 = false;
@@ -250,16 +250,41 @@ class RegisterScreen extends StatelessWidget {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<RegisterProvider>();
+                        var registerProvider =
+                            context.watch<CreateAccountProvider>();
                         bool isEnabled = false;
-                        if ((bloc.firstName.isNotEmpty &&
-                            bloc.lastName.isNotEmpty &&
-                            isEmail(bloc.email) &&
-                            (bloc.password.length >= 6) &&
-                            (bloc.confirmPassword.length >=
-                                6) /* && (bloc.password==bloc.confirmPassword)*/ &&
-                            bloc.info1Checked &&
-                            bloc.info2Checked &&
-                            bloc.info3Checked)||Singleton.isDev) {
+
+                        if (registerProvider.message != null) {
+                          Future.delayed(Duration.zero, () {
+                            Navigator.pushNamed(context, OTPScreen.tag);
+                          });
+                        } else if (registerProvider.isLoading == true) {
+                          return Center(
+                            child: RawMaterialButton(
+                              onPressed: () {},
+                              fillColor: MyColors.blackColor,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              constraints: const BoxConstraints(),
+                              child: const SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: MyColors.whiteColor)),
+                            ),
+                          );
+                        } else if ((bloc.firstName.isNotEmpty &&
+                                bloc.lastName.isNotEmpty &&
+                                isEmail(bloc.email) &&
+                                (bloc.password.length >= 6) &&
+                                (bloc.confirmPassword.length >=
+                                    6) /* && (bloc.password==bloc.confirmPassword)*/ &&
+                                bloc.info1Checked &&
+                                bloc.info2Checked &&
+                                bloc.info3Checked) ||
+                            Singleton.isDev) {
                           isEnabled = true;
                         }
                         return PrimaryButton(
@@ -267,10 +292,16 @@ class RegisterScreen extends StatelessWidget {
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate() && isEnabled) {
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate() &&
+                                isEnabled) {
                               if (cbState1 && cbState2 && cbState3) {
-                                Navigator.pushNamed(context, OTPScreen.tag);
+                                await registerProvider.setMessage(
+                                    context: context,
+                                    firstName: fNameController.text,
+                                    lastName: lNameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text);
                               } else {
                                 showMessage(
                                     context: context,

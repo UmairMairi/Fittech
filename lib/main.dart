@@ -17,6 +17,7 @@ import 'package:fit_tech/logic/medical_history_provider.dart';
 import 'package:fit_tech/logic/nutrition/fat_Percentage_provider.dart';
 import 'package:fit_tech/logic/nutrition/nutrition_line_identification_provider.dart';
 import 'package:fit_tech/logic/nutrition/select_recipe_screen.dart';
+import 'package:fit_tech/logic/oboarding/create_account_provider.dart';
 import 'package:fit_tech/logic/otp_provider.dart';
 import 'package:fit_tech/logic/physical_activity_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
@@ -70,6 +71,8 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<CreateAccountProvider>(
+            create: (context) => CreateAccountProvider()),
         ChangeNotifierProvider<LoginProvider>(
             create: (context) => LoginProvider()),
         ChangeNotifierProvider<RegisterProvider>(
