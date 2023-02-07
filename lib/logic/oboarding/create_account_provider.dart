@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 
-class CreateAccountProvider extends ChangeNotifier {
+class CreateAccountProvider with ChangeNotifier {
   Map<String, dynamic>? message;
 
   bool isLoading = false;

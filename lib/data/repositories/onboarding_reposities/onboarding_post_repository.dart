@@ -20,8 +20,7 @@ class OnboardPostRepository {
       "password": password
     };
 
-    var response =
-        await OnboardPostServices.createAccountPostJson(url: url, body: data);
+    var response = await OnboardPostServices.createAccountPostJson(url: url, body: data);
 
     try {
       if (response.statusCode == 200 ) {
