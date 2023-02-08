@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:fit_tech/logic/otp_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,7 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController otpController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
 
@@ -65,10 +64,22 @@ class _OTPScreenState extends State<OTPScreen> {
     });
   }
 
+  String email = '';
+
   @override
   void initState() {
     super.initState();
     startTimer();
+    getSharePreferenceValue();
+  }
+
+  Future<void> getSharePreferenceValue() async {
+    String email = await SharedPreferencesWork.getEmailFromSharedPreference();
+    if (email != "") {
+      setState(() {
+        email = email;
+      });
+    }
   }
 
   @override
@@ -141,7 +152,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       child: Builder(builder: (context) {
                         var bloc = context.watch<OTPProvider>();
                         bool isEnabled = false;
-                        if ((bloc.otp.length >= 6)||Singleton.isDev) {
+                        if ((bloc.otp.length >= 6) || Singleton.isDev) {
                           isEnabled = true;
                         }
                         return PrimaryButton(
@@ -149,8 +160,13 @@ class _OTPScreenState extends State<OTPScreen> {
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate() && isEnabled) {
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate() &&
+                                isEnabled) {
+                              bloc.setMessage(
+                                  context: context,
+                                  code: otpController.text,
+                                  email: email);
                               Navigator.pushNamed(
                                   context, LoginWelcomeScreen.tag);
                             }
@@ -165,24 +181,24 @@ class _OTPScreenState extends State<OTPScreen> {
                       return Column(
                         children: [
                           // if (!hideResend)
-                            SizedBox(
-                              width: double.infinity,
-                              child: PrimaryButton(
-                                title: Constants.resendLabel,
-                                titleStyle: MyTextStyle.buttonTitle
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                textColor: MyColors.blackColor,
-                                backgroundColor: MyColors.whiteColor,
-                                enabled: !hideResend,
-                                onPressed: () {
-                                  resetTimer();
-                                  startTimer();
-                                  myState(() {
-                                    hideResend = true;
-                                  });
-                                },
-                              ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: PrimaryButton(
+                              title: Constants.resendLabel,
+                              titleStyle: MyTextStyle.buttonTitle
+                                  .copyWith(fontWeight: FontWeight.w600),
+                              textColor: MyColors.blackColor,
+                              backgroundColor: MyColors.whiteColor,
+                              enabled: !hideResend,
+                              onPressed: () {
+                                resetTimer();
+                                startTimer();
+                                myState(() {
+                                  hideResend = true;
+                                });
+                              },
                             ),
+                          ),
                           const SizedBox(
                             height: 50.0,
                           ),

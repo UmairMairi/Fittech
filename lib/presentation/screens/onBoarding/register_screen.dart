@@ -12,6 +12,8 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/shared_prefences_work.dart';
+
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
 
@@ -296,6 +298,8 @@ class RegisterScreen extends StatelessWidget {
                             if (_formKey.currentState!.validate() &&
                                 isEnabled) {
                               if (cbState1 && cbState2 && cbState3) {
+                                await SharedPreferencesWork.saveEmail(
+                                    email: emailController.text);
                                 await registerProvider.setMessage(
                                     context: context,
                                     firstName: fNameController.text,

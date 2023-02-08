@@ -28,7 +28,7 @@ class CreateAccountProvider with ChangeNotifier {
           url: ApiConstants.createAccount);
       notifyListeners();
       if (message == null) {
-        showMessage(msg: "can not create account", context: context);
+        showMessage(msg: "check yours internet connection", context: context);
         isLoading = false;
         notifyListeners();
       }

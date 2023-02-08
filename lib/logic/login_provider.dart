@@ -1,3 +1,4 @@
+import 'package:fit_tech/data/models/on_boarding_model/login_model.dart';
 import 'package:flutter/material.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -5,6 +6,10 @@ class LoginProvider extends ChangeNotifier {
 
   String email = "";
   String password = "";
+  LoginModel loginModel = LoginModel();
+
+  Future<void> setLoginModel(
+      {required String email, required String password}) async {}
 
   setEmail(String val) {
     email = val;
@@ -15,5 +20,4 @@ class LoginProvider extends ChangeNotifier {
     password = val;
     notifyListeners();
   }
-
 }
