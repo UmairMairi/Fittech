@@ -1,5 +1,4 @@
 import 'package:fit_tech/utils/colors.dart';
-import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 class CircularProgress extends StatefulWidget {
@@ -41,9 +40,10 @@ class _CircularProgressState extends State<CircularProgress> {
         alignment: Alignment.center,
         children: [
           TweenAnimationBuilder(
-              tween: Tween<double>(begin: widget.startAnimation??0.0, end: progress),
+              tween: Tween<double>(
+                  begin: widget.startAnimation ?? 0.0, end: progress),
               duration: const Duration(milliseconds: 1000),
-              builder: (context, value,_) {
+              builder: (context, value, _) {
                 return CircularProgressIndicator(
                   backgroundColor: widget.trackColor,
                   valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor),

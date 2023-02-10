@@ -254,9 +254,9 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                   showDialogue(
                                       context: context,
                                       category: Profile.gender,
-                                    inputText: context.read<MyDataProvider>().gender
-
-                                  );
+                                      inputText: context
+                                          .read<MyDataProvider>()
+                                          .gender);
                                 },
                               ),
                             ],

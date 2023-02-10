@@ -10,6 +10,13 @@ class OTPProvider extends ChangeNotifier {
   Map<String, dynamic>? message;
 
 
+  bool isLoading=false;
+  setBoolValue(bool val){
+    isLoading=val;
+    notifyListeners();
+  }
+
+
 
 
   setPassword({required String val}) {
@@ -24,18 +31,26 @@ class OTPProvider extends ChangeNotifier {
     required String email,
   }) async {
     try {
+      setBoolValue(true);
       message = await OnboardPostRepository.verifyAccount(
           context: context,
           code: code,
           email: email,
           url: ApiConstants.verifyAccount);
       notifyListeners();
+      setBoolValue(false);
       if (message == null) {
         showMessage(msg: "check yours internet connection", context: context);
+        setBoolValue(false);
+
       }
     } catch (e) {
+      setBoolValue(false);
+
       showMessage(
           msg: "varify api exception ${e.toString()}", context: context);
+      setBoolValue(false);
+
     }
   }
 

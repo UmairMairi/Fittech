@@ -7,21 +7,48 @@ import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/my_circular_progress_indicator.dart';
 import 'update_password_status_screen.dart';
 
-class UpdatePasswordScreen extends StatelessWidget {
+class UpdatePasswordScreen extends StatefulWidget {
   static const String tag = "update_password_screen";
 
   UpdatePasswordScreen({super.key});
 
+  @override
+  State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
+}
+
+class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  String email = '';
+
+  Future<void> getSharePreferenceValue() async {
+    String email = await SharedPreferencesWork
+        .getEmailForRecoverPasswordFromSharedPreference();
+    if (email != "") {
+      setState(() {
+        email = email;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSharePreferenceValue();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +132,11 @@ class UpdatePasswordScreen extends StatelessWidget {
                             return null;
                           },
                           keyboardType: TextInputType.name),
-                      Text("Debe contener mínimo 6 caracteres y un número.",style: MyTextStyle.normal.copyWith(fontSize: 15,color: null),),
+                      Text(
+                        "Debe contener mínimo 6 caracteres y un número.",
+                        style: MyTextStyle.normal
+                            .copyWith(fontSize: 15, color: null),
+                      ),
                       const SizedBox(
                         height: 30.0,
                       ),
@@ -144,19 +175,32 @@ class UpdatePasswordScreen extends StatelessWidget {
                         child: Builder(builder: (context) {
                           var bloc = context.watch<UpdatePasswordProvider>();
                           bool isEnabled = false;
-                          if ((bloc.password.length >= 6 && bloc.confirmPassword.length >= 6) || Singleton.isDev) {
-                              isEnabled = true;
+                          if ((bloc.password.length >= 6 &&
+                                  bloc.confirmPassword.length >= 6) ||
+                              Singleton.isDev) {
+                            isEnabled = true;
+                          } else if (bloc
+                                  .newPasswordResponseInMap!["message"] ==
+                              "Password Reset Successfully!") {
+                            SharedPreferencesWork
+                                .clearSharePreferenceForRecoverPassword();
+                            Navigator.pushNamed(
+                                context, UpdatePasswordStatusScreen.tag);
+                          } else if (bloc.isLoading == true) {
+                            const MyCircularProgressIndicator();
                           }
                           return PrimaryButton(
                             title: Constants.verifyIdentityScreenContinue,
                             textColor: MyColors.whiteColor,
                             backgroundColor: MyColors.blackColor,
                             enabled: isEnabled,
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate() &&
                                   isEnabled) {
-                                Navigator.pushNamed(
-                                    context, UpdatePasswordStatusScreen.tag);
+                                await bloc.setNewPasswordResponseInMap(
+                                    context: context,
+                                    email: email,
+                                    newPassword: passwordController.text);
                               }
                             },
                           );

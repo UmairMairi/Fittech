@@ -155,6 +155,32 @@ class _OTPScreenState extends State<OTPScreen> {
                         if ((bloc.otp.length >= 6) || Singleton.isDev) {
                           isEnabled = true;
                         }
+
+                        else if(bloc.message!['message']!="incorrect verification code"){
+                          Navigator.pushNamed(
+                              context, LoginWelcomeScreen.tag);
+
+                        }
+                      else  if (bloc.isLoading == true) {
+                          RawMaterialButton(
+                              fillColor: MyColors.blackColor,
+                              elevation: 0.0,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(color: MyColors.blackColor),
+                                borderRadius: BorderRadius.circular(2.0),
+                              ),
+                              onPressed: () {},
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(
+                                  minHeight: 0.0, minWidth: 0.0),
+                              child: const SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      color: MyColors.whiteColor)));
+                        }
+
                         return PrimaryButton(
                           title: Constants.verifyLabel,
                           textColor: MyColors.whiteColor,
@@ -167,8 +193,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                   context: context,
                                   code: otpController.text,
                                   email: email);
-                              Navigator.pushNamed(
-                                  context, LoginWelcomeScreen.tag);
+
                             }
                           },
                         );

@@ -7,9 +7,11 @@ import 'package:fit_tech/presentation/screens/profile/update_password_screen.dar
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +27,7 @@ class VerifyCodeScreen extends StatefulWidget {
 
 class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   final TextEditingController otpController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
 
@@ -67,9 +69,22 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
     });
   }
 
+  String email = '';
+
+  Future<void> getSharePreferenceValue() async {
+    String email = await SharedPreferencesWork
+        .getEmailForRecoverPasswordFromSharedPreference();
+    if (email != "") {
+      setState(() {
+        email = email;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    getSharePreferenceValue();
     startTimer();
   }
 
@@ -118,7 +133,6 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
@@ -142,7 +156,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       title: Constants.verifyCodeScreenCodeLabel,
                       isObscure: false,
                       keyboardType: TextInputType.text,
-                      onChanged: (val){
+                      onChanged: (val) {
                         context.read<VerifyCodeProvider>().setCode(val: val);
                       },
                       validator: (value) {
@@ -160,27 +174,36 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: Builder(
-                      builder: (context) {
-                        var bloc = context.watch<VerifyCodeProvider>();
-                        bool isEnabled = false;
-                        if((bloc.code.length>=6)||Singleton.isDev){
-                          isEnabled = true;
-                        }
-                        return PrimaryButton(
-                          title: Constants.verifyCodeScreenContinueLabel,
-                          textColor: MyColors.whiteColor,
-                          backgroundColor: MyColors.blackColor,
-                          enabled: isEnabled,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate() && isEnabled) {
-                              Navigator.pushNamed(
-                                  context, UpdatePasswordScreen.tag);
-                            }
-                          },
-                        );
+                    child: Builder(builder: (context) {
+                      var bloc = context.watch<VerifyCodeProvider>();
+                      bool isEnabled = false;
+                      if ((bloc.code.length >= 6) || Singleton.isDev) {
+                        isEnabled = true;
+                      } else if (bloc.forgotPasswordVerifiedCodeResponseInMap![
+                              "message"] ==
+                          "email verified successfully") {
+
+
+                        Navigator.pushNamed(context, UpdatePasswordScreen.tag);
+                      } else if (bloc.isLoading == true) {
+                        const MyCircularProgressIndicator();
                       }
-                    ),
+
+                      return PrimaryButton(
+                        title: Constants.verifyCodeScreenContinueLabel,
+                        textColor: MyColors.whiteColor,
+                        backgroundColor: MyColors.blackColor,
+                        enabled: isEnabled,
+                        onPressed: () {
+                          if (_formKey.currentState!.validate() && isEnabled) {
+                            bloc.setForgotPasswordVerifiedCodeResponseInMap(
+                                context: context,
+                                email: email,
+                                code: otpController.text);
+                          }
+                        },
+                      );
+                    }),
                   ),
                   const SizedBox(
                     height: 10.0,
