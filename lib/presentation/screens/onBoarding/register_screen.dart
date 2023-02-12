@@ -6,6 +6,7 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/check_box.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -298,8 +299,7 @@ class RegisterScreen extends StatelessWidget {
                             if (_formKey.currentState!.validate() &&
                                 isEnabled) {
                               if (cbState1 && cbState2 && cbState3) {
-                                await SharedPreferencesWork.saveEmail(
-                                    email: emailController.text);
+                                GlobalState.email= emailController.text;
                                 await registerProvider.setMessage(
                                     context: context,
                                     firstName: fNameController.text,

@@ -210,13 +210,12 @@ class OnboardPostRepository {
       {required BuildContext context,
         String? token,
         required String url}) async {
-    var data = {'token': token};
 
 
 
 
     var response =
-    await OnboardPostServices.newPasswordPostJson(url: url, body: data);
+    await OnboardPostServices.newPasswordPostJson(url: url,token: token);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "Account Deleted Successfully") &&

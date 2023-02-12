@@ -6,6 +6,7 @@ import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -72,17 +73,9 @@ class _OTPScreenState extends State<OTPScreen> {
   void initState() {
     super.initState();
     startTimer();
-    getSharePreferenceValue();
   }
 
-  Future<void> getSharePreferenceValue() async {
-    String email = await SharedPreferencesWork.getEmailFromSharedPreference();
-    if (email != "") {
-      setState(() {
-        email = email;
-      });
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +187,7 @@ class _OTPScreenState extends State<OTPScreen> {
                               bloc.setMessage(
                                   context: context,
                                   code: otpController.text,
-                                  email: email);
+                                  email: GlobalState.email!);
 
                             }
                           },

@@ -1,11 +1,10 @@
+import 'package:fit_tech/logic/profile/verify_Identity_provider.dart';
 import 'package:fit_tech/logic/update_password_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -32,26 +31,16 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  String email = '';
-
-  Future<void> getSharePreferenceValue() async {
-    String email = await SharedPreferencesWork
-        .getEmailForRecoverPasswordFromSharedPreference();
-    if (email != "") {
-      setState(() {
-        email = email;
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    getSharePreferenceValue();
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider =
+        Provider.of<VerifyIdentityProvider>(context, listen: false);
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -175,19 +164,21 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         child: Builder(builder: (context) {
                           var bloc = context.watch<UpdatePasswordProvider>();
                           bool isEnabled = false;
-                          if ((bloc.password.length >= 6 &&
-                                  bloc.confirmPassword.length >= 6) ||
-                              Singleton.isDev) {
-                            isEnabled = true;
-                          } else if (bloc
-                                  .newPasswordResponseInMap!["message"] ==
-                              "Password Reset Successfully!") {
+                          if (bloc.updatePasswordAfterLoginResponseInMap![
+                                      "message"] ==
+                                  "password changed Successfully" ||
+                              bloc.newPasswordResponseInMap!["message"] ==
+                                  "Password Reset Successfully!") {
                             SharedPreferencesWork
                                 .clearSharePreferenceForRecoverPassword();
                             Navigator.pushNamed(
                                 context, UpdatePasswordStatusScreen.tag);
                           } else if (bloc.isLoading == true) {
                             const MyCircularProgressIndicator();
+                          } else if ((bloc.password.length >= 6 &&
+                                  bloc.confirmPassword.length >= 6) ||
+                              Singleton.isDev) {
+                            isEnabled = true;
                           }
                           return PrimaryButton(
                             title: Constants.verifyIdentityScreenContinue,
@@ -197,10 +188,19 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate() &&
                                   isEnabled) {
-                                await bloc.setNewPasswordResponseInMap(
-                                    context: context,
-                                    email: email,
-                                    newPassword: passwordController.text);
+                                (provider.verifyIdentityInMap?['message'] ==
+                                        "Identity Verified Successfully")
+                                    ? await bloc
+                                        .setUpdatePasswordAfterLoginResponseInMap(
+                                            context: context,
+                                            currentPassword:
+                                                passwordController.text,
+                                            confirmPassword:
+                                                confirmPasswordController.text)
+                                    : await bloc.setNewPasswordResponseInMap(
+                                        context: context,
+                                        email: GlobalState.email!,
+                                        newPassword: passwordController.text);
                               }
                             },
                           );

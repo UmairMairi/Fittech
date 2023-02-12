@@ -8,6 +8,7 @@ import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/shared_prefences_work.dart';
@@ -125,8 +126,9 @@ class LoginScreen extends StatelessWidget {
                         var bloc = context.watch<LoginProvider>();
                         if (bloc.loginModel!.data != null &&
                             bloc.loginModel!.data!.token != null) {
-                          SharedPreferencesWork.saveTokenToSharedPreference(
-                              token: bloc.loginModel!.data!.token!);
+                          GlobalState.token = bloc.loginModel!.data!.token;
+                          /* SharedPreferencesWork.saveTokenToSharedPreference(
+                              token: bloc.loginModel!.data!.token!);*/
                           Future.delayed(Duration.zero, () {
                             Navigator.pushNamed(context, DashboardScreen.tag);
                           });

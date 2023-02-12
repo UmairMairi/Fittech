@@ -12,6 +12,7 @@ import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:flutter/material.dart';
@@ -28,19 +29,9 @@ class DeleteAccountScreen extends StatefulWidget {
 }
 
 class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
-  String token = '';
-
-  Future<void> getSharePreferenceValue() async {
-    String token = await SharedPreferencesWork.getTokenFromSharedPreference();
-    if (token != "") {
-      token = token;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    getSharePreferenceValue();
   }
 
   @override
@@ -117,7 +108,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                               context
                                   .read<DeleteAccountProvider>()
                                   .setDeleteAccountResponseInMap(
-                                      context: context, token: token);
+                                      context: context,
+                                      token: GlobalState.token!);
                               showDialogue(
                                   context: context,
                                   category: Profile.deleteAccount);

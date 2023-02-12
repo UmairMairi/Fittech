@@ -3,12 +3,12 @@ import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
 import 'package:fit_tech/presentation/screens/profile/verify_identity_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
+import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class MyDataScreen extends StatefulWidget {
@@ -61,30 +61,56 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 shape: BoxShape.circle,
                                 color: MyColors.greyColor,
                               ),
-                              child: (bloc.imageFile != null)
-                                  ? CircleAvatar(
-                                      foregroundImage: FileImage(
-                                      bloc.imageFile!,
-                                    ))
-                                  : Image.asset(
-                                      Images.profileScreenProfileIcon),
+                              child:
+                                  (bloc.myDataScreenModel?.data?.profileImage !=
+                                              null &&
+                                          bloc.myDataScreenModel?.data != null)
+                                      ? CircleAvatar(
+                                          foregroundImage: NetworkImage(
+                                          ApiConstants.baseUrl +
+                                              bloc.myDataScreenModel!.data!
+                                                  .profileImage!,
+                                        ))
+                                      : Image.asset(
+                                          Images.profileScreenProfileIcon),
                             );
                           }),
                           const SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            width: 150,
-                            alignment: Alignment.center,
-                            child: PrimaryButton(
-                              title: Constants.myDataScreenUpdatePhoto,
-                              backgroundColor: MyColors.whiteColor,
-                              textColor: Colors.black,
-                              onPressed: () {
-                                provider.pickImageFromGallery(context: context);
-                              },
-                            ),
-                          ),
+                          Builder(builder: (context) {
+                            var bloc = context.watch<MyDataProvider>();
+
+                            String imagePath = bloc.imageFile.toString();
+                            return Container(
+                              width: 150,
+                              alignment: Alignment.center,
+                              child: PrimaryButton(
+                                title: Constants.myDataScreenUpdatePhoto,
+                                backgroundColor: MyColors.whiteColor,
+                                textColor: Colors.black,
+                                onPressed: () async {
+                                  await bloc.pickImageFromGallery(
+                                      context: context);
+
+                                  Map<String, String> filePath = {
+                                    "profile_image": imagePath
+                                  };
+                                  await bloc.setChangeProfileImageInMap(
+                                      context: context, filePath: filePath);
+                                  if (bloc.changeProfileImageInMap?[
+                                              "message"] ==
+                                          "Updated Successfully" &&
+                                      bloc.changeProfileImageInMap?[
+                                              'success'] ==
+                                          true) {
+                                    await bloc.setMyDataScreenModel(
+                                        context: context);
+                                  }
+                                },
+                              ),
+                            );
+                          }),
                           const SizedBox(
                             height: 20,
                           ),
@@ -331,7 +357,6 @@ class _MyDataScreenState extends State<MyDataScreen> {
                     }
                     break;
                   case Profile.gender:
-
                     {
                       context.read<MyDataProvider>().setGender(val: val);
                     }

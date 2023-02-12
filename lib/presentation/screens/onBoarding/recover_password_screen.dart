@@ -5,6 +5,7 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -110,7 +111,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                               Navigator.pushNamed(context, VerifyCodeScreen.tag);
                             });
                           } else if (bloc.isLoading == true) {
-                            const MyCircularProgressIndicator();
+                         return   const MyCircularProgressIndicator();
                           }
                           else  if ((isEmail(bloc.email)) || Singleton.isDev) {
                           isEnabled = true;
@@ -124,9 +125,8 @@ class RecoverPasswordScreen extends StatelessWidget {
                             onPressed: () async {
                               if (_formKey.currentState!.validate() &&
                                   isEnabled) {
-                                await SharedPreferencesWork
-                                    .saveEmailForRecoverPassword(
-                                        email: emailController.text);
+
+                                GlobalState.email= emailController.text;
                                 await bloc.setResponseInMap(
                                     context: context,
                                     email: emailController.text);

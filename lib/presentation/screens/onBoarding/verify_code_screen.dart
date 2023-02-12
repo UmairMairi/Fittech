@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:fit_tech/logic/verify_code_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
+import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -70,20 +69,11 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
     });
   }
 
-  String email = '';
 
-  Future<void> getSharePreferenceValue() async {
-    String email = await SharedPreferencesWork
-        .getEmailForRecoverPasswordFromSharedPreference();
-    if (email != "") {
-      email = email;
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    getSharePreferenceValue();
     startTimer();
   }
 
@@ -161,7 +151,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
-                            value.length <=4) {
+                            value.length < 4) {
                           return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
                         }
                         return null;
@@ -180,8 +170,8 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                           "email verified successfully") {
                         Navigator.pushNamed(context, UpdatePasswordScreen.tag);
                       } else if (bloc.isLoading == true) {
-                       return  const MyCircularProgressIndicator();
-                      } else if ((bloc.code.length >= 4) || Singleton.isDev) {
+                        return const MyCircularProgressIndicator();
+                      } else if ((bloc.code.length < 4) || Singleton.isDev) {
                         isEnabled = true;
                       }
 
@@ -192,10 +182,15 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         enabled: isEnabled,
                         onPressed: () {
                           if (_formKey.currentState!.validate() && isEnabled) {
-                            bloc.setForgotPasswordVerifiedCodeResponseInMap(
-                                context: context,
-                                email: email,
-                                code: otpController.text);
+                            (GlobalState.email != null)
+                                ? bloc
+                                    .setForgotPasswordVerifiedCodeResponseInMap(
+                                        context: context,
+                                        email: GlobalState.email!,
+                                        code: otpController.text)
+                                : showMessage(
+                                    msg: "your email null", context: context);
+
                           }
                         },
                       );

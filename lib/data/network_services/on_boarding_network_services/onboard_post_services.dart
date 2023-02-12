@@ -71,8 +71,17 @@ class OnboardPostServices {
 //  set new password method
 
   static Future<http.Response> newPasswordPostJson(
-      {Map<String, dynamic>? body, required String url}) async {
-    var headers = {'Content-Type': 'application/json'};
+      {Map<String, dynamic>? body, required String url, String? token}) async {
+    Map<String, String> headers;
+
+    if (token != null) {
+      headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
+    } else {
+      headers = {'Content-Type': 'application/json'};
+    }
     var request = http.Request('POST', Uri.parse(url));
     if (body != null) {
       request.body = jsonEncode(body);
@@ -97,7 +106,7 @@ class OnboardPostServices {
 
 //  delete account
   static Future<http.Response> deleteAccountPostJson(
-      {Map<String, dynamic>? body, required String url}) async {
+      {Map<String, dynamic>? body, required String url, String? token}) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse(url));
     if (body != null) {

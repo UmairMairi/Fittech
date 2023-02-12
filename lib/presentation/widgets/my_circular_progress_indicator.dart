@@ -25,11 +25,14 @@ class _MyCircularProgressIndicatorState
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
         child: const Center(
-          child: SizedBox(
-              height: 30,
-              width: 30,
-              child: CircularProgressIndicator(
-                  strokeWidth: 4, color: MyColors.whiteColor)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            child: SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(
+                    strokeWidth: 4, color: MyColors.whiteColor)),
+          ),
         ));
   }
 }
