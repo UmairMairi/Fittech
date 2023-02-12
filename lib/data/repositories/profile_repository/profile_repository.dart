@@ -5,7 +5,7 @@ import 'package:fit_tech/data/network_services/profile_post_service/profile_post
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/material.dart';
 
-import '../../network_services/profile_get_services/profile_get_services.dart';
+import '../../network_services/profile_post_service/profile_get_services.dart';
 
 class ProfilePostRepository {
   static Future<Map<String, dynamic>?> changeProfileImageDecodeJsonString(
