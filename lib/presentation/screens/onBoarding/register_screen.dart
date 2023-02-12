@@ -256,7 +256,7 @@ class RegisterScreen extends StatelessWidget {
                             context.watch<CreateAccountProvider>();
                         bool isEnabled = false;
 
-                        if (registerProvider.message != null) {
+                        if (registerProvider.message?["message"] == "User Registered Successfully") {
                           Future.delayed(Duration.zero, () {
                             Navigator.pushNamed(context, OTPScreen.tag);
                           });

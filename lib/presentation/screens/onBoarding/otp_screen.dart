@@ -24,6 +24,8 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController otpController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
+  bool isEnabled = false;
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -151,12 +153,9 @@ class _OTPScreenState extends State<OTPScreen> {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<OTPProvider>();
-                        bool isEnabled = false;
-                        if ((bloc.otp.length >= 6) || Singleton.isDev) {
-                          isEnabled = true;
-                        }
 
-                        else if(bloc.message!['message']!="incorrect verification code"){
+
+                         if(bloc.message!['message']!="incorrect verification code"){
                           Navigator.pushNamed(
                               context, LoginWelcomeScreen.tag);
 
@@ -179,6 +178,9 @@ class _OTPScreenState extends State<OTPScreen> {
                                   child: CircularProgressIndicator(
                                       strokeWidth: 2.5,
                                       color: MyColors.whiteColor)));
+                        }
+                       else if ((bloc.otp.length >= 6) || Singleton.isDev) {
+                        isEnabled = true;
                         }
 
                         return PrimaryButton(

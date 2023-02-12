@@ -95,8 +95,16 @@ class OnboardPostServices {
     return await http.Response.fromStream(response);
   }
 
-
-
-
-
+//  delete account
+  static Future<http.Response> deleteAccountPostJson(
+      {Map<String, dynamic>? body, required String url}) async {
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(url));
+    if (body != null) {
+      request.body = jsonEncode(body);
+    }
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    return await http.Response.fromStream(response);
+  }
 }

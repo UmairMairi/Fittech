@@ -203,4 +203,35 @@ class OnboardPostRepository {
     }
     return null;
   }
+
+
+  // delete account method
+  static Future<Map<String, dynamic>?> deleteAccountDecodeJsonString(
+      {required BuildContext context,
+        String? token,
+        required String url}) async {
+    var data = {'token': token};
+
+
+
+
+    var response =
+    await OnboardPostServices.newPasswordPostJson(url: url, body: data);
+    try {
+      if (response.statusCode == 200 &&
+          (jsonDecode(response.body)["message"] == "Account Deleted Successfully") &&
+          jsonDecode(response.body)["success"] == true) {
+        return jsonDecode(response.body);
+      } else {
+        showMessage(
+            msg: "invalid token ", context: context);
+      }
+    } catch (e) {
+      showMessage(msg: "decoding error", context: context);
+    }
+    return null;
+  }
+
+
+
 }

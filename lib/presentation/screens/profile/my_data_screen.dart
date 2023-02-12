@@ -7,7 +7,6 @@ import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
-import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -332,6 +331,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                     }
                     break;
                   case Profile.gender:
+
                     {
                       context.read<MyDataProvider>().setGender(val: val);
                     }

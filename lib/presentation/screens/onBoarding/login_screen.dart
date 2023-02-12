@@ -120,19 +120,22 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: Builder(builder: (context) {
-                        var bloc = context.watch<LoginProvider>();
                         bool isEnabled = false;
-                        if ((isEmail(bloc.email) &&
+
+                        var bloc = context.watch<LoginProvider>();
+                        if (bloc.loginModel!.data != null &&
+                            bloc.loginModel!.data!.token != null) {
+                          SharedPreferencesWork.saveTokenToSharedPreference(
+                              token: bloc.loginModel!.data!.token!);
+                          Future.delayed(Duration.zero, () {
+                            Navigator.pushNamed(context, DashboardScreen.tag);
+                          });
+                        } else if (bloc.isLoading == true) {
+                          const MyCircularProgressIndicator();
+                        } else if ((isEmail(bloc.email) &&
                                 bloc.password.length >= 6) ||
                             Singleton.isDev) {
                           isEnabled = true;
-                        } else if (bloc.loginModel.data != null &&
-                            bloc.loginModel.data!.token != null) {
-                          SharedPreferencesWork.saveTokenToSharedPreference(
-                              token: bloc.loginModel.data!.token!);
-                          Navigator.pushNamed(context, DashboardScreen.tag);
-                        } else if (bloc.isLoading == true) {
-                          const MyCircularProgressIndicator();
                         }
 
                         return PrimaryButton(
@@ -140,10 +143,10 @@ class LoginScreen extends StatelessWidget {
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate() &&
                                 isEnabled) {
-                              bloc.setLoginModel(
+                              await bloc.setLoginModel(
                                   context: context,
                                   email: emailController.text,
                                   password: passwordController.text);

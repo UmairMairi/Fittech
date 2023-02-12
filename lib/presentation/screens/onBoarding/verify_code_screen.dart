@@ -28,6 +28,7 @@ class VerifyCodeScreen extends StatefulWidget {
 class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   final TextEditingController otpController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
+  bool isEnabled = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -75,9 +76,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
     String email = await SharedPreferencesWork
         .getEmailForRecoverPasswordFromSharedPreference();
     if (email != "") {
-      setState(() {
-        email = email;
-      });
+      email = email;
     }
   }
 
@@ -162,7 +161,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
-                            value.length < 6) {
+                            value.length <=4) {
                           return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
                         }
                         return null;
@@ -176,17 +175,14 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     width: double.infinity,
                     child: Builder(builder: (context) {
                       var bloc = context.watch<VerifyCodeProvider>();
-                      bool isEnabled = false;
-                      if ((bloc.code.length >= 6) || Singleton.isDev) {
-                        isEnabled = true;
-                      } else if (bloc.forgotPasswordVerifiedCodeResponseInMap![
+                      if (bloc.forgotPasswordVerifiedCodeResponseInMap?[
                               "message"] ==
                           "email verified successfully") {
-
-
                         Navigator.pushNamed(context, UpdatePasswordScreen.tag);
                       } else if (bloc.isLoading == true) {
-                        const MyCircularProgressIndicator();
+                       return  const MyCircularProgressIndicator();
+                      } else if ((bloc.code.length >= 4) || Singleton.isDev) {
+                        isEnabled = true;
                       }
 
                       return PrimaryButton(

@@ -5,6 +5,7 @@ import 'package:fit_tech/logic/choose_date_provider.dart';
 import 'package:fit_tech/logic/choose_training_provider.dart';
 import 'package:fit_tech/logic/counted_beats_provider.dart';
 import 'package:fit_tech/logic/create_account_provider.dart';
+import 'package:fit_tech/logic/delete_account_provider.dart';
 import 'package:fit_tech/logic/excercise/excersice_provider.dart';
 import 'package:fit_tech/logic/excercise/gym_excercise_provider.dart';
 import 'package:fit_tech/logic/excercise/rest_between_sequence_provider.dart';
@@ -71,7 +72,8 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiProvider(
       providers: [
-
+        ChangeNotifierProvider<DeleteAccountProvider>(
+            create: (context) => DeleteAccountProvider()),
         ChangeNotifierProvider<CreateAccountProvider>(
             create: (context) => CreateAccountProvider()),
         ChangeNotifierProvider<LoginProvider>(

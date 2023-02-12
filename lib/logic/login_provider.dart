@@ -9,7 +9,7 @@ class LoginProvider extends ChangeNotifier {
 
   String email = "";
   String password = "";
-  LoginModel loginModel = LoginModel();
+  LoginModel? loginModel = LoginModel();
   bool isLoading = false;
 
   setBoolValue(bool val) {
@@ -24,21 +24,21 @@ class LoginProvider extends ChangeNotifier {
    try{
      setBoolValue(true);
 
-     loginModel = (await OnboardPostRepository.loginJani(
+     loginModel = await OnboardPostRepository.loginJani(
          context: context,
          email: email,
          password: password,
-         url: ApiConstants.loginAccount))!;
+         url: ApiConstants.loginAccount);
      notifyListeners();
      setBoolValue(false);
-     if (loginModel.data == null) {
+     if (loginModel?.data == null) {
        showMessage(msg: "Login failed", context: context);
        setBoolValue(false);
      }
 
    }
    catch (e){
-     showMessage(msg: e.toString(), context: context);
+     showMessage(msg: "login api ${e.toString()}", context: context);
      setBoolValue(false);
 
    }

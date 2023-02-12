@@ -21,6 +21,8 @@ class RecoverPasswordScreen extends StatelessWidget {
   final TextEditingController emailController =
       TextEditingController(text: Singleton.isDev ? "test@mail.com" : "");
   final _formKey = GlobalKey<FormState>();
+  bool isEnabled = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,14 +104,16 @@ class RecoverPasswordScreen extends StatelessWidget {
                         width: double.infinity,
                         child: Builder(builder: (context) {
                           var bloc = context.watch<RecoverPasswordProvider>();
-                          bool isEnabled = false;
-                          if ((isEmail(bloc.email)) || Singleton.isDev) {
-                            isEnabled = true;
-                          } else if (bloc.responseInMap!["message"] ==
+                           if (bloc.responseInMap?["message"] ==
                               "email sent successfully") {
-                            Navigator.pushNamed(context, VerifyCodeScreen.tag);
+                            Future.delayed(Duration.zero, () {
+                              Navigator.pushNamed(context, VerifyCodeScreen.tag);
+                            });
                           } else if (bloc.isLoading == true) {
                             const MyCircularProgressIndicator();
+                          }
+                          else  if ((isEmail(bloc.email)) || Singleton.isDev) {
+                          isEnabled = true;
                           }
 
                           return PrimaryButton(
