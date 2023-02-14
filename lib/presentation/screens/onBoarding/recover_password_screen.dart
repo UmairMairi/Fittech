@@ -24,7 +24,6 @@ class RecoverPasswordScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -105,16 +104,16 @@ class RecoverPasswordScreen extends StatelessWidget {
                         width: double.infinity,
                         child: Builder(builder: (context) {
                           var bloc = context.watch<RecoverPasswordProvider>();
-                           if (bloc.responseInMap?["message"] ==
+                          if (bloc.responseInMap?["message"] ==
                               "email sent successfully") {
                             Future.delayed(Duration.zero, () {
-                              Navigator.pushNamed(context, VerifyCodeScreen.tag);
+                              Navigator.pushNamed(
+                                  context, VerifyCodeScreen.tag);
                             });
                           } else if (bloc.isLoading == true) {
-                         return   const MyCircularProgressIndicator();
-                          }
-                          else  if ((isEmail(bloc.email)) || Singleton.isDev) {
-                          isEnabled = true;
+                            return const MyCircularProgressIndicator();
+                          } else if ((isEmail(bloc.email)) || Singleton.isDev) {
+                            isEnabled = true;
                           }
 
                           return PrimaryButton(
@@ -125,8 +124,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                             onPressed: () async {
                               if (_formKey.currentState!.validate() &&
                                   isEnabled) {
-
-                                GlobalState.email= emailController.text;
+                                GlobalState.email = emailController.text;
                                 await bloc.setResponseInMap(
                                     context: context,
                                     email: emailController.text);

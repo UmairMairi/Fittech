@@ -136,7 +136,7 @@ class _RecipeListScreenState extends State<RecipeListScreen>
                         ),
                       ),
                       const Divider(),
-                      SizedBox(height: 10.0,)
+                      const SizedBox(height: 10.0,)
                     ],
                   );
                 },

@@ -1,12 +1,8 @@
 import 'package:fit_tech/data/models/nutritions_list_model.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/food_list_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/counter_widget.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -41,7 +37,9 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const MyAppBar(title: Constants.titleRecipeDetailsScreen),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextFieldPrimary(
@@ -60,7 +58,9 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                 },
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +72,9 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                     style: MyTextStyle.heading3,
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -91,32 +93,36 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Expanded(
                   child: ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       itemCount: 5,
-                      itemBuilder: (context,index){
-                    return Column(
-                      children: [
-                        Row(
+                      itemBuilder: (context, index) {
+                        return Column(
                           children: [
-                            const Text(
-                              "Manana",
-                              style: MyTextStyle.text1,
+                            Row(
+                              children: [
+                                const Text(
+                                  "Manana",
+                                  style: MyTextStyle.text1,
+                                ),
+                                Expanded(child: Container()),
+                                const Text(
+                                  "300gr",
+                                  style: MyTextStyle.text1,
+                                ),
+                              ],
                             ),
-                            Expanded(child: Container()),
-                            const Text(
-                              "300gr",
-                              style: MyTextStyle.text1,
+                            const SizedBox(
+                              height: 10,
                             ),
+                            const Divider()
                           ],
-                        ),
-                        SizedBox(height: 10,),
-                        Divider()
-                      ],
-                    );
-                  }),
+                        );
+                      }),
                 )
               ],
             )),
@@ -160,7 +166,9 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   SizedBox(
                     width: double.infinity,
                     child: PrimaryButton(

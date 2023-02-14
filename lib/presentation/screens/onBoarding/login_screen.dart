@@ -26,6 +26,8 @@ class LoginScreen extends StatelessWidget {
       TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
+  bool isEnabled = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -121,8 +123,6 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: Builder(builder: (context) {
-                        bool isEnabled = false;
-
                         var bloc = context.watch<LoginProvider>();
                         if (bloc.loginModel!.data != null &&
                             bloc.loginModel!.data!.token != null) {
@@ -133,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.pushNamed(context, DashboardScreen.tag);
                           });
                         } else if (bloc.isLoading == true) {
-                          const MyCircularProgressIndicator();
+                        return  const MyCircularProgressIndicator();
                         } else if ((isEmail(bloc.email) &&
                                 bloc.password.length >= 6) ||
                             Singleton.isDev) {

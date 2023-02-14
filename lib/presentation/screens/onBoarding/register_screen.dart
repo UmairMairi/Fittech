@@ -35,6 +35,8 @@ class RegisterScreen extends StatelessWidget {
   bool cbState1 = false;
   bool cbState2 = false;
   bool cbState3 = false;
+  bool isEnabled = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -255,8 +257,6 @@ class RegisterScreen extends StatelessWidget {
                         var bloc = context.watch<RegisterProvider>();
                         var registerProvider =
                             context.watch<CreateAccountProvider>();
-                        bool isEnabled = false;
-
                         if (registerProvider.message?["message"] == "User Registered Successfully") {
                           Future.delayed(Duration.zero, () {
                             Navigator.pushNamed(context, OTPScreen.tag);

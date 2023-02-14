@@ -10,7 +10,6 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
-import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

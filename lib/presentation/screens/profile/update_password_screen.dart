@@ -174,7 +174,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                             Navigator.pushNamed(
                                 context, UpdatePasswordStatusScreen.tag);
                           } else if (bloc.isLoading == true) {
-                            const MyCircularProgressIndicator();
+                            return const MyCircularProgressIndicator();
                           } else if ((bloc.password.length >= 6 &&
                                   bloc.confirmPassword.length >= 6) ||
                               Singleton.isDev) {

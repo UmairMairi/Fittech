@@ -6,8 +6,7 @@ import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_sc
 import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
-import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/my_styles.dart';
+  import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'toturial_usage_screen.dart';

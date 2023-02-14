@@ -1,5 +1,4 @@
 import 'package:fit_tech/presentation/screens/nutritionTest/food_list_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/food_type_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
