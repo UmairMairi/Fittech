@@ -11,7 +11,6 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
-import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +26,6 @@ class LoginScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -124,16 +122,16 @@ class LoginScreen extends StatelessWidget {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<LoginProvider>();
-                        if (bloc.loginModel!.data != null &&
-                            bloc.loginModel!.data!.token != null) {
-                          GlobalState.token = bloc.loginModel!.data!.token;
+                        if (bloc.loginModel?.data != null &&
+                            bloc.loginModel?.data?.token != null) {
+                          GlobalState.token = bloc.loginModel?.data?.token;
                           /* SharedPreferencesWork.saveTokenToSharedPreference(
                               token: bloc.loginModel!.data!.token!);*/
                           Future.delayed(Duration.zero, () {
                             Navigator.pushNamed(context, DashboardScreen.tag);
                           });
                         } else if (bloc.isLoading == true) {
-                        return  const MyCircularProgressIndicator();
+                          return const MyCircularProgressIndicator();
                         } else if ((isEmail(bloc.email) &&
                                 bloc.password.length >= 6) ||
                             Singleton.isDev) {

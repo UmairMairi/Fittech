@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:fit_tech/data/models/on_boarding_model/login_model.dart';
+import 'package:fit_tech/data/network_services/api_services.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
-
-import '../../network_services/on_boarding_network_services/onboard_post_services.dart';
 
 class OnboardPostRepository {
   static Future<Map<String, dynamic>?> createAccount(
@@ -23,7 +23,7 @@ class OnboardPostRepository {
     };
 
     var response =
-        await OnboardPostServices.createAccountPostJson(url: url, body: data);
+        await ApiServices.postJson(url: url, body: data);
 
     try {
       if (response.statusCode == 200) {
@@ -48,7 +48,7 @@ class OnboardPostRepository {
     };
 
     var response =
-        await OnboardPostServices.verifyAccountPostJson(url: url, body: data);
+        await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
@@ -71,7 +71,7 @@ class OnboardPostRepository {
       'email': email,
     };
     var response =
-        await OnboardPostServices.loginPostJson(url: url, body: data);
+        await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "User Login Successfully") &&
@@ -96,7 +96,7 @@ class OnboardPostRepository {
       'email': email,
     };
     var response =
-        await OnboardPostServices.recoverPasswordPostJson(url: url, body: data);
+        await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "email sent successfully") &&
@@ -119,7 +119,7 @@ class OnboardPostRepository {
           required String email,
           required String url}) async {
     var data = {'email': email, "code": code};
-    var response = await OnboardPostServices.forgotPasswordVerifiedCodePostJson(
+    var response = await ApiServices.postJson(
         url: url, body: data);
     try {
       if (response.statusCode == 200 &&
@@ -146,7 +146,7 @@ class OnboardPostRepository {
       required String url}) async {
     var data = {'email': email, "code": newPassword};
     var response =
-        await OnboardPostServices.newPasswordPostJson(url: url, body: data);
+        await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] ==
@@ -154,7 +154,7 @@ class OnboardPostRepository {
           jsonDecode(response.body)["success"] == true) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "must be enter correct email", context: context);
+        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -173,26 +173,31 @@ class OnboardPostRepository {
       String? updatePassword,
       required String url}) async {
     Map<String, dynamic> data = {};
-    if (firstName != null ||
-        lastName != null ||
-        email != null ||
-        gender != null ||
-        updatePassword != null) {
-      data = {
-        'first_name': firstName,
-        'last_name': lastName,
-        'email': email,
-        'gender': gender,
-        'updatePassword': updatePassword
-      };
+
+    if (firstName != null) {
+      data.putIfAbsent("first_name", () => firstName);
+    } else if (lastName != null) {
+      data.putIfAbsent("last_name", () => lastName);
+    } else if (email != null) {
+      data.putIfAbsent("email", () => email);
+    } else if (gender != null) {
+      data.putIfAbsent("gender", () => gender);
+    } else if (updatePassword != null) {
+      data.putIfAbsent("updatePassword", () => updatePassword);
     }
 
-    var response =
-        await OnboardPostServices.newPasswordPostJson(url: url, body: data);
+    if (kDebugMode) {
+      print("Update Profile Request--> $data");
+    }
+    var response = await ApiServices.postJson(url: url, body: data,token: GlobalState.token);
+    if (kDebugMode) {
+      print("Update Profile response--> ${response.body}");
+    }
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "Updated Successfully") &&
           jsonDecode(response.body)["success"] == true) {
+
         return jsonDecode(response.body);
       } else {
         showMessage(
@@ -204,33 +209,25 @@ class OnboardPostRepository {
     return null;
   }
 
-
   // delete account method
   static Future<Map<String, dynamic>?> deleteAccountDecodeJsonString(
       {required BuildContext context,
-        String? token,
-        required String url}) async {
-
-
-
-
+      String? token,
+      required String url}) async {
     var response =
-    await OnboardPostServices.newPasswordPostJson(url: url,token: token);
+        await ApiServices.postJson(url: url, token: token);
     try {
       if (response.statusCode == 200 &&
-          (jsonDecode(response.body)["message"] == "Account Deleted Successfully") &&
+          (jsonDecode(response.body)["message"] ==
+              "Account Deleted Successfully") &&
           jsonDecode(response.body)["success"] == true) {
         return jsonDecode(response.body);
       } else {
-        showMessage(
-            msg: "invalid token ", context: context);
+        showMessage(msg: "${jsonDecode(response.body)["message"]} ", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
     }
     return null;
   }
-
-
-
 }

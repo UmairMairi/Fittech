@@ -74,7 +74,7 @@ class MyDataProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> setMessage({
+  Future<void> updateProfileData({
     required BuildContext context,
     String? firstName,
     String? lastName,
@@ -84,8 +84,7 @@ class MyDataProvider extends ChangeNotifier {
   }) async {
     try {
       setBoolValue(true);
-      updateProfileInMap =
-          await OnboardPostRepository.updateProfileDecodeJsonString(
+      updateProfileInMap = await OnboardPostRepository.updateProfileDecodeJsonString(
               context: context,
               firstName: firstName,
               lastName: lastName,

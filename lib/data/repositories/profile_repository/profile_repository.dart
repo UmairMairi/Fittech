@@ -1,18 +1,17 @@
 import 'dart:convert';
 
 import 'package:fit_tech/data/models/profile_models/my_data_screen_model.dart';
-import 'package:fit_tech/data/network_services/profile_post_service/profile_post_services.dart';
+import 'package:fit_tech/data/network_services/api_services.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/material.dart';
 
-import '../../network_services/profile_post_service/profile_get_services.dart';
 
 class ProfilePostRepository {
   static Future<Map<String, dynamic>?> changeProfileImageDecodeJsonString(
       {required BuildContext context,
       Map<String, String>? filePath,
       required String url}) async {
-    var response = await ProfilePostServices.changeProfileImagePostJson(
+    var response = await ApiServices.postMultiPartJson(
         url: url, filePath: filePath);
 
     try {
@@ -34,7 +33,7 @@ class ProfilePostRepository {
           {required BuildContext context,
           required String url,
           String? token}) async {
-    var response = await ProfileGetServices.changeProfileImageGetRequestJson(
+    var response = await ApiServices.postJson(
         url: url, token: token);
 
     try {
@@ -63,7 +62,7 @@ class ProfilePostRepository {
       String? token}) async {
     var data = {"password": password};
 
-    var response = await ProfilePostServices.verifyIdentityPostJson(
+    var response = await ApiServices.postJson(
         body: data, url: url, token: token);
 
     try {
@@ -93,7 +92,7 @@ class ProfilePostRepository {
       String? token}) async {
     var data = {"current_password": oldPassword, "new_password": newPassword};
 
-    var response = await ProfilePostServices.updatePasswordAfterLoginPostJson(
+    var response = await ApiServices.postJson(
         body: data, url: url, token: token);
 
     try {

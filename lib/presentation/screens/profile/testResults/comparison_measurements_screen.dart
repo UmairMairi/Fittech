@@ -1,13 +1,9 @@
-import 'package:fit_tech/logic/choose_date_provider.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
-import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 class MeasurementsComparisonScreen extends StatelessWidget {
   static const String tag = "measurements_comparison_screen";
@@ -178,7 +174,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "+2",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_upward)
+                                      const Icon(Icons.arrow_upward)
                                     ],
                                   ),
                                 )),
@@ -276,7 +272,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "+2",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_upward)
+                                      const Icon(Icons.arrow_upward)
                                     ],
                                   ),
                                 )),
@@ -325,7 +321,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "+2",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_upward)
+                                      const Icon(Icons.arrow_upward)
                                     ],
                                   ),
                                 )),
@@ -374,7 +370,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "-3",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_downward)
+                                      const Icon(Icons.arrow_downward)
                                     ],
                                   ),
                                 )),
@@ -423,7 +419,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "-1",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_downward)
+                                      const Icon(Icons.arrow_downward)
                                     ],
                                   ),
                                 )),
@@ -472,7 +468,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "+2",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_upward)
+                                      const Icon(Icons.arrow_upward)
                                     ],
                                   ),
                                 )),
@@ -521,7 +517,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "+2",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_upward)
+                                      const Icon(Icons.arrow_upward)
                                     ],
                                   ),
                                 )),
@@ -570,7 +566,7 @@ class MeasurementsComparisonScreen extends StatelessWidget {
                                         "+2",
                                         style: MyTextStyle.text1,
                                       ),
-                                      Icon(Icons.arrow_upward)
+                                      const Icon(Icons.arrow_upward)
                                     ],
                                   ),
                                 )),

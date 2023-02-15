@@ -1,10 +1,13 @@
+import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileDialogue extends StatelessWidget {
   final Profile category;
@@ -180,8 +183,7 @@ class ProfileDialogue extends StatelessWidget {
                   borderColor: MyColors.blackColor,
                   enabled: true,
                   onPressed: () {
-                    if ((category != Profile.deleteAccount) &&
-                        (category != Profile.logout)) {
+                    if ((category != Profile.deleteAccount) && (category != Profile.logout)) {
                       Navigator.pop(context);
                     }
                   },
@@ -191,27 +193,47 @@ class ProfileDialogue extends StatelessWidget {
                 width: 10,
               ),
               Expanded(
-                child: PrimaryButton(
-                  title: ((category != Profile.deleteAccount) &&
-                      (category != Profile.logout))
-                      ? Constants.ProfileDialogueButtonSave
-                      : Constants.deleteAccountDialogueButtonLabel2,
-                  backgroundColor: MyColors.blackColor,
-                  textColor: MyColors.whiteColor,
-                  borderColor: MyColors.blackColor,
-                  enabled: true,
-                  onPressed: () {
-                    if ((category != Profile.deleteAccount) &&
-                        (category != Profile.logout) &&
-                        onChange != null) {
-                      if (category == Profile.gender) {
-                        (selected == 0) ? onChange!("Hombre"):onChange!("Mujer");
-                      }else{
-                        onChange!(controller.text.toString());
-                      }
-                      Navigator.pop(context);
+                child: Builder(
+                  builder: (context) {
+                    var provider =  context.watch<MyDataProvider>();
+                    if(provider.isLoading){
+                      return const MyCircularProgressIndicator();
                     }
-                  },
+                    return PrimaryButton(
+                      title: ((category != Profile.deleteAccount) &&
+                          (category != Profile.logout))
+                          ? Constants.ProfileDialogueButtonSave
+                          : Constants.deleteAccountDialogueButtonLabel2,
+                      backgroundColor: MyColors.blackColor,
+                      textColor: MyColors.whiteColor,
+                      borderColor: MyColors.blackColor,
+                      enabled: true,
+                      onPressed: () async {
+                        if ((category != Profile.deleteAccount) && (category != Profile.logout) && onChange != null) {
+                          if (category == Profile.gender) {
+                            (selected == 0)
+                                ? onChange!("Hombre")
+                                :onChange!("Mujer");
+                          }else{
+                            switch(category){
+                              case Profile.name:{
+                                await context.read<MyDataProvider>().updateProfileData(context: context, firstName:controller.text.toString());
+                                break;}
+                              case Profile.lastName:{
+                                await context.read<MyDataProvider>().updateProfileData(context: context, lastName:controller.text.toString());
+                                break;}
+                              case Profile.email:{
+                                await context.read<MyDataProvider>().updateProfileData(context: context, email:controller.text.toString());
+                                break;}
+                              default:{}
+                            }
+                            onChange!(controller.text.toString());
+                          }
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+                  }
                 ),
               ),
             ],

@@ -80,7 +80,6 @@ class _MyDataScreenState extends State<MyDataScreen> {
                           ),
                           Builder(builder: (context) {
                             var bloc = context.watch<MyDataProvider>();
-
                             String imagePath = bloc.imageFile.toString();
                             return Container(
                               width: 150,
@@ -354,15 +353,14 @@ class _MyDataScreenState extends State<MyDataScreen> {
                   case Profile.email:
                     {
                       context.read<MyDataProvider>().setEmail(val: val);
-                    }
-                    break;
+                    }break;
                   case Profile.gender:
                     {
                       context.read<MyDataProvider>().setGender(val: val);
-                    }
-                    break;
-                  default:
-                    {}
+                    }break;
+                  default:{
+
+                  }
                 }
               },
             ),

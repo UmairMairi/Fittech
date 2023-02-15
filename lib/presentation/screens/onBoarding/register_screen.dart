@@ -13,7 +13,6 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/shared_prefences_work.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
