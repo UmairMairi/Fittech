@@ -86,6 +86,7 @@ class _AddNoteDialogueState extends State<AddNoteDialogue> {
                   backgroundColor: MyColors.blackColor,
                   textColor: MyColors.whiteColor,
                   borderColor: MyColors.blackColor,
+
                 ),
               ),
             ],

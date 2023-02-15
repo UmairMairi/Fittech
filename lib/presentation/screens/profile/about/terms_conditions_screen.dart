@@ -1,14 +1,12 @@
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
+
 class TermsConditionsScreen extends StatelessWidget {
   static const String tag = "terms_conditions_screen";
-
   const TermsConditionsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

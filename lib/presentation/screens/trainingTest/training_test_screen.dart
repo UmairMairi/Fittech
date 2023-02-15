@@ -1,4 +1,3 @@
-import 'package:fit_tech/data/models/subscription_plans_tile_model.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/choose_training_mode_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/info_checks.dart';

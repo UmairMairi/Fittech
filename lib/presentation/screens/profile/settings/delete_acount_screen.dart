@@ -1,5 +1,6 @@
 import 'package:fit_tech/data/models/intro_model.dart';
 import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/logic/delete_account_provider.dart';
 import 'package:fit_tech/presentation/screens/dialogue/cadence_pause.dart';
 import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
@@ -11,9 +12,12 @@ import 'package:fit_tech/presentation/widgets/info_checks.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key});
@@ -95,14 +99,23 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: PrimaryButton(
-                          title: Constants.deleteAccountButtonLabel,
-                          backgroundColor: MyColors.whiteColor,
-                          textColor: MyColors.blackColor,
-                          onPressed: (){
-                            showDialogue(context: context, category: Profile.deleteAccount);
-                          },
-                        ),
+                        child: Builder(builder: (context) {
+                          return PrimaryButton(
+                            title: Constants.deleteAccountButtonLabel,
+                            backgroundColor: MyColors.whiteColor,
+                            textColor: MyColors.blackColor,
+                            onPressed: () {
+                              context
+                                  .read<DeleteAccountProvider>()
+                                  .setDeleteAccountResponseInMap(
+                                      context: context,
+                                      token: GlobalState.token!);
+                              showDialogue(
+                                  context: context,
+                                  category: Profile.deleteAccount);
+                            },
+                          );
+                        }),
                       )
                     ],
                   ),
@@ -115,9 +128,11 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
     );
   }
 
-  showDialogue({required BuildContext context,required Profile category}){
-    showModalBottomSheet<void>(context: context, builder: (BuildContext context){
-      return ProfileDialogue(category: category);
-    });
+  showDialogue({required BuildContext context, required Profile category}) {
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ProfileDialogue(category: category);
+        });
   }
 }

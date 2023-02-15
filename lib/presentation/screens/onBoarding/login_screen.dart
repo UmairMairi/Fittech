@@ -5,8 +5,10 @@ import 'package:fit_tech/presentation/screens/onBoarding/recover_password_screen
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -17,14 +19,16 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   static const String tag = "login_screen";
-  final TextEditingController emailController = TextEditingController(text: Singleton.isDev?"test@mail.com":"");
-  final TextEditingController passwordController = TextEditingController(text: Singleton.isDev?"123456":"");
+  final TextEditingController emailController =
+      TextEditingController(text: Singleton.isDev ? "test@mail.com" : "");
+  final TextEditingController passwordController =
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
+  bool isEnabled = false;
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         body: Form(
@@ -76,21 +80,18 @@ class LoginScreen extends StatelessWidget {
                       isObscure: false,
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      onChanged: (val){
+                      onChanged: (val) {
                         context.read<LoginProvider>().setEmail(val = val);
                       },
                       validator: (val) {
                         if (val == null && val!.isEmpty) {
                           return "El correo ingresado no está registrado";
-                        }
-                        else if (!isEmail(val)) {
+                        } else if (!isEmail(val)) {
                           return "El correo ingresado no está registrado";
-                        }
-                        else {
+                        } else {
                           return null;
                         }
                       },
-
                     ),
                     const SizedBox(
                       height: 30.0,
@@ -101,8 +102,8 @@ class LoginScreen extends StatelessWidget {
                       isObscure: true,
                       controller: passwordController,
                       keyboardType: TextInputType.visiblePassword,
-                      onChanged: (val){
-                        context.read<LoginProvider>().setPassword(val =val);
+                      onChanged: (val) {
+                        context.read<LoginProvider>().setPassword(val = val);
                       },
                       validator: (val) {
                         if (val == null && val!.isEmpty) {
@@ -119,26 +120,40 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: Builder(
-                        builder: (context) {
-                          var bloc = context.watch<LoginProvider>();
-                          bool isEnabled = false;
-                          if((isEmail(bloc.email) && bloc.password.length>=6)||Singleton.isDev){
-                            isEnabled = true;
-                          }
-                          return PrimaryButton(
-                            title: Constants.signIn,
-                            textColor: MyColors.whiteColor,
-                            backgroundColor: MyColors.blackColor,
-                            enabled: isEnabled,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate() && isEnabled) {
-                                Navigator.pushNamed(context, DashboardScreen.tag);
-                              }
-                            },
-                          );
+                      child: Builder(builder: (context) {
+                        var bloc = context.watch<LoginProvider>();
+                        if (bloc.loginModel?.data != null &&
+                            bloc.loginModel?.data?.token != null) {
+                          GlobalState.token = bloc.loginModel?.data?.token;
+                          /* SharedPreferencesWork.saveTokenToSharedPreference(
+                              token: bloc.loginModel!.data!.token!);*/
+                          Future.delayed(Duration.zero, () {
+                            Navigator.pushNamed(context, DashboardScreen.tag);
+                          });
+                        } else if (bloc.isLoading == true) {
+                          return const MyCircularProgressIndicator();
+                        } else if ((isEmail(bloc.email) &&
+                                bloc.password.length >= 6) ||
+                            Singleton.isDev) {
+                          isEnabled = true;
                         }
-                      ),
+
+                        return PrimaryButton(
+                          title: Constants.signIn,
+                          textColor: MyColors.whiteColor,
+                          backgroundColor: MyColors.blackColor,
+                          enabled: isEnabled,
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate() &&
+                                isEnabled) {
+                              await bloc.setLoginModel(
+                                  context: context,
+                                  email: emailController.text,
+                                  password: passwordController.text);
+                            }
+                          },
+                        );
+                      }),
                     ),
                     const SizedBox(
                       height: 10.0,

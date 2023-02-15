@@ -1,13 +1,16 @@
 import 'package:fit_tech/logic/create_account_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
+import 'package:fit_tech/logic/oboarding/create_account_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/check_box.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,20 +21,21 @@ class RegisterScreen extends StatelessWidget {
   static const String tag = "register_screen";
 
   final TextEditingController fNameController =
-      TextEditingController(text: Singleton.isDev?"Angel":"");
+      TextEditingController(text: Singleton.isDev ? "Angel" : "");
   final TextEditingController lNameController =
-      TextEditingController(text: Singleton.isDev?"Valverde":"");
-  final TextEditingController emailController =
-      TextEditingController(text: Singleton.isDev?"angelvalverde@gmail.com":"");
+      TextEditingController(text: Singleton.isDev ? "Valverde" : "");
+  final TextEditingController emailController = TextEditingController(
+      text: Singleton.isDev ? "angelvalverde@gmail.com" : "");
   final TextEditingController passwordController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
   final TextEditingController confirmPasswordController =
-      TextEditingController(text: Singleton.isDev?"123456":"");
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
   bool cbState1 = false;
   bool cbState2 = false;
   bool cbState3 = false;
+  bool isEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -250,16 +254,25 @@ class RegisterScreen extends StatelessWidget {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<RegisterProvider>();
-                        bool isEnabled = false;
-                        if ((bloc.firstName.isNotEmpty &&
-                            bloc.lastName.isNotEmpty &&
-                            isEmail(bloc.email) &&
-                            (bloc.password.length >= 6) &&
-                            (bloc.confirmPassword.length >=
-                                6) /* && (bloc.password==bloc.confirmPassword)*/ &&
-                            bloc.info1Checked &&
-                            bloc.info2Checked &&
-                            bloc.info3Checked)||Singleton.isDev) {
+                        var registerProvider =
+                            context.watch<CreateAccountProvider>();
+                        if (registerProvider.userRegisterModel?["message"] ==
+                            "User Registered Successfully") {
+                          Future.delayed(Duration.zero, () {
+                            Navigator.pushNamed(context, OTPScreen.tag);
+                          });
+                        } else if (registerProvider.isLoading == true) {
+                          return const MyCircularProgressIndicator();
+                        } else if ((bloc.firstName.isNotEmpty &&
+                                bloc.lastName.isNotEmpty &&
+                                isEmail(bloc.email) &&
+                                (bloc.password.length >= 6) &&
+                                (bloc.confirmPassword.length >=
+                                    6) /* && (bloc.password==bloc.confirmPassword)*/ &&
+                                bloc.info1Checked &&
+                                bloc.info2Checked &&
+                                bloc.info3Checked) ||
+                            Singleton.isDev) {
                           isEnabled = true;
                         }
                         return PrimaryButton(
@@ -267,10 +280,19 @@ class RegisterScreen extends StatelessWidget {
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate() && isEnabled) {
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate() &&
+                                isEnabled) {
                               if (cbState1 && cbState2 && cbState3) {
-                                Navigator.pushNamed(context, OTPScreen.tag);
+                                GlobalState.email=emailController.text;
+                                GlobalState.password=passwordController.text;
+                                await SharedPreferencesWork.clearSharePreferenceForRecoverPassword();
+                                await registerProvider.setUserRegisterModel(
+                                    context: context,
+                                    firstName: fNameController.text,
+                                    lastName: lNameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text);
                               } else {
                                 showMessage(
                                     context: context,

@@ -4,7 +4,6 @@ import 'package:fit_tech/presentation/screens/dialogue/add_note_dialogue.dart';
 import 'package:fit_tech/presentation/screens/dialogue/dialogue_pause.dart';
 import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
 import 'package:fit_tech/presentation/screens/today_training_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/heart_rate_screen.dart';
 import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';

@@ -6,12 +6,11 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'family_history_screen.dart';
 
-class MedicalHistoryScreen extends StatelessWidget {
+class   MedicalHistoryScreen extends StatelessWidget {
   static const String tag = "medical_history_screen";
 
   const MedicalHistoryScreen({super.key});

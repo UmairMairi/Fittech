@@ -210,7 +210,7 @@ class _SubscribePlanScreenState extends State<SubscribePlanScreen> {
                             itemBuilder: (context, index) {
                               return Container(
                                 height: 60,
-                                padding: const EdgeInsets.symmetric(
+                                padding: const  EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
                                 color: (index % 2 == 0)
                                     ? MyColors.greyColor

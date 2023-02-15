@@ -1,15 +1,11 @@
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class OTPProvider extends ChangeNotifier {
-  OTPProvider();
+class DeleteAccountProvider extends ChangeNotifier{
 
-  String otp = "";
-  Map<String, dynamic>? emailVerifyAfterCreateAccountModel;
-
-
+  Map<String, dynamic>? deleteAccountResponseInMap;
   bool isLoading=false;
   setBoolValue(bool val){
     isLoading=val;
@@ -17,29 +13,20 @@ class OTPProvider extends ChangeNotifier {
   }
 
 
-
-
-  setPassword({required String val}) {
-    otp = val;
-    notifyListeners();
-  }
-
-
-  Future<void> setEmailVerifyAfterCreateAccountModel({
+  Future<void> setDeleteAccountResponseInMap({
     required BuildContext context,
-    required String code,
-    required String email,
+    required String token,
   }) async {
     try {
       setBoolValue(true);
-      emailVerifyAfterCreateAccountModel = await OnboardPostRepository.verifyAccount(
+      deleteAccountResponseInMap = await OnboardPostRepository.deleteAccountDecodeJsonString(
           context: context,
-          code: code,
-          email: email,
-          url: ApiConstants.verifyAccount);
+          token: token,
+
+          url: ApiConstants.deleteAccount);
       notifyListeners();
       setBoolValue(false);
-      if (emailVerifyAfterCreateAccountModel == null) {
+      if (deleteAccountResponseInMap == null) {
         showMessage(msg: "check yours internet connection", context: context);
         setBoolValue(false);
 
@@ -48,10 +35,12 @@ class OTPProvider extends ChangeNotifier {
       setBoolValue(false);
 
       showMessage(
-          msg: "varify api exception ${e.toString()}", context: context);
+          msg: "api exception ${e.toString()}", context: context);
       setBoolValue(false);
 
     }
   }
+
+
 
 }

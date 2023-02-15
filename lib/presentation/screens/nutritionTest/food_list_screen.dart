@@ -1,18 +1,6 @@
 import 'package:fit_tech/presentation/screens/dialogue/food_dialogue.dart';
-import 'package:fit_tech/presentation/screens/exercise_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/food_type_screen.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
-import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
-import 'package:fit_tech/presentation/screens/active_outdoor_screen.dart';
-import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
-import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
-import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/presentation/widgets/today_workout_home.dart';
 import 'package:fit_tech/utils/colors.dart';
-import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 

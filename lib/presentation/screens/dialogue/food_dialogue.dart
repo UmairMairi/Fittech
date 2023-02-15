@@ -1,5 +1,3 @@
-import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
-import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';

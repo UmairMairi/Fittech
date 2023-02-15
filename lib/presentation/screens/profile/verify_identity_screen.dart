@@ -1,10 +1,8 @@
 import 'package:fit_tech/logic/profile/verify_Identity_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -16,8 +14,10 @@ class VerifyIdentityScreen extends StatelessWidget {
   static const String tag = "verify_identity_screen";
 
   VerifyIdentityScreen({super.key});
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+  bool isEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -110,27 +110,34 @@ class VerifyIdentityScreen extends StatelessWidget {
                       Expanded(child: Container()),
                       SizedBox(
                         width: double.infinity,
-                        child: Builder(
-                          builder: (context) {
-                            var bloc = context.watch<VerifyIdentityProvider>();
-                            bool isEnabled = false;
-                            if ((bloc.password.length >= 6) ||
-                                Singleton.isDev) {
-                              isEnabled = true;
-                            }
-                            return PrimaryButton(
-                              title: Constants.verifyIdentityScreenContinue,
-                              textColor: MyColors.whiteColor,
-                              backgroundColor: MyColors.blackColor,
-                              enabled: isEnabled,
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.pushNamed(context, UpdatePasswordScreen.tag);
-                                }
-                              },
-                            );
+                        child: Builder(builder: (context) {
+                          var bloc = context.watch<VerifyIdentityProvider>();
+
+                          if (bloc.verifyIdentityInMap?["success"] == true) {
+                            Future.delayed(Duration.zero, () {
+                              Navigator.pushNamed(
+                                  context, UpdatePasswordScreen.tag);
+                            });
+                          } else if (bloc.isLoading == true) {
+                            return const MyCircularProgressIndicator();
+                          } else if ((bloc.password.length >= 6) ||
+                              Singleton.isDev) {
+                            isEnabled = true;
                           }
-                        ),
+                          return PrimaryButton(
+                            title: Constants.verifyIdentityScreenContinue,
+                            textColor: MyColors.whiteColor,
+                            backgroundColor: MyColors.blackColor,
+                            enabled: isEnabled,
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                await bloc.setVerifyIdentityInMap(
+                                    context: context,
+                                    password: passwordController.text);
+                              }
+                            },
+                          );
+                        }),
                       ),
                       const SizedBox(
                         height: 20.0,

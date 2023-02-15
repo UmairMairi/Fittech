@@ -18,7 +18,8 @@ class CurrentPerformanceScreen extends StatefulWidget {
   static const String tag = "current_performance_screen";
 
   @override
-  State<CurrentPerformanceScreen> createState() => _CurrentPerformanceScreenState();
+  State<CurrentPerformanceScreen> createState() =>
+      _CurrentPerformanceScreenState();
 }
 
 class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
@@ -29,24 +30,24 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
   void initState() {
     super.initState();
     list.add(MyPlansListModel(
-        image: Images.myPlansScreenGymBanner,
-        title: "Home",
-        quantity: "12 ejercicios",
-        duration: "15 minutos",
-        route: TodayTrainingScreen.tag,
+      image: Images.myPlansScreenGymBanner,
+      title: "Home",
+      quantity: "12 ejercicios",
+      duration: "15 minutos",
+      route: TodayTrainingScreen.tag,
     ));
     list.add(MyPlansListModel(
-        image: Images.myPlansScreenHomeBanner,
-        title: "Gym",
-        quantity: "12 ejercicios",
-        duration: "15 minutos",
+      image: Images.myPlansScreenHomeBanner,
+      title: "Gym",
+      quantity: "12 ejercicios",
+      duration: "15 minutos",
       route: GymScreen.tag,
     ));
     list.add(MyPlansListModel(
-        image: Images.myPlansScreenOutdoorBanner,
-        title: "Outdoor",
-        quantity: "12 ejercicios",
-        duration: "15 minutos",
+      image: Images.myPlansScreenOutdoorBanner,
+      title: "Outdoor",
+      quantity: "12 ejercicios",
+      duration: "15 minutos",
       route: OutdoorScreen.tag,
     ));
   }
@@ -103,7 +104,7 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal:20.0),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
                       Constants.currentPerformanceScreenLabel1,
                       style: MyTextStyle.heading3,
@@ -116,31 +117,29 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                     children: [
                       Expanded(
                           child: Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Text(
-                                  "4",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22.0),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  Constants
-                                      .trainingCompletedScreenExerciseLabel,
-                                  textAlign: TextAlign.start,
-                                  style: MyTextStyle.paragraph2,
-                                ),
-                              ],
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "4",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontFamily: 'Open Sance',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22.0),
                             ),
-                          )),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Text(
+                              Constants.trainingCompletedScreenExerciseLabel,
+                              textAlign: TextAlign.start,
+                              style: MyTextStyle.paragraph2,
+                            ),
+                          ],
+                        ),
+                      )),
                       Container(
                         height: 30,
                         width: 0.5,
@@ -148,30 +147,29 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                       ),
                       Expanded(
                           child: Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Text(
-                                  "4150.5",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22.0),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  Constants.trainingCompletedScreenKclLabel,
-                                  textAlign: TextAlign.start,
-                                  style: MyTextStyle.paragraph2,
-                                ),
-                              ],
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "4150.5",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontFamily: 'Open Sance',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22.0),
                             ),
-                          )),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Text(
+                              Constants.trainingCompletedScreenKclLabel,
+                              textAlign: TextAlign.start,
+                              style: MyTextStyle.paragraph2,
+                            ),
+                          ],
+                        ),
+                      )),
                       Container(
                         height: 30,
                         width: 0.5,
@@ -179,31 +177,29 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                       ),
                       Expanded(
                           child: Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Text(
-                                  "15:35",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Open Sance',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22.0),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  Constants
-                                      .trainingCompletedScreenDurationLabel,
-                                  textAlign: TextAlign.start,
-                                  style: MyTextStyle.paragraph2,
-                                ),
-                              ],
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "15:35",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontFamily: 'Open Sance',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22.0),
                             ),
-                          )),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Text(
+                              Constants.trainingCompletedScreenDurationLabel,
+                              textAlign: TextAlign.start,
+                              style: MyTextStyle.paragraph2,
+                            ),
+                          ],
+                        ),
+                      )),
                     ],
                   ),
                   const SizedBox(
@@ -212,18 +208,9 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 20,),
-            // Container(
-            //   color: MyColors.whiteColor,
-            //   padding: const EdgeInsets.symmetric(horizontal: 20),
-            //   child: TableCalendar(
-            //     firstDay: DateTime.utc(2010, 10, 16),
-            //     lastDay: DateTime.utc(2030, 3, 14),
-            //     focusedDay: DateTime.now(),
-            //     daysOfWeekVisible: true,
-            //     weekNumbersVisible: false,
-            //   ),
-            // ),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
                 color: MyColors.whiteColor,
                 padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20.0),
@@ -291,7 +278,7 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                     height: 20.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -301,7 +288,8 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                         ),
                         Text(
                           '2 entrenamientos',
-                          style: MyTextStyle.inputTitle.copyWith(color: MyColors.greyColor),
+                          style: MyTextStyle.inputTitle
+                              .copyWith(color: MyColors.greyColor),
                         ),
                       ],
                     ),
@@ -317,16 +305,21 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                     height: 20.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Image.asset(Images.currentPerformanceScreenIcon1,height: 76,width: 76,),
+                            Image.asset(
+                              Images.currentPerformanceScreenIcon1,
+                              height: 76,
+                              width: 76,
+                            ),
                             Expanded(
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -336,7 +329,9 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                       style: MyTextStyle.heading3,
                                       maxLines: 1,
                                     ),
-                                    const SizedBox(height: 10.0,),
+                                    const SizedBox(
+                                      height: 10.0,
+                                    ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -366,28 +361,42 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                         ),
                                         Expanded(
                                             child: Padding(
-                                              padding:
-                                              const EdgeInsets.symmetric(horizontal: 10.0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "12:58",
-                                                    textAlign: TextAlign.start,
-                                                    maxLines: 1,
-                                                    style: MyTextStyle.style.copyWith(color: MyColors.blackColor,fontSize: 15,fontWeight: FontWeight.w600),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Text('Duración',
-                                                    textAlign: TextAlign.start,
-                                                    maxLines: 1,
-                                                    style: MyTextStyle.style.copyWith(color: MyColors.greyColor,fontSize: 15,fontWeight: FontWeight.normal),
-                                                  ),
-                                                ],
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "12:58",
+                                                textAlign: TextAlign.start,
+                                                maxLines: 1,
+                                                style: MyTextStyle.style
+                                                    .copyWith(
+                                                        color:
+                                                            MyColors.blackColor,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                               ),
-                                            )),
+                                              const SizedBox(
+                                                height: 10.0,
+                                              ),
+                                              Text(
+                                                'Duración',
+                                                textAlign: TextAlign.start,
+                                                maxLines: 1,
+                                                style: MyTextStyle.style
+                                                    .copyWith(
+                                                        color:
+                                                            MyColors.greyColor,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
                                         Container(
                                           height: 30,
                                           width: 0.5,
@@ -395,28 +404,42 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                         ),
                                         Expanded(
                                             child: Padding(
-                                              padding:
-                                              const EdgeInsets.symmetric(horizontal: 10.0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "146.8",
-                                                    textAlign: TextAlign.start,
-                                                    maxLines: 1,
-                                                    style: MyTextStyle.style.copyWith(color: MyColors.blackColor,fontSize: 15,fontWeight: FontWeight.w600),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10.0,
-                                                  ),
-                                                  Text('Kcal',
-                                                    textAlign: TextAlign.start,
-                                                    maxLines: 1,
-                                                    style: MyTextStyle.style.copyWith(color: MyColors.greyColor,fontSize: 15,fontWeight: FontWeight.normal),
-                                                  ),
-                                                ],
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "146.8",
+                                                textAlign: TextAlign.start,
+                                                maxLines: 1,
+                                                style: MyTextStyle.style
+                                                    .copyWith(
+                                                        color:
+                                                            MyColors.blackColor,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                               ),
-                                            )),
+                                              const SizedBox(
+                                                height: 10.0,
+                                              ),
+                                              Text(
+                                                'Kcal',
+                                                textAlign: TextAlign.start,
+                                                maxLines: 1,
+                                                style: MyTextStyle.style
+                                                    .copyWith(
+                                                        color:
+                                                            MyColors.greyColor,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
                                       ],
                                     ),
                                   ],
@@ -426,27 +449,37 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                           ],
                         ),
                         InkWell(
-                          onTap: (){
-                            Navigator.pushNamed(context, TrainingNotesDetailScreen.tag);
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, TrainingNotesDetailScreen.tag);
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical:10.0,horizontal: 10.0),
-                            margin: const EdgeInsets.symmetric(vertical:10.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            margin: const EdgeInsets.symmetric(vertical: 10.0),
                             decoration: BoxDecoration(
-                              color: MyColors.lightGreyColor,
-                              borderRadius: BorderRadius.circular(10.0)
-                            ),
+                                color: MyColors.lightGreyColor,
+                                borderRadius: BorderRadius.circular(10.0)),
                             child: Row(
                               children: [
-                                Expanded(child: Text('NOTAS',style: MyTextStyle.style.copyWith(color: MyColors.blackColor),)),
+                                Expanded(
+                                    child: Text(
+                                  'NOTAS',
+                                  style: MyTextStyle.style
+                                      .copyWith(color: MyColors.blackColor),
+                                )),
                                 Container(
                                     padding: const EdgeInsets.all(5.0),
-                                    margin: const EdgeInsets.symmetric(horizontal:5.0),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: MyColors.blackColor
-                                  ),
-                                    child: Text('2',style: MyTextStyle.style.copyWith(color: MyColors.whiteColor),)),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 5.0),
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: MyColors.blackColor),
+                                    child: Text(
+                                      '2',
+                                      style: MyTextStyle.style
+                                          .copyWith(color: MyColors.whiteColor),
+                                    )),
                                 const Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   color: MyColors.greyMediumColor,
@@ -470,11 +503,15 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                     height: 20.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Image.asset(Images.currentPerformanceScreenIcon1,height: 76,width: 76,),
+                        Image.asset(
+                          Images.currentPerformanceScreenIcon1,
+                          height: 76,
+                          width: 76,
+                        ),
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -487,7 +524,9 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                   style: MyTextStyle.heading3,
                                   maxLines: 1,
                                 ),
-                                const SizedBox(height: 10.0,),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
                                 Row(
                                   children: [
                                     Expanded(
@@ -517,28 +556,36 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                     ),
                                     Expanded(
                                         child: Padding(
-                                          padding:
-                                          const EdgeInsets.symmetric(horizontal: 10.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "12:58",
-                                                textAlign: TextAlign.start,
-                                                maxLines: 1,
-                                                style: MyTextStyle.style.copyWith(color: MyColors.blackColor,fontSize: 15,fontWeight: FontWeight.w600),
-                                              ),
-                                              const SizedBox(
-                                                height: 10.0,
-                                              ),
-                                              Text('Duración',
-                                                textAlign: TextAlign.start,
-                                                maxLines: 1,
-                                                style: MyTextStyle.style.copyWith(color: MyColors.greyColor,fontSize: 15,fontWeight: FontWeight.normal),
-                                              ),
-                                            ],
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "12:58",
+                                            textAlign: TextAlign.start,
+                                            maxLines: 1,
+                                            style: MyTextStyle.style.copyWith(
+                                                color: MyColors.blackColor,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600),
                                           ),
-                                        )),
+                                          const SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Text(
+                                            'Duración',
+                                            textAlign: TextAlign.start,
+                                            maxLines: 1,
+                                            style: MyTextStyle.style.copyWith(
+                                                color: MyColors.greyColor,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
                                     Container(
                                       height: 30,
                                       width: 0.5,
@@ -546,28 +593,36 @@ class _CurrentPerformanceScreenState extends State<CurrentPerformanceScreen> {
                                     ),
                                     Expanded(
                                         child: Padding(
-                                          padding:
-                                          const EdgeInsets.symmetric(horizontal: 10.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "146.8",
-                                                textAlign: TextAlign.start,
-                                                maxLines: 1,
-                                                style: MyTextStyle.style.copyWith(color: MyColors.blackColor,fontSize: 15,fontWeight: FontWeight.w600),
-                                              ),
-                                              const SizedBox(
-                                                height: 10.0,
-                                              ),
-                                              Text('Kcal',
-                                                textAlign: TextAlign.start,
-                                                maxLines: 1,
-                                                style: MyTextStyle.style.copyWith(color: MyColors.greyColor,fontSize: 15,fontWeight: FontWeight.normal),
-                                              ),
-                                            ],
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "146.8",
+                                            textAlign: TextAlign.start,
+                                            maxLines: 1,
+                                            style: MyTextStyle.style.copyWith(
+                                                color: MyColors.blackColor,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600),
                                           ),
-                                        )),
+                                          const SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Text(
+                                            'Kcal',
+                                            textAlign: TextAlign.start,
+                                            maxLines: 1,
+                                            style: MyTextStyle.style.copyWith(
+                                                color: MyColors.greyColor,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
                                   ],
                                 ),
                               ],

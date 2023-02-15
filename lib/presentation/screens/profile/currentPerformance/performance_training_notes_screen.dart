@@ -34,7 +34,7 @@ class _TrainingNotesDetailScreenState
       child: Scaffold(
         backgroundColor: MyColors.lightGreyColor,
         body: ListView(
-          shrinkWrap: true,
+            shrinkWrap: true,
           children: [
             Container(
               color: MyColors.whiteColor,
