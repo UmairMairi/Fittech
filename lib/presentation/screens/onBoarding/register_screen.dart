@@ -256,14 +256,16 @@ class RegisterScreen extends StatelessWidget {
                         var bloc = context.watch<RegisterProvider>();
                         var registerProvider =
                             context.watch<CreateAccountProvider>();
-                        if (registerProvider.userRegisterModel?["message"] ==
-                            "User Registered Successfully") {
-                          Future.delayed(Duration.zero, () {
-                            Navigator.pushNamed(context, OTPScreen.tag);
-                          });
-                        } else if (registerProvider.isLoading == true) {
+                        // if (registerProvider.userRegisterModel?["message"] ==
+                        //     "User Registered Successfully") {
+                        //   Future.delayed(Duration.zero, () {
+                        //     Navigator.pushNamed(context, OTPScreen.tag);
+                        //   });
+                        // } else
+                          if (registerProvider.isLoading == true) {
                           return const MyCircularProgressIndicator();
-                        } else if ((bloc.firstName.isNotEmpty &&
+                        }
+                          else if ((bloc.firstName.isNotEmpty &&
                                 bloc.lastName.isNotEmpty &&
                                 isEmail(bloc.email) &&
                                 (bloc.password.length >= 6) &&

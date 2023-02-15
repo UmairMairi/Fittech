@@ -165,8 +165,9 @@ class AppRoute {
       case GymExerciseScreen.tag:
         var type = routeSettings.arguments as dynamic;
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                GymExerciseScreen(type: type,));
+            page: (context, animation, secondaryAnimation) => GymExerciseScreen(
+                  type: type,
+                ));
       case ReplaceExerciseScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -425,7 +426,7 @@ class AppRoute {
       case ImageViewerScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-            const ImageViewerScreen());
+                const ImageViewerScreen());
       case MeasurementHistoryScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

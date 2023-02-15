@@ -1,3 +1,4 @@
+import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +28,10 @@ class CreateAccountProvider with ChangeNotifier {
           password: password,
           url: ApiConstants.createAccount);
       notifyListeners();
+
+      if (userRegisterModel?["message"] == "User Registered Successfully" ) {
+          Navigator.pushNamed(context, OTPScreen.tag);
+      }
       isLoading=false;
     } catch (e) {
       showMessage(

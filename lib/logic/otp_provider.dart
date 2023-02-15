@@ -3,6 +3,8 @@ import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/material.dart';
 
+import '../presentation/screens/onBoarding/login_welcome_screen.dart';
+
 class OTPProvider extends ChangeNotifier {
   OTPProvider();
 
@@ -42,9 +44,13 @@ class OTPProvider extends ChangeNotifier {
       if (emailVerifyAfterCreateAccountModel == null) {
         showMessage(msg: "check yours internet connection", context: context);
         setBoolValue(false);
-
+      }else{
+        if (emailVerifyAfterCreateAccountModel?['message'] == "email verified successfully" || emailVerifyAfterCreateAccountModel?["message"] == "Email Already Verified") {
+            Navigator.pushNamed(context, LoginWelcomeScreen.tag);
+          }
+        }
       }
-    } catch (e) {
+     catch (e) {
       setBoolValue(false);
 
       showMessage(

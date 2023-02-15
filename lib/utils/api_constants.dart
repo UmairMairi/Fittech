@@ -13,4 +13,7 @@ class ApiConstants {
 
   static const String verifyIdentity="$baseUrl/account/verifyyouridentity/";
   static const String changePasswordAfterLogin="$baseUrl/account/changepassword/";
+
+  static const String getTermsConditions="$baseUrl/account/termsandcondition";
+  static const String getPolicyData="$baseUrl/account/datapolicy";
 }
