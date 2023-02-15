@@ -39,5 +39,7 @@ class SharedPreferencesWork {
   static Future<void> clearSharePreferenceForRecoverPassword() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(emailKeyForRecoverPassword);
+    await prefs.remove(emailKey);
+    await prefs.remove(tokenKey);
   }
 }

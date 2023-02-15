@@ -12,7 +12,6 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/shared_prefences_work.dart';
 
 class RecoverPasswordScreen extends StatelessWidget {
   RecoverPasswordScreen({super.key});
@@ -104,7 +103,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                         width: double.infinity,
                         child: Builder(builder: (context) {
                           var bloc = context.watch<RecoverPasswordProvider>();
-                          if (bloc.responseInMap?["message"] ==
+                          if (bloc.recoverPasswordInMap?["message"] ==
                               "email sent successfully") {
                             Future.delayed(Duration.zero, () {
                               Navigator.pushNamed(
@@ -125,7 +124,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                               if (_formKey.currentState!.validate() &&
                                   isEnabled) {
                                 GlobalState.email = emailController.text;
-                                await bloc.setResponseInMap(
+                                await bloc.setRecoverPasswordInMap(
                                     context: context,
                                     email: emailController.text);
                               }

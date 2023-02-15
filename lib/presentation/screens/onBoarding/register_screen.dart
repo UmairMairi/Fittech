@@ -4,15 +4,16 @@ import 'package:fit_tech/presentation/screens/onBoarding/otp_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/check_box.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -35,7 +36,6 @@ class RegisterScreen extends StatelessWidget {
   bool cbState2 = false;
   bool cbState3 = false;
   bool isEnabled = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -256,27 +256,13 @@ class RegisterScreen extends StatelessWidget {
                         var bloc = context.watch<RegisterProvider>();
                         var registerProvider =
                             context.watch<CreateAccountProvider>();
-                        if (registerProvider.message?["message"] == "User Registered Successfully") {
+                        if (registerProvider.userRegisterModel?["message"] ==
+                            "User Registered Successfully") {
                           Future.delayed(Duration.zero, () {
                             Navigator.pushNamed(context, OTPScreen.tag);
                           });
                         } else if (registerProvider.isLoading == true) {
-                          return Center(
-                            child: RawMaterialButton(
-                              onPressed: () {},
-                              fillColor: MyColors.blackColor,
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0)),
-                              constraints: const BoxConstraints(),
-                              child: const SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      color: MyColors.whiteColor)),
-                            ),
-                          );
+                          return const MyCircularProgressIndicator();
                         } else if ((bloc.firstName.isNotEmpty &&
                                 bloc.lastName.isNotEmpty &&
                                 isEmail(bloc.email) &&
@@ -298,8 +284,10 @@ class RegisterScreen extends StatelessWidget {
                             if (_formKey.currentState!.validate() &&
                                 isEnabled) {
                               if (cbState1 && cbState2 && cbState3) {
-                                GlobalState.email= emailController.text;
-                                await registerProvider.setMessage(
+                                GlobalState.email=emailController.text;
+                                GlobalState.password=passwordController.text;
+                                await SharedPreferencesWork.clearSharePreferenceForRecoverPassword();
+                                await registerProvider.setUserRegisterModel(
                                     context: context,
                                     firstName: fNameController.text,
                                     lastName: lNameController.text,

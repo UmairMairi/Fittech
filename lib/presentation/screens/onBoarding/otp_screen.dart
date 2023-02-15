@@ -4,6 +4,7 @@ import 'package:fit_tech/logic/otp_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
@@ -26,7 +27,6 @@ class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController otpController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
   bool isEnabled = false;
-
 
   final _formKey = GlobalKey<FormState>();
 
@@ -67,15 +67,12 @@ class _OTPScreenState extends State<OTPScreen> {
     });
   }
 
-  String email = '';
 
   @override
   void initState() {
     super.initState();
     startTimer();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +130,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
-                              value.length < 6) {
+                              value.length < 4) {
                             return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
                           }
                           return null;
@@ -147,33 +144,16 @@ class _OTPScreenState extends State<OTPScreen> {
                       child: Builder(builder: (context) {
                         var bloc = context.watch<OTPProvider>();
 
-
-                         if(bloc.message!['message']!="incorrect verification code"){
-                          Navigator.pushNamed(
-                              context, LoginWelcomeScreen.tag);
-
-                        }
-                      else  if (bloc.isLoading == true) {
-                          RawMaterialButton(
-                              fillColor: MyColors.blackColor,
-                              elevation: 0.0,
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(color: MyColors.blackColor),
-                                borderRadius: BorderRadius.circular(2.0),
-                              ),
-                              onPressed: () {},
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(
-                                  minHeight: 0.0, minWidth: 0.0),
-                              child: const SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: CircularProgressIndicator(
-                                      strokeWidth: 2.5,
-                                      color: MyColors.whiteColor)));
-                        }
-                       else if ((bloc.otp.length >= 6) || Singleton.isDev) {
-                        isEnabled = true;
+                        if (bloc.emailVerifyAfterCreateAccountModel?['message'] !=
+                            "email verified successfully") {
+                          Future.delayed(Duration.zero, () {
+                            Navigator.pushNamed(
+                                context, LoginWelcomeScreen.tag);
+                          });
+                        } else if (bloc.isLoading == true) {
+                          return const MyCircularProgressIndicator();
+                        } else if ((bloc.otp.length >= 4) || Singleton.isDev) {
+                          isEnabled = true;
                         }
 
                         return PrimaryButton(
@@ -184,11 +164,10 @@ class _OTPScreenState extends State<OTPScreen> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate() &&
                                 isEnabled) {
-                              bloc.setMessage(
+                              await bloc.setEmailVerifyAfterCreateAccountModel(
                                   context: context,
                                   code: otpController.text,
                                   email: GlobalState.email!);
-
                             }
                           },
                         );

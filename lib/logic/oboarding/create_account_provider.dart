@@ -5,11 +5,11 @@ import 'package:flutter/cupertino.dart';
 import '../../data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 
 class CreateAccountProvider with ChangeNotifier {
-  Map<String, dynamic>? message;
+  Map<String, dynamic>? userRegisterModel;
 
   bool isLoading = false;
 
-  Future<void> setMessage(
+  Future<void> setUserRegisterModel(
       {required BuildContext context,
       required String firstName,
       required String lastName,
@@ -19,7 +19,7 @@ class CreateAccountProvider with ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      message = await OnboardPostRepository.createAccount(
+      userRegisterModel = await OnboardPostRepository.createAccount(
           context: context,
           firstName: firstName,
           lastName: lastName,
@@ -27,14 +27,10 @@ class CreateAccountProvider with ChangeNotifier {
           password: password,
           url: ApiConstants.createAccount);
       notifyListeners();
-      if (message == null) {
-        showMessage(msg: "check yours internet connection", context: context);
-        isLoading = false;
-        notifyListeners();
-      }
+      isLoading=false;
     } catch (e) {
       showMessage(
-          msg: "register api exception ${e.toString()}", context: context);
+          msg: "check yours internet connection ${e.toString()}", context: context);
       isLoading = false;
       notifyListeners();
     }

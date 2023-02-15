@@ -7,7 +7,7 @@ class RecoverPasswordProvider extends ChangeNotifier {
   RecoverPasswordProvider();
 
   String email = "";
-  Map<String, dynamic>? responseInMap;
+  Map<String, dynamic>? recoverPasswordInMap;
   bool isLoading = false;
 
   setBoolValue(bool val) {
@@ -15,20 +15,20 @@ class RecoverPasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setResponseInMap({
+  Future<void> setRecoverPasswordInMap({
     required BuildContext context,
     required String email,
   }) async {
     try {
       setBoolValue(true);
-      responseInMap =
+      recoverPasswordInMap =
           await OnboardPostRepository.recoverPasswordDecodeJsonString(
               context: context,
               email: email,
               url: ApiConstants.recoverPassword);
       notifyListeners();
       setBoolValue(false);
-      if (responseInMap == null) {
+      if (recoverPasswordInMap == null) {
         showMessage(msg: "response can't be null", context: context);
         setBoolValue(false);
       }

@@ -34,12 +34,14 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
   Widget build(BuildContext context) {
     final provider =
-        Provider.of<VerifyIdentityProvider>(context, listen: false);
+    Provider.of<VerifyIdentityProvider>(context, listen: false);
+
 
     return SafeArea(
       child: Scaffold(
@@ -164,15 +166,17 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         child: Builder(builder: (context) {
                           var bloc = context.watch<UpdatePasswordProvider>();
                           bool isEnabled = false;
-                          if (bloc.updatePasswordAfterLoginResponseInMap![
+                          if (bloc.updatePasswordAfterLoginResponseInMap?[
                                       "message"] ==
                                   "password changed Successfully" ||
-                              bloc.newPasswordResponseInMap!["message"] ==
+                              bloc.newPasswordResponseInMap?["message"] ==
                                   "Password Reset Successfully!") {
                             SharedPreferencesWork
                                 .clearSharePreferenceForRecoverPassword();
-                            Navigator.pushNamed(
-                                context, UpdatePasswordStatusScreen.tag);
+                            Future.delayed(Duration.zero, () {
+                              Navigator.pushNamed(
+                                  context, UpdatePasswordStatusScreen.tag);
+                            });
                           } else if (bloc.isLoading == true) {
                             return const MyCircularProgressIndicator();
                           } else if ((bloc.password.length >= 6 &&

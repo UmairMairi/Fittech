@@ -7,7 +7,7 @@ class OTPProvider extends ChangeNotifier {
   OTPProvider();
 
   String otp = "";
-  Map<String, dynamic>? message;
+  Map<String, dynamic>? emailVerifyAfterCreateAccountModel;
 
 
   bool isLoading=false;
@@ -25,21 +25,21 @@ class OTPProvider extends ChangeNotifier {
   }
 
 
-  Future<void> setMessage({
+  Future<void> setEmailVerifyAfterCreateAccountModel({
     required BuildContext context,
     required String code,
     required String email,
   }) async {
     try {
       setBoolValue(true);
-      message = await OnboardPostRepository.verifyAccount(
+      emailVerifyAfterCreateAccountModel = await OnboardPostRepository.verifyAccount(
           context: context,
           code: code,
           email: email,
           url: ApiConstants.verifyAccount);
       notifyListeners();
       setBoolValue(false);
-      if (message == null) {
+      if (emailVerifyAfterCreateAccountModel == null) {
         showMessage(msg: "check yours internet connection", context: context);
         setBoolValue(false);
 

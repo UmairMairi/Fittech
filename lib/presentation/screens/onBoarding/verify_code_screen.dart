@@ -140,6 +140,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                   Form(
                     key: _formKey,
                     child: TextFieldPrimary(
+                      controller: otpController,
                       isLabelRequired: true,
                       title: Constants.verifyCodeScreenCodeLabel,
                       isObscure: false,
@@ -167,7 +168,9 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                       if (bloc.forgotPasswordVerifiedCodeResponseInMap?[
                               "message"] ==
                           "email verified successfully") {
-                        Navigator.pushNamed(context, UpdatePasswordScreen.tag);
+                        Future.delayed(Duration.zero, () {
+                          Navigator.pushNamed(context, UpdatePasswordScreen.tag);
+                        });
                       } else if (bloc.isLoading == true) {
                         return const MyCircularProgressIndicator();
                       } else if ((bloc.code.length < 4) || Singleton.isDev) {
@@ -179,10 +182,10 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         textColor: MyColors.whiteColor,
                         backgroundColor: MyColors.blackColor,
                         enabled: isEnabled,
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate() && isEnabled) {
                             (GlobalState.email != null)
-                                ? bloc
+                                ? await bloc
                                     .setForgotPasswordVerifiedCodeResponseInMap(
                                         context: context,
                                         email: GlobalState.email!,

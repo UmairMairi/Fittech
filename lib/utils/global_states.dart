@@ -9,4 +9,5 @@ class GlobalState {
 
   static String? token;
   static String? email;
+  static String? password;
 }

@@ -26,10 +26,10 @@ class OnboardPostRepository {
         await ApiServices.postJson(url: url, body: data);
 
     try {
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && jsonDecode(response.body)["message"]=="User Registered Successfully"){
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "your Email already registered", context: context);
+        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -50,10 +50,10 @@ class OnboardPostRepository {
     var response =
         await ApiServices.postJson(url: url, body: data);
     try {
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 &&(jsonDecode(response.body)["message"]=="email verified successfully")) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "incorrect verification code", context: context);
+        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -103,7 +103,7 @@ class OnboardPostRepository {
           jsonDecode(response.body)["success"] == true) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "email not found", context: context);
+        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -129,7 +129,7 @@ class OnboardPostRepository {
         return jsonDecode(response.body);
       } else {
         showMessage(
-            msg: "must be enter correct email and code", context: context);
+            msg: "${ jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -144,7 +144,7 @@ class OnboardPostRepository {
       required String newPassword,
       required String email,
       required String url}) async {
-    var data = {'email': email, "code": newPassword};
+    var data = {'email': email, "new_password": newPassword};
     var response =
         await ApiServices.postJson(url: url, body: data);
     try {

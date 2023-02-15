@@ -1,10 +1,14 @@
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/intro_screen.dart';
 import 'package:fit_tech/presentation/screens/subscribe_plan_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
+import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginWelcomeScreen extends StatelessWidget {
   const LoginWelcomeScreen({super.key});
@@ -70,13 +74,37 @@ class LoginWelcomeScreen extends StatelessWidget {
       Expanded(child: Container()),
       SizedBox(
         width: double.infinity,
-        child: PrimaryButton(
-          title: Constants.continueLabelLoginWelcomeScreen,
-          textColor: MyColors.whiteColor,
-          backgroundColor: MyColors.redColor,
-          onPressed: (){
-            Navigator.pushNamed(context,IntroScreen.tag);
-          },
+        child: Builder(
+          builder: (context) {
+            var bloc = context.watch<LoginProvider>();
+
+            if (bloc.loginModel?.data != null &&
+                bloc.loginModel?.data?.token != null) {
+              GlobalState.token = bloc.loginModel?.data?.token;
+
+              Future.delayed(Duration.zero, () {
+                Navigator.pushNamed(context,IntroScreen.tag);
+              });
+            } else if (bloc.isLoading == true) {
+              return const MyCircularProgressIndicator();
+            }
+            return PrimaryButton(
+              title: Constants.continueLabelLoginWelcomeScreen,
+              textColor: MyColors.whiteColor,
+              backgroundColor: MyColors.redColor,
+              onPressed: () async {
+                if(GlobalState.email!=null&& GlobalState.password!=null){
+                  await bloc.setLoginModel(
+                      context: context,
+                      email: GlobalState.email!,
+                      password: GlobalState.password!);
+
+                }
+
+
+              },
+            );
+          }
         ),
       ),
       const SizedBox(
