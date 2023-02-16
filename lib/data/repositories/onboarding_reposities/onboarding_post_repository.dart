@@ -7,6 +7,8 @@ import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/pref_utils.dart';
+
 class OnboardPostRepository {
   static Future<Map<String, dynamic>?> createAccount(
       {required BuildContext context,
@@ -22,14 +24,16 @@ class OnboardPostRepository {
       "password": password
     };
 
-    var response =
-        await ApiServices.postJson(url: url, body: data);
+    var response = await ApiServices.postJson(url: url, body: data);
 
     try {
-      if (response.statusCode == 200 && jsonDecode(response.body)["message"]=="User Registered Successfully"){
+      if (response.statusCode == 200 &&
+          jsonDecode(response.body)["message"] ==
+              "User Registered Successfully") {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
+        showMessage(
+            msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -47,13 +51,15 @@ class OnboardPostRepository {
       'email': email,
     };
 
-    var response =
-        await ApiServices.postJson(url: url, body: data);
+    var response = await ApiServices.postJson(url: url, body: data);
     try {
-      if (response.statusCode == 200 &&(jsonDecode(response.body)["message"]=="email verified successfully")) {
+      if (response.statusCode == 200 &&
+          (jsonDecode(response.body)["message"] ==
+              "email verified successfully")) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
+        showMessage(
+            msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -70,14 +76,14 @@ class OnboardPostRepository {
       "password": password,
       'email': email,
     };
-    var response =
-        await ApiServices.postJson(url: url, body: data);
+    var response = await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "User Login Successfully") &&
           jsonDecode(response.body)["success"] == true) {
         var result = loginModelFromJson(response.body);
-        print(response.body);
+        PrefUtils.putString(
+            key: PrefUtils.loginModel, value: response.body ?? "");
         return result;
       } else {
         showMessage(msg: "invalid authentication", context: context);
@@ -96,15 +102,15 @@ class OnboardPostRepository {
     var data = {
       'email': email,
     };
-    var response =
-        await ApiServices.postJson(url: url, body: data);
+    var response = await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "email sent successfully") &&
           jsonDecode(response.body)["success"] == true) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
+        showMessage(
+            msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -120,8 +126,7 @@ class OnboardPostRepository {
           required String email,
           required String url}) async {
     var data = {'email': email, "code": code};
-    var response = await ApiServices.postJson(
-        url: url, body: data);
+    var response = await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] ==
@@ -130,7 +135,7 @@ class OnboardPostRepository {
         return jsonDecode(response.body);
       } else {
         showMessage(
-            msg: "${ jsonDecode(response.body)["message"]}", context: context);
+            msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -146,8 +151,7 @@ class OnboardPostRepository {
       required String email,
       required String url}) async {
     var data = {'email': email, "new_password": newPassword};
-    var response =
-        await ApiServices.postJson(url: url, body: data);
+    var response = await ApiServices.postJson(url: url, body: data);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] ==
@@ -155,7 +159,8 @@ class OnboardPostRepository {
           jsonDecode(response.body)["success"] == true) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "${jsonDecode(response.body)["message"]}", context: context);
+        showMessage(
+            msg: "${jsonDecode(response.body)["message"]}", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);
@@ -190,7 +195,8 @@ class OnboardPostRepository {
     if (kDebugMode) {
       print("Update Profile Request--> $data");
     }
-    var response = await ApiServices.postJson(url: url, body: data,token: GlobalState.token);
+    var response = await ApiServices.postJson(
+        url: url, body: data, token: GlobalState.token);
     if (kDebugMode) {
       print("Update Profile response--> ${response.body}");
     }
@@ -198,7 +204,6 @@ class OnboardPostRepository {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] == "Updated Successfully") &&
           jsonDecode(response.body)["success"] == true) {
-
         return jsonDecode(response.body);
       } else {
         showMessage(
@@ -215,8 +220,7 @@ class OnboardPostRepository {
       {required BuildContext context,
       String? token,
       required String url}) async {
-    var response =
-        await ApiServices.postJson(url: url, token: token);
+    var response = await ApiServices.postJson(url: url, token: token);
     try {
       if (response.statusCode == 200 &&
           (jsonDecode(response.body)["message"] ==
@@ -224,7 +228,8 @@ class OnboardPostRepository {
           jsonDecode(response.body)["success"] == true) {
         return jsonDecode(response.body);
       } else {
-        showMessage(msg: "${jsonDecode(response.body)["message"]} ", context: context);
+        showMessage(
+            msg: "${jsonDecode(response.body)["message"]} ", context: context);
       }
     } catch (e) {
       showMessage(msg: "decoding error", context: context);

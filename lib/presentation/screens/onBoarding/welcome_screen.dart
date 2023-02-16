@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
@@ -6,9 +8,15 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../data/models/on_boarding_model/login_model.dart';
+import '../../../utils/pref_utils.dart';
+import '../../../utils/singlton.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String tag = "welcome_screen";
@@ -23,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late VideoPlayerController _controller;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
     _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
     _controller.addListener(() {
@@ -32,6 +40,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _controller.setLooping(true);
     _controller.initialize().then((_) => setState(() {}));
     _controller.play();
+
+      var model = await PrefUtils.getString(key: PrefUtils.loginModel);
+      if (kDebugMode) {
+        print(model);
+      }
+      if(model!=null ){
+        if(model.isNotEmpty){
+          _controller.dispose();
+          var result = loginModelFromJson(model);
+          Singleton.userToken = result.data?.token;
+          Singleton.userModel = result;
+          Navigator.pushNamed(context, DashboardScreen.tag);
+
+        }
+      }
+
   }
 
 

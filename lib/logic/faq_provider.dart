@@ -9,6 +9,8 @@ import '../data/repositories/faq_repository/faq_repository.dart';
 import '../utils/my_utils.dart';
 
 class FaqProvider extends ChangeNotifier {
+
+
   FaqCategories? faqCategoriesModel;
   FaqQuestions? faqQuestionsModel;
   var faqCategoriesLoading = false;

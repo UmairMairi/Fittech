@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/models/faqData/FaqCategories.dart';
 import '../../../../logic/faq_provider.dart';
+import '../../../../utils/singlton.dart';
 
 class FAQScreen extends StatefulWidget {
   const FAQScreen({super.key});
@@ -83,7 +84,8 @@ class _FAQScreenState extends State<FAQScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, FAQDetailsScreen.tag,arguments:categoryList[index] );
+                          Singleton.pressedCategoryId=categoryList[index].id.toString();
+                          Navigator.pushNamed(context, FAQDetailsScreen.tag);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

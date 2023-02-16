@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import '../../../../data/models/faqData/FaqCategories.dart';
 import '../../../../data/models/faqData/FaqQuestions.dart';
 import '../../../../logic/faq_provider.dart';
+import '../../../../utils/singlton.dart';
 
 class FAQDetailsScreen extends StatefulWidget {
   const FAQDetailsScreen({super.key});
@@ -26,13 +27,12 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
   @override
   void initState() {
     super.initState();
-
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    final category=ModalRoute.of(context)!.settings.arguments as CategoryData;
-    getData(category.id.toString());
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -52,9 +52,9 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Expanded(
+                   Expanded(
                     child: Text(
-                      "Categoría 1",
+                      questionList[0].category?.name ?? "",
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading3,
                     ),
@@ -100,7 +100,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                               });
                             },
                             iconColor: MyColors.redColor,
-                            children: [getContent()],
+                            children: [getContent( questionList[index].answer ?? "")],
                           ),
                         ),
                         const Divider(height: 5,)
@@ -138,7 +138,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
 
   }
 
-  Widget getContent() {
+  Widget getContent(String detail) {
     return Theme(
       data: Theme.of(context),
       child: Column(
@@ -146,17 +146,15 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
           const Divider(height: 1,),
           Container(
             padding: const EdgeInsets.all(20.0),
-            child: const Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-              style: MyTextStyle.text1,
+            child:  Text(detail, style: MyTextStyle.text1,
             ),
           ),
         ],
       ),
     );
   }
-  getData(String categoryId) async {
-    var model = await faqProvider.getFaqQuestions(context: context, id: categoryId);
+  getData() async {
+    var model = await faqProvider.getFaqQuestions(context: context, id: Singleton.pressedCategoryId.toString());
     if (model != null) {
       setState(() {
         questionList = faqProvider.faqQuestionsModel?.data ?? [];
