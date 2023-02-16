@@ -8,6 +8,9 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/faqData/FaqCategories.dart';
+import '../../../../logic/faq_provider.dart';
+
 class FAQScreen extends StatefulWidget {
   const FAQScreen({super.key});
 
@@ -18,9 +21,13 @@ class FAQScreen extends StatefulWidget {
 }
 
 class _FAQScreenState extends State<FAQScreen> {
+
+  FaqProvider faqProvider=FaqProvider();
+  List<CategoryData> categoryList=[];
   @override
   void initState() {
     super.initState();
+    getData();
   }
 
   @override
@@ -68,7 +75,7 @@ class _FAQScreenState extends State<FAQScreen> {
               ),
             ),
             ListView.builder(
-                itemCount: 5,
+                itemCount: categoryList.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
@@ -76,7 +83,7 @@ class _FAQScreenState extends State<FAQScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, FAQDetailsScreen.tag);
+                          Navigator.pushNamed(context, FAQDetailsScreen.tag,arguments:categoryList[index] );
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -105,5 +112,13 @@ class _FAQScreenState extends State<FAQScreen> {
         ),
       ),
     );
+  }
+  getData() async {
+    var model = await faqProvider.getFaqCategories(context: context);
+    if (model != null) {
+      setState(() {
+        categoryList = faqProvider.faqCategoriesModel?.data ?? [];
+      });
+    }
   }
 }

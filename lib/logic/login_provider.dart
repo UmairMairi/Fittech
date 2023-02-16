@@ -2,6 +2,7 @@ import 'package:fit_tech/data/models/on_boarding_model/login_model.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -29,6 +30,7 @@ class LoginProvider extends ChangeNotifier {
          email: email,
          password: password,
          url: ApiConstants.loginAccount);
+     Singleton.userToken=loginModel?.data?.token;
      notifyListeners();
      setBoolValue(false);
      if (loginModel?.data == null) {

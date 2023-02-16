@@ -77,6 +77,7 @@ class OnboardPostRepository {
           (jsonDecode(response.body)["message"] == "User Login Successfully") &&
           jsonDecode(response.body)["success"] == true) {
         var result = loginModelFromJson(response.body);
+        print(response.body);
         return result;
       } else {
         showMessage(msg: "invalid authentication", context: context);

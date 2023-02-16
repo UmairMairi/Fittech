@@ -16,4 +16,7 @@ class ApiConstants {
 
   static const String getTermsConditions="$baseUrl/account/termsandcondition";
   static const String getPolicyData="$baseUrl/account/datapolicy";
+
+  static const String getFaqCategories="$baseUrl/account/faqcategories/";
+  static const String getFaqQuestions="$baseUrl/account/faqquestions/";
 }
