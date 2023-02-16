@@ -1,13 +1,21 @@
+import 'package:fit_tech/logic/policies_provider.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
-class PrivacyPolicyScreen extends StatelessWidget {
+class PrivacyPolicyScreen extends StatefulWidget {
   static const String tag = "privacy_policy_screen";
 
   const PrivacyPolicyScreen({super.key});
+
+  @override
+  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
+}
+
+class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
+  PoliciesProvider policiesProvider = PoliciesProvider();
+  String description = "";
 
   @override
   Widget build(BuildContext context) {
@@ -15,49 +23,33 @@ class PrivacyPolicyScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            const MyAppBar(title: Constants.privacyPolicyScreenTitle,),
+            const MyAppBar(
+              title: Constants.privacyPolicyScreenTitle,
+            ),
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:20.0),
-                    child: RichText(
-                      textAlign: TextAlign.start,
-                      text: const TextSpan(
-                          text: "",
-                          style: MyTextStyle.paragraph1,
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: "${Constants.privacyPolicyScreenInfoTitle1}\n\n",
-                                style: MyTextStyle.heading3),
-                            TextSpan(
-                                text: Constants.privacyPolicyScreenInfo1,
-                            ),
-                            TextSpan(
-                                text: "\n\n${Constants.privacyPolicyScreenInfoTitle2}\n\n",
-                                style: MyTextStyle.heading3),
-                            TextSpan(
-                                text: "${Constants.privacyPolicyScreenInfo2}\n",
-                            ),
-                            TextSpan(
-                                text: "\n\n${Constants.privacyPolicyScreenInfoTitle3}\n\n",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: MyColors.blackColor)),
-                            TextSpan(
-                                text: "${Constants.privacyPolicyScreenInfo3}\n",
-                            ),
-                          ]),
-                    ),
-                  )
-                ],
+              child: Html(
+                data: description,
+                tagsList: Html.tags..addAll(["bird", "flutter"]),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getTermsConditions();
+  }
+
+  getTermsConditions() async {
+    var model = await policiesProvider.getPolicyData(context: context);
+    if (model != null) {
+      setState(() {
+        description = policiesProvider.dataPolicyModel?.data?.description ?? "";
+      });
+    }
   }
 }

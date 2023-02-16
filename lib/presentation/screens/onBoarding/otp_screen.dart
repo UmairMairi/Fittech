@@ -71,7 +71,7 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   void initState() {
     super.initState();
-    startTimer();
+    // startTimer();
   }
 
   @override
@@ -143,27 +143,16 @@ class _OTPScreenState extends State<OTPScreen> {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<OTPProvider>();
-
-                        if (bloc.emailVerifyAfterCreateAccountModel?['message'] !=
-                            "email verified successfully") {
-                          Future.delayed(Duration.zero, () {
-                            Navigator.pushNamed(
-                                context, LoginWelcomeScreen.tag);
-                          });
-                        } else if (bloc.isLoading == true) {
+                       if (bloc.isLoading == true) {
                           return const MyCircularProgressIndicator();
-                        } else if ((bloc.otp.length >= 4) || Singleton.isDev) {
-                          isEnabled = true;
                         }
-
                         return PrimaryButton(
                           title: Constants.verifyLabel,
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
-                          enabled: isEnabled,
+                          enabled: (bloc.otp.length >= 4) || Singleton.isDev,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() &&
-                                isEnabled) {
+                            if (_formKey.currentState!.validate() && ((bloc.otp.length >= 4) || Singleton.isDev)) {
                               await bloc.setEmailVerifyAfterCreateAccountModel(
                                   context: context,
                                   code: otpController.text,

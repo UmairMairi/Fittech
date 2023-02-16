@@ -5,6 +5,10 @@ class Singleton {
   factory Singleton() {
     return _singleton;
   }
+  static String? userToken;
 
   Singleton._internal();
 }
+
+
+

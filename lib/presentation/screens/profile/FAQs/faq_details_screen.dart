@@ -7,6 +7,10 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/faqData/FaqCategories.dart';
+import '../../../../data/models/faqData/FaqQuestions.dart';
+import '../../../../logic/faq_provider.dart';
+
 class FAQDetailsScreen extends StatefulWidget {
   const FAQDetailsScreen({super.key});
 
@@ -17,13 +21,18 @@ class FAQDetailsScreen extends StatefulWidget {
 }
 
 class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
+  FaqProvider faqProvider=FaqProvider();
+  List<QuestionData> questionList=[];
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    final category=ModalRoute.of(context)!.settings.arguments as CategoryData;
+    getData(category.id.toString());
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -67,7 +76,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
               ),
             ),
             ListView.builder(
-                itemCount: 5,
+                itemCount: questionList.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
@@ -79,7 +88,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                           child: ExpansionTile(
                             title: Text(
-                              "Ejemplo de pregunta",
+                              questionList[index].question ?? "",
                               style: MyTextStyle.paragraph1.copyWith(
                                   color: isExpanded
                                       ? MyColors.redColor
@@ -126,6 +135,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
         ),
       ),
     );
+
   }
 
   Widget getContent() {
@@ -144,5 +154,13 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
         ],
       ),
     );
+  }
+  getData(String categoryId) async {
+    var model = await faqProvider.getFaqQuestions(context: context, id: categoryId);
+    if (model != null) {
+      setState(() {
+        questionList = faqProvider.faqQuestionsModel?.data ?? [];
+      });
+    }
   }
 }
