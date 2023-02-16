@@ -85,7 +85,8 @@ class _FAQScreenState extends State<FAQScreen> {
                       InkWell(
                         onTap: () {
                           Singleton.pressedCategoryId=categoryList[index].id.toString();
-                          Navigator.pushNamed(context, FAQDetailsScreen.tag);
+                          Navigator.pushNamed(context, FAQDetailsScreen.tag,
+                              arguments:categoryList[index]);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(

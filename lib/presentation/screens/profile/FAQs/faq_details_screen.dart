@@ -1,9 +1,4 @@
-import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
-import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
-import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +8,9 @@ import '../../../../logic/faq_provider.dart';
 import '../../../../utils/singlton.dart';
 
 class FAQDetailsScreen extends StatefulWidget {
-  const FAQDetailsScreen({super.key});
+  final CategoryData? category;
+
+  const FAQDetailsScreen({super.key, this.category});
 
   static const String tag = "faq_details_screen";
 
@@ -22,17 +19,20 @@ class FAQDetailsScreen extends StatefulWidget {
 }
 
 class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
-  FaqProvider faqProvider=FaqProvider();
-  List<QuestionData> questionList=[];
+  FaqProvider faqProvider = FaqProvider();
+  List<QuestionData> questionList = [];
+  CategoryData? data;
+
   @override
   void initState() {
     super.initState();
-    getData();
+    data = widget.category;
+    print("==================${data?.toJson()}=========================");
+    getData(data?.id.toString() ?? "");
   }
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -52,7 +52,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                       Navigator.pop(context);
                     },
                   ),
-                   Expanded(
+                  Expanded(
                     child: Text(
                       questionList[0].category?.name ?? "",
                       textAlign: TextAlign.center,
@@ -85,7 +85,8 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                     return Column(
                       children: [
                         Theme(
-                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: Colors.transparent),
                           child: ExpansionTile(
                             title: Text(
                               questionList[index].question ?? "",
@@ -100,10 +101,14 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                               });
                             },
                             iconColor: MyColors.redColor,
-                            children: [getContent( questionList[index].answer ?? "")],
+                            children: [
+                              getContent(questionList[index].answer ?? "")
+                            ],
                           ),
                         ),
-                        const Divider(height: 5,)
+                        const Divider(
+                          height: 5,
+                        )
                       ],
                     );
                   });
@@ -116,9 +121,9 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                           children: const [
                             Expanded(
                                 child: Text(
-                              "Ejemplo de pregunta",
-                              style: MyTextStyle.paragraph1,
-                            )),
+                                  "Ejemplo de pregunta",
+                                  style: MyTextStyle.paragraph1,
+                                )),
                             Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: MyColors.greyColor,
@@ -135,7 +140,6 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
         ),
       ),
     );
-
   }
 
   Widget getContent(String detail) {
@@ -143,18 +147,22 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
       data: Theme.of(context),
       child: Column(
         children: [
-          const Divider(height: 1,),
+          const Divider(
+            height: 1,
+          ),
           Container(
             padding: const EdgeInsets.all(20.0),
-            child:  Text(detail, style: MyTextStyle.text1,
+            child: Text(detail, style: MyTextStyle.text1,
             ),
           ),
         ],
       ),
     );
   }
-  getData() async {
-    var model = await faqProvider.getFaqQuestions(context: context, id: Singleton.pressedCategoryId.toString());
+
+  getData(String categoryId) async {
+    var model =
+    await faqProvider.getFaqQuestions(context: context, id: categoryId);
     if (model != null) {
       setState(() {
         questionList = faqProvider.faqQuestionsModel?.data ?? [];
