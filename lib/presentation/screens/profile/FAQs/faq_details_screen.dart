@@ -1,9 +1,4 @@
-import 'package:fit_tech/data/models/profile_model.dart';
-import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
-import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
-import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +7,9 @@ import '../../../../data/models/faqData/FaqQuestions.dart';
 import '../../../../logic/faq_provider.dart';
 
 class FAQDetailsScreen extends StatefulWidget {
-  const FAQDetailsScreen({super.key});
+  final CategoryData? category;
+
+  const FAQDetailsScreen({super.key, this.category});
 
   static const String tag = "faq_details_screen";
 
@@ -21,18 +18,20 @@ class FAQDetailsScreen extends StatefulWidget {
 }
 
 class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
-  FaqProvider faqProvider=FaqProvider();
-  List<QuestionData> questionList=[];
+  FaqProvider faqProvider = FaqProvider();
+  List<QuestionData> questionList = [];
+  CategoryData? data;
+
   @override
   void initState() {
     super.initState();
+    data = widget.category;
 
+    print("==================${data?.toJson()}=========================");
   }
 
   @override
   Widget build(BuildContext context) {
-    final category=ModalRoute.of(context)!.settings.arguments as CategoryData;
-    getData(category.id.toString());
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -85,7 +84,8 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                     return Column(
                       children: [
                         Theme(
-                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: Colors.transparent),
                           child: ExpansionTile(
                             title: Text(
                               questionList[index].question ?? "",
@@ -103,7 +103,9 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                             children: [getContent()],
                           ),
                         ),
-                        const Divider(height: 5,)
+                        const Divider(
+                          height: 5,
+                        )
                       ],
                     );
                   });
@@ -135,7 +137,6 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
         ),
       ),
     );
-
   }
 
   Widget getContent() {
@@ -143,7 +144,9 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
       data: Theme.of(context),
       child: Column(
         children: [
-          const Divider(height: 1,),
+          const Divider(
+            height: 1,
+          ),
           Container(
             padding: const EdgeInsets.all(20.0),
             child: const Text(
@@ -155,8 +158,10 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
       ),
     );
   }
+
   getData(String categoryId) async {
-    var model = await faqProvider.getFaqQuestions(context: context, id: categoryId);
+    var model =
+        await faqProvider.getFaqQuestions(context: context, id: categoryId);
     if (model != null) {
       setState(() {
         questionList = faqProvider.faqQuestionsModel?.data ?? [];

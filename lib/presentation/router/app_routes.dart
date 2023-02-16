@@ -1,3 +1,4 @@
+import 'package:fit_tech/data/models/faqData/FaqCategories.dart';
 import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
@@ -286,9 +287,11 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const FAQScreen());
       case FAQDetailsScreen.tag:
+        var type = routeSettings.arguments as CategoryData?;
         return SlideRightRoute(
-            page: (context, animation, secondaryAnimation) =>
-                const FAQDetailsScreen());
+            page: (context, animation, secondaryAnimation) => FAQDetailsScreen(
+                  category: type,
+                ));
       case AboutScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -443,7 +446,6 @@ class AppRoute {
         return null;
     }
   }
-
   void dispose() {}
 }
 

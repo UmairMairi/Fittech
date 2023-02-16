@@ -83,7 +83,8 @@ class _FAQScreenState extends State<FAQScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, FAQDetailsScreen.tag,arguments:categoryList[index] );
+                          Navigator.pushNamed(context, FAQDetailsScreen.tag,
+                              arguments:categoryList[index]);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
