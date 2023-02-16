@@ -31,9 +31,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late VideoPlayerController _controller;
 
   @override
-  Future<void> initState() async {
+ initState()  {
     super.initState();
-    _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
+    videoHandler();
+  
+
+  }
+
+  videoHandler()async{
+  _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
     _controller.addListener(() {
       setState(() {});
     });
@@ -55,7 +61,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
         }
       }
-
   }
 
 
