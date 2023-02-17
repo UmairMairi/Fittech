@@ -31,6 +31,8 @@ class RecoverPasswordProvider extends ChangeNotifier {
       if (recoverPasswordInMap == null) {
         showMessage(msg: "response can't be null", context: context);
         setBoolValue(false);
+      }else{
+
       }
     } catch (e) {
       setBoolValue(false);

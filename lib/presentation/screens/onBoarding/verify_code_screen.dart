@@ -18,8 +18,8 @@ import '../../../logic/oboarding/create_account_provider.dart';
 import '../../../utils/ScreenArguments.dart';
 
 class VerifyCodeScreen extends StatefulWidget {
-  final ScreenArguments? arguments;
-   const VerifyCodeScreen({super.key,this.arguments});
+  final String? email;
+   const VerifyCodeScreen({super.key,this.email});
 
   static const String tag = "verify_code_screen";
 
@@ -33,7 +33,6 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   final TextEditingController otpController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
   bool isEnabled = false;
-  ScreenArguments? screenArguments;
   String email="";
 
   final _formKey = GlobalKey<FormState>();
@@ -81,8 +80,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   @override
   void initState() {
     super.initState();
-   screenArguments=widget.arguments;
-   email=screenArguments?.email ?? "";
+   email=widget.email ?? "";
     startTimer();
   }
 

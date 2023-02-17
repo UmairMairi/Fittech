@@ -121,9 +121,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 RecoverPasswordScreen());
       case VerifyCodeScreen.tag:
+        var arguments = routeSettings.arguments as String?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const VerifyCodeScreen());
+                VerifyCodeScreen(arguments: arguments,));
       case TestIncompleteScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

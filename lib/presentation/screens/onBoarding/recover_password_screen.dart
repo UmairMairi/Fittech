@@ -110,7 +110,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                               "email sent successfully") {
                             Future.delayed(Duration.zero, () {
                               Navigator.pushNamed(
-                                  context, VerifyCodeScreen.tag,arguments:ScreenArguments(emailController.text) );
+                                  context, VerifyCodeScreen.tag,arguments:emailController.text );
                             });
                           } else if (bloc.isLoading == true) {
                             return const MyCircularProgressIndicator();
@@ -154,6 +154,5 @@ class RecoverPasswordScreen extends StatelessWidget {
 
 class ScreenArguments {
   final String email;
-
   ScreenArguments(this.email);
 }

@@ -29,32 +29,10 @@ import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
-import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
-import 'package:fit_tech/presentation/screens/excersice/gym_exercise_screen.dart';
-import 'package:fit_tech/presentation/screens/exercise_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/add_measurements_scren.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
-import 'package:fit_tech/presentation/screens/replace_exercise_screen.dart';
-import 'package:fit_tech/presentation/screens/today_training_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/heart_beat_counter_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/test_after_training_screen.dart';
-import 'package:fit_tech/presentation/screens/trainingTest/training_test_screen.dart';
-import 'package:fit_tech/presentation/screens/training_completed_screen.dart';
-import 'package:fit_tech/presentation/screens/warmup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import 'presentation/screens/breaks_screen.dart';
-import 'presentation/screens/dashboard/nutrition_screen.dart';
-import 'presentation/screens/nutritionTest/food_list_screen.dart';
-import 'presentation/screens/nutritionTest/measurement_history_screen.dart';
-import 'presentation/screens/nutritionTest/recipie_list_screen.dart';
-import 'presentation/screens/nutritionTest/select_recipes_screen.dart';
-import 'presentation/screens/profile/testResults/choose_dates_screen.dart';
 
 void main() {
   runApp(MyApp());
