@@ -42,9 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _controller.initialize().then((_) => setState(() {}));
     _controller.play();
 
-
   }
-
 
   @override
   void dispose() {
