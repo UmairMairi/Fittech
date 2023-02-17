@@ -31,8 +31,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late VideoPlayerController _controller;
 
   @override
-  Future<void> initState() async {
+   initState()  {
     super.initState();
+    checkLogin();
     _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
     _controller.addListener(() {
       setState(() {});
@@ -41,20 +42,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _controller.initialize().then((_) => setState(() {}));
     _controller.play();
 
-      var model = await PrefUtils.getString(key: PrefUtils.loginModel);
-      if (kDebugMode) {
-        print(model);
-      }
-      if(model!=null ){
-        if(model.isNotEmpty){
-          _controller.dispose();
-          var result = loginModelFromJson(model);
-          Singleton.userToken = result.data?.token;
-          Singleton.userModel = result;
-          Navigator.pushNamed(context, DashboardScreen.tag);
-
-        }
-      }
 
   }
 
@@ -159,5 +146,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
     );
+  }
+  checkLogin() async {
+    var model = await PrefUtils.getString(key: PrefUtils.loginModel);
+    if (kDebugMode) {
+      print(model);
+    }
+    if(model!=null ){
+      if(model.isNotEmpty){
+        var result = loginModelFromJson(model);
+        Singleton.userToken = result.data?.token;
+        Singleton.userModel = result;
+        Navigator.pushNamed(context, DashboardScreen.tag);
+
+      }
+    }
   }
 }

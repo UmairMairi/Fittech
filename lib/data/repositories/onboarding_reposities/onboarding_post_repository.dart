@@ -7,7 +7,11 @@ import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/api_constants.dart';
 import '../../../utils/pref_utils.dart';
+import '../../../utils/singlton.dart';
+import '../../models/on_boarding_model/LogoutResponse.dart';
+import '../../models/on_boarding_model/SendCodeResponse.dart';
 
 class OnboardPostRepository {
   static Future<Map<String, dynamic>?> createAccount(
@@ -235,5 +239,40 @@ class OnboardPostRepository {
       showMessage(msg: "decoding error", context: context);
     }
     return null;
+  }
+
+
+
+  static Future<dynamic> SendCode({required String email}) async {
+    var data = {
+      "email": email,
+    };
+    var response = await ApiServices.postJson(body:data,url: ApiConstants.sendCode);
+    if (kDebugMode) {
+      print(response.body);
+    }
+    if (response.statusCode == 200) {
+      var result = sendCodeModelFromJson(response.body ?? "");
+      return result;
+    } else {
+      var result = json.decode(response.body ?? "");
+      return result;
+    }
+  }
+
+
+  static Future<dynamic> Logout() async {
+
+    var response = await ApiServices.postJson(url: ApiConstants.logoutUser,token: Singleton.userToken);
+    if (kDebugMode) {
+      print(response.body);
+    }
+    if (response.statusCode == 200) {
+      var result = logoutModelFromJson(response.body ?? "");
+      return result;
+    } else {
+      var result = json.decode(response.body ?? "");
+      return result;
+    }
   }
 }

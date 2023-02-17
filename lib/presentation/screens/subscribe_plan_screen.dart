@@ -350,7 +350,7 @@ class _SubscribePlanScreenState extends State<SubscribePlanScreen> {
                                   builder: (BuildContext context){
                                 return Padding(
                                   padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                                  child: const ProfileDialogue(category: Profile.coupon),
+                                  child:  ProfileDialogue(category: Profile.coupon),
                                 );
                               });
                             },

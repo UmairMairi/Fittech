@@ -1,6 +1,5 @@
 class ScreenArguments {
-  final String id;
-  final String name;
+  final String email;
 
-  ScreenArguments(this.id, this.name);
+  ScreenArguments(this.email);
 }

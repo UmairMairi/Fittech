@@ -12,6 +12,8 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../logic/oboarding/create_account_provider.dart';
+
 
 class RecoverPasswordScreen extends StatelessWidget {
   RecoverPasswordScreen({super.key});
@@ -22,6 +24,7 @@ class RecoverPasswordScreen extends StatelessWidget {
       TextEditingController(text: Singleton.isDev ? "test@mail.com" : "");
   final _formKey = GlobalKey<FormState>();
   bool isEnabled = false;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +110,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                               "email sent successfully") {
                             Future.delayed(Duration.zero, () {
                               Navigator.pushNamed(
-                                  context, VerifyCodeScreen.tag);
+                                  context, VerifyCodeScreen.tag,arguments:ScreenArguments(emailController.text) );
                             });
                           } else if (bloc.isLoading == true) {
                             return const MyCircularProgressIndicator();
@@ -145,4 +148,12 @@ class RecoverPasswordScreen extends StatelessWidget {
       ),
     );
   }
+
+
+}
+
+class ScreenArguments {
+  final String email;
+
+  ScreenArguments(this.email);
 }

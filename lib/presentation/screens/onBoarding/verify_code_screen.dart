@@ -14,8 +14,12 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../logic/oboarding/create_account_provider.dart';
+import '../../../utils/ScreenArguments.dart';
+
 class VerifyCodeScreen extends StatefulWidget {
-  const VerifyCodeScreen({super.key});
+  final ScreenArguments? arguments;
+   const VerifyCodeScreen({super.key,this.arguments});
 
   static const String tag = "verify_code_screen";
 
@@ -24,9 +28,13 @@ class VerifyCodeScreen extends StatefulWidget {
 }
 
 class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
+  CreateAccountProvider createAccountProvider=CreateAccountProvider();
+
   final TextEditingController otpController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
   bool isEnabled = false;
+  ScreenArguments? screenArguments;
+  String email="";
 
   final _formKey = GlobalKey<FormState>();
 
@@ -73,6 +81,8 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   @override
   void initState() {
     super.initState();
+   screenArguments=widget.arguments;
+   email=screenArguments?.email ?? "";
     startTimer();
   }
 
@@ -214,6 +224,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                               textColor: MyColors.blackColor,
                               backgroundColor: MyColors.whiteColor,
                               onPressed: () {
+                                getData(context);
                                 resetTimer();
                                 startTimer();
                                 myState(() {
@@ -289,5 +300,11 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
         ),
       ),
     );
+  }
+  getData(BuildContext context) async {
+    var model = await createAccountProvider.sendCode(context: context,email: email);
+    if (model != null) {
+
+    }
   }
 }

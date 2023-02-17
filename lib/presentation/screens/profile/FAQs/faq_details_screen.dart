@@ -22,6 +22,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
   FaqProvider faqProvider = FaqProvider();
   List<QuestionData> questionList = [];
   CategoryData? data;
+  String name="";
 
   @override
   void initState() {
@@ -54,7 +55,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      questionList[0].category?.name ?? "",
+                      name,
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading3,
                     ),
@@ -166,6 +167,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
     if (model != null) {
       setState(() {
         questionList = faqProvider.faqQuestionsModel?.data ?? [];
+        name=questionList[0].category?.name ?? "";
       });
     }
   }

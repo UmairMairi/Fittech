@@ -20,4 +20,7 @@ class ApiConstants {
 
   static const String getFaqCategories="$baseUrl/account/faqcategories/";
   static const String getFaqQuestions="$baseUrl/account/faqquestions/";
+
+  static const String logoutUser="$baseUrl/account/logout/";
+  static const String sendCode="$baseUrl/account/sendverificationcode/";
 }

@@ -1,4 +1,5 @@
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -9,18 +10,22 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../logic/oboarding/create_account_provider.dart';
+import '../../../utils/pref_utils.dart';
+
 class ProfileDialogue extends StatelessWidget {
   final Profile category;
   final String inputText;
   final Function(String)? onChange;
 
-  const ProfileDialogue({super.key,
+   ProfileDialogue({super.key,
     this.category = Profile.name,
     this.inputText = "",
     this.onChange});
-
+  CreateAccountProvider createAccountProvider=CreateAccountProvider();
   @override
   Widget build(BuildContext context) {
+
     final TextEditingController controller =
     TextEditingController(text: inputText);
     var selected = 0;
@@ -230,6 +235,8 @@ class ProfileDialogue extends StatelessWidget {
                             onChange!(controller.text.toString());
                           }
                           Navigator.pop(context);
+                        }else if(category == Profile.logout){
+                          getData(context);
                         }
                       },
                     );
@@ -260,6 +267,15 @@ class ProfileDialogue extends StatelessWidget {
       return Constants.closeSessionDialogueLabel;
     } else if (cat == Profile.coupon) {
       return Constants.couponDialogueName;
+    }
+  }
+
+  getData(BuildContext context) async {
+    var model = await createAccountProvider.LogoutUser(context: context);
+    if (model != null) {
+      PrefUtils.putString(
+          key: PrefUtils.loginModel, value: '');
+     Navigator.pushNamed(context, WelcomeScreen.tag);
     }
   }
 }
