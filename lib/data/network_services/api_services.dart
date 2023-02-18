@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class ApiServices {
-  static Future<Response> getJson({ Map<String, dynamic>? queryParam,String? token, required String url}) async {
+  static Future<Response> getJson(
+      {Map<String, dynamic>? queryParam,
+      String? token,
+      required String url}) async {
     Map<String, String> headers;
 
     if (token != null) {
@@ -66,7 +70,9 @@ class ApiServices {
 
     var request = http.MultipartRequest("POST", Uri.parse(url));
 
-    request.fields.addAll(body!);
+    if(body!=null){
+      request.fields.addAll(body);
+    }
     if (filePath != null) {
       filePath.forEach((key, value) async {
         request.files.add(await http.MultipartFile.fromPath(key, value));

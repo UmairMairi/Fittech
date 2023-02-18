@@ -1,6 +1,9 @@
+import 'package:fit_tech/presentation/widgets/shimmer.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../data/models/faqData/FaqCategories.dart';
 import '../../../../data/models/faqData/FaqQuestions.dart';
@@ -19,17 +22,18 @@ class FAQDetailsScreen extends StatefulWidget {
 }
 
 class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
-  FaqProvider faqProvider = FaqProvider();
-  List<QuestionData> questionList = [];
   CategoryData? data;
-  String name="";
 
   @override
   void initState() {
     super.initState();
+
     data = widget.category;
-    print("==================${data?.toJson()}=========================");
-    getData(data?.id.toString() ?? "");
+    if (kDebugMode) {
+      print("==================${data?.toJson()}=========================");
+    }
+
+    context.read<FaqProvider>().getFaqQuestions(context: context, id: data?.id.toString() ?? "");
   }
 
   @override
@@ -55,7 +59,7 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      name,
+                      data?.name ?? "",
                       textAlign: TextAlign.center,
                       style: MyTextStyle.heading3,
                     ),
@@ -76,67 +80,90 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
                 ],
               ),
             ),
-            ListView.builder(
-                itemCount: questionList.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  var isExpanded = false;
-                  return StatefulBuilder(builder: (context, myState) {
-                    return Column(
-                      children: [
-                        Theme(
-                          data: Theme.of(context)
-                              .copyWith(dividerColor: Colors.transparent),
-                          child: ExpansionTile(
-                            title: Text(
-                              questionList[index].question ?? "",
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: isExpanded
-                                      ? MyColors.redColor
-                                      : MyColors.blackColor),
+            Builder(
+              builder: (context) {
+                var provider = context.watch<FaqProvider>();
+                if(provider.faqQuestionsLoading){
+                  return ListView.builder(
+                      itemCount: 5,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Shimmer.fromColors(
+                          highlightColor: MyColors.shimmerHighlightColor,
+                          baseColor: MyColors.shimmerBaseColor,
+                          child: Container(
+                            color: Colors.white,
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 20),
+                                  child: Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(
+                                            "Ejemplo de categoría",
+                                            style: MyTextStyle.paragraph1,
+                                          )),
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: MyColors.greyColor,
+                                        size: 18,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const Divider()
+                              ],
                             ),
-                            onExpansionChanged: (val) {
-                              myState(() {
-                                isExpanded = val;
-                              });
-                            },
-                            iconColor: MyColors.redColor,
-                            children: [
-                              getContent(questionList[index].answer ?? "")
-                            ],
                           ),
-                        ),
-                        const Divider(
-                          height: 5,
-                        )
-                      ],
-                    );
-                  });
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20),
-                        child: Row(
-                          children: const [
-                            Expanded(
-                                child: Text(
-                                  "Ejemplo de pregunta",
-                                  style: MyTextStyle.paragraph1,
-                                )),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: MyColors.greyColor,
-                              size: 18,
+                        );
+                      });
+                }
+                return ListView.builder(
+                    itemCount: provider.faqQuestionsModel?.data?.length ?? 0,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      var list = provider.faqQuestionsModel?.data;
+                      var isExpanded = false;
+                      return StatefulBuilder(builder: (context, myState) {
+                        return Column(
+                          children: [
+                            Theme(
+                              data: Theme.of(context)
+                                  .copyWith(dividerColor: Colors.transparent),
+                              child: ExpansionTile(
+                                title: Text(
+                                  list?[index].question ?? "",
+                                  style: MyTextStyle.paragraph1.copyWith(
+                                      color: isExpanded
+                                          ? MyColors.redColor
+                                          : MyColors.blackColor),
+                                ),
+                                onExpansionChanged: (val) {
+                                  myState(() {
+                                    isExpanded = val;
+                                  });
+                                },
+                                iconColor: MyColors.redColor,
+                                children: [
+                                  getContent(list?[index].answer ?? "")
+                                ],
+                              ),
+                            ),
+                            const Divider(
+                              height: 5,
                             )
                           ],
-                        ),
-                      ),
-                      const Divider()
-                    ],
-                  );
-                }),
+                        );
+                      });
+                    },
+                );
+              }
+            ),
           ],
         ),
       ),
@@ -153,22 +180,11 @@ class _FAQDetailsScreenState extends State<FAQDetailsScreen> {
           ),
           Container(
             padding: const EdgeInsets.all(20.0),
-            child: Text(detail, style: MyTextStyle.text1,
+            child: Text(detail, style: MyTextStyle.text1,textAlign: TextAlign.start,
             ),
           ),
         ],
       ),
     );
-  }
-
-  getData(String categoryId) async {
-    var model =
-    await faqProvider.getFaqQuestions(context: context, id: categoryId);
-    if (model != null) {
-      setState(() {
-        questionList = faqProvider.faqQuestionsModel?.data ?? [];
-        name=questionList[0].category?.name ?? "";
-      });
-    }
   }
 }

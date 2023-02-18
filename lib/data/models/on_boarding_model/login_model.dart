@@ -20,7 +20,7 @@ class LoginModel {
   final bool? success;
   final int? statusCode;
   final String? message;
-  final Data? data;
+  Data? data;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         success: json["success"],
@@ -44,7 +44,7 @@ class Data {
   });
 
   final String? token;
-  final UserProfile? userProfile;
+  UserProfile? userProfile;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         token: json["token"],

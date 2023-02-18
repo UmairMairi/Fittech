@@ -12,6 +12,7 @@ import 'package:fit_tech/logic/excercise/rest_between_sequence_provider.dart';
 import 'package:fit_tech/logic/excercise/rest_between_series_provider.dart';
 import 'package:fit_tech/logic/excercise/training_completed_provider.dart';
 import 'package:fit_tech/logic/family_history_provider.dart';
+import 'package:fit_tech/logic/faq_provider.dart';
 import 'package:fit_tech/logic/heart_rate_provider.dart';
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/medical_history_provider.dart';
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<RegisterProvider>(
             create: (context) => RegisterProvider()),
         ChangeNotifierProvider<OTPProvider>(create: (context) => OTPProvider()),
+        ChangeNotifierProvider<FaqProvider>(create: (context) => FaqProvider()),
         ChangeNotifierProvider<RecoverPasswordProvider>(
             create: (context) => RecoverPasswordProvider()),
         ChangeNotifierProvider<VerifyCodeProvider>(

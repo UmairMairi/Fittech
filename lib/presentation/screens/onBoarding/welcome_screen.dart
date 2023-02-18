@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
@@ -11,6 +12,7 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../data/models/on_boarding_model/login_model.dart';
@@ -49,6 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           var result = loginModelFromJson(value);
           Singleton.userToken = result.data?.token;
           Singleton.userModel = result;
+          context.read<LoginProvider>().loginModel = Singleton.userModel;
           _controller.dispose();
           Navigator.pushReplacementNamed(context, DashboardScreen.tag);
         }

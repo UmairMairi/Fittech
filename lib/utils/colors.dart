@@ -12,6 +12,12 @@ class MyColors {
   static const Color lightGreyColor = Color(0xFFF0EFF5);
   static const Color extraLightGreyColor = Color(0xFFF3F3F3);
 
+
+  static const Color shimmerBaseColor =  Color(0xFFEAEAEA);
+  static const Color shimmerBaseColor2 =  Color(0xFFD4D4D4);
+  static const Color shimmerHighlightColor =  Color(0xFFF5F5F5);
+
+
   static const Gradient blackGradiant = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fit_tech/data/models/on_boarding_model/login_model.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
@@ -5,7 +7,9 @@ import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.da
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -50,6 +54,18 @@ class LoginProvider extends ChangeNotifier {
      isLoading = false;
      notifyListeners();
    }
+  }
+
+  setLoginModel({required UserProfile model}){
+    loginModel?.data?.userProfile = model;
+    notifyListeners();
+    if (kDebugMode) {
+      print("Updates user model--> ${loginModel?.toJson()}");
+    }
+    PrefUtils.putString(key: PrefUtils.loginModel, value: json.encode(loginModel?.toJson()));
+    if (kDebugMode) {
+      print("Updates user model Encoded--> ${loginModel?.toJson()}");
+    }
   }
 
   setEmail(String val) {

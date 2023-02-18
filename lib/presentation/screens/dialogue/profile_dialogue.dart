@@ -1,5 +1,6 @@
 import 'package:fit_tech/logic/create_account_provider.dart';
 import 'package:fit_tech/logic/delete_account_provider.dart';
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -13,29 +14,26 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class ProfileDialogue extends StatelessWidget {
   final Profile category;
   final String inputText;
   final Function(String)? onChange;
 
-   const ProfileDialogue({super.key,
-    this.category = Profile.name,
-    this.inputText = "",
-    this.onChange});
-
+  const ProfileDialogue(
+      {super.key,
+      this.category = Profile.name,
+      this.inputText = "",
+      this.onChange});
 
   @override
   Widget build(BuildContext context) {
-
-    final TextEditingController controller =
-    TextEditingController(text: inputText);
+    final TextEditingController controller = TextEditingController(text: inputText);
     var selected = 0;
 
-    if(category == Profile.gender){
-      if(inputText == "Hombre"){
+    if (category == Profile.gender) {
+      if (inputText == "Hombre") {
         selected = 0;
-      }else{
+      } else {
         selected = 1;
       }
     }
@@ -53,7 +51,7 @@ class ProfileDialogue extends StatelessWidget {
                   getName(category),
                   textAlign: TextAlign.start,
                   style:
-                  MyTextStyle.heading3.copyWith(color: MyColors.blackColor),
+                      MyTextStyle.heading3.copyWith(color: MyColors.blackColor),
                 ),
               ),
               IconButton(
@@ -66,7 +64,7 @@ class ProfileDialogue extends StatelessWidget {
                   size: 20,
                 ),
                 constraints:
-                const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
+                    const BoxConstraints(minWidth: 0.0, minHeight: 0.0),
               )
             ],
           ),
@@ -75,105 +73,108 @@ class ProfileDialogue extends StatelessWidget {
           ),
           category != Profile.gender
               ? category == Profile.deleteAccount
-              ? const Text(
-            Constants.deleteAccountDialogueInfo,
-            style: MyTextStyle.paragraph1,
-          )
-              : category == Profile.logout
-              ? const Text(
-            Constants.closeSessionDialogueInfo,
-            style: MyTextStyle.paragraph1,
-          )
-              : TextFieldPrimary(
-              isLabelRequired: true,
-              title: getName(category),
-              isObscure: false,
-              controller: controller,
-              validator: (value) {
-                if (value == null || value.isEmpty) {}
-                return null;
-              },
-              keyboardType: TextInputType.name)
+                  ? const Text(
+                      Constants.deleteAccountDialogueInfo,
+                      style: MyTextStyle.paragraph1,
+                    )
+                  : category == Profile.logout
+                      ? const Text(
+                          Constants.closeSessionDialogueInfo,
+                          style: MyTextStyle.paragraph1,
+                        )
+                      : TextFieldPrimary(
+                          isLabelRequired: true,
+                          title: getName(category),
+                          isObscure: false,
+                          controller: controller,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {}
+                            return null;
+                          },
+                          keyboardType: TextInputType.name)
               : StatefulBuilder(builder: (context, myState) {
-            return Column(
-              children: [
-                Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        myState(() {
-                          selected = 0;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                                  "Hombre",
-                                  style: MyTextStyle.paragraph1
-                                      .copyWith(color: MyColors.blackColor),
-                                )),
-                            Container(
-                              height: 20,
-                              width: 20,
-                              margin: const EdgeInsets.only(right: 10),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: (selected == 0)
-                                          ? MyColors.redColor
-                                          : MyColors.greyColor,
-                                      width: (selected == 0) ? 5 : 1)),
-                            )
-                          ],
-                        ),
+                  return Column(
+                    children: [
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              myState(() {
+                                selected = 0;
+                              });
+                              (selected == 0)
+                                  ? onChange!("Hombre")
+                                  : onChange!("Mujer");
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                    "Hombre",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.blackColor),
+                                  )),
+                                  Container(
+                                    height: 20,
+                                    width: 20,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (selected == 0)
+                                                ? MyColors.redColor
+                                                : MyColors.greyColor,
+                                            width: (selected == 0) ? 5 : 1)),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          const Divider()
+                        ],
                       ),
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                                  "Mujer",
-                                  style: MyTextStyle.paragraph1
-                                      .copyWith(color: MyColors.blackColor),
-                                )),
-                            Container(
-                              height: 20,
-                              width: 20,
-                              margin: const EdgeInsets.only(right: 10),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: (selected == 1)
-                                          ? MyColors.redColor
-                                          : MyColors.greyColor,
-                                      width: (selected == 1) ? 5 : 1)),
-                            )
-                          ],
-                        ),
+                      Column(
+                        children: [
+                          InkWell(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                    "Mujer",
+                                    style: MyTextStyle.paragraph1
+                                        .copyWith(color: MyColors.blackColor),
+                                  )),
+                                  Container(
+                                    height: 20,
+                                    width: 20,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: (selected == 1)
+                                                ? MyColors.redColor
+                                                : MyColors.greyColor,
+                                            width: (selected == 1) ? 5 : 1)),
+                                  )
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              myState(() {
+                                selected = 1;
+                              });
+                            },
+                          ),
+                          const Divider()
+                        ],
                       ),
-                      onTap: () {
-                        myState(() {
-                          selected = 1;
-                        });
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-              ],
-            );
-          }),
+                    ],
+                  );
+                }),
           const SizedBox(
             height: 50,
           ),
@@ -182,7 +183,7 @@ class ProfileDialogue extends StatelessWidget {
               Expanded(
                 child: PrimaryButton(
                   title: ((category != Profile.deleteAccount) &&
-                      (category != Profile.logout))
+                          (category != Profile.logout))
                       ? Constants.ProfileDialogueButtonCancel
                       : Constants.deleteAccountDialogueButtonLabel1,
                   backgroundColor: MyColors.whiteColor,
@@ -190,7 +191,8 @@ class ProfileDialogue extends StatelessWidget {
                   borderColor: MyColors.blackColor,
                   enabled: true,
                   onPressed: () {
-                    if ((category != Profile.deleteAccount) && (category != Profile.logout)) {
+                    if ((category != Profile.deleteAccount) &&
+                        (category != Profile.logout)) {
                       Navigator.pop(context);
                     }
                   },
@@ -200,17 +202,19 @@ class ProfileDialogue extends StatelessWidget {
                 width: 10,
               ),
               Expanded(
-                child: Builder(
-                  builder: (context) {
-                    var provider =  context.watch<MyDataProvider>();
-                    var deleteAccountProvider =  context.watch<DeleteAccountProvider>();
-                    var registerProvider =  context.watch<RegisterProvider>();
-                    if(provider.isLoading || deleteAccountProvider.isLoading|| registerProvider.isLoading){
-                      return const LoadingButton();
-                    }
-                    return PrimaryButton(
+                child: Builder(builder: (context) {
+                  var provider = context.watch<MyDataProvider>();
+                  var deleteAccountProvider =
+                      context.watch<DeleteAccountProvider>();
+                  var registerProvider = context.watch<RegisterProvider>();
+                  if (provider.isLoading ||
+                      deleteAccountProvider.isLoading ||
+                      registerProvider.isLoading) {
+                    return const LoadingButton();
+                  }
+                  return PrimaryButton(
                       title: ((category != Profile.deleteAccount) &&
-                          (category != Profile.logout))
+                              (category != Profile.logout))
                           ? Constants.ProfileDialogueButtonSave
                           : Constants.deleteAccountDialogueButtonLabel2,
                       backgroundColor: MyColors.blackColor,
@@ -218,37 +222,100 @@ class ProfileDialogue extends StatelessWidget {
                       borderColor: MyColors.blackColor,
                       enabled: true,
                       onPressed: () async {
-                        if(category == Profile.deleteAccount){
-                          await context.read<DeleteAccountProvider>().deleteAccount(context: context, token: Singleton.userToken!);
-                        }else if(category == Profile.logout){
-                          await context.read<RegisterProvider>().logoutUser(context: context);
-                        } else if ((category != Profile.deleteAccount) && (category != Profile.logout) && onChange != null) {
-                          if (category == Profile.gender) {
-                            (selected == 0)
-                                ? onChange!("Hombre")
-                                :onChange!("Mujer");
-                          }else{
-                            switch(category){
-                              case Profile.name:{
-                                await context.read<MyDataProvider>().updateProfileData(context: context, firstName:controller.text.toString());
-                                break;}
-                              case Profile.lastName:{
-                                await context.read<MyDataProvider>().updateProfileData(context: context, lastName:controller.text.toString());
-                                break;}
-                              case Profile.email:{
-                                await context.read<MyDataProvider>().updateProfileData(context: context, email:controller.text.toString());
-                                break;}
-                              default:{}
-                            }
-                            onChange!(controller.text.toString());
+                        if (category == Profile.deleteAccount) {
+                          await context
+                              .read<DeleteAccountProvider>()
+                              .deleteAccount(
+                                  context: context,
+                                  token: Singleton.userToken!);
+                        } else if (category == Profile.logout) {
+                          await context
+                              .read<RegisterProvider>()
+                              .logoutUser(context: context);
+                        } else if ((category != Profile.deleteAccount) &&
+                            (category != Profile.logout) &&
+                            onChange != null) {
+                          // if (category == Profile.gender) {
+                          //   (selected == 0)
+                          //       ? onChange!("Hombre")
+                          //       : onChange!("Mujer");
+                          // }
+                          // else {
+                          switch (category) {
+                            case Profile.name:
+                              {
+                                await context
+                                    .read<MyDataProvider>()
+                                    .updateProfileData(
+                                        context: context,
+                                        firstName: controller.text.toString(),
+                                        onSuccess: (val) {
+                                          if (val != null) {
+                                            Provider.of<LoginProvider>(context,
+                                                    listen: false)
+                                                .setLoginModel(model: val);
+                                          }
+                                        });
+                                break;
+                              }
+                            case Profile.lastName:
+                              {
+                                await context
+                                    .read<MyDataProvider>()
+                                    .updateProfileData(
+                                        context: context,
+                                        lastName: controller.text.toString(),
+                                        onSuccess: (val) {
+                                          if (val != null) {
+                                            Provider.of<LoginProvider>(context,
+                                                    listen: false)
+                                                .setLoginModel(model: val);
+                                          }
+                                        });
+                                break;
+                              }
+                            case Profile.email:
+                              {
+                                await context
+                                    .read<MyDataProvider>()
+                                    .updateProfileData(
+                                        context: context,
+                                        email: controller.text.toString(),
+                                        onSuccess: (val) {
+                                          if (val != null) {
+                                            Provider.of<LoginProvider>(context,
+                                                    listen: false)
+                                                .setLoginModel(model: val);
+                                          }
+                                        });
+                                break;
+                              }
+                            case Profile.gender:
+                              {
+                                await context
+                                    .read<MyDataProvider>()
+                                    .updateProfileData(
+                                        context: context,
+                                        gender: (selected == 0)
+                                            ? "Hombre"
+                                            : "Mujer",
+                                        onSuccess: (val) {
+                                          if (val != null) {
+                                            Provider.of<LoginProvider>(context, listen: false).setLoginModel(model: val);
+                                          }
+                                        });
+                                break;
+                              }
+                            default:
+                              {}
                           }
-                          Navigator.pop(context);
+                          onChange!(controller.text.toString());
                         }
-
-                      },
-                    );
-                  }
-                ),
+                        Navigator.pop(context);
+                      }
+                      // },
+                      );
+                }),
               ),
             ],
           )
@@ -276,5 +343,4 @@ class ProfileDialogue extends StatelessWidget {
       return Constants.couponDialogueName;
     }
   }
-
 }
