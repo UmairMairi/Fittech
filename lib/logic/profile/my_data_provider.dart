@@ -15,9 +15,9 @@ class MyDataProvider extends ChangeNotifier {
   MyDataProvider();
 
   File? imageFile;
-  String name = "Angle";
-  String lastName = "Castañeda";
-  String email = "ejemplo@gmail.com";
+  String name = Singleton.userModel?.data?.userProfile?.user?.firstName ?? "";
+  String lastName = Singleton.userModel?.data?.userProfile?.user?.lastName ?? "";
+  String email = Singleton.userModel?.data?.userProfile?.user?.email ?? "";
   String gender = "Hombre";
 
   Map<String, dynamic>? updateProfileInMap;
@@ -56,14 +56,13 @@ class MyDataProvider extends ChangeNotifier {
   //update profile
   Future<void> updateProfileImage({
     required BuildContext context,
-    File? file,
   }) async {
     try {
       setBoolValue(true);
       var model = await ProfilePostRepository.uploadImage(
           context: context,
           url: ApiConstants.changeImageProfile,
-          filePath: file!.path);
+          filePath: imageFile?.path ?? "");
 
       isLoading = false;
       notifyListeners();
@@ -129,13 +128,13 @@ class MyDataProvider extends ChangeNotifier {
       if (pickedFile != null) {
         imageFile = File(pickedFile.path);
         notifyListeners();
+        return imageFile;
       } else {
         return null;
       }
     } catch (e) {
       return null;
     }
-    return null;
   }
 
   setName({required String val}) {

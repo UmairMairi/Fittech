@@ -74,6 +74,7 @@ class Images {
   static const profileScreenNotesIcon = 'assets/images/icon_notes.png';
   static const profileScreenFaqIcon = 'assets/images/icon_faq.png';
   static const profileScreenAboutIcon = 'assets/images/icon_about.png';
+  static const iconProfileMyAccountScreen = 'assets/images/icon_account_placeholder.svg';
 
   //AppFounderScreen
   static const appFounderScreenBanner = 'assets/images/app_founder_banner.png';

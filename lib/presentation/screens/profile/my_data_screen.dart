@@ -9,6 +9,7 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class MyDataScreen extends StatefulWidget {
@@ -57,13 +58,12 @@ class _MyDataScreenState extends State<MyDataScreen> {
                             return Container(
                               height: 100,
                               width: 100,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: MyColors.greyColor,
-                              ),
+                              // decoration: const BoxDecoration(
+                              //   shape: BoxShape.circle,
+                              //   color: MyColors.greyColor,
+                              // ),
                               child:
-                                  (bloc.myDataScreenModel?.data?.profileImage !=
-                                              null &&
+                                  (bloc.myDataScreenModel?.data?.profileImage != null &&
                                           bloc.myDataScreenModel?.data != null)
                                       ? CircleAvatar(
                                           foregroundImage: NetworkImage(
@@ -71,8 +71,10 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                               bloc.myDataScreenModel!.data!
                                                   .profileImage!,
                                         ))
-                                      : Image.asset(
-                                          Images.profileScreenProfileIcon),
+                                      : SvgPicture.asset(
+                                          Images.iconProfileMyAccountScreen,
+                                          fit: BoxFit.cover,
+                                        ),
                             );
                           }),
                           const SizedBox(
@@ -88,9 +90,13 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 backgroundColor: MyColors.whiteColor,
                                 textColor: Colors.black,
                                 onPressed: () async {
-                                  var file = await bloc.pickImageFromGallery(context: context);
+                                  var file = await bloc.pickImageFromGallery(
+                                      context: context);
+                                  if (file != null) {
+                                    await bloc.updateProfileImage(
+                                        context: context);
+                                  }
 
-                                  await bloc.updateProfileImage(context: context, file: file);
                                   // await bloc.setMyDataScreenModel(
                                   //     context: context);
                                 },

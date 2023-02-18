@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/FAQs/faq_screen.dart';
@@ -11,6 +12,8 @@ import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -97,17 +100,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                     height: 110,
                     width: 110,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: MyColors.greyColor,
-                    ),
-                    child: Image.asset(Images.profileScreenProfileIcon)),
+                    // decoration: const BoxDecoration(
+                    //   shape: BoxShape.circle,
+                    //   color: MyColors.greyColor,
+                    // ),
+                    child: SvgPicture.asset(
+                      Images.iconProfileMyAccountScreen,
+                      fit: BoxFit.cover,
+                    )),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(
-                    "Angel Castañeda",
-                    style: MyTextStyle.style
-                        .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+                  child: Builder(
+                    builder: (context) {
+                      var provider = context.watch<MyDataProvider>();
+                      return Text(
+                        "${provider.name} ${provider.lastName}",
+                        style: MyTextStyle.style
+                            .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+                      );
+                    }
                   ),
                 ),
                 Container(
