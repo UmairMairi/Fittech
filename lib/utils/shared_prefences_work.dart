@@ -42,4 +42,9 @@ class SharedPreferencesWork {
     await prefs.remove(emailKey);
     await prefs.remove(tokenKey);
   }
+
+  static Future<void> clear() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
 }

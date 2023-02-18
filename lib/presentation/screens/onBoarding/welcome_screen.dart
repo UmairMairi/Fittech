@@ -33,7 +33,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
    initState()  {
     super.initState();
-    checkLogin();
     _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
     _controller.addListener(() {
       setState(() {});
@@ -41,7 +40,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _controller.setLooping(true);
     _controller.initialize().then((_) => setState(() {}));
     _controller.play();
-
+    PrefUtils.getString(key: PrefUtils.loginModel).then((value){
+      if(value!=null ){
+        if(value.isNotEmpty){
+          if (kDebugMode) {
+            print(value);
+          }
+          var result = loginModelFromJson(value);
+          Singleton.userToken = result.data?.token;
+          Singleton.userModel = result;
+          _controller.dispose();
+          Navigator.pushReplacementNamed(context, DashboardScreen.tag);
+        }
+      }
+    });
   }
 
   @override
@@ -52,16 +64,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Stack(
           fit: StackFit.expand,
           children: [
-            // Image.asset(
-            //   Images.welcomeBackground,
-            //   fit: BoxFit.cover,
-            // ),
             VideoPlayer(_controller),
             Container(
               decoration: const BoxDecoration(),
@@ -93,7 +100,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: double.infinity,
                       child: PrimaryButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, LoginScreen.tag);
+                          Navigator.popAndPushNamed(context, LoginScreen.tag);
                         },
                         title: Constants.login,
                         backgroundColor: MyColors.blackColor,
@@ -144,20 +151,5 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
     );
-  }
-  checkLogin() async {
-    var model = await PrefUtils.getString(key: PrefUtils.loginModel);
-    if (kDebugMode) {
-      print(model);
-    }
-    if(model!=null ){
-      if(model.isNotEmpty){
-        var result = loginModelFromJson(model);
-        Singleton.userToken = result.data?.token;
-        Singleton.userModel = result;
-        Navigator.pushNamed(context, DashboardScreen.tag);
-
-      }
-    }
   }
 }

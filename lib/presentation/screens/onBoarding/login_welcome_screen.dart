@@ -74,37 +74,13 @@ class LoginWelcomeScreen extends StatelessWidget {
       Expanded(child: Container()),
       SizedBox(
         width: double.infinity,
-        child: Builder(
-          builder: (context) {
-            var bloc = context.watch<LoginProvider>();
-
-            if (bloc.loginModel?.data != null &&
-                bloc.loginModel?.data?.token != null) {
-              GlobalState.token = bloc.loginModel?.data?.token;
-
-              Future.delayed(Duration.zero, () {
-                Navigator.pushNamed(context,IntroScreen.tag);
-              });
-            } else if (bloc.isLoading == true) {
-              return const MyCircularProgressIndicator();
-            }
-            return PrimaryButton(
-              title: Constants.continueLabelLoginWelcomeScreen,
-              textColor: MyColors.whiteColor,
-              backgroundColor: MyColors.redColor,
-              onPressed: () async {
-                if(GlobalState.email!=null&& GlobalState.password!=null){
-                  await bloc.setLoginModel(
-                      context: context,
-                      email: GlobalState.email!,
-                      password: GlobalState.password!);
-
-                }
-
-
-              },
-            );
-          }
+        child: PrimaryButton(
+          title: Constants.continueLabelLoginWelcomeScreen,
+          textColor: MyColors.whiteColor,
+          backgroundColor: MyColors.redColor,
+          onPressed: () async {
+            Navigator.pushNamed(context,IntroScreen.tag);
+          },
         ),
       ),
       const SizedBox(

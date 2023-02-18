@@ -1,9 +1,11 @@
+import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/repositories/profile_repository/profile_repository.dart';
-import '../../utils/global_states.dart';
 
 class VerifyIdentityProvider extends ChangeNotifier {
   String password = "";
@@ -14,29 +16,41 @@ class VerifyIdentityProvider extends ChangeNotifier {
   }
 
   bool isLoading = false;
-  Map<String, dynamic>? verifyIdentityInMap;
+  SuccessResponseGeneric? verifyIdentityInMap;
 
   setIsLoading(bool val) {
     isLoading = val;
     notifyListeners();
   }
 
-  Future<void> setVerifyIdentityInMap({required BuildContext context ,String? password}) async {
+  Future<void> verifyIdentity(
+      {required BuildContext context, String? password}) async {
     try {
-      setIsLoading(true);
-      verifyIdentityInMap =
-          await ProfilePostRepository.verifyIdentityDecodeJsonString(
-              context: context,
-              url: ApiConstants.verifyIdentity,
-              token: GlobalState.token,password: password);
+      isLoading = true;
       notifyListeners();
-      setIsLoading(false);
+      var model = await ProfilePostRepository.verifyIdentity(
+          context: context,
+          url: ApiConstants.verifyIdentity,
+          token: Singleton.userToken,
+          password: password);
+
+      isLoading = false;
+      notifyListeners();
+
+      if (model is SuccessResponseGeneric) {
+        verifyIdentityInMap = model;
+        notifyListeners();
+        Navigator.pushNamed(context, UpdatePasswordScreen.tag,
+            arguments: Types.updatePassword);
+      } else if (model is Map) {
+        showMessage(msg: "${model["message"]}", context: context);
+      } else {
+        showMessage(msg: "something went wrong", context: context);
+      }
     } catch (e) {
-      showMessage(
-          msg:
-              "please check internet connection or something else error${e.toString()}",
-          context: context);
-      setIsLoading(false);
+      isLoading = false;
+      notifyListeners();
+      showMessage(msg: "something went wrong", context: context);
     }
   }
 }

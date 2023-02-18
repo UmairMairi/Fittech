@@ -1,5 +1,6 @@
+import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
-import 'package:fit_tech/utils/api_constants.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class VerifyCodeProvider extends ChangeNotifier {
   VerifyCodeProvider();
 
   String code = "";
-  Map<String, dynamic>? forgotPasswordVerifiedCodeResponseInMap;
+  SuccessResponseGeneric? verifyCodeModel;
   bool isLoading = false;
 
   setCode({required String val}) {
@@ -20,35 +21,29 @@ class VerifyCodeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setForgotPasswordVerifiedCodeResponseInMap({
+  Future<void> verifyCode({
     required BuildContext context,
     required String email,
     required String code,
   }) async {
     try {
-      setBoolValue(true);
-      forgotPasswordVerifiedCodeResponseInMap = await OnboardPostRepository
-          .forgotPasswordVerifiedCodeDecodeJsonString(
-              context: context,
-              email: email,
-              code: code,
-              url: ApiConstants.forgotPasswordVerifiedCode);
+      isLoading = true;
       notifyListeners();
-      setBoolValue(false);
-      if (forgotPasswordVerifiedCodeResponseInMap == null) {
-        showMessage(
-            msg: "response can't be null please check internet connection",
-            context: context);
-        setBoolValue(false);
+      var model = await OnboardPostRepository.verifyCode(
+          context: context, email: email, code: code);
+      if (model is SuccessResponseGeneric) {
+        verifyCodeModel = model;
+        notifyListeners();
+        Navigator.pushNamed(context, UpdatePasswordScreen.tag,arguments: Types.forgotPassword);
+      } else if (model is Map) {
+        showMessage(msg: "${model["message"]}", context: context);
+      } else {
+        showMessage(msg: "something went wrong", context: context);
       }
     } catch (e) {
-      setBoolValue(false);
-
-      showMessage(
-          msg:
-              "check yours internet connection or something else error ${e.toString()}",
-          context: context);
-      setBoolValue(false);
+      isLoading = false;
+      notifyListeners();
+      showMessage(msg: "something went wrong", context: context);
     }
   }
 }

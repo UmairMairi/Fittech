@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:fit_tech/logic/create_account_provider.dart';
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/otp_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
+import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -24,14 +27,10 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  final TextEditingController otpController =
-      TextEditingController(text: Singleton.isDev ? "123456" : "");
+  final TextEditingController otpController = TextEditingController(text: Singleton.isDev ? "123456" : "");
   bool isEnabled = false;
-
   final _formKey = GlobalKey<FormState>();
-
   var hideResend = true;
-
   Timer? countdownTimer;
   Duration myDuration = const Duration(seconds: 30);
 
@@ -71,7 +70,7 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   void initState() {
     super.initState();
-    // startTimer();
+    startTimer();
   }
 
   @override
@@ -144,7 +143,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       child: Builder(builder: (context) {
                         var bloc = context.watch<OTPProvider>();
                        if (bloc.isLoading == true) {
-                          return const MyCircularProgressIndicator();
+                          return const LoadingButton();
                         }
                         return PrimaryButton(
                           title: Constants.verifyLabel,
@@ -153,10 +152,18 @@ class _OTPScreenState extends State<OTPScreen> {
                           enabled: (bloc.otp.length >= 4) || Singleton.isDev,
                           onPressed: () async {
                             if (_formKey.currentState!.validate() && ((bloc.otp.length >= 4) || Singleton.isDev)) {
-                              await bloc.setEmailVerifyAfterCreateAccountModel(
+                              await bloc.verifyEmail(
                                   context: context,
-                                  code: otpController.text,
-                                  email: GlobalState.email!);
+                                  email: context.read<RegisterProvider>().email,
+                                onSuccess: (){
+                                    context.read<LoginProvider>().login(
+                                      context: context,
+                                      email: context.read<RegisterProvider>().email,
+                                      password: context.read<RegisterProvider>().password,
+                                      isRegistration: true
+                                    );
+                                }
+                              );
                             }
                           },
                         );
@@ -168,7 +175,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     StatefulBuilder(builder: (context, myState) {
                       return Column(
                         children: [
-                          // if (!hideResend)
+                          if (!hideResend)
                           SizedBox(
                             width: double.infinity,
                             child: PrimaryButton(

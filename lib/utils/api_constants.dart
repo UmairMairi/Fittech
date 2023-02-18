@@ -8,7 +8,7 @@ class ApiConstants {
   static const String forgotPasswordVerifiedCode = "$baseUrl/account/forgetpasswordverifycode/";
   static const String setNewPassword = "$baseUrl/account/setnewpassword/";
   static const String updateProfile = "$baseUrl/account/updateprofile/";
-  static const String deleteAccount ="${baseUrl}account/deleteaccount/";
+  static const String deleteAccount ="$baseUrl/account/deleteaccount/";
   static const String changeImageProfile="$baseUrl/account/changeprofileimage/";
   static const String changeProfileImage="$baseUrl/account/changeprofileimage/";
 

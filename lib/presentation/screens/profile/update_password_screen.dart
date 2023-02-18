@@ -1,6 +1,8 @@
 import 'package:fit_tech/logic/profile/verify_Identity_provider.dart';
+import 'package:fit_tech/logic/recover_password_provider.dart';
 import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
+import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -16,8 +18,8 @@ import 'update_password_status_screen.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
   static const String tag = "update_password_screen";
-
-  UpdatePasswordScreen({super.key});
+  final Types type;
+  UpdatePasswordScreen({super.key, required this.type});
 
   @override
   State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
@@ -27,22 +29,16 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController passwordController = TextEditingController();
-
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider =
-    Provider.of<VerifyIdentityProvider>(context, listen: false);
-
-
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -110,9 +106,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                           isObscure: true,
                           controller: passwordController,
                           onChanged: (val) {
-                            context
-                                .read<UpdatePasswordProvider>()
-                                .setPassword(val: val);
+                            context.read<UpdatePasswordProvider>().setPassword(val: val);
                           },
                           validator: (value) {
                             if (value == null ||
@@ -147,8 +141,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                                 value.isEmpty ||
                                 value.length < 6) {
                               return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
-                            } else if (passwordController.text !=
-                                confirmPasswordController.text) {
+                            } else if ((passwordController.text != confirmPasswordController.text) && (widget.type == Types.forgotPassword)) {
                               return "Las contraseñas no coinciden.";
                             }
                             return null;
@@ -166,22 +159,10 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         child: Builder(builder: (context) {
                           var bloc = context.watch<UpdatePasswordProvider>();
                           bool isEnabled = false;
-                          if (bloc.updatePasswordAfterLoginResponseInMap?[
-                                      "message"] ==
-                                  "password changed Successfully" ||
-                              bloc.newPasswordResponseInMap?["message"] ==
-                                  "Password Reset Successfully!") {
-                            SharedPreferencesWork
-                                .clearSharePreferenceForRecoverPassword();
-                            Future.delayed(Duration.zero, () {
-                              Navigator.pushNamed(
-                                  context, UpdatePasswordStatusScreen.tag);
-                            });
-                          } else if (bloc.isLoading == true) {
-                            return const MyCircularProgressIndicator();
-                          } else if ((bloc.password.length >= 6 &&
-                                  bloc.confirmPassword.length >= 6) ||
-                              Singleton.isDev) {
+                          if (bloc.isLoading == true) {
+                            return const LoadingButton();
+                          }
+                          if ((bloc.password.length >= 6 && bloc.confirmPassword.length >= 6) || Singleton.isDev) {
                             isEnabled = true;
                           }
                           return PrimaryButton(
@@ -190,21 +171,15 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                             backgroundColor: MyColors.blackColor,
                             enabled: isEnabled,
                             onPressed: () async {
-                              if (_formKey.currentState!.validate() &&
-                                  isEnabled) {
-                                (provider.verifyIdentityInMap?['message'] ==
-                                        "Identity Verified Successfully")
-                                    ? await bloc
-                                        .setUpdatePasswordAfterLoginResponseInMap(
-                                            context: context,
-                                            currentPassword:
-                                                passwordController.text,
-                                            confirmPassword:
-                                                confirmPasswordController.text)
-                                    : await bloc.setNewPasswordResponseInMap(
-                                        context: context,
-                                        email: GlobalState.email!,
-                                        newPassword: passwordController.text);
+                              if (_formKey.currentState!.validate() && isEnabled) {
+                                if(widget.type == Types.updatePassword){
+                                  await bloc.updatePassword(context: context);
+                                }else{
+                                  await bloc.setNewPassword(
+                                      context: context,
+                                      email: context.read<RecoverPasswordProvider>().email,
+                                      newPassword: passwordController.text);
+                                }
                               }
                             },
                           );
@@ -224,3 +199,5 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
     );
   }
 }
+
+enum Types { updatePassword, forgotPassword }

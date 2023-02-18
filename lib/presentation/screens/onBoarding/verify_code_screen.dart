@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:fit_tech/logic/recover_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
+import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -15,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../logic/oboarding/create_account_provider.dart';
-import '../../../utils/ScreenArguments.dart';
 
 class VerifyCodeScreen extends StatefulWidget {
   final String? email;
@@ -173,15 +174,11 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     width: double.infinity,
                     child: Builder(builder: (context) {
                       var bloc = context.watch<VerifyCodeProvider>();
-                      if (bloc.forgotPasswordVerifiedCodeResponseInMap?[
-                              "message"] ==
-                          "email verified successfully") {
-                        Future.delayed(Duration.zero, () {
-                          Navigator.pushNamed(context, UpdatePasswordScreen.tag);
-                        });
-                      } else if (bloc.isLoading == true) {
-                        return const MyCircularProgressIndicator();
-                      } else if ((bloc.code.length < 4) || Singleton.isDev) {
+                      if (bloc.isLoading == true) {
+                        return const LoadingButton();
+                      }
+
+                      if ((bloc.code.length < 4) || Singleton.isDev) {
                         isEnabled = true;
                       }
 
@@ -192,15 +189,10 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         enabled: isEnabled,
                         onPressed: () async {
                           if (_formKey.currentState!.validate() && isEnabled) {
-                            (GlobalState.email != null)
-                                ? await bloc
-                                    .setForgotPasswordVerifiedCodeResponseInMap(
+                                await bloc.verifyCode(
                                         context: context,
-                                        email: GlobalState.email!,
-                                        code: otpController.text)
-                                : showMessage(
-                                    msg: "your email null", context: context);
-
+                                        email: context.read<RecoverPasswordProvider>().email,
+                                        code: otpController.text);
                           }
                         },
                       );

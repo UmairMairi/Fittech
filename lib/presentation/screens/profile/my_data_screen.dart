@@ -80,7 +80,6 @@ class _MyDataScreenState extends State<MyDataScreen> {
                           ),
                           Builder(builder: (context) {
                             var bloc = context.watch<MyDataProvider>();
-                            String imagePath = bloc.imageFile.toString();
                             return Container(
                               width: 150,
                               alignment: Alignment.center,
@@ -89,23 +88,11 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                 backgroundColor: MyColors.whiteColor,
                                 textColor: Colors.black,
                                 onPressed: () async {
-                                  await bloc.pickImageFromGallery(
-                                      context: context);
+                                  var file = await bloc.pickImageFromGallery(context: context);
 
-                                  Map<String, String> filePath = {
-                                    "profile_image": imagePath
-                                  };
-                                  await bloc.setChangeProfileImageInMap(
-                                      context: context, filePath: filePath);
-                                  if (bloc.changeProfileImageInMap?[
-                                              "message"] ==
-                                          "Updated Successfully" &&
-                                      bloc.changeProfileImageInMap?[
-                                              'success'] ==
-                                          true) {
-                                    await bloc.setMyDataScreenModel(
-                                        context: context);
-                                  }
+                                  await bloc.updateProfileImage(context: context, file: file);
+                                  // await bloc.setMyDataScreenModel(
+                                  //     context: context);
                                 },
                               ),
                             );
@@ -353,14 +340,15 @@ class _MyDataScreenState extends State<MyDataScreen> {
                   case Profile.email:
                     {
                       context.read<MyDataProvider>().setEmail(val: val);
-                    }break;
+                    }
+                    break;
                   case Profile.gender:
                     {
                       context.read<MyDataProvider>().setGender(val: val);
-                    }break;
-                  default:{
-
-                  }
+                    }
+                    break;
+                  default:
+                    {}
                 }
               },
             ),

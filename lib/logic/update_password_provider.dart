@@ -1,8 +1,11 @@
+import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/data/repositories/profile_repository/profile_repository.dart';
+import 'package:fit_tech/presentation/screens/profile/update_password_status_screen.dart';
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 
 class UpdatePasswordProvider extends ChangeNotifier {
@@ -10,30 +13,36 @@ class UpdatePasswordProvider extends ChangeNotifier {
 
   String password = "";
   String confirmPassword = "";
-  Map<String, dynamic>? newPasswordResponseInMap;
-  Map<String, dynamic>? updatePasswordAfterLoginResponseInMap;
+  SuccessResponseGeneric? newPasswordModel;
+  SuccessResponseGeneric? updatePasswordModel;
 
-  Future<void> setUpdatePasswordAfterLoginResponseInMap(
-      {required BuildContext context,
-      required String currentPassword,
-      required String confirmPassword}) async {
+  Future<void> updatePassword(
+      {required BuildContext context}) async {
     try {
-      setBoolValue(true);
-      updatePasswordAfterLoginResponseInMap =
-          await ProfilePostRepository.updatePasswordAfterLoginDecodeJsonString(
-              context: context,
-              oldPassword: currentPassword,
-              url: ApiConstants.changePasswordAfterLogin,
-              newPassword: confirmPassword,
-              token: GlobalState.token);
+      isLoading = true;
       notifyListeners();
-      setBoolValue(false);
+
+      var model = await ProfilePostRepository.updatePassword(
+          context: context,
+          oldPassword: password,
+          newPassword: confirmPassword,
+          token: Singleton.userToken);
+      isLoading = false;
+      notifyListeners();
+
+      if (model is SuccessResponseGeneric) {
+        updatePasswordModel = model;
+        notifyListeners();
+        Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
+      } else if (model is Map) {
+        showMessage(msg: "${model["message"]}", context: context);
+      } else {
+        showMessage(msg: "something went wrong", context: context);
+      }
     } catch (e) {
-      showMessage(
-          msg:
-              "check yours internet connection or something else error ${e.toString()}",
-          context: context);
-      setBoolValue(false);
+      isLoading = false;
+      notifyListeners();
+      showMessage(msg: "something went wrong", context: context);
     }
   }
 
@@ -54,32 +63,32 @@ class UpdatePasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setNewPasswordResponseInMap(
+  Future<void> setNewPassword(
       {required BuildContext context,
       required String email,
       required String newPassword}) async {
     try {
-      setBoolValue(true);
-      newPasswordResponseInMap =
-          await OnboardPostRepository.newPasswordDecodeJsonString(
-              context: context,
-              email: email,
-              url: ApiConstants.setNewPassword,
-              newPassword: newPassword);
+      isLoading = true;
       notifyListeners();
-      setBoolValue(false);
-      if (newPasswordResponseInMap == null) {
-        showMessage(msg: "check internet connection", context: context);
-        setBoolValue(false);
+      var model = await OnboardPostRepository.setNewPassword(
+          context: context, email: email, newPassword: newPassword);
+
+      isLoading = false;
+      notifyListeners();
+
+      if (model is SuccessResponseGeneric) {
+        newPasswordModel = model;
+        notifyListeners();
+        Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
+      } else if (model is Map) {
+        showMessage(msg: "${model["message"]}", context: context);
+      } else {
+        showMessage(msg: "something went wrong", context: context);
       }
     } catch (e) {
-      setBoolValue(false);
-
-      showMessage(
-          msg:
-              "check yours internet connection or something else error ${e.toString()}",
-          context: context);
-      setBoolValue(false);
+      isLoading = false;
+      notifyListeners();
+      showMessage(msg: "something went wrong", context: context);
     }
   }
 }

@@ -78,7 +78,7 @@ class UpdatePasswordStatusScreen extends StatelessWidget {
           backgroundColor: MyColors.redColor,
           borderColor: MyColors.redColor,
           onPressed: () {
-            Navigator.pushNamed(context, LoginScreen.tag);
+            Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
           },
         ),
       ),

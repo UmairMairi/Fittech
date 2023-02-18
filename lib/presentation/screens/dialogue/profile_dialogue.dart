@@ -1,28 +1,30 @@
+import 'package:fit_tech/logic/create_account_provider.dart';
+import 'package:fit_tech/logic/delete_account_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
-import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
+import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
-import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../logic/oboarding/create_account_provider.dart';
-import '../../../utils/pref_utils.dart';
 
 class ProfileDialogue extends StatelessWidget {
   final Profile category;
   final String inputText;
   final Function(String)? onChange;
 
-   ProfileDialogue({super.key,
+   const ProfileDialogue({super.key,
     this.category = Profile.name,
     this.inputText = "",
     this.onChange});
-  CreateAccountProvider createAccountProvider=CreateAccountProvider();
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -201,8 +203,10 @@ class ProfileDialogue extends StatelessWidget {
                 child: Builder(
                   builder: (context) {
                     var provider =  context.watch<MyDataProvider>();
-                    if(provider.isLoading){
-                      return const MyCircularProgressIndicator();
+                    var deleteAccountProvider =  context.watch<DeleteAccountProvider>();
+                    var registerProvider =  context.watch<RegisterProvider>();
+                    if(provider.isLoading || deleteAccountProvider.isLoading|| registerProvider.isLoading){
+                      return const LoadingButton();
                     }
                     return PrimaryButton(
                       title: ((category != Profile.deleteAccount) &&
@@ -214,7 +218,11 @@ class ProfileDialogue extends StatelessWidget {
                       borderColor: MyColors.blackColor,
                       enabled: true,
                       onPressed: () async {
-                        if ((category != Profile.deleteAccount) && (category != Profile.logout) && onChange != null) {
+                        if(category == Profile.deleteAccount){
+                          await context.read<DeleteAccountProvider>().deleteAccount(context: context, token: Singleton.userToken!);
+                        }else if(category == Profile.logout){
+                          await context.read<RegisterProvider>().logoutUser(context: context);
+                        } else if ((category != Profile.deleteAccount) && (category != Profile.logout) && onChange != null) {
                           if (category == Profile.gender) {
                             (selected == 0)
                                 ? onChange!("Hombre")
@@ -235,9 +243,8 @@ class ProfileDialogue extends StatelessWidget {
                             onChange!(controller.text.toString());
                           }
                           Navigator.pop(context);
-                        }else if(category == Profile.logout){
-                          getData(context);
                         }
+
                       },
                     );
                   }
@@ -270,12 +277,4 @@ class ProfileDialogue extends StatelessWidget {
     }
   }
 
-  getData(BuildContext context) async {
-    var model = await createAccountProvider.LogoutUser(context: context);
-    if (model != null) {
-      PrefUtils.putString(
-          key: PrefUtils.loginModel, value: '');
-     Navigator.pushNamed(context, WelcomeScreen.tag);
-    }
-  }
 }

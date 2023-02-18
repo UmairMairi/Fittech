@@ -29,20 +29,36 @@ import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
+import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
+import 'package:fit_tech/utils/singlton.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'data/models/on_boarding_model/login_model.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final AppRoute appRoute = AppRoute();
+  var initialRoute = WelcomeScreen.tag;
 
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -117,9 +133,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute: WelcomeScreen.tag,
+        initialRoute:WelcomeScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );
   }
+
 }

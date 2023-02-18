@@ -1,30 +1,33 @@
 import 'dart:convert';
 
+import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/data/models/profile_models/my_data_screen_model.dart';
 import 'package:fit_tech/data/network_services/api_services.dart';
+import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 
 class ProfilePostRepository {
-  static Future<Map<String, dynamic>?> changeProfileImageDecodeJsonString(
+  static Future<dynamic> uploadImage(
       {required BuildContext context,
-      Map<String, String>? filePath,
+      required String filePath,
       required String url}) async {
+    var data ={
+      "profile_image":filePath
+    };
     var response = await ApiServices.postMultiPartJson(
-        url: url, filePath: filePath);
+        url: ApiConstants.changeImageProfile, filePath: data);
 
-    try {
-      if (response.statusCode == 200 &&
-          jsonDecode(response.body)["success"] == true) {
-        return jsonDecode(response.body);
-      } else {
-        showMessage(msg: "Please enter image", context: context);
-      }
-    } catch (e) {
-      showMessage(msg: "decoding error", context: context);
+    if (kDebugMode) {
+      print("verify identity Request--> ${response.body}");
     }
-    return null;
+    if (response.statusCode == 200) {
+      return  successResponseGenericFromJson(response.body);
+    } else {
+      return jsonDecode(response.body);
+    }
   }
 
 //  method for change image in response you to get image
@@ -33,8 +36,8 @@ class ProfilePostRepository {
           {required BuildContext context,
           required String url,
           String? token}) async {
-    var response = await ApiServices.postJson(
-        url: url, token: token);
+
+    var response = await ApiServices.postJson(url: url, token: token);
 
     try {
       if (response.statusCode == 200 &&
@@ -55,60 +58,45 @@ class ProfilePostRepository {
   }
 
 //  verify identity
-  static Future<Map<String, dynamic>?> verifyIdentityDecodeJsonString(
+  static Future<dynamic> verifyIdentity(
       {required BuildContext context,
       required String url,
       String? password,
       String? token}) async {
     var data = {"password": password};
-
+    if (kDebugMode) {
+      print("verify identity Request--> $data");
+    }
     var response = await ApiServices.postJson(
         body: data, url: url, token: token);
-
-    try {
-      if (response.statusCode == 200 &&
-          jsonDecode(response.body)["success"] == true &&
-          jsonDecode(response.body)["message"] ==
-              "Identity Verified Successfully") {
-        return jsonDecode(response.body);
-
-        // return jsonDecode(response.body);
-      } else {
-        showMessage(
-            msg: "Invalid token. No credentials provided", context: context);
-      }
-    } catch (e) {
-      showMessage(msg: "decoding error", context: context);
+    if (kDebugMode) {
+      print("verify identity Request--> ${response.body}");
     }
-    return null;
+    if (response.statusCode == 200) {
+      return  successResponseGenericFromJson(response.body);
+    } else {
+      return jsonDecode(response.body);
+    }
   }
 
-//  update passord after login
-  static Future<Map<String, dynamic>?> updatePasswordAfterLoginDecodeJsonString(
+  static Future<dynamic> updatePassword(
       {required BuildContext context,
-      required String url,
       String? oldPassword,
       String? newPassword,
       String? token}) async {
     var data = {"current_password": oldPassword, "new_password": newPassword};
-
-    var response = await ApiServices.postJson(
-        body: data, url: url, token: token);
-
-    try {
-      if (response.statusCode == 200 &&
-          jsonDecode(response.body)["success"] == true &&
-          jsonDecode(response.body)["message"] ==
-              "password changed Successfully") {
-        return jsonDecode(response.body);
-
-        // return jsonDecode(response.body);
-      } else {
-        showMessage(msg: "password does not match", context: context);
-      }
-    } catch (e) {
-      showMessage(msg: "decoding error", context: context);
+    if (kDebugMode) {
+      print("Update password Request--> $data");
     }
-    return null;
+    var response = await ApiServices.postJson(
+        body: data, url: ApiConstants.changePasswordAfterLogin, token: token);
+    if (kDebugMode) {
+      print("Update password response--> $response");
+    }
+    if (response.statusCode == 200) {
+      return  successResponseGenericFromJson(response.body);
+    } else {
+      return jsonDecode(response.body);
+    }
   }
 }

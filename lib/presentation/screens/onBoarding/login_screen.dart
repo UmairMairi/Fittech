@@ -3,6 +3,7 @@ import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/recover_password_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
+import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/btn_secondary.dart';
 import 'package:fit_tech/presentation/widgets/my_circular_progress_indicator.dart';
@@ -122,31 +123,20 @@ class LoginScreen extends StatelessWidget {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<LoginProvider>();
-                        if (bloc.loginModel?.data != null &&
-                            bloc.loginModel?.data?.token != null) {
-                          GlobalState.token = bloc.loginModel?.data?.token;
-                          /* SharedPreferencesWork.saveTokenToSharedPreference(
-                              token: bloc.loginModel!.data!.token!);*/
-                          Future.delayed(Duration.zero, () {
-                            Navigator.pushNamed(context, DashboardScreen.tag);
-                          });
-                        } else if (bloc.isLoading == true) {
-                          return const MyCircularProgressIndicator();
-                        } else if ((isEmail(bloc.email) &&
-                                bloc.password.length >= 6) ||
-                            Singleton.isDev) {
+                        if (bloc.isLoading == true) {
+                          return const LoadingButton();
+                        }
+                        if ((isEmail(bloc.email) && bloc.password.length >= 6) || Singleton.isDev) {
                           isEnabled = true;
                         }
-
                         return PrimaryButton(
                           title: Constants.signIn,
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() &&
-                                isEnabled) {
-                              await bloc.setLoginModel(
+                            if (_formKey.currentState!.validate() && isEnabled) {
+                              await bloc.login(
                                   context: context,
                                   email: emailController.text,
                                   password: passwordController.text);

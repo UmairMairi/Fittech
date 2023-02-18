@@ -55,7 +55,7 @@ class CreateAccountProvider with ChangeNotifier {
     sendCodeLoading = true;
     notifyListeners();
     try {
-      var response = await OnboardPostRepository.SendCode(email: email);
+      var response = await OnboardPostRepository.sendCode(email: email);
       if (response is Map) {
         sendCodeLoading = false;
         notifyListeners();
@@ -77,29 +77,4 @@ class CreateAccountProvider with ChangeNotifier {
     }
   }
 
-  Future<dynamic> LogoutUser({required BuildContext context}) async {
-    logoutLoading = true;
-    notifyListeners();
-    try {
-      var response = await OnboardPostRepository.Logout();
-      if (response is Map) {
-        logoutLoading = false;
-        notifyListeners();
-        MyUtils.showMessage(
-            context: context, msg: response['message'], success: false);
-        return null;
-      } else {
-        logoutResponseModel = response;
-        logoutLoading = false;
-        notifyListeners();
-        return logoutResponseModel;
-      }
-    } catch (e) {
-      logoutLoading = false;
-      MyUtils.showMessage(context: context, msg: e.toString(), success: false);
-      logoutResponseModel = null;
-      notifyListeners();
-      return null;
-    }
-  }
 }

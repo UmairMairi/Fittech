@@ -121,10 +121,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 RecoverPasswordScreen());
       case VerifyCodeScreen.tag:
-        var arguments = routeSettings.arguments as String?;
+        var email = routeSettings.arguments as String?;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                VerifyCodeScreen(arguments: arguments,));
+                VerifyCodeScreen(email: email,));
       case TestIncompleteScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -272,9 +272,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 VerifyIdentityScreen());
       case UpdatePasswordScreen.tag:
+        var type = routeSettings.arguments as Types;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                UpdatePasswordScreen());
+                UpdatePasswordScreen(type: type,));
       case TestResultsScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
