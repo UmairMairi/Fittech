@@ -12,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-
 import '../../../data/models/on_boarding_model/login_model.dart';
 import '../../../utils/pref_utils.dart';
 import '../../../utils/singlton.dart';

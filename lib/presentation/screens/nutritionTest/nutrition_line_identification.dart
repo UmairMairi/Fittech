@@ -104,6 +104,7 @@ class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
                                 myState(() {
                                   currentSelectedItem = index;
                                   context.read<NutritionLineIdentificationProvider>().setSelectItem(val: list[index]);
+                                  print("arham");
                                 });
                               },
                               child: Container(

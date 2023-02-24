@@ -23,4 +23,6 @@ class ApiConstants {
 
   static const String logoutUser="$baseUrl/account/logout/";
   static const String sendCode="$baseUrl/account/sendverificationcode/";
+
+  static const String getFood="$baseUrl/account/foods/";
 }

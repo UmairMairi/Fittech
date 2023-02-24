@@ -52,10 +52,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         route: AboutScreen.tag),
   ];
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

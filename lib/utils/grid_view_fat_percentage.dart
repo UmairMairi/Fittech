@@ -6,7 +6,7 @@ class MyGridViewSmall extends StatefulWidget {
   const MyGridViewSmall({super.key, this.title,required this.onChange});
 
   final String? title;
-  final ValueChanged<int> onChange;
+  final onChange;
 
   @override
   State<MyGridViewSmall> createState() => _MyGridViewSmallState();
@@ -14,11 +14,16 @@ class MyGridViewSmall extends StatefulWidget {
 
 class _MyGridViewSmallState extends State<MyGridViewSmall> {
   var selectedIndex = -1;
+
+  var list = [
+    "<9","11-13","17","21-25","26-28","31-33","36-38",">41"
+  ];
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return GridView.builder(
-      itemCount: 20,
+      itemCount: list.length,
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
@@ -27,14 +32,14 @@ class _MyGridViewSmallState extends State<MyGridViewSmall> {
             setState((){
               selectedIndex = index;
             });
-            widget.onChange(selectedIndex);
+            widget.onChange(selectedIndex,"${list[index]}% graso");
           },
           child: Container(
             color: (selectedIndex==index)?MyColors.redColor:MyColors.extraLightGreyColor,
             child: Column(
               children: [
-                Image.asset("assets/images/icon_fat_percentage.png"),
-                Text("<9% graso",style: MyTextStyle.heading3.copyWith(
+                Image.asset("assets/images/icon_fat_percentage${list[index]}.png"),
+                Text("${list[index]}% graso",style: MyTextStyle.heading3.copyWith(
                   color: (selectedIndex==index)?MyColors.whiteColor:MyColors.blackColor,
                 ),)
               ],

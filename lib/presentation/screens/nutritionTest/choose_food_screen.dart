@@ -1,38 +1,44 @@
+import 'package:fit_tech/data/models/choose_food_model.dart';
+import 'package:fit_tech/data/models/nutrition_test_model.dart';
 import 'package:fit_tech/data/models/nutrition_training_model.dart';
+import 'package:fit_tech/data/network_services/api_services.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/fat_percentage_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/biological_gender_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_chips.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ChooseFoodScreen extends StatelessWidget {
+import '../../../logic/nutrition/choose_food_provider.dart';
+
+class ChooseFoodScreen extends StatefulWidget {
   static const String tag = "choose_food_screen";
 
   ChooseFoodScreen({super.key});
 
+  @override
+  State<ChooseFoodScreen> createState() => _ChooseFoodScreenState();
+}
+
+class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
   var index = 0;
+
   var selectedIndex = -1;
-  var list = [
-    "test 100",
-    "test 100100",
-    "test 100",
-    "test 100100",
-    "test 100",
-    "test 100100100",
-    "test 100",
-    "test 100100",
-    "test 100",
-    "test 100100100100100",
-    "test 100",
-    "test 100100",
-    "test 100",
-    "test 100100",
-    "test 1000",
-    "test 100100100100100"
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+    getFoods();
+  }
+
+  getFoods() {
+    var read = context.read<ChooseFoodProvider>();
+    read.getFood(context: context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,21 +111,33 @@ class ChooseFoodScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Wrap(
-                              children: list.map((item) {
-                            var selected = false;
-                            if (selectedIndex == index) {
-                              selected = true;
-                            } else {
-                              selected = false;
+                          Builder(builder: (context) {
+                            var bloc = context.watch<ChooseFoodProvider>();
+
+                            if (bloc.isLoading) {
+                              return const CircularProgressIndicator.adaptive();
                             }
-                            index++;
-                            return MyChipsList(
-                              item: item,
-                              selected: selected,
-                              currentValue: (value) {},
-                            );
-                          }).toList()),
+
+                            return Wrap(
+                                children: bloc.getFoodModel!.data!.map((Data item) {
+                              var selected = false;
+                              if (selectedIndex == index) {
+                                selected = true;
+                              } else {
+                                selected = false;
+                              }
+                              index++;
+                              return MyChipsList(
+                                item: item.name!,
+                                selected: selected,
+                                currentValue: (value) {
+                                  if (value) {
+                                    GlobalState.nutritionTest = NutritionTestModel.fromJson({"food_dont_like":item.id});
+                                  }
+                                },
+                              );
+                            }).toList());
+                          }),
                         ],
                       ),
                       const SizedBox(
@@ -130,8 +148,7 @@ class ChooseFoodScreen extends StatelessWidget {
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, FatPercentageScreen.tag);
+                          Navigator.pushNamed(context, FatPercentageScreen.tag);
                         },
                       ),
                       const SizedBox(

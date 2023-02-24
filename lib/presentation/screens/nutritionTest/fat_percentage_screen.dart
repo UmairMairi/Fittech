@@ -7,6 +7,7 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_chips.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/grid_view_fat_percentage.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -26,6 +27,7 @@ class FatPercentageScreen extends StatefulWidget {
 
 class _FatPercentageScreenState extends State<FatPercentageScreen> {
   var selectedIndex = -1;
+  var selectedFat;
 
   @override
   void initState() {
@@ -103,8 +105,9 @@ class _FatPercentageScreenState extends State<FatPercentageScreen> {
                         height: 20.0,
                       ),
                       MyGridViewSmall(
-                        onChange: (val) {
+                        onChange: (val,fat) {
                           selectedIndex = val;
+                          selectedFat = fat;
                           context.read<FatPercentageProvider>().setSelectItem(val: selectedIndex);
                         },
                       ),
@@ -125,6 +128,7 @@ class _FatPercentageScreenState extends State<FatPercentageScreen> {
                             enabled: isEnabled,
                             onPressed: () {
                               if(selectedIndex!=-1){
+                                GlobalState.nutritionTest!.fatPercentage = selectedFat;
                                 Navigator.pushNamed(context, AddMeasurementsScreen.tag, arguments: MeasurementsType.addNew);
                               }
                             },

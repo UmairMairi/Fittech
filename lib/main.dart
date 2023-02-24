@@ -15,6 +15,7 @@ import 'package:fit_tech/logic/family_history_provider.dart';
 import 'package:fit_tech/logic/heart_rate_provider.dart';
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/medical_history_provider.dart';
+import 'package:fit_tech/logic/nutrition/choose_food_provider.dart';
 import 'package:fit_tech/logic/nutrition/fat_Percentage_provider.dart';
 import 'package:fit_tech/logic/nutrition/nutrition_line_identification_provider.dart';
 import 'package:fit_tech/logic/nutrition/select_recipe_screen.dart';
@@ -126,6 +127,8 @@ class _MyAppState extends State<MyApp> {
             create: (context) => TrainingCompletedProvider()),
         ChangeNotifierProvider<SelectRecipeProvider>(
             create: (context) => SelectRecipeProvider()),
+             ChangeNotifierProvider<ChooseFoodProvider>(
+            create: (context) => ChooseFoodProvider()),
       ],
       child: MaterialApp(
         title: 'FITTECH',
@@ -133,7 +136,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        initialRoute:WelcomeScreen.tag,
+        initialRoute: WelcomeScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

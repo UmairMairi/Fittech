@@ -25,10 +25,6 @@ class _AboutScreenState extends State<AboutScreen> {
     AboutModel(title: Constants.aboutScreenLabel3,route: TermsConditionsScreen.tag),
     AboutModel(title: Constants.aboutScreenLabel4,route: ContactScreen.tag)
   ];
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
