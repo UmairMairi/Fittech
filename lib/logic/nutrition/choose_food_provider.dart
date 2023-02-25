@@ -16,11 +16,9 @@ class ChooseFoodProvider extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();  
-      print("=============================================");
       getFoodModel = await NutritionRepository.getFoods(
           context: context, url: ApiConstants.getFood);
       notifyListeners();
-
       isLoading = false;
     } catch (e) {
       showMessage(

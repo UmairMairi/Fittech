@@ -6,6 +6,7 @@ import 'package:fit_tech/presentation/screens/nutritionTest/measurement_history_
 import 'package:fit_tech/presentation/screens/profile/testResults/choose_dates_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/image_viewer_screen.dart';
 import 'package:fit_tech/presentation/screens/trainingTest/heart_status_screen.dart';
+import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -763,23 +764,27 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                     ),
                   ),
                 if (widget.type == MeasurementsType.addNew)
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  //  provider.isLoading ? LoadingButton(): 
+                    Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: PrimaryButton(
                         title: Constants.measurementsScreenLabel3,
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
-                        borderColor: MyColors.blackColor,
-                        onPressed: () {
-                          context.read<AddMeasurementsProviders>().setData();
-                          if (widget.type == MeasurementsType.addNew) {
-                            Navigator.pushNamed(context, HeartStatusScreen.tag,
-                                arguments:
-                                    (widget.type == MeasurementsType.addNew));
-                          }
+                        borderColor: MyColors.blackColor,                                            
+                        onPressed: () async{
+                          var bloc = context.read<AddMeasurementsProviders>();
+                          bloc.setData();
+                          await bloc.addNutrition(context: context);
+                          // if (widget.type == MeasurementsType.addNew) {
+
+                          //   Navigator.pushNamed(context, HeartStatusScreen.tag,
+                          //       arguments:
+                          //           (widget.type == MeasurementsType.addNew));
+                          // }
                         },
                       )),
                 if (widget.type == MeasurementsType.addNewFromHistory)
-                  Padding(
+                 Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Builder(
                         builder: (context) {

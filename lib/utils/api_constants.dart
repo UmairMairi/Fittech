@@ -25,4 +25,5 @@ class ApiConstants {
   static const String sendCode="$baseUrl/account/sendverificationcode/";
 
   static const String getFood="$baseUrl/account/foods/";
+  static const String addNutrition="$baseUrl/account/usernutritioninfodata/";
 }
