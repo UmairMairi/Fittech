@@ -1,15 +1,18 @@
+import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/logic/create_account_provider.dart';
 import 'package:fit_tech/logic/delete_account_provider.dart';
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/global_states.dart';
+import 'package:fit_tech/utils/extentions/context_extentions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +30,8 @@ class ProfileDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController(text: inputText);
+    final TextEditingController controller =
+        TextEditingController(text: inputText);
     var selected = 0;
 
     if (category == Profile.gender) {
@@ -226,12 +230,18 @@ class ProfileDialogue extends StatelessWidget {
                           await context
                               .read<DeleteAccountProvider>()
                               .deleteAccount(
-                                  context: context,
-                                  token: Singleton.userToken!);
+                                  context: context, token: Singleton.userToken!)
+                              .whenComplete(() => Navigator.pop(context));
                         } else if (category == Profile.logout) {
-                          await context
+                          var model = await context
                               .read<RegisterProvider>()
                               .logoutUser(context: context);
+                          if (model is SuccessResponseGeneric) {
+                            if (!context.mounted) return;
+                            PrefUtils.clear();
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, WelcomeScreen.tag, (route) => false);
+                          }
                         } else if ((category != Profile.deleteAccount) &&
                             (category != Profile.logout) &&
                             onChange != null) {
@@ -255,7 +265,8 @@ class ProfileDialogue extends StatelessWidget {
                                                     listen: false)
                                                 .setLoginModel(model: val);
                                           }
-                                        });
+                                        })
+                                    .whenComplete(() => Navigator.pop(context));
                                 break;
                               }
                             case Profile.lastName:
@@ -271,7 +282,8 @@ class ProfileDialogue extends StatelessWidget {
                                                     listen: false)
                                                 .setLoginModel(model: val);
                                           }
-                                        });
+                                        })
+                                    .whenComplete(() => Navigator.pop(context));
                                 break;
                               }
                             case Profile.email:
@@ -287,7 +299,8 @@ class ProfileDialogue extends StatelessWidget {
                                                     listen: false)
                                                 .setLoginModel(model: val);
                                           }
-                                        });
+                                        })
+                                    .whenComplete(() => Navigator.pop(context));
                                 break;
                               }
                             case Profile.gender:
@@ -296,14 +309,16 @@ class ProfileDialogue extends StatelessWidget {
                                     .read<MyDataProvider>()
                                     .updateProfileData(
                                         context: context,
-                                        gender: (selected == 0)
-                                            ? "Hombre"
-                                            : "Mujer",
+                                        gender:
+                                            (selected == 0) ? "Male" : "Female",
                                         onSuccess: (val) {
                                           if (val != null) {
-                                            Provider.of<LoginProvider>(context, listen: false).setLoginModel(model: val);
+                                            Provider.of<LoginProvider>(context,
+                                                    listen: false)
+                                                .setLoginModel(model: val);
                                           }
-                                        });
+                                        })
+                                    .whenComplete(() => Navigator.pop(context));
                                 break;
                               }
                             default:
@@ -311,10 +326,7 @@ class ProfileDialogue extends StatelessWidget {
                           }
                           onChange!(controller.text.toString());
                         }
-                        Navigator.pop(context);
-                      }
-                      // },
-                      );
+                      });
                 }),
               ),
             ],

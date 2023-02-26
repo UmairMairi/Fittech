@@ -1,9 +1,11 @@
 import 'package:fit_tech/logic/policies_provider.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
+import 'package:fit_tech/presentation/widgets/shimmer.dart';
+import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:provider/provider.dart';
 
 class TermsConditionsScreen extends StatefulWidget {
   static const String tag = "terms_conditions_screen";
@@ -15,8 +17,8 @@ class TermsConditionsScreen extends StatefulWidget {
 }
 
 class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
-  PoliciesProvider policiesProvider=PoliciesProvider();
-  String description="";
+  String description = "";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,29 +29,33 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
               title: Constants.termsConditionsScreenTitle,
             ),
             Expanded(
-              child:  Html(
-                data:  description,
-                tagsList: Html.tags..addAll(["bird", "flutter"]),
-            ),
-            )],
+              child: Builder(builder: (context) {
+                var provider = context.watch<PoliciesProvider>();
+                if(provider.loading){
+                  return Shimmer.fromColors(
+                      highlightColor: MyColors.shimmerHighlightColor,
+                      baseColor: MyColors.shimmerBaseColor2,
+                      child: const Text(
+                        Constants.dummyText,
+                        style: TextStyle(height: 1.5,backgroundColor: MyColors.whiteColor,),
+                      )
+                  );
+                }
+                return Html(
+                  data: provider.termsConditionModel?.data?.description ?? "",
+                  tagsList: Html.tags..addAll(["bird", "flutter"]),
+                );
+              }),
+            )
+          ],
         ),
       ),
     );
   }
-@override
+
+  @override
   void initState() {
     super.initState();
-    getTermsConditions();
-  }
-  getTermsConditions() async {
-    var model =
-    await policiesProvider.getTermsConditions(
-        context: context);
-    if (model != null) {
-      setState(() {
-        description=policiesProvider.termsConditionModel?.data?.description ?? "";
-      });
-
-    }
+    context.read<PoliciesProvider>().getTermsConditions(context: context);
   }
 }

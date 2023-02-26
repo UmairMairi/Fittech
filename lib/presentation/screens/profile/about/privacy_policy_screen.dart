@@ -1,8 +1,11 @@
 import 'package:fit_tech/logic/policies_provider.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
+import 'package:fit_tech/presentation/widgets/shimmer.dart';
+import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:provider/provider.dart';
 
 class PrivacyPolicyScreen extends StatefulWidget {
   static const String tag = "privacy_policy_screen";
@@ -14,7 +17,6 @@ class PrivacyPolicyScreen extends StatefulWidget {
 }
 
 class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
-  PoliciesProvider policiesProvider = PoliciesProvider();
   String description = "";
 
   @override
@@ -27,10 +29,23 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               title: Constants.privacyPolicyScreenTitle,
             ),
             Expanded(
-              child: Html(
-                data: description,
-                tagsList: Html.tags..addAll(["bird", "flutter"]),
-              ),
+              child: Builder(builder: (context) {
+                var provider = context.watch<PoliciesProvider>();
+                if (provider.policyLoading) {
+                  return Shimmer.fromColors(
+                      highlightColor: MyColors.shimmerHighlightColor,
+                      baseColor: MyColors.shimmerBaseColor2,
+                      child: const Text(
+                        Constants.dummyText,
+                        style: TextStyle(height: 1.5,backgroundColor: MyColors.whiteColor,),
+                      )
+                  );
+                }
+                return Html(
+                  data: provider.dataPolicyModel?.data?.description ?? "",
+                  tagsList: Html.tags..addAll(["bird", "flutter"]),
+                );
+              }),
             ),
           ],
         ),
@@ -41,15 +56,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   @override
   void initState() {
     super.initState();
-    getTermsConditions();
+    context.read<PoliciesProvider>().getPolicyData(context: context);
   }
 
-  getTermsConditions() async {
-    var model = await policiesProvider.getPolicyData(context: context);
-    if (model != null) {
-      setState(() {
-        description = policiesProvider.dataPolicyModel?.data?.description ?? "";
-      });
-    }
-  }
 }

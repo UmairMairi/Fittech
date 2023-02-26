@@ -96,7 +96,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             backgroundColor: MyColors.whiteColor,
                             textColor: MyColors.blackColor,
                             onPressed: () {
-
                               showDialogue(
                                   context: context,
                                   category: Profile.deleteAccount);

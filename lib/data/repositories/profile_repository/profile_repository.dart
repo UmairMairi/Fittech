@@ -46,7 +46,7 @@ class ProfilePostRepository {
       print("verify identity Request--> ${response.body}");
     }
     if (response.statusCode == 200) {
-      return  successResponseGenericFromJson(response.body);
+      return successResponseGenericFromJson(response.body);
     } else {
       return jsonDecode(response.body);
     }

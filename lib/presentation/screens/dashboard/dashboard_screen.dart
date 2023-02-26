@@ -19,6 +19,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   List<Widget> list = [];
   var currentIndex = 0;
+  DateTime? currentBackPressTime;
 
   @override
   void initState() {
@@ -33,115 +34,137 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          child: list[currentIndex],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedLabelStyle: MyTextStyle.style.copyWith(
-            color:
-                (currentIndex != 2) ? MyColors.redColor : MyColors.blackColor,
-            fontSize: 13,
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: SafeArea(
+        child: Scaffold(
+          body: Container(
+            child: list[currentIndex],
           ),
-          unselectedLabelStyle: MyTextStyle.style.copyWith(
-            color: MyColors.blackColor,
-            fontSize: 13,
+          bottomNavigationBar: BottomNavigationBar(
+            selectedLabelStyle: MyTextStyle.style.copyWith(
+              color:
+                  (currentIndex != 2) ? MyColors.redColor : MyColors.blackColor,
+              fontSize: 13,
+            ),
+            unselectedLabelStyle: MyTextStyle.style.copyWith(
+              color: MyColors.blackColor,
+              fontSize: 13,
+            ),
+            unselectedItemColor: MyColors.blackColor,
+            selectedItemColor: MyColors.redColor,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) {
+              if (index == 2) {
+                Navigator.pushNamed(context, StoreScreen.tag);
+              } else {
+                setState(() {
+                  currentIndex = index;
+                });
+              }
+            },
+            currentIndex: currentIndex,
+            elevation: 0,
+            items: [
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.planUnChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                activeIcon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.planChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                label: "Mi plan",
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.nutritionUnChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                activeIcon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.nutritionChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                label: "Nutrición",
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.storeUnChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                activeIcon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.storeUnChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                label: "Tienda",
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.profileUnChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                activeIcon: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Image.asset(
+                    Images.profileChecked,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+                label: "Mi cuenta",
+              ),
+            ],
           ),
-          unselectedItemColor: MyColors.blackColor,
-          selectedItemColor: MyColors.redColor,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            if (index == 2) {
-              Navigator.pushNamed(context, StoreScreen.tag);
-            } else {
-              setState(() {
-                currentIndex = index;
-              });
-            }
-          },
-          currentIndex: currentIndex,
-          elevation: 0,
-          items: [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.planUnChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.planChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              label: "Mi plan",
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.nutritionUnChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.nutritionChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              label: "Nutrición",
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.storeUnChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.storeUnChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              label: "Tienda",
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.profileUnChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  Images.profileChecked,
-                  height: 24,
-                  width: 24,
-                ),
-              ),
-              label: "Mi cuenta",
-            ),
-          ],
         ),
       ),
     );
   }
+
+  Future<bool> onWillPop() {
+    if (currentIndex != 0) {
+      setState(() {
+        currentIndex = 0;
+      });
+      return Future.value(false);
+    } else {
+      DateTime now = DateTime.now();
+      if (currentBackPressTime == null ||
+          now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+        currentBackPressTime = now;
+        return Future.value(false);
+      }
+
+      return Future.value(true);
+    }
+  }
+
 }

@@ -98,9 +98,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                         context: context,
                                         onSuccess: (val) {
                                           if (val != null) {
-                                            Provider.of<LoginProvider>(context,
-                                                    listen: false)
-                                                .setLoginModel(model: val);
+                                            Provider.of<LoginProvider>(context, listen: false).setLoginModel(model: val);
                                           }
                                         });
                                   }

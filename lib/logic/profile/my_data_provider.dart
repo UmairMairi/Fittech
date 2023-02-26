@@ -8,8 +8,10 @@ import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post
 import 'package:fit_tech/data/repositories/profile_repository/profile_repository.dart';
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/utils/api_constants.dart';
+import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/my_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -94,21 +96,19 @@ class MyDataProvider extends ChangeNotifier {
               url: ApiConstants.updateProfile);
       isLoading = false;
       notifyListeners();
-
       if (model is UpdateProfileModel) {
         updateProfileInMap = model;
         notifyListeners();
         onSuccess(model.data);
       } else if (model is Map) {
-        showMessage(msg: "${model["message"]}", context: context);
+        MyUtils.showMessage(msg: "${model["message"]}", context: context);
       } else {
-        showMessage(msg: "something went wrong", context: context);
+        MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }
-
     } catch (e) {
       isLoading = false;
       notifyListeners();
-      showMessage(msg: "something went wrong", context: context);
+      MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
     }
   }
 

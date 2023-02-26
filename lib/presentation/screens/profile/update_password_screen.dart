@@ -6,15 +6,10 @@ import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
-import 'package:fit_tech/utils/shared_prefences_work.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../widgets/my_circular_progress_indicator.dart';
-import 'update_password_status_screen.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
   static const String tag = "update_password_screen";
@@ -29,8 +24,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -173,7 +167,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate() && isEnabled) {
                                 if(widget.type == Types.updatePassword){
-                                  await bloc.updatePassword(context: context);
+                                   await bloc.updatePassword(context: context,
+                                       oldPassword: context.read<VerifyIdentityProvider>().password);
                                 }else{
                                   await bloc.setNewPassword(
                                       context: context,
