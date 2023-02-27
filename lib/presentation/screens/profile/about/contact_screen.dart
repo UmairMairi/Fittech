@@ -4,6 +4,7 @@ import 'package:fit_tech/presentation/screens/profile/testResults/test_result_sc
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/extentions/string_extentions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -112,7 +113,22 @@ class _ContactScreenState extends State<ContactScreen> {
                             style: MyTextStyle.paragraph1,
                           ),
                           minLeadingWidth: 0.0,
-                          onTap: () {},
+                          onTap: () {
+                            switch(list[index].title){
+                              case Constants.contactScreenInsta:{
+                                Contacts.instagram.openAsLink();
+                                break;
+                              }
+                              case Constants.contactScreenFacebook:{
+                                Contacts.facebook.openAsLink();
+                                break;
+                              }
+                              case Constants.contactScreenCorreo:{
+                                Contacts.facebook.openAsLink();
+                                break;
+                              }
+                            }
+                          },
                         ),
                         const Divider()
                       ],

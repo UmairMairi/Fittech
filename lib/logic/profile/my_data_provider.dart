@@ -1,15 +1,21 @@
 import 'dart:io';
 
 import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
+import 'package:fit_tech/data/models/UpdateProfileDataModel.dart';
+import 'package:fit_tech/data/models/on_boarding_model/login_model.dart';
 import 'package:fit_tech/data/models/profile_models/my_data_screen_model.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/data/repositories/profile_repository/profile_repository.dart';
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/utils/api_constants.dart';
+import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/my_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class MyDataProvider extends ChangeNotifier {
   MyDataProvider();
@@ -19,9 +25,11 @@ class MyDataProvider extends ChangeNotifier {
   String lastName = Singleton.userModel?.data?.userProfile?.user?.lastName ?? "";
   String email = Singleton.userModel?.data?.userProfile?.user?.email ?? "";
   String gender = "Hombre";
+  LoginModel? loginModel;
 
-  Map<String, dynamic>? updateProfileInMap;
-  MyDataScreenModel? myDataScreenModel = MyDataScreenModel();
+  MyDataScreenModel? myDataScreenModel;
+  UpdateProfileModel? updateProfileInMap;
+  UpdateProfileModel? updateProfileModel;
   bool isLoading = false;
 
   setBoolValue(bool val) {
@@ -29,36 +37,17 @@ class MyDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  SuccessResponseGeneric? changeProfileImageInMap;
 
-  //get my data screen image here
-  Future<void> setMyDataScreenModel({
-    required BuildContext context,
-  }) async {
-    try {
-      setBoolValue(true);
-      myDataScreenModel = await ProfilePostRepository
-          .getRequestChangeProfileImageDecodeJsonString(
-              context: context,
-              url: ApiConstants.changeProfileImage,
-              token: Singleton.userToken);
-      notifyListeners();
-      setBoolValue(false);
-    } catch (e) {
-      showMessage(
-          msg:
-              "please check internet connection or something else error exception ${e.toString()}",
-          context: context);
-      setBoolValue(false);
-    }
-  }
 
   //update profile
   Future<void> updateProfileImage({
     required BuildContext context,
+    required Function(UserProfile? model) onSuccess
   }) async {
     try {
-      setBoolValue(true);
+      isLoading = true;
+      notifyListeners();
+
       var model = await ProfilePostRepository.uploadImage(
           context: context,
           url: ApiConstants.changeImageProfile,
@@ -67,9 +56,10 @@ class MyDataProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
 
-      if (model is SuccessResponseGeneric) {
-        changeProfileImageInMap = model;
+      if (model is UpdateProfileModel) {
+        updateProfileModel = model;
         notifyListeners();
+        onSuccess(model.data);
       } else if (model is Map) {
         showMessage(msg: "${model["message"]}", context: context);
       } else {
@@ -90,11 +80,13 @@ class MyDataProvider extends ChangeNotifier {
     String? gender,
     String? updatePassword,
     String? email,
+    required Function(UserProfile? model) onSuccess
   }) async {
     try {
-      setBoolValue(true);
-      updateProfileInMap =
-          await OnboardPostRepository.updateProfileDecodeJsonString(
+      isLoading = true;
+      notifyListeners();
+
+      var model = await OnboardPostRepository.updateProfileData(
               context: context,
               firstName: firstName,
               lastName: lastName,
@@ -102,17 +94,21 @@ class MyDataProvider extends ChangeNotifier {
               updatePassword: updatePassword,
               gender: gender,
               url: ApiConstants.updateProfile);
+      isLoading = false;
       notifyListeners();
-      setBoolValue(false);
-      if (updateProfileInMap == null) {
-        showMessage(msg: "check yours internet connection", context: context);
-        setBoolValue(false);
+      if (model is UpdateProfileModel) {
+        updateProfileInMap = model;
+        notifyListeners();
+        onSuccess(model.data);
+      } else if (model is Map) {
+        MyUtils.showMessage(msg: "${model["message"]}", context: context);
+      } else {
+        MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }
     } catch (e) {
-      setBoolValue(false);
-
-      showMessage(msg: "exception ${e.toString()}", context: context);
-      setBoolValue(false);
+      isLoading = false;
+      notifyListeners();
+      MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
     }
   }
 
@@ -121,8 +117,6 @@ class MyDataProvider extends ChangeNotifier {
     try {
       final XFile? pickedFile = await picker.pickImage(
         source: ImageSource.gallery,
-        maxWidth: 200,
-        maxHeight: 200,
         imageQuality: 80,
       );
       if (pickedFile != null) {

@@ -27,7 +27,7 @@ class LoadingButton extends StatelessWidget {
       hoverElevation: 0.0,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: borderColor),
-        borderRadius: BorderRadius.circular(6.0),
+        borderRadius: BorderRadius.circular(2.0),
       ),
       onPressed: onPressed,
       padding: EdgeInsets.zero,
@@ -35,8 +35,8 @@ class LoadingButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         child: Center(child: SizedBox(
-          height: 26.5,
-          width: 26.5,
+          height: 20,
+          width: 20,
             child: CircularProgressIndicator(color: progressColor,strokeWidth: 2.0,)),),
       ),
     );

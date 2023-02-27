@@ -1,11 +1,8 @@
-import 'package:fit_tech/data/models/profile_model.dart';
 import 'package:fit_tech/data/models/settings_model.dart';
 import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/Privacy_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/settings/current_plan_screen.dart';
-import 'package:fit_tech/presentation/screens/profile/testResults/test_result_screen.dart';
-import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
@@ -22,10 +19,8 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   var list = [
-    SettingsModel(
-        title: Constants.settingsScreenLabel1, route: CurrentPlanScreen.tag),
-    SettingsModel(
-        title: Constants.settingsScreenLabel2, route: PrivacyScreen.tag),
+    SettingsModel(title: Constants.settingsScreenLabel1, route: CurrentPlanScreen.tag),
+    SettingsModel(title: Constants.settingsScreenLabel2, route: PrivacyScreen.tag),
     SettingsModel(title: Constants.settingsScreenLabel3, route: "")
   ];
 

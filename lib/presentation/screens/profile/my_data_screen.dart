@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/presentation/screens/dialogue/profile_dialogue.dart';
 import 'package:fit_tech/presentation/screens/profile/verify_identity_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
-import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -29,7 +31,6 @@ class _MyDataScreenState extends State<MyDataScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = context.read<MyDataProvider>();
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.backgroundColor,
@@ -54,27 +55,26 @@ class _MyDataScreenState extends State<MyDataScreen> {
                       child: Column(
                         children: [
                           Builder(builder: (context) {
-                            var bloc = context.watch<MyDataProvider>();
-                            return Container(
-                              height: 100,
-                              width: 100,
-                              // decoration: const BoxDecoration(
-                              //   shape: BoxShape.circle,
-                              //   color: MyColors.greyColor,
-                              // ),
-                              child:
-                                  (bloc.myDataScreenModel?.data?.profileImage != null &&
-                                          bloc.myDataScreenModel?.data != null)
-                                      ? CircleAvatar(
-                                          foregroundImage: NetworkImage(
-                                          ApiConstants.baseUrl +
-                                              bloc.myDataScreenModel!.data!
-                                                  .profileImage!,
-                                        ))
-                                      : SvgPicture.asset(
-                                          Images.iconProfileMyAccountScreen,
-                                          fit: BoxFit.cover,
-                                        ),
+                            var bloc = context.watch<LoginProvider>();
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(50.0),
+                              child: CachedNetworkImage(
+                                imageUrl: bloc.loginModel?.data?.userProfile
+                                        ?.profileImageUrl ??
+                                    "",
+                                placeholder: (context, url) => SvgPicture.asset(
+                                  Images.iconProfileMyAccountScreen,
+                                  fit: BoxFit.cover,
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    SvgPicture.asset(
+                                  Images.iconProfileMyAccountScreen,
+                                  fit: BoxFit.cover,
+                                ),
+                                fit: BoxFit.cover,
+                                height: 100,
+                                width: 100,
+                              ),
                             );
                           }),
                           const SizedBox(
@@ -82,6 +82,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                           ),
                           Builder(builder: (context) {
                             var bloc = context.watch<MyDataProvider>();
+
                             return Container(
                               width: 150,
                               alignment: Alignment.center,
@@ -94,11 +95,13 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                       context: context);
                                   if (file != null) {
                                     await bloc.updateProfileImage(
-                                        context: context);
+                                        context: context,
+                                        onSuccess: (val) {
+                                          if (val != null) {
+                                            Provider.of<LoginProvider>(context, listen: false).setLoginModel(model: val);
+                                          }
+                                        });
                                   }
-
-                                  // await bloc.setMyDataScreenModel(
-                                  //     context: context);
                                 },
                               ),
                             );
@@ -125,8 +128,14 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                   showDialogue(
                                       context: context,
                                       category: Profile.name,
-                                      inputText:
-                                          context.read<MyDataProvider>().name);
+                                      inputText: context
+                                              .read<LoginProvider>()
+                                              .loginModel
+                                              ?.data
+                                              ?.userProfile
+                                              ?.user
+                                              ?.firstName ??
+                                          "");
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -141,10 +150,12 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                       )),
                                       Builder(builder: (context) {
                                         var bloc =
-                                            context.watch<MyDataProvider>();
+                                            context.read<LoginProvider>();
                                         return Expanded(
                                             child: Text(
-                                          bloc.name,
+                                          bloc.loginModel?.data?.userProfile
+                                                  ?.user?.firstName ??
+                                              "",
                                           textAlign: TextAlign.end,
                                           style: MyTextStyle.paragraph1
                                               .copyWith(
@@ -174,10 +185,12 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                       )),
                                       Builder(builder: (context) {
                                         var bloc =
-                                            context.watch<MyDataProvider>();
+                                            context.watch<LoginProvider>();
                                         return Expanded(
                                             child: Text(
-                                          bloc.lastName,
+                                          bloc.loginModel?.data?.userProfile
+                                                  ?.user?.lastName ??
+                                              "",
                                           textAlign: TextAlign.end,
                                           style: MyTextStyle.paragraph1
                                               .copyWith(
@@ -192,8 +205,8 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                       context: context,
                                       category: Profile.lastName,
                                       inputText: context
-                                          .read<MyDataProvider>()
-                                          .lastName);
+                                          .read<LoginProvider>()
+                                        .loginModel?.data?.userProfile?.user?.lastName ?? "");
                                 },
                               ),
                               const Divider()
@@ -215,9 +228,11 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                       )),
                                       Builder(builder: (context) {
                                         var bloc =
-                                            context.watch<MyDataProvider>();
+                                            context.watch<LoginProvider>();
                                         return Text(
-                                          bloc.email,
+                                          bloc.loginModel?.data?.userProfile
+                                                  ?.user?.email ??
+                                              "",
                                           textAlign: TextAlign.end,
                                           style: MyTextStyle.paragraph1
                                               .copyWith(
@@ -231,8 +246,10 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                   showDialogue(
                                       context: context,
                                       category: Profile.email,
-                                      inputText:
-                                          context.read<MyDataProvider>().email);
+                                      inputText: context
+                                          .read<LoginProvider>().loginModel?.data
+                                              ?.userProfile?.user?.email ??
+                                          "");
                                 },
                               ),
                               const Divider()
@@ -253,17 +270,20 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                             color: MyColors.blackColor),
                                       )),
                                       Expanded(
-                                          child: Builder(builder: (context) {
-                                        var bloc =
-                                            context.watch<MyDataProvider>();
-                                        return Text(
-                                          bloc.gender,
-                                          textAlign: TextAlign.end,
-                                          style: MyTextStyle.paragraph1
-                                              .copyWith(
-                                                  color: MyColors.greyColor),
-                                        );
-                                      }))
+                                        child: Builder(
+                                          builder: (context) {
+                                            var bloc = context.watch<LoginProvider>();
+                                            return Text(
+                                              bloc.loginModel?.data?.userProfile?.gender ?? "",
+                                              textAlign: TextAlign.end,
+                                              style: MyTextStyle.paragraph1
+                                                  .copyWith(
+                                                      color:
+                                                          MyColors.greyColor),
+                                            );
+                                          },
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -271,9 +291,7 @@ class _MyDataScreenState extends State<MyDataScreen> {
                                   showDialogue(
                                       context: context,
                                       category: Profile.gender,
-                                      inputText: context
-                                          .read<MyDataProvider>()
-                                          .gender);
+                                      inputText:context.read<LoginProvider>().loginModel?.data?.userProfile?.gender ?? "",);
                                 },
                               ),
                             ],

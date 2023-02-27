@@ -554,6 +554,7 @@ class Constants {
   static const String healthIndicatorScreenTitle4 = "Perímetro de cintura";
   static const String healthIndicatorScreenTitle5 = "TMBA";
   static const String healthIndicatorScreenTitle6 = "Estrategia nutricional";
+
   // (health Indicators)
   static const String measurementsScreenHeading1 = "Fotos";
   static const String measurementsScreenHeading2 = "Para finalizar, agrega tus medidas para ver cambios con una mejor nutrición";
@@ -805,4 +806,15 @@ class Constants {
   static const String titleMeasurementsComparisonScreen = "Comparación";
   static const String btnMeasurementsComparisonScreen = "Comparar medidas";
 
+  static const String dummyText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+
+}
+
+class ErrorMessages {
+  static const String somethingWrong = "something went wrong";
+}
+
+class Contacts {
+  static const String instagram = "https://m.instagram.com/";
+  static const String facebook = "https://m.facebook.com/";
 }

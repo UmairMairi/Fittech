@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
+import 'package:fit_tech/data/models/UpdateProfileDataModel.dart';
 import 'package:fit_tech/data/models/on_boarding_model/login_model.dart';
 import 'package:fit_tech/data/network_services/api_services.dart';
 import 'package:fit_tech/utils/constants.dart';
@@ -157,14 +158,14 @@ class OnboardPostRepository {
 
   //update profile methode
 
-  static Future<Map<String, dynamic>?> updateProfileDecodeJsonString(
+  static Future<dynamic> updateProfileData(
       {required BuildContext context,
-      String? firstName,
-      String? lastName,
-      String? email,
-      String? gender,
-      String? updatePassword,
-      required String url}) async {
+        String? firstName,
+        String? lastName,
+        String? email,
+        String? gender,
+        String? updatePassword,
+        required String url}) async {
     Map<String, dynamic> data = {};
 
     if (firstName != null) {
@@ -174,7 +175,7 @@ class OnboardPostRepository {
     } else if (email != null) {
       data.putIfAbsent("email", () => email);
     } else if (gender != null) {
-      data.putIfAbsent("gender", () => gender);
+      data.putIfAbsent("biological_gender", () => gender);
     } else if (updatePassword != null) {
       data.putIfAbsent("updatePassword", () => updatePassword);
     }
@@ -187,19 +188,11 @@ class OnboardPostRepository {
     if (kDebugMode) {
       print("Update Profile response--> ${response.body}");
     }
-    try {
-      if (response.statusCode == 200 &&
-          (jsonDecode(response.body)["message"] == "Updated Successfully") &&
-          jsonDecode(response.body)["success"] == true) {
-        return jsonDecode(response.body);
-      } else {
-        showMessage(
-            msg: "please enter at least one parameter", context: context);
-      }
-    } catch (e) {
-      showMessage(msg: "decoding error", context: context);
+    if (response.statusCode == 200) {
+      return  updateProfileModelFromJson(response.body);
+    } else {
+      return jsonDecode(response.body);
     }
-    return null;
   }
 
   // delete account method

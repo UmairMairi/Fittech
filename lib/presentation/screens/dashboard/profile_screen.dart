@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fit_tech/data/models/profile_model.dart';
+import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/presentation/screens/profile/about_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/currentPerformance/current_performance_screen.dart';
@@ -52,6 +54,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         route: AboutScreen.tag),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    context.read<MyDataProvider>().loginModel = context.read<LoginProvider>().loginModel;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,24 +100,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                    height: 110,
-                    width: 110,
-                    // decoration: const BoxDecoration(
-                    //   shape: BoxShape.circle,
-                    //   color: MyColors.greyColor,
-                    // ),
-                    child: SvgPicture.asset(
-                      Images.iconProfileMyAccountScreen,
-                      fit: BoxFit.cover,
-                    )),
+
+                Builder(
+                  builder: (context) {
+                    var provider = context.watch<MyDataProvider>().loginModel;
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(55.0),
+                      child: CachedNetworkImage(
+                        imageUrl: provider?.data?.userProfile?.profileImageUrl ?? "",
+                        placeholder: (context, url) =>
+                            SvgPicture.asset(
+                              Images.iconProfileMyAccountScreen,
+                              fit: BoxFit.cover,
+                            ),
+                        errorWidget: (context, url, error) =>
+                            SvgPicture.asset(
+                              Images.iconProfileMyAccountScreen,
+                              fit: BoxFit.cover,
+                            ),
+                        fit: BoxFit.cover,
+                        height: 110,
+                        width: 110,
+                      ),
+                    );
+                  }
+                ),
+                // Container(
+                //     height: 110,
+                //     width: 110,
+                //     child: SvgPicture.asset(
+                //       Images.iconProfileMyAccountScreen,
+                //       fit: BoxFit.cover,
+                //     ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Builder(
                     builder: (context) {
-                      var provider = context.watch<MyDataProvider>();
+                      var provider = context.watch<MyDataProvider>().loginModel;
                       return Text(
-                        "${provider.name} ${provider.lastName}",
+                        "${provider?.data?.userProfile?.user?.firstName} ${provider?.data?.userProfile?.user?.lastName}",
                         style: MyTextStyle.style
                             .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
                       );
@@ -137,9 +166,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(
                         width: 20,
                       ),
-                      const Text(
-                        "Angel Castañeda",
-                        style: MyTextStyle.inputTitle,
+                      Builder(
+                        builder: (context) {
+                          var provider = context.watch<MyDataProvider>().loginModel;
+                          return Text(
+                            "${provider?.data?.userProfile?.user?.firstName} ${provider?.data?.userProfile?.user?.lastName}",
+                            style: MyTextStyle.inputTitle,
+                          );
+                        }
                       ),
                       const SizedBox(
                         width: 10,

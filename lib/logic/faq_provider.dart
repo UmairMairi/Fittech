@@ -24,8 +24,7 @@ class FaqProvider extends ChangeNotifier {
       if (response is Map) {
         faqCategoriesLoading = false;
         notifyListeners();
-        MyUtils.showMessage(
-            context: context, msg: response['message'], success: false);
+        MyUtils.showMessage(context: context, msg: response['message'], success: false);
         return null;
       } else {
         faqCategoriesModel = response;
@@ -50,8 +49,7 @@ class FaqProvider extends ChangeNotifier {
       if (response is Map) {
         faqQuestionsLoading = false;
         notifyListeners();
-        MyUtils.showMessage(
-            context: context, msg: response['message'], success: false);
+        MyUtils.showMessage(context: context, msg: response['message'], success: false);
         return null;
       } else {
         faqQuestionsModel = response;
