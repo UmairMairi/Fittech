@@ -1,10 +1,12 @@
 import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/data/repositories/profile_repository/profile_repository.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/update_password_status_screen.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/extentions/context_extentions.dart';
 import 'package:fit_tech/utils/my_utils.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,11 @@ class UpdatePasswordProvider extends ChangeNotifier {
         Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
       } else {
         MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }
@@ -83,6 +90,11 @@ class UpdatePasswordProvider extends ChangeNotifier {
         Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
       } else {
         MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }

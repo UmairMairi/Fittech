@@ -1,8 +1,12 @@
 import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/verify_code_screen.dart';
 import 'package:fit_tech/utils/api_constants.dart';
+import 'package:fit_tech/utils/extentions/context_extentions.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/my_utils.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:flutter/material.dart';
 
 class RecoverPasswordProvider extends ChangeNotifier {
@@ -31,19 +35,24 @@ class RecoverPasswordProvider extends ChangeNotifier {
       if (model is SuccessResponseGeneric) {
         recoverPasswordInMap = model;
         notifyListeners();
+        if(!context.mounted) return;
         Navigator.pushNamed(context, VerifyCodeScreen.tag,arguments:email );
       }
       else if (model is Map) {
-        showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
+        MyUtils.showMessage(msg: "${model["message"]}", context: context);
       }else{
-        showMessage(msg: "something went wrong", context: context);
-
+        MyUtils.showMessage(msg: "something went wrong", context: context);
       }
 
     } catch (e) {
       isLoading = false;
       notifyListeners();
-      showMessage(msg: "something went wrong", context: context);
+      MyUtils.showMessage(msg: "something went wrong", context: context);
     }
   }
 
