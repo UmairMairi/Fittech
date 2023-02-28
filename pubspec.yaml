@@ -48,6 +48,7 @@ dependencies:
   flutter_svg:
   cached_network_image: ^3.2.3
   url_launcher: ^6.1.10
+  intl:
 
 dev_dependencies:
   flutter_test:

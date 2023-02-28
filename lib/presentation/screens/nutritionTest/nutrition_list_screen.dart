@@ -8,6 +8,7 @@ import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
   import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'toturial_usage_screen.dart';
 
@@ -45,6 +46,10 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
     ));
   }
 
+  dateSelector(){
+   return DateFormat("E dd MMM.").format(DateTime.now());
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -61,9 +66,9 @@ class _MyNutritionDetailsScreenState extends State<NutritionListScreen> {
                       padding: const EdgeInsets.only(left: 20, right: 10),
                       child: Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              "Lunes 22 Ago",
+                              "${dateSelector()}",
                               textAlign: TextAlign.start,
                               style: MyTextStyle.heading2,
                             ),

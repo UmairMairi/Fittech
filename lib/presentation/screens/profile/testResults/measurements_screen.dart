@@ -774,13 +774,13 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         onPressed: () async{
                           var bloc = context.read<AddMeasurementsProviders>();
                           bloc.setData();
-                          await bloc.addNutrition(context: context);
-                          // if (widget.type == MeasurementsType.addNew) {
+                          // await bloc.addNutrition(context: context);
+                          if (widget.type == MeasurementsType.addNew) {
 
-                          //   Navigator.pushNamed(context, HeartStatusScreen.tag,
-                          //       arguments:
-                          //           (widget.type == MeasurementsType.addNew));
-                          // }
+                            Navigator.pushNamed(context, HeartStatusScreen.tag,
+                                arguments:
+                                    (widget.type == MeasurementsType.addNew));
+                          }
                         },
                       )),
                 if (widget.type == MeasurementsType.addNewFromHistory)

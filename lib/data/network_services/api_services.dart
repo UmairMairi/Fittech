@@ -54,7 +54,7 @@ class ApiServices {
 
   static Future<Response> postMultiPartJson(
       {String? token,
-      Map<String, String>? body,
+      Map<String, dynamic>? body,
       Map<String, String>? filePath,
       required String url}) async {
     Map<String, String> headers;
@@ -70,8 +70,17 @@ class ApiServices {
 
     var request = http.MultipartRequest("POST", Uri.parse(url));
 
-    if(body!=null){
-      request.fields.addAll(body);
+    Map<String, String> fields = {};
+
+    if (body != null) {
+      body.forEach((key, value) {
+       if (value is int) {
+      fields[key] = value.toString();
+    } else {
+      fields[key] = value;
+    }
+      });
+      request.fields.addAll(fields);
     }
     if (filePath != null) {
       filePath.forEach((key, value) async {

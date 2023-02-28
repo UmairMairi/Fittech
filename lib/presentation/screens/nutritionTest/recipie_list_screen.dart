@@ -65,81 +65,86 @@ class _RecipeListScreenState extends State<RecipeListScreen>
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Desayuno ligero",
-                              style: MyTextStyle.medium.copyWith(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  height: 1.5),
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            Row(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+              child: Builder(
+                builder: (context) {
+                  
+                  return ListView.builder(
+                    itemCount: 5,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("4 ingredients",
-                                    style: MyTextStyle.inputTitle),
-                                Expanded(child: Container()),
-                                InkWell(
-                                  onTap: (){
-                                    Navigator.pushNamed(context, RecipeDetailsScreen.tag);
-                                  },
-                                  child: Text(
-                                    "Ver receta",
-                                    style: MyTextStyle.paragraph1.copyWith(fontWeight: FontWeight.bold,color: MyColors.redColor),
-                                  ),
+                                Text(
+                                  "Desayuno ligero",
+                                  style: MyTextStyle.medium.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      height: 1.5),
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    const Text("4 ingredients",
+                                        style: MyTextStyle.inputTitle),
+                                    Expanded(child: Container()),
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, RecipeDetailsScreen.tag);
+                                      },
+                                      child: Text(
+                                        "Ver receta",
+                                        style: MyTextStyle.paragraph1.copyWith(fontWeight: FontWeight.bold,color: MyColors.redColor),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                  children: const [
+                                    Expanded(
+                                      child: Text("245 kcal",
+                                          style: MyTextStyle.paragraph1),
+                                    ),
+                                    Expanded(
+                                      child: Text("P. 102g",
+                                          style: MyTextStyle.paragraph1),
+                                    ),
+                                    Expanded(
+                                      child: Text("C. 27g",
+                                          style: MyTextStyle.paragraph1),
+                                    ),
+                                    Expanded(
+                                      child: Text("G. 21g",
+                                          style: MyTextStyle.paragraph1),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            Row(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.center,
-                              children: const [
-                                Expanded(
-                                  child: Text("245 kcal",
-                                      style: MyTextStyle.paragraph1),
-                                ),
-                                Expanded(
-                                  child: Text("P. 102g",
-                                      style: MyTextStyle.paragraph1),
-                                ),
-                                Expanded(
-                                  child: Text("C. 27g",
-                                      style: MyTextStyle.paragraph1),
-                                ),
-                                Expanded(
-                                  child: Text("G. 21g",
-                                      style: MyTextStyle.paragraph1),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Divider(),
-                      const SizedBox(height: 10.0,)
-                    ],
+                          ),
+                          const Divider(),
+                          const SizedBox(height: 10.0,)
+                        ],
+                      );
+                    },
                   );
-                },
+                }
               ),
             ),
           ],

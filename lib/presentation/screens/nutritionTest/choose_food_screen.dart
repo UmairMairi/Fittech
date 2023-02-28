@@ -36,8 +36,10 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
   }
 
   getFoods() {
-    var read = context.read<ChooseFoodProvider>();
-    read.getFood(context: context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var read = context.read<ChooseFoodProvider>();
+      read.getFood(context: context);
+    });
   }
 
   @override
@@ -119,7 +121,8 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                             }
 
                             return Wrap(
-                                children: bloc.getFoodModel!.data!.map((Data item) {
+                                children:
+                                    bloc.getFoodModel!.data!.map((Data item) {
                               var selected = false;
                               if (selectedIndex == index) {
                                 selected = true;
@@ -132,7 +135,9 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                                 selected: selected,
                                 currentValue: (value) {
                                   if (value) {
-                                    GlobalState.nutritionTest = NutritionTestModel.fromJson({"food_dont_like":item.id});
+                                    GlobalState.nutritionTest =
+                                        NutritionTestModel.fromJson(
+                                            {"food_dont_like": item.id});
                                   }
                                 },
                               );

@@ -1,8 +1,12 @@
+import 'package:fit_tech/data/models/choose_food_model.dart';
 import 'package:fit_tech/presentation/screens/dialogue/food_dialogue.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/food_type_screen.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../logic/nutrition/choose_food_provider.dart';
 
 class FoodListScreen extends StatefulWidget {
   const FoodListScreen({super.key});
@@ -20,6 +24,14 @@ class _FoodListScreenState extends State<FoodListScreen>
   @override
   void initState() {
     super.initState();
+    getFoods();
+  }
+
+  getFoods() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var read = context.read<ChooseFoodProvider>();
+      read.getFood(context: context);
+    });
   }
 
   @override
@@ -75,33 +87,39 @@ class _FoodListScreenState extends State<FoodListScreen>
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 20,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      showDialogue(context: context);
-                    },
-                    child: Container(
-                        margin: const EdgeInsets.only(bottom: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 5.0),
-                              child: Text(
-                                "Alimento 1",
-                                style: MyTextStyle.text1,
-                              ),
-                            ),
-                            Divider()
-                          ],
-                        )),
-                  );
-                },
-              ),
+              child: Builder(builder: (context) {
+                var provider = context.watch<ChooseFoodProvider>();
+                return provider.getFoodModel == null
+                    ? const CircularProgressIndicator.adaptive()
+                    : ListView.builder(
+                        itemCount: provider.getFoodModel!.data!.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          Data food = provider.getFoodModel!.data![index];
+                          return InkWell(
+                            onTap: () {
+                              showDialogue(context: context);
+                            },
+                            child: Container(
+                                margin: const EdgeInsets.only(bottom: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 5.0),
+                                      child: Text(
+                                        "${food.name}",
+                                        style: MyTextStyle.text1,
+                                      ),
+                                    ),
+                                    Divider()
+                                  ],
+                                )),
+                          );
+                        },
+                      );
+              }),
             ),
           ],
         ),
