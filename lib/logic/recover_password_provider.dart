@@ -23,12 +23,13 @@ class RecoverPasswordProvider extends ChangeNotifier {
 
   Future<void> resetPassword({
     required BuildContext context,
+    String? email,
   }) async {
     try {
       isLoading = true;
       notifyListeners();
       var model =
-      await OnboardPostRepository.resetPassword(context: context, email: email, url: ApiConstants.recoverPassword);
+      await OnboardPostRepository.resetPassword(context: context, email: email ?? this.email, url: ApiConstants.recoverPassword);
       isLoading = false;
       notifyListeners();
 
@@ -36,7 +37,9 @@ class RecoverPasswordProvider extends ChangeNotifier {
         recoverPasswordInMap = model;
         notifyListeners();
         if(!context.mounted) return;
-        Navigator.pushNamed(context, VerifyCodeScreen.tag,arguments:email );
+        if(email==null){
+          Navigator.pushNamed(context, VerifyCodeScreen.tag,arguments:this.email);
+        }
       }
       else if (model is Map) {
         if(model.containsKey("detail") && model["detail"] == "Invalid token."){

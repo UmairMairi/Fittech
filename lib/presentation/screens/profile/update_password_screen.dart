@@ -11,6 +11,7 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 class UpdatePasswordScreen extends StatefulWidget {
   static const String tag = "update_password_screen";
   final Types type;
@@ -165,10 +166,10 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                             backgroundColor: MyColors.blackColor,
                             enabled: isEnabled,
                             onPressed: () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
                               if (_formKey.currentState!.validate() && isEnabled) {
                                 if(widget.type == Types.updatePassword){
-                                   await bloc.updatePassword(context: context,
-                                       oldPassword: context.read<VerifyIdentityProvider>().password);
+                                   await bloc.updatePassword(context: context, oldPassword: context.read<VerifyIdentityProvider>().password);
                                 }else{
                                   await bloc.setNewPassword(
                                       context: context,

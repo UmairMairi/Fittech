@@ -14,23 +14,29 @@ class UpdatePasswordStatusScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: MyColors.blackColor,
-        body: SizedBox(
-          width: size.width,
-          height: size.height,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: size.height > size.width
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: childrenList(context: context),
-                  )
-                : ListView(
-                    children: childrenList(context: context),
-                  ),
+    return WillPopScope(
+      onWillPop: (){
+        Navigator.pop(context,NavigationResults.passwordUpdated);
+        return Future.value(false);
+      },
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: MyColors.blackColor,
+          body: SizedBox(
+            width: size.width,
+            height: size.height,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: size.height > size.width
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: childrenList(context: context),
+                    )
+                  : ListView(
+                      children: childrenList(context: context),
+                    ),
+            ),
           ),
         ),
       ),

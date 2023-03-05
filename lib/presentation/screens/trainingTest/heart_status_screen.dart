@@ -110,7 +110,7 @@ class HeartStatusScreen extends StatelessWidget {
                 backgroundColor: MyColors.blackColor,
                 borderColor: MyColors.whiteColor,
                 onPressed: () {
-                  Navigator.pushNamed(context, DashboardScreen.tag);
+                  Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag, (route) => false);
                 },
               ),
             ),

@@ -43,7 +43,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                 }
                 return Html(
                   data: provider.dataPolicyModel?.data?.description ?? "",
-                  tagsList: Html.tags..addAll(["bird", "flutter"]),
+                  tagsList: Html.tags,
                 );
               }),
             ),
@@ -56,7 +56,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<PoliciesProvider>().getPolicyData(context: context);
+    Future.delayed(Duration.zero,()async{
+      context.read<PoliciesProvider>().getPolicyData(context: context);
+    });
   }
 
 }

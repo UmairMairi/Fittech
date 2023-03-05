@@ -46,7 +46,11 @@ class VerifyIdentityProvider extends ChangeNotifier {
         verifyIdentityInMap = model;
         notifyListeners();
         if (!context.mounted) return;
-        Navigator.pushNamed(context, UpdatePasswordScreen.tag, arguments: Types.updatePassword);
+        Navigator.pushNamed(context, UpdatePasswordScreen.tag, arguments: Types.updatePassword).then((value){
+          if(value == NavigationResults.passwordUpdated){
+            Navigator.pop(context,NavigationResults.passwordUpdated);
+          }
+        });
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
         if(model.containsKey("detail") && model["detail"] == "Invalid token."){

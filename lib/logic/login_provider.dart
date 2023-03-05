@@ -61,8 +61,7 @@ class LoginProvider extends ChangeNotifier {
     if (kDebugMode) {
       print("Updates user model--> ${loginModel?.toJson()}");
     }
-    PrefUtils.putString(
-        key: PrefUtils.loginModel, value: json.encode(loginModel?.toJson()));
+    PrefUtils.putString(key: PrefUtils.loginModel, value: json.encode(loginModel?.toJson()));
     if (kDebugMode) {
       print("Updates user model Encoded--> ${loginModel?.toJson()}");
     }

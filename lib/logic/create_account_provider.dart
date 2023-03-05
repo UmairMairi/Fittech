@@ -67,7 +67,7 @@ class RegisterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setUserRegisterModel({required BuildContext context,}) async {
+  Future<void> createAccount({required BuildContext context,}) async {
     try {
       isLoading = true;
       notifyListeners();

@@ -20,13 +20,19 @@ class RegisterScreen extends StatelessWidget {
 
   static const String tag = "register_screen";
 
-  final TextEditingController fNameController = TextEditingController(text: Singleton.isDev ? "Angel" : "");
-  final TextEditingController lNameController =   TextEditingController(text: Singleton.isDev ? "Valverde" : "");
-  final TextEditingController emailController = TextEditingController(text: Singleton.isDev ? "angelvalverde@gmail.com" : "");
-  final TextEditingController passwordController =   TextEditingController(text: Singleton.isDev ? "123456" : "");
-  final TextEditingController confirmPasswordController =   TextEditingController(text: Singleton.isDev ? "123456" : "");
+  final TextEditingController fNameController =
+      TextEditingController(text: Singleton.isDev ? "Angel" : "");
+  final TextEditingController lNameController =
+      TextEditingController(text: Singleton.isDev ? "Valverde" : "");
+  final TextEditingController emailController = TextEditingController(
+      text: Singleton.isDev ? "angelvalverde@gmail.com" : "");
+  final TextEditingController passwordController =
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
+  final TextEditingController confirmPasswordController =
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
+  final _confirmFieldKey = GlobalKey<FormState>();
   bool cbState1 = false;
   bool cbState2 = false;
   bool cbState3 = false;
@@ -181,25 +187,32 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30.0,
                     ),
-                    TextFieldPrimary(
-                        isLabelRequired: true,
-                        title: Constants.confirmPasswordLabel,
-                        isObscure: true,
-                        controller: confirmPasswordController,
-                        onChanged: (val) {
-                          context
-                              .read<RegisterProvider>()
-                              .setConfirmPassword(val = val);
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "digite uma senha válida";
-                          } else if (value != passwordController.text) {
-                            return "Las contraseñas no coinciden.";
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.visiblePassword),
+                    Form(
+                      key: _confirmFieldKey,
+                      child: TextFieldPrimary(
+                          isLabelRequired: true,
+                          title: Constants.confirmPasswordLabel,
+                          isObscure: true,
+                          controller: confirmPasswordController,
+                          onChanged: (val) {
+                            context
+                                .read<RegisterProvider>()
+                                .setConfirmPassword(val = val);
+                            if (val.length >= passwordController.text.length) {
+                              _confirmFieldKey.currentState!.validate();
+                              print("validate == true");
+                            }
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "digite uma senha válida";
+                            } else if (value != passwordController.text) {
+                              return "Las contraseñas no coinciden.";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.visiblePassword),
+                    ),
                     const SizedBox(
                       height: 25.0,
                     ),
@@ -250,18 +263,20 @@ class RegisterScreen extends StatelessWidget {
                       child: Builder(builder: (context) {
                         var bloc = context.watch<RegisterProvider>();
                         if ((bloc.firstName.isNotEmpty &&
-                            bloc.lastName.isNotEmpty &&
-                            isEmail(bloc.email) &&
-                            (bloc.password.length >= 6) &&
-                            (bloc.confirmPassword.length >= 6) &&
-                            (bloc.password==bloc.confirmPassword) &&
-                            bloc.info1Checked &&
-                            bloc.info2Checked &&
-                            bloc.info3Checked) ||
+                                bloc.lastName.isNotEmpty &&
+                                isEmail(bloc.email) &&
+                                (bloc.password.length >= 6) &&
+                                (bloc.confirmPassword.length >= 6) &&
+                                (bloc.password == bloc.confirmPassword) &&
+                                bloc.info1Checked &&
+                                bloc.info2Checked &&
+                                bloc.info3Checked) ||
                             Singleton.isDev) {
                           isEnabled = true;
+                        } else {
+                          isEnabled = false;
                         }
-                          if (bloc.isLoading == true) {
+                        if (bloc.isLoading == true) {
                           return const LoadingButton();
                         }
                         return PrimaryButton(
@@ -270,11 +285,16 @@ class RegisterScreen extends StatelessWidget {
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() && isEnabled) {
+                            if (_formKey.currentState!.validate() &&
+                                isEnabled) {
                               if (cbState1 && cbState2 && cbState3) {
-                                await bloc.setUserRegisterModel(context: context,);
+                                await bloc.createAccount(
+                                  context: context,
+                                );
                               } else {
-                                showMessage(context: context, msg: "Please select the conditions first");
+                                showMessage(
+                                    context: context,
+                                    msg: "Please select the conditions first");
                               }
                             }
                           },

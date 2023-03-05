@@ -35,7 +35,11 @@ class UpdatePasswordProvider extends ChangeNotifier {
         updatePasswordModel = model;
         notifyListeners();
         if(!context.mounted)return;
-        Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag);
+        Navigator.pushNamed(context, UpdatePasswordStatusScreen.tag).then((value){
+          if(value == NavigationResults.passwordUpdated){
+            Navigator.pop(context,NavigationResults.passwordUpdated);
+          }
+        });
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
         if(model.containsKey("detail") && model["detail"] == "Invalid token."){
