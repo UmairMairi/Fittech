@@ -25,4 +25,8 @@ class ApiConstants {
 
   static const String getFood="$baseUrl/account/foods/";
   static const String addNutrition="$baseUrl/account/usernutritioninfodata/";
+
+  static const String getRecipeList="$baseUrl/recipie/get-user-all-recipie";
+  static const String addRecipe="$baseUrl/recipie/add-recipie";
+
 }

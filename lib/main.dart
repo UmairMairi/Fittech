@@ -27,12 +27,15 @@ import 'package:fit_tech/logic/policies_provider.dart';
 import 'package:fit_tech/logic/profile/my_data_provider.dart';
 import 'package:fit_tech/logic/profile/test_after_training_provider.dart';
 import 'package:fit_tech/logic/profile/verify_Identity_provider.dart';
+import 'package:fit_tech/logic/recipe/recipe_provider.dart';
 import 'package:fit_tech/logic/recover_password_provider.dart';
 import 'package:fit_tech/logic/update_password_provider.dart';
 import 'package:fit_tech/logic/verify_code_provider.dart';
 import 'package:fit_tech/logic/weight_height_provider.dart';
 import 'package:fit_tech/presentation/router/app_routes.dart';
 import 'package:fit_tech/presentation/screens/dashboard/dashboard_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipe_list_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/welcome_screen.dart';
 import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
@@ -134,6 +137,8 @@ class _MyAppState extends State<MyApp> {
             create: (context) => ChooseFoodProvider()),
         ChangeNotifierProvider<PoliciesProvider>(
             create: (context) => PoliciesProvider()),
+            ChangeNotifierProvider<RecipeProvider>(
+            create: (context) => RecipeProvider()),
       ],
       child: MaterialApp(
         title: 'FITTECH',
@@ -142,6 +147,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.grey,
         ),
         initialRoute: WelcomeScreen.tag,
+        // initialRoute: RecipeListScreen.tag,
         onGenerateRoute: appRoute.onGenerateRoute,
       ),
     );

@@ -144,7 +144,7 @@ class _FoodTypeScreenState extends State<FoodTypeScreen>
           return Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: const FoodDialogue(),
+            // child: const FoodDialogue(),
           );
         }).then((val) {
       if ((val is bool) && (val == true)) {

@@ -17,7 +17,7 @@ import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_sc
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_line_identification.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/recipe_details_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipe_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/select_recipes_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/toturial_usage_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';

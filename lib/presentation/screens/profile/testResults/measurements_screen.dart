@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:another_flushbar/flushbar_route.dart';
 import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/presentation/screens/dialogue/image_source.dart';
 import 'package:fit_tech/presentation/screens/dialogue/test_result_dialogue.dart';
@@ -11,6 +14,7 @@ import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,201 +45,127 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
     return SingleChildScrollView(
       child: Container(
         color: Colors.white,
-        child: Builder(
-          builder: (context) {
-            var provider = context.watch<AddMeasurementsProviders>();
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (widget.type == MeasurementsType.addNew)
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                        child: Text(
-                          Constants.measurementsScreenHeading2,
-                          style: MyTextStyle.heading2,
-                        ),
+        child: Builder(builder: (context) {
+          var provider = context.watch<AddMeasurementsProviders>();
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.type == MeasurementsType.addNew)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20.0),
+                      child: Text(
+                        Constants.measurementsScreenHeading2,
+                        style: MyTextStyle.heading2,
                       ),
-                    if (widget.type == MeasurementsType.addNewFromHistory)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          Constants.measurementsScreenHeading1,
-                          style: MyTextStyle.heading3,
-                        ),
+                    ),
+                  if (widget.type == MeasurementsType.addNewFromHistory)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Text(
+                        Constants.measurementsScreenHeading1,
+                        style: MyTextStyle.heading3,
                       ),
-                    SizedBox(
-                      height: 250,
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: InkWell(
-                            onTap: () {
-                              showDialogueSourceType(
-                                  context: context, imageAspect: "0");
-                            },
-                            child: Builder(builder: (context) {
-                              var img = context
-                                  .watch<AddMeasurementsProviders>()
-                                  .frontImage;
-                              return img != null
-                                  ? Container(
-                                      color: Colors.red,
-                                      child: Image.file(
-                                        img,
-                                        fit: BoxFit.cover,
-                                        height: 250,
-                                      ),
-                                    )
-                                  : (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? Container(
-                                          color: MyColors.blackColor,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 20.0),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(10.0),
-                                                  decoration: const BoxDecoration(
-                                                      color: MyColors.redColor,
-                                                      shape: BoxShape.circle),
-                                                  child: Text(
-                                                    "1",
-                                                    style: MyTextStyle.paragraph1
-                                                        .copyWith(
-                                                            color: MyColors
-                                                                .whiteColor),
-                                                  ),
-                                                ),
-                                                Expanded(child: Container()),
-                                                const ImageIcon(
-                                                  AssetImage(Images
-                                                      .iconCameraMeasurementsScreen),
-                                                  color: MyColors.redColor,
-                                                  size: 30,
-                                                ),
-                                                Expanded(child: Container()),
-                                                Text(
-                                                  "Frontal",
-                                                  style: MyTextStyle.heading3
-                                                      .copyWith(
-                                                          color: MyColors.redColor,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      : Container(color: MyColors.greyColor);
-                            }),
-                          )),
-                          const SizedBox(
-                            width: 1,
-                          ),
-                          Expanded(child: Builder(builder: (context) {
-                            var provider =
-                                Provider.of<AddMeasurementsProviders>(context);
-                            var isSelected = provider.frontImage != null;
-                            return InkWell(
-                                onTap: () {
-                                  showDialogueSourceType(
-                                      context: context, imageAspect: "1");
-                                },
-                                child: (provider.sideImage != null)
+                    ),
+                  SizedBox(
+                    height: 250,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: InkWell(
+                          onTap: () {
+                            showDialogueSourceType(
+                                context: context, imageAspect: "0");
+                          },
+                          child: Builder(builder: (context) {
+                            var img = context
+                                .watch<AddMeasurementsProviders>()
+                                .frontImage;
+                            return img != null
+                                ? Container(
+                                    color: Colors.red,
+                                    child: Image.file(
+                                      img,
+                                      fit: BoxFit.cover,
+                                      height: 250,
+                                    ),
+                                  )
+                                : (widget.type == MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
                                     ? Container(
-                                        color: Colors.red,
-                                        child: Image.file(
-                                          provider.sideImage!,
-                                          fit: BoxFit.cover,
-                                          height: 250,
+                                        color: MyColors.blackColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 20.0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                decoration: const BoxDecoration(
+                                                    color: MyColors.redColor,
+                                                    shape: BoxShape.circle),
+                                                child: Text(
+                                                  "1",
+                                                  style: MyTextStyle.paragraph1
+                                                      .copyWith(
+                                                          color: MyColors
+                                                              .whiteColor),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                              const ImageIcon(
+                                                AssetImage(Images
+                                                    .iconCameraMeasurementsScreen),
+                                                color: MyColors.redColor,
+                                                size: 30,
+                                              ),
+                                              Expanded(child: Container()),
+                                              Text(
+                                                "Frontal",
+                                                style: MyTextStyle.heading3
+                                                    .copyWith(
+                                                        color:
+                                                            MyColors.redColor,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       )
-                                    : (widget.type == MeasurementsType.addNew ||
-                                            widget.type ==
-                                                MeasurementsType.addNewFromHistory)
-                                        ? Container(
-                                            color: MyColors.blackColor,
-                                            child: Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  vertical: 20.0),
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    padding:
-                                                        const EdgeInsets.all(10.0),
-                                                    decoration: BoxDecoration(
-                                                        color: isSelected
-                                                            ? MyColors.redColor
-                                                            : MyColors.greyAccent,
-                                                        shape: BoxShape.circle),
-                                                    child: Text(
-                                                      "2",
-                                                      style: MyTextStyle.paragraph1
-                                                          .copyWith(
-                                                              color: MyColors
-                                                                  .whiteColor),
-                                                    ),
-                                                  ),
-                                                  Expanded(child: Container()),
-                                                  ImageIcon(
-                                                    const AssetImage(Images
-                                                        .iconCameraMeasurementsScreen),
-                                                    color: isSelected
-                                                        ? MyColors.redColor
-                                                        : MyColors.greyAccent,
-                                                    size: 30,
-                                                  ),
-                                                  Expanded(child: Container()),
-                                                  Text(
-                                                    "Perfil",
-                                                    style: MyTextStyle.heading3
-                                                        .copyWith(
-                                                            color: isSelected
-                                                                ? MyColors.redColor
-                                                                : MyColors
-                                                                    .greyAccent,
-                                                            fontWeight:
-                                                                FontWeight.w500),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          )
-                                        : Container(color: MyColors.greyColor));
-                          })),
-                          const SizedBox(
-                            width: 1,
-                          ),
-                          Expanded(child: Builder(builder: (context) {
-                            var provider =
-                                Provider.of<AddMeasurementsProviders>(context);
-                            var isSelected = ((provider.frontImage != null) &&
-                                (provider.sideImage != null));
-                            return InkWell(
+                                    : Container(color: MyColors.greyColor);
+                          }),
+                        )),
+                        const SizedBox(
+                          width: 1,
+                        ),
+                        Expanded(child: Builder(builder: (context) {
+                          var provider =
+                              Provider.of<AddMeasurementsProviders>(context);
+                          var isSelected = provider.frontImage != null;
+                          return InkWell(
                               onTap: () {
                                 showDialogueSourceType(
-                                    context: context, imageAspect: "2");
+                                    context: context, imageAspect: "1");
                               },
-                              child: (provider.backImage != null)
+                              child: (provider.sideImage != null)
                                   ? Container(
                                       color: Colors.red,
                                       child: Image.file(
-                                        provider.backImage!,
+                                        provider.sideImage!,
                                         fit: BoxFit.cover,
                                         height: 250,
                                       ),
                                     )
                                   : (widget.type == MeasurementsType.addNew ||
                                           widget.type ==
-                                              MeasurementsType.addNewFromHistory)
+                                              MeasurementsType
+                                                  .addNewFromHistory)
                                       ? Container(
                                           color: MyColors.blackColor,
                                           child: Padding(
@@ -244,16 +174,17 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  padding:
-                                                      const EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
                                                   decoration: BoxDecoration(
                                                       color: isSelected
                                                           ? MyColors.redColor
                                                           : MyColors.greyAccent,
                                                       shape: BoxShape.circle),
                                                   child: Text(
-                                                    "3",
-                                                    style: MyTextStyle.paragraph1
+                                                    "2",
+                                                    style: MyTextStyle
+                                                        .paragraph1
                                                         .copyWith(
                                                             color: MyColors
                                                                 .whiteColor),
@@ -270,13 +201,14 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                                                 ),
                                                 Expanded(child: Container()),
                                                 Text(
-                                                  "Espalda",
-                                                  style: MyTextStyle
-                                                      .heading3
+                                                  "Perfil",
+                                                  style: MyTextStyle.heading3
                                                       .copyWith(
                                                           color: isSelected
-                                                              ? MyColors.redColor
-                                                              : MyColors.greyAccent,
+                                                              ? MyColors
+                                                                  .redColor
+                                                              : MyColors
+                                                                  .greyAccent,
                                                           fontWeight:
                                                               FontWeight.w500),
                                                 ),
@@ -284,542 +216,710 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                                             ),
                                           ),
                                         )
-                                      : Container(color: MyColors.greyColor),
-                            );
-                          })),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    (widget.type == MeasurementsType.addNew ||
-                            widget.type == MeasurementsType.addNewFromHistory)
-                        ? Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: Text(
-                              Constants.measurementsScreenHeading3,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: MyColors.greyAccent,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        : Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    child: Text(
-                                  Constants.measurementsScreenTitle1,
-                                  style: MyTextStyle.paragraph1.copyWith(
-                                      color: MyColors.blackColor,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                                if (widget.type == MeasurementsType.testResult)
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, MeasurementHistoryScreen.tag);
-                                    },
-                                    child: Text(
-                                      "Ver historial",
-                                      textAlign: TextAlign.end,
-                                      style: MyTextStyle.paragraph1.copyWith(
-                                          color: MyColors.redColor,
-                                          fontWeight: FontWeight.bold),
+                                      : Container(color: MyColors.greyColor));
+                        })),
+                        const SizedBox(
+                          width: 1,
+                        ),
+                        Expanded(child: Builder(builder: (context) {
+                          var provider =
+                              Provider.of<AddMeasurementsProviders>(context);
+                          var isSelected = ((provider.frontImage != null) &&
+                              (provider.sideImage != null));
+                          return InkWell(
+                            onTap: () {
+                              showDialogueSourceType(
+                                  context: context, imageAspect: "2");
+                            },
+                            child: (provider.backImage != null)
+                                ? Container(
+                                    color: Colors.red,
+                                    child: Image.file(
+                                      provider.backImage!,
+                                      fit: BoxFit.cover,
+                                      height: 250,
                                     ),
                                   )
-                              ],
-                            ),
-                          ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle2,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                  ? provider.weightTest??"+ Agregar"
-                                  : "62 kg",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.weightTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(
-                            context: context,
-                            category: TestResult.weight,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "62"
-                        );
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle3,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
-                                  ? provider.heightTest??"+ Agregar"
-                                  : "180cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.heightTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(
-                            context: context,
-                            category: TestResult.height,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "180");
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle4,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
-                                  ? provider.minWaistTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.minWaistTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(
-                            context: context, category: TestResult.minWaist,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60"
-                        );
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle5,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
-                                  ? provider.maxWaistTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.maxWaistTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(
-                            context: context, category: TestResult.maxWaist,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60");
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle6,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
-                                  ? provider.hipTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.hipTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(context: context, category: TestResult.hip,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60");
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle7,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
-                                  ? provider.neckTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.neckTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(context: context, category: TestResult.neck,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60"
-                        );
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle8,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type ==
-                                          MeasurementsType.addNewFromHistory)
-                                  ? provider.middleThighTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.middleThighTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(
-                            context: context, category: TestResult.middleThigh,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60");
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle9,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type == MeasurementsType.addNewFromHistory)
-                                  ? provider.armTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.armTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(context: context, category: TestResult.arm,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60");
-                      },
-                    ),
-                    const Divider()
-                  ],
-                ),
-                Column(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Constants.measurementsScreenTitle10,
-                              style: MyTextStyle.paragraph1
-                                  .copyWith(color: MyColors.blackColor),
-                            )),
-                            Text(
-                              (widget.type == MeasurementsType.addNew ||
-                                      widget.type == MeasurementsType.addNewFromHistory)
-                                  ? provider.chestTest??"+ Agregar"
-                                  : "60cm",
-                              textAlign: TextAlign.end,
-                              style: MyTextStyle.paragraph1.copyWith(
-                                  color: (widget.type == MeasurementsType.addNew ||
-                                          widget.type ==
-                                              MeasurementsType.addNewFromHistory)
-                                      ? provider.chestTest!=null?MyColors.greyColor:MyColors.redColor
-                                      : MyColors.greyColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        showDialogue(context: context, category: TestResult.chest,
-                            initialValue:(widget.type == MeasurementsType.addNew || widget.type == MeasurementsType.addNewFromHistory)
-                                ? ""
-                                : "60");
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                if (widget.type == MeasurementsType.history)
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: PrimaryButton(
-                        title: Constants.measurementsScreenLabel2,
-                        backgroundColor: MyColors.whiteColor,
-                        textColor: MyColors.blackColor,
-                        borderColor: MyColors.blackColor,
-                        onPressed: () {
-                          Navigator.pushNamed(context, ChooseDatesScreen.tag);
-                        },
-                      )),
-                if (widget.type == MeasurementsType.testResult)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: PrimaryButton(
-                            title: Constants.measurementsScreenLabel1,
-                            backgroundColor: MyColors.blackColor,
-                            textColor: MyColors.whiteColor,
-                            borderColor: MyColors.blackColor,
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, AddMeasurementsScreen.tag,
-                                  arguments: MeasurementsType.addNewFromHistory);
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: PrimaryButton(
-                            title: Constants.measurementsScreenLabel2,
-                            backgroundColor: MyColors.whiteColor,
-                            textColor: MyColors.blackColor,
-                            borderColor: MyColors.blackColor,
-                            onPressed: () {
-                              Navigator.pushNamed(context, ChooseDatesScreen.tag);
-                            },
-                          ),
-                        ),
+                                : (widget.type == MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? Container(
+                                        color: MyColors.blackColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 20.0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                decoration: BoxDecoration(
+                                                    color: isSelected
+                                                        ? MyColors.redColor
+                                                        : MyColors.greyAccent,
+                                                    shape: BoxShape.circle),
+                                                child: Text(
+                                                  "3",
+                                                  style: MyTextStyle.paragraph1
+                                                      .copyWith(
+                                                          color: MyColors
+                                                              .whiteColor),
+                                                ),
+                                              ),
+                                              Expanded(child: Container()),
+                                              ImageIcon(
+                                                const AssetImage(Images
+                                                    .iconCameraMeasurementsScreen),
+                                                color: isSelected
+                                                    ? MyColors.redColor
+                                                    : MyColors.greyAccent,
+                                                size: 30,
+                                              ),
+                                              Expanded(child: Container()),
+                                              Text(
+                                                "Espalda",
+                                                style: MyTextStyle.heading3
+                                                    .copyWith(
+                                                        color: isSelected
+                                                            ? MyColors.redColor
+                                                            : MyColors
+                                                                .greyAccent,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    : Container(color: MyColors.greyColor),
+                          );
+                        })),
                       ],
                     ),
                   ),
-                if (widget.type == MeasurementsType.addNew)
-                  //  provider.isLoading ? LoadingButton(): 
-                    Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: PrimaryButton(
-                        title: Constants.measurementsScreenLabel3,
-                        backgroundColor: MyColors.blackColor,
-                        textColor: MyColors.whiteColor,
-                        borderColor: MyColors.blackColor,                                            
-                        onPressed: () async{
-                          var bloc = context.read<AddMeasurementsProviders>();
-                          bloc.setData();
-                          // await bloc.addNutrition(context: context);
-                          if (widget.type == MeasurementsType.addNew) {
-
-                            Navigator.pushNamed(context, HeartStatusScreen.tag,
-                                arguments:
-                                    (widget.type == MeasurementsType.addNew));
-                          }
-                        },
-                      )),
-                if (widget.type == MeasurementsType.addNewFromHistory)
-                 Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Builder(
-                        builder: (context) {
-                          var bloc = context.watch<AddMeasurementsProviders>();
-                          bool isEnabled = false;
-                          isEnabled = bloc.isDataChanged();
-                          return PrimaryButton(
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  (widget.type == MeasurementsType.addNew ||
+                          widget.type == MeasurementsType.addNewFromHistory)
+                      ? Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Text(
+                            Constants.measurementsScreenHeading3,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: MyColors.greyAccent,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      : Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                Constants.measurementsScreenTitle1,
+                                style: MyTextStyle.paragraph1.copyWith(
+                                    color: MyColors.blackColor,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              if (widget.type == MeasurementsType.testResult)
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, MeasurementHistoryScreen.tag);
+                                  },
+                                  child: Text(
+                                    "Ver historial",
+                                    textAlign: TextAlign.end,
+                                    style: MyTextStyle.paragraph1.copyWith(
+                                        color: MyColors.redColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                            ],
+                          ),
+                        ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle2,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.weightTest ?? "+ Agregar"
+                                : "62 kg",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.weightTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.weight,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "62");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle3,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.heightTest ?? "+ Agregar"
+                                : "180cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.heightTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.height,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "180");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle4,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.minWaistTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.minWaistTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.minWaist,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle5,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.maxWaistTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.maxWaistTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.maxWaist,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle6,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.hipTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.hipTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.hip,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle7,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.neckTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.neckTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.neck,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle8,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.middleThighTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.middleThighTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.middleThigh,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle9,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.armTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.armTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.arm,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                  const Divider()
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                            Constants.measurementsScreenTitle10,
+                            style: MyTextStyle.paragraph1
+                                .copyWith(color: MyColors.blackColor),
+                          )),
+                          Text(
+                            (widget.type == MeasurementsType.addNew ||
+                                    widget.type ==
+                                        MeasurementsType.addNewFromHistory)
+                                ? provider.chestTest ?? "+ Agregar"
+                                : "60cm",
+                            textAlign: TextAlign.end,
+                            style: MyTextStyle.paragraph1.copyWith(
+                                color: (widget.type ==
+                                            MeasurementsType.addNew ||
+                                        widget.type ==
+                                            MeasurementsType.addNewFromHistory)
+                                    ? provider.chestTest != null
+                                        ? MyColors.greyColor
+                                        : MyColors.redColor
+                                    : MyColors.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialogue(
+                          context: context,
+                          category: TestResult.chest,
+                          initialValue:
+                              (widget.type == MeasurementsType.addNew ||
+                                      widget.type ==
+                                          MeasurementsType.addNewFromHistory)
+                                  ? ""
+                                  : "60");
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              if (widget.type == MeasurementsType.history)
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: PrimaryButton(
+                      title: Constants.measurementsScreenLabel2,
+                      backgroundColor: MyColors.whiteColor,
+                      textColor: MyColors.blackColor,
+                      borderColor: MyColors.blackColor,
+                      onPressed: () {
+                        Navigator.pushNamed(context, ChooseDatesScreen.tag);
+                      },
+                    )),
+              if (widget.type == MeasurementsType.testResult)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          title: Constants.measurementsScreenLabel1,
+                          backgroundColor: MyColors.blackColor,
+                          textColor: MyColors.whiteColor,
+                          borderColor: MyColors.blackColor,
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, AddMeasurementsScreen.tag,
+                                arguments: MeasurementsType.addNewFromHistory);
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: PrimaryButton(
+                          title: Constants.measurementsScreenLabel2,
+                          backgroundColor: MyColors.whiteColor,
+                          textColor: MyColors.blackColor,
+                          borderColor: MyColors.blackColor,
+                          onPressed: () {
+                            Navigator.pushNamed(context, ChooseDatesScreen.tag);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              if (widget.type == MeasurementsType.addNew)
+                Builder(builder: (context) {
+                  var provider = context.watch<AddMeasurementsProviders>();
+                  return provider.isLoading
+                      ? const Center(child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child:  LoadingButton(),
+                        ),
+                      )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: PrimaryButton(
                             title: Constants.measurementsScreenLabel3,
                             backgroundColor: MyColors.blackColor,
                             textColor: MyColors.whiteColor,
                             borderColor: MyColors.blackColor,
-                            enabled: isEnabled,
-                            onPressed: () {
-                              context.read<AddMeasurementsProviders>().setData();
-                              Navigator.pop(context);
+                            onPressed: () async {
+                              var bloc =
+                                  context.read<AddMeasurementsProviders>();
+                              if (widget.type == MeasurementsType.addNew) {
+                                bool isValid = bloc.validationChecker(context);
+                                if (isValid) {
+                                  bloc.setData();
+                                  var response =
+                                      await bloc.addNutrition(context: context);
+                                  if (response.containsKey("success") &&
+                                      response['success']) {
+                                    showMessage(
+                                        context: context,
+                                        msg: response['message'],
+                                        success: true);
+                                    bloc.resetData();
+                                    Navigator.pushNamed(
+                                        context, HeartStatusScreen.tag,
+                                        arguments: (widget.type ==
+                                            MeasurementsType.addNew));
+                                  } else {
+                                    showMessage(
+                                        context: context,
+                                        msg: response.toString());
+                                  }
+                                }
+                              }
                             },
-                          );
-                        }
-                      )),
-                const SizedBox(
-                  height: 40,
-                )
-              ],
-            );
-          }
-        ),
+                          ));
+                }),
+              if (widget.type == MeasurementsType.addNewFromHistory)
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Builder(builder: (context) {
+                      var bloc = context.watch<AddMeasurementsProviders>();
+                      bool isEnabled = false;
+                      isEnabled = bloc.isDataChanged();
+                      return PrimaryButton(
+                        title: Constants.measurementsScreenLabel3,
+                        backgroundColor: MyColors.blackColor,
+                        textColor: MyColors.whiteColor,
+                        borderColor: MyColors.blackColor,
+                        enabled: isEnabled,
+                        onPressed: () {
+                          context.read<AddMeasurementsProviders>().setData();
+                          Navigator.pop(context);
+                        },
+                      );
+                    })),
+              const SizedBox(
+                height: 40,
+              )
+            ],
+          );
+        }),
       ),
     );
   }
 
-  showDialogue({required BuildContext context, required TestResult category,String? initialValue}) {
+  showDialogue(
+      {required BuildContext context,
+      required TestResult category,
+      String? initialValue}) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
+      constraints:
+          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
       builder: (BuildContext context) {
         return Padding(
           padding:
@@ -828,48 +928,62 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
             category: category,
             initialValue: initialValue,
             onSetValue: (val) {
-              switch(category){
-                case TestResult.weight:{
-                  context.read<AddMeasurementsProviders>().setWeight(val: val);
-                }
-                break;
-                case TestResult.height:{
-                  context.read<AddMeasurementsProviders>().setHeight(val: val);
-                }
-                break;
-                case TestResult.minWaist:{
-                  context.read<AddMeasurementsProviders>().setMinWaist(val: val);
-
-                }
-                break;
-                case TestResult.maxWaist:{
-                  context.read<AddMeasurementsProviders>().setMaxWaist(val: val);
-
-                }
-                break;
-                case TestResult.hip:{
-                  context.read<AddMeasurementsProviders>().setHip(val: val);
-                }
-                break;
-                case TestResult.neck:{
-                  context.read<AddMeasurementsProviders>().setNeck(val: val);
-
-                }
-                break;
-                case TestResult.middleThigh:{
-                  context.read<AddMeasurementsProviders>().setMiddleThigh(val: val);
-
-                }
-                break;
-                case TestResult.arm:{
-                  context.read<AddMeasurementsProviders>().setArm(val: val);
-
-                }
-                break;
-                case TestResult.chest:{
-                  context.read<AddMeasurementsProviders>().setChest(val: val);
-                }
-                break;
+              switch (category) {
+                case TestResult.weight:
+                  {
+                    context
+                        .read<AddMeasurementsProviders>()
+                        .setWeight(val: val);
+                  }
+                  break;
+                case TestResult.height:
+                  {
+                    context
+                        .read<AddMeasurementsProviders>()
+                        .setHeight(val: val);
+                  }
+                  break;
+                case TestResult.minWaist:
+                  {
+                    context
+                        .read<AddMeasurementsProviders>()
+                        .setMinWaist(val: val);
+                  }
+                  break;
+                case TestResult.maxWaist:
+                  {
+                    context
+                        .read<AddMeasurementsProviders>()
+                        .setMaxWaist(val: val);
+                  }
+                  break;
+                case TestResult.hip:
+                  {
+                    context.read<AddMeasurementsProviders>().setHip(val: val);
+                  }
+                  break;
+                case TestResult.neck:
+                  {
+                    context.read<AddMeasurementsProviders>().setNeck(val: val);
+                  }
+                  break;
+                case TestResult.middleThigh:
+                  {
+                    context
+                        .read<AddMeasurementsProviders>()
+                        .setMiddleThigh(val: val);
+                  }
+                  break;
+                case TestResult.arm:
+                  {
+                    context.read<AddMeasurementsProviders>().setArm(val: val);
+                  }
+                  break;
+                case TestResult.chest:
+                  {
+                    context.read<AddMeasurementsProviders>().setChest(val: val);
+                  }
+                  break;
               }
             },
           ),
@@ -894,71 +1008,95 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
           child: ImageSource(
             onCamera: () {
               if (imageAspect == "0") {
-                context.read<AddMeasurementsProviders>().getFrontImage(context: context,onSelect: (file){
-                  Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-                    if(value == true){
-                      context.read<AddMeasurementsProviders>().setFrontImage(file);
-                      Navigator.pop(context);
-                    }
-                  });
-                });
-              }
-              else if (imageAspect == "1") {
-                context.read<AddMeasurementsProviders>().getSideImage(context: context,
-                onSelect: (file){
-                    Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-                      if(value == true){
-                        context.read<AddMeasurementsProviders>().setSideImage(file);
-                        Navigator.pop(context);
-                      }
+                context.read<AddMeasurementsProviders>().getFrontImage(
+                    context: context,
+                    onSelect: (file) {
+                      Navigator.pushNamed(context, ImageViewerScreen.tag)
+                          .then((value) {
+                        if (value == true) {
+                          context
+                              .read<AddMeasurementsProviders>()
+                              .setFrontImage(file);
+                          Navigator.pop(context);
+                        }
+                      });
                     });
-                });
-              }
-              else {
-                context.read<AddMeasurementsProviders>().getBackImage(context: context,onSelect: (file){
-                    Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-                      if(value == true){
-                        context.read<AddMeasurementsProviders>().setBackImage(file);
-                        Navigator.pop(context);
-                      }
+              } else if (imageAspect == "1") {
+                context.read<AddMeasurementsProviders>().getSideImage(
+                    context: context,
+                    onSelect: (file) {
+                      Navigator.pushNamed(context, ImageViewerScreen.tag)
+                          .then((value) {
+                        if (value == true) {
+                          context
+                              .read<AddMeasurementsProviders>()
+                              .setSideImage(file);
+                          Navigator.pop(context);
+                        }
+                      });
                     });
-                });
-              }
-            },
-            onGallery: () {
-              if (imageAspect == "0") {
-                context.read<AddMeasurementsProviders>().getFrontImage(context: context,source: SourceType.gallery,onSelect: (file){
-                  Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-                    if(value == true){
-                      context.read<AddMeasurementsProviders>().setFrontImage(file);
-                      Navigator.pop(context);
-                    }
-                  });
-                });
-              }
-              else if (imageAspect == "1") {
-                context.read<AddMeasurementsProviders>().getSideImage(context: context,
-                    source: SourceType.gallery,
-                    onSelect: (file){
-                      Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-                        if(value == true){
-                          context.read<AddMeasurementsProviders>().setSideImage(file);
+              } else {
+                context.read<AddMeasurementsProviders>().getBackImage(
+                    context: context,
+                    onSelect: (file) {
+                      Navigator.pushNamed(context, ImageViewerScreen.tag)
+                          .then((value) {
+                        if (value == true) {
+                          context
+                              .read<AddMeasurementsProviders>()
+                              .setBackImage(file);
                           Navigator.pop(context);
                         }
                       });
                     });
               }
-              else {
-                context.read<AddMeasurementsProviders>().getBackImage(context: context,
+            },
+            onGallery: () {
+              if (imageAspect == "0") {
+                context.read<AddMeasurementsProviders>().getFrontImage(
+                    context: context,
                     source: SourceType.gallery,
-                    onSelect: (file){
-                  Navigator.pushNamed(context, ImageViewerScreen.tag).then((value){
-                    if(value == true){
-                      context.read<AddMeasurementsProviders>().setBackImage(file);
-                      Navigator.pop(context);
-                    }
-                  });
-                });
+                    onSelect: (file) {
+                      Navigator.pushNamed(context, ImageViewerScreen.tag)
+                          .then((value) {
+                        if (value == true) {
+                          context
+                              .read<AddMeasurementsProviders>()
+                              .setFrontImage(file);
+                          Navigator.pop(context);
+                        }
+                      });
+                    });
+              } else if (imageAspect == "1") {
+                context.read<AddMeasurementsProviders>().getSideImage(
+                    context: context,
+                    source: SourceType.gallery,
+                    onSelect: (file) {
+                      Navigator.pushNamed(context, ImageViewerScreen.tag)
+                          .then((value) {
+                        if (value == true) {
+                          context
+                              .read<AddMeasurementsProviders>()
+                              .setSideImage(file);
+                          Navigator.pop(context);
+                        }
+                      });
+                    });
+              } else {
+                context.read<AddMeasurementsProviders>().getBackImage(
+                    context: context,
+                    source: SourceType.gallery,
+                    onSelect: (file) {
+                      Navigator.pushNamed(context, ImageViewerScreen.tag)
+                          .then((value) {
+                        if (value == true) {
+                          context
+                              .read<AddMeasurementsProviders>()
+                              .setBackImage(file);
+                          Navigator.pop(context);
+                        }
+                      });
+                    });
               }
             },
           ),

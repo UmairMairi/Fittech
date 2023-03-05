@@ -1,50 +1,73 @@
+// To parse this JSON data, do
+//
+//     final chooseFoodModel = chooseFoodModelFromJson(jsonString);
+
+import 'dart:convert';
+
+ChooseFoodModel chooseFoodModelFromJson(String str) => ChooseFoodModel.fromJson(json.decode(str));
+
+String chooseFoodModelToJson(ChooseFoodModel data) => json.encode(data.toJson());
+
 class ChooseFoodModel {
-  bool? success;
-  int? statusCode;
-  String? message;
-  List<Data>? data;
+    ChooseFoodModel({
+        required this.success,
+        required this.statusCode,
+        required this.message,
+        required this.data,
+    });
 
-  ChooseFoodModel({this.success, this.statusCode, this.message, this.data});
+    bool success;
+    int statusCode;
+    String message;
+    List<Datum> data;
 
-  ChooseFoodModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    statusCode = json['status_code'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-  }
+    factory ChooseFoodModel.fromJson(Map<String, dynamic> json) => ChooseFoodModel(
+        success: json["success"],
+        statusCode: json["status_code"],
+        message: json["message"],
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['status_code'] = this.statusCode;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "success": success,
+        "status_code": statusCode,
+        "message": message,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    };
 }
 
-class Data {
-  int? id;
-  String? name;
+class Datum {
+    Datum({
+        required this.id,
+        required this.name,
+        required this.protien,
+        required this.carbs,
+        required this.calorie,
+        required this.fat,
+    });
 
-  Data({this.id, this.name});
+    int id;
+    String name;
+    int protien;
+    int carbs;
+    int calorie;
+    int fat;
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
+        name: json["name"],
+        protien: json["protien"],
+        carbs: json["carbs"],
+        calorie: json["calorie"],
+        fat: json["fat"],
+    );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "protien": protien,
+        "carbs": carbs,
+        "calorie": calorie,
+        "fat": fat,
+    };
 }

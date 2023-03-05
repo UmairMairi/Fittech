@@ -32,7 +32,7 @@ class _MyGridViewSmallState extends State<MyGridViewSmall> {
             setState((){
               selectedIndex = index;
             });
-            widget.onChange(selectedIndex,"${list[index]}% graso");
+            widget.onChange(selectedIndex,"${list[index]}%");
           },
           child: Container(
             color: (selectedIndex==index)?MyColors.redColor:MyColors.extraLightGreyColor,

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../logic/nutrition/choose_food_provider.dart';
+import '../../widgets/shimmer.dart';
 
 class ChooseFoodScreen extends StatefulWidget {
   static const String tag = "choose_food_screen";
@@ -98,7 +99,7 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: [            
                       const SizedBox(
                         height: 20.0,
                       ),
@@ -115,29 +116,24 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                         children: [
                           Builder(builder: (context) {
                             var bloc = context.watch<ChooseFoodProvider>();
-
-                            if (bloc.isLoading) {
-                              return const CircularProgressIndicator.adaptive();
+                            if (bloc.isLoading && bloc.getFoodModel == null) {
+                              return const ShimmerChoiceChips();
                             }
-
-                            return Wrap(
+                            return  Wrap(
                                 children:
-                                    bloc.getFoodModel!.data!.map((Data item) {
+                                     bloc.getFoodModel!.data.map((Datum item) {
                               var selected = false;
                               if (selectedIndex == index) {
                                 selected = true;
                               } else {
                                 selected = false;
-                              }
-                              index++;
+                              }                         
                               return MyChipsList(
-                                item: item.name!,
+                                item: item.name,
                                 selected: selected,
                                 currentValue: (value) {
                                   if (value) {
-                                    GlobalState.nutritionTest =
-                                        NutritionTestModel.fromJson(
-                                            {"food_dont_like": item.id});
+                                    GlobalState.nutritionTest!.foodDontLike = item.id;
                                   }
                                 },
                               );

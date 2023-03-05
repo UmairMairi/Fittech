@@ -732,6 +732,7 @@ class Constants {
 
   //RecipeListScreen
   static const String titleRecipeListScreen = "Lista de recetas";
+  static const String noRecipeFoundTitle = "No se encontró ninguna receta";
 
   //CreateRecipeScreen
   static const String titleCreateRecipeScreen = "Crear receta";

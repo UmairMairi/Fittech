@@ -25,9 +25,9 @@ showMessage({required BuildContext context, required String msg, bool? success =
   // ScaffoldMessenger.of(context).showSnackBar(
   //   snackBar,
   // );
-  if (msg.length > 1) {
-    msg = msg.capitalizeFirst();
-  }
+  // if (msg.length > 1) {
+    // msg = msg.capitalizeFirst();
+  // }
   Flushbar(
     messageText: Text(
       msg,

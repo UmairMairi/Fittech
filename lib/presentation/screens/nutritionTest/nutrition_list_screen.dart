@@ -3,7 +3,7 @@ import 'package:fit_tech/data/models/nutritions_list_model.dart';
 import 'package:fit_tech/presentation/screens/active_gym_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/nutrition_details_screen.dart';
-import 'package:fit_tech/presentation/screens/nutritionTest/recipie_list_screen.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/recipe_list_screen.dart';
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
   import 'package:fit_tech/utils/my_styles.dart';

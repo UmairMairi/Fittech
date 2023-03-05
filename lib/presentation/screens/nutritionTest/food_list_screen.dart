@@ -55,8 +55,8 @@ class _FoodListScreenState extends State<FoodListScreen>
                           size: 24.0,
                         ),
                         onPressed: () {
-                          // Navigator.pop(context);
-                          Navigator.pushNamed(context, FoodTypeScreen.tag);
+                          Navigator.pop(context);
+                          // Navigator.pushNamed(context, FoodTypeScreen.tag);
                         },
                       ),
                       Expanded(
@@ -92,13 +92,13 @@ class _FoodListScreenState extends State<FoodListScreen>
                 return provider.getFoodModel == null
                     ? const CircularProgressIndicator.adaptive()
                     : ListView.builder(
-                        itemCount: provider.getFoodModel!.data!.length,
+                        itemCount: provider.getFoodModel!.data.length,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
-                          Data food = provider.getFoodModel!.data![index];
+                          Datum food = provider.getFoodModel!.data[index];
                           return InkWell(
                             onTap: () {
-                              showDialogue(context: context);
+                              showDialogue(context: context,food:food);
                             },
                             child: Container(
                                 margin: const EdgeInsets.only(bottom: 10.0),
@@ -109,7 +109,7 @@ class _FoodListScreenState extends State<FoodListScreen>
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 5.0),
                                       child: Text(
-                                        "${food.name}",
+                                        food.name,
                                         style: MyTextStyle.text1,
                                       ),
                                     ),
@@ -127,7 +127,7 @@ class _FoodListScreenState extends State<FoodListScreen>
     );
   }
 
-  showDialogue({required BuildContext context}) {
+  showDialogue({required BuildContext context,Datum? food}) {
     showModalBottomSheet<bool?>(
         context: context,
         isScrollControlled: true,
@@ -137,7 +137,7 @@ class _FoodListScreenState extends State<FoodListScreen>
           return Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: const FoodDialogue(),
+            child:  FoodDialogue(food!),
           );
         }).then((val) {
       if ((val is bool) && (val == true)) {

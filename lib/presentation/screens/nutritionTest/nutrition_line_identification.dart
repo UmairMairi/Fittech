@@ -4,10 +4,13 @@ import 'package:fit_tech/presentation/screens/nutritionTest/choose_food_screen.d
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../data/models/nutrition_test_model.dart';
 
 class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
   static const String tag = "nutrition_training_line_identification_screen";
@@ -104,7 +107,6 @@ class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
                                 myState(() {
                                   currentSelectedItem = index;
                                   context.read<NutritionLineIdentificationProvider>().setSelectItem(val: list[index]);
-                                  print("arham");
                                 });
                               },
                               child: Container(
@@ -165,6 +167,9 @@ class NutritionTrainingLineIdentificationScreen extends StatelessWidget {
                             enabled: isEnabled,
                             onPressed: () {
                               if(currentSelectedItem!=-1){
+                                 GlobalState.nutritionTest =
+                                        NutritionTestModel.fromJson(
+                                            {"nutrition_line": bloc.selectedItem!.title});
                                 Navigator.pushNamed(context, ChooseFoodScreen.tag);
                               }
                             },

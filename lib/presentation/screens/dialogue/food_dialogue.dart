@@ -1,11 +1,17 @@
+import 'package:fit_tech/logic/recipe/recipe_provider.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data/models/choose_food_model.dart';
 
 class FoodDialogue extends StatefulWidget {
-  const FoodDialogue({super.key});
+  final Datum food;
+  FoodDialogue(@required this.food);
 
   @override
   State<FoodDialogue> createState() => _FoodDialogueState();
@@ -25,7 +31,7 @@ class _FoodDialogueState extends State<FoodDialogue> {
             children: [
               Expanded(
                 child: Text(
-                  Constants.titleFoodDialogue,
+                  widget.food.name,
                   textAlign: TextAlign.start,
                   style:
                       MyTextStyle.heading3.copyWith(color: MyColors.blackColor),
@@ -33,7 +39,7 @@ class _FoodDialogueState extends State<FoodDialogue> {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.pop(context,false);
+                  Navigator.pop(context, false);
                 },
                 icon: const Icon(
                   Icons.close,
@@ -51,17 +57,31 @@ class _FoodDialogueState extends State<FoodDialogue> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(Constants.infoFoodDialogue,style: MyTextStyle.paragraph1,),
-              const SizedBox(height: 20.0,),
+              const Text(
+                Constants.infoFoodDialogue,
+                style: MyTextStyle.paragraph1,
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
               Row(
                 children: [
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(Constants.label1FoodDialogue,style: MyTextStyle.normal.copyWith(fontSize: 15,color: MyColors.greyColor),),
-                        const SizedBox(height: 10,),
-                        const Text(Constants.label1ValueFoodDialogue,style: MyTextStyle.paragraph1,),
+                        Text(
+                          Constants.label1FoodDialogue,
+                          style: MyTextStyle.normal.copyWith(
+                              fontSize: 15, color: MyColors.greyColor),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          Constants.label1ValueFoodDialogue,
+                          style: MyTextStyle.paragraph1,
+                        ),
                       ],
                     ),
                   ),
@@ -69,9 +89,18 @@ class _FoodDialogueState extends State<FoodDialogue> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(Constants.label2FoodDialogue,style: MyTextStyle.normal.copyWith(fontSize: 15,color: MyColors.greyColor),),
-                        const SizedBox(height: 10,),
-                        const Text(Constants.label2ValueFoodDialogue,style: MyTextStyle.paragraph1,),
+                        Text(
+                          Constants.label2FoodDialogue,
+                          style: MyTextStyle.normal.copyWith(
+                              fontSize: 15, color: MyColors.greyColor),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          Constants.label2ValueFoodDialogue,
+                          style: MyTextStyle.paragraph1,
+                        ),
                       ],
                     ),
                   ),
@@ -79,19 +108,36 @@ class _FoodDialogueState extends State<FoodDialogue> {
               )
             ],
           ),
-          const SizedBox(height: 20.0,),
+          const SizedBox(
+            height: 20.0,
+          ),
           PrimaryButton(
             title: Constants.btnLabelFoodDialogue,
             backgroundColor: MyColors.redColor,
             textColor: MyColors.whiteColor,
             borderColor: MyColors.redColor,
-            onPressed: (){
-              Navigator.pop(context,true);
+            onPressed: () {
+              var provider = context.read<RecipeProvider>();
+              bool isFind = false;
+            
+                for (var data in provider.selectedFood) {
+                  if (data.name == widget.food.name) {
+                    isFind = true;
+                  //  showMessage(context: context, msg: "Already Added");
+                    break;
+                  }
+                }
+              
+
+              if (!isFind) {
+                provider.addSelectedFood(widget.food);
+              }
+
+              Navigator.pop(context, true);
             },
           )
         ],
       ),
     );
   }
-
 }

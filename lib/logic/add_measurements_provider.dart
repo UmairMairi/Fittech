@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -7,7 +8,6 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 
 import '../data/network_services/api_services.dart';
-import '../data/repositories/nutrition_repository/nutrition_repository.dart';
 import '../utils/api_constants.dart';
 import '../utils/global_states.dart';
 import '../utils/helper_funtions.dart';
@@ -86,16 +86,20 @@ class AddMeasurementsProviders extends ChangeNotifier {
     notifyListeners();
   }
 
+  dataExtractor(data){
+    return data.replaceAll(RegExp(r'[^0-9]'),'');
+  }
+
   setData() {
-    weight = weightTest;
-    height = heightTest;
-    minWaist = minWaistTest;
-    maxWaist = maxWaistTest;
-    hip = hipTest;
-    neck = neckTest;
-    middleThigh = middleThighTest;
-    arm = armTest;
-    chest = chestTest;
+    weight = dataExtractor(weightTest);
+    height = dataExtractor(heightTest);
+    minWaist = dataExtractor(minWaistTest);
+    maxWaist = dataExtractor(maxWaistTest);
+    hip = dataExtractor(hipTest);
+    neck = dataExtractor(neckTest);
+    middleThigh = dataExtractor(middleThighTest);
+    arm = dataExtractor(armTest);
+    chest = dataExtractor(chestTest);
     notifyListeners();
 
     // weightTest = null;
@@ -217,10 +221,8 @@ class AddMeasurementsProviders extends ChangeNotifier {
 
   /// Api Calling ////
 
-  Future<void> addNutrition({required BuildContext context}) async {
+  Future addNutrition({required BuildContext context}) async {
     try {
-      isLoading = true;
-      print("000--------------");
       var body = {
         "height": "$height",
         "weight": "$weight",
@@ -232,7 +234,7 @@ class AddMeasurementsProviders extends ChangeNotifier {
         "middle_thigh": "$middleThigh",
         "arm": "$arm",
         "chest": "$chest",
-        "nutrition_line": "vegitable",
+        "nutrition_line": "${GlobalState.nutritionTest!.nutritionLine}",
         "fat_percentage": "${GlobalState.nutritionTest!.fatPercentage}",
       };
       print(body);
@@ -246,18 +248,19 @@ class AddMeasurementsProviders extends ChangeNotifier {
           "profile_image": sideImage!.path
         };
       }
-      // debugger();
-      notifyListeners();
       if (data != null) {
+        isLoading = true;
+      notifyListeners();
         var response = await ApiServices.postMultiPartJson(
             url: ApiConstants.addNutrition,
             body: body,
             filePath: data,
             token: Singleton.userToken);
         print(response.body);
-      }
+          isLoading = false;
       notifyListeners();
-      isLoading = false;
+        return jsonDecode(response.body);
+      }    
     } catch (e) {
       showMessage(
           msg: "check yours internet connection ${e.toString()}",
@@ -265,6 +268,54 @@ class AddMeasurementsProviders extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+
+  validationChecker(context){
+    bool isValid = false;
+      if(frontImage == null){
+        showMessage(context: context, msg: "Please! Enter frontImage");
+      }
+    else if(sideImage == null){
+      showMessage(context: context, msg: "Please! Enter sideImage");
+    }
+    else if(backImage == null){
+      showMessage(context: context, msg: "Please! Enter backImage");
+    }
+    else if(imageFile == null){
+      showMessage(context: context, msg: "Please! Enter imageFile");
+    }
+    else if(weightTest == null){
+      showMessage(context: context, msg: "Please! Enter weight");
+    }
+    else if(heightTest == null){
+      showMessage(context: context, msg: "Please! Enter height");
+    }
+    else if(minWaistTest == null){
+      showMessage(context: context, msg: "Please! Enter minWaist");
+    }
+    else if(maxWaistTest == null){
+      showMessage(context: context, msg: "Please! Enter maxWaist");
+    }
+    else if(hipTest == null){
+      showMessage(context: context, msg: "Please! Enter hip");
+    }
+    else if(neckTest == null){
+      showMessage(context: context, msg: "Please! Enter neck");
+    }
+    else if(middleThighTest == null){
+      showMessage(context: context, msg: "Please! Enter middleThigh");
+    }
+    else if(armTest == null){
+      showMessage(context: context, msg: "Please! Enter arm");
+    }
+    else if(chestTest == null){
+      showMessage(context: context, msg: "Please! Enter chest");
+    }else{
+      isValid = true;
+    }
+
+    return isValid;
   }
 }
 
