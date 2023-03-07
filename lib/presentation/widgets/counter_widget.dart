@@ -10,10 +10,10 @@ class CounterWidget extends StatefulWidget {
   final bool showUnit;
   final bool isEditable;
   final String unit;
-  final int counter;
+        int counter;
   final ValueChanged<int>? onChange;
 
-  const CounterWidget(
+   CounterWidget(
       {this.selectedColor = MyColors.blackColor,
       this.unselectedColor = MyColors.whiteColor,
       this.showUnit = false,
@@ -35,7 +35,7 @@ class _CounterWidgetState extends State<CounterWidget> {
   @override
   void initState() {
     super.initState();
-    count = widget.counter;
+    count = widget.counter++;
     textController.text = "$count";
   }
 
