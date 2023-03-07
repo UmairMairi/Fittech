@@ -132,6 +132,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                                         );
                                 });
                           }),
+                          
                           InkWell(
                               onTap: () {
                                 Navigator.pushNamed(
@@ -164,7 +165,6 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                       ),
                       Builder(builder: (context) {
                         var provider = context.watch<RecipeProvider>();
-                        print(provider.selectedFood[0].toJson());
                         provider.sumCalculator();
                         return Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -190,6 +190,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                           ],
                         );
                       }),
+                     
                       const SizedBox(
                         height: 10,
                       ),

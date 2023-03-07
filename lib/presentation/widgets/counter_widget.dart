@@ -29,13 +29,13 @@ class CounterWidget extends StatefulWidget {
 }
 
 class _CounterWidgetState extends State<CounterWidget> {
-  var count = 0;
+  var count = 1;
   final TextEditingController textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    count = widget.counter++;
+    count = widget.counter;
     textController.text = "$count";
   }
 
