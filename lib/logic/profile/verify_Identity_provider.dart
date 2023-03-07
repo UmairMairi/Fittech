@@ -46,7 +46,7 @@ class VerifyIdentityProvider extends ChangeNotifier {
         verifyIdentityInMap = model;
         notifyListeners();
         if (!context.mounted) return;
-        Navigator.pushNamed(context, UpdatePasswordScreen.tag, arguments: Types.updatePassword).then((value){
+        Navigator.pushReplacementNamed(context, UpdatePasswordScreen.tag, arguments: Types.updatePassword).then((value){
           if(value == NavigationResults.passwordUpdated){
             Navigator.pop(context,NavigationResults.passwordUpdated);
           }

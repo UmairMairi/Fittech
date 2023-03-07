@@ -4,6 +4,7 @@ import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/my_styles.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:flutter/material.dart';
 
 class UpdatePasswordStatusScreen extends StatelessWidget {
@@ -84,6 +85,7 @@ class UpdatePasswordStatusScreen extends StatelessWidget {
           backgroundColor: MyColors.redColor,
           borderColor: MyColors.redColor,
           onPressed: () {
+            PrefUtils.clear();
             Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
           },
         ),

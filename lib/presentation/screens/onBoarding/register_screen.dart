@@ -195,9 +195,7 @@ class RegisterScreen extends StatelessWidget {
                           isObscure: true,
                           controller: confirmPasswordController,
                           onChanged: (val) {
-                            context
-                                .read<RegisterProvider>()
-                                .setConfirmPassword(val = val);
+                            context.read<RegisterProvider>().setConfirmPassword(val = val);
                             if (val.length >= passwordController.text.length) {
                               _confirmFieldKey.currentState!.validate();
                               print("validate == true");

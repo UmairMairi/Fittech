@@ -23,6 +23,7 @@ class UpdatePasswordScreen extends StatefulWidget {
 
 class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _confirmFieldKey = GlobalKey<FormState>();
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
@@ -122,21 +123,20 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                       ),
                       TextFieldPrimary(
                           isLabelRequired: true,
-                          title: Constants
-                              .updatePasswordScreenConfirmPasswordLabel,
+                          title: Constants.updatePasswordScreenConfirmPasswordLabel,
                           isObscure: true,
                           controller: confirmPasswordController,
                           onChanged: (val) {
-                            context
-                                .read<UpdatePasswordProvider>()
-                                .setConfirmPassword(val: val);
+                            context.read<UpdatePasswordProvider>().setConfirmPassword(val: val);
+                            // if(widget.type == Types.updatePassword && val.length >= passwordController.text.length){
+                            //     _confirmFieldKey.currentState!.validate();
+                            //     print("validate == true");
+                            // }
                           },
                           validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                value.length < 6) {
+                            if (value == null || value.isEmpty || value.length < 6) {
                               return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
-                            } else if ((passwordController.text != confirmPasswordController.text) && (widget.type == Types.forgotPassword)) {
+                            } else if ((passwordController.text != confirmPasswordController.text) /*&& (widget.type == Types.forgotPassword*/) {
                               return "Las contraseñas no coinciden.";
                             }
                             return null;
