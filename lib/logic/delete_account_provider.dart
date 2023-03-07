@@ -39,6 +39,11 @@ class DeleteAccountProvider extends ChangeNotifier {
         Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
       } else {
         MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }

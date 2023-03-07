@@ -164,7 +164,7 @@ class FinishingTrainingTestScreen extends StatelessWidget {
                         textColor: MyColors.blackColor,
                         borderColor: MyColors.blackColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, DashboardScreen.tag);
+                          Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag, (route) => false);
                         },
                       ),
                       const SizedBox(height: 20,),

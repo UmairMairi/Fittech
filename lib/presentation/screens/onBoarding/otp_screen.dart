@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fit_tech/logic/create_account_provider.dart';
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/logic/otp_provider.dart';
+import 'package:fit_tech/logic/recover_password_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_welcome_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_loading.dart';
@@ -27,7 +28,8 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  final TextEditingController otpController = TextEditingController(text: Singleton.isDev ? "123456" : "");
+  final TextEditingController otpController =
+      TextEditingController(text: Singleton.isDev ? "123456" : "");
   bool isEnabled = false;
   final _formKey = GlobalKey<FormState>();
   var hideResend = true;
@@ -65,7 +67,6 @@ class _OTPScreenState extends State<OTPScreen> {
       }
     });
   }
-
 
   @override
   void initState() {
@@ -142,7 +143,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       width: double.infinity,
                       child: Builder(builder: (context) {
                         var bloc = context.watch<OTPProvider>();
-                       if (bloc.isLoading == true) {
+                        if (bloc.isLoading == true) {
                           return const LoadingButton();
                         }
                         return PrimaryButton(
@@ -151,19 +152,22 @@ class _OTPScreenState extends State<OTPScreen> {
                           backgroundColor: MyColors.blackColor,
                           enabled: (bloc.otp.length >= 4) || Singleton.isDev,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() && ((bloc.otp.length >= 4) || Singleton.isDev)) {
+                            if (_formKey.currentState!.validate() &&
+                                ((bloc.otp.length >= 4) || Singleton.isDev)) {
                               await bloc.verifyEmail(
                                   context: context,
                                   email: context.read<RegisterProvider>().email,
-                                onSuccess: (){
+                                  onSuccess: () {
                                     context.read<LoginProvider>().login(
-                                      context: context,
-                                      email: context.read<RegisterProvider>().email,
-                                      password: context.read<RegisterProvider>().password,
-                                      isRegistration: true
-                                    );
-                                }
-                              );
+                                        context: context,
+                                        email: context
+                                            .read<RegisterProvider>()
+                                            .email,
+                                        password: context
+                                            .read<RegisterProvider>()
+                                            .password,
+                                        isRegistration: true);
+                                  });
                             }
                           },
                         );
@@ -176,24 +180,31 @@ class _OTPScreenState extends State<OTPScreen> {
                       return Column(
                         children: [
                           if (!hideResend)
-                          SizedBox(
-                            width: double.infinity,
-                            child: PrimaryButton(
-                              title: Constants.resendLabel,
-                              titleStyle: MyTextStyle.buttonTitle
-                                  .copyWith(fontWeight: FontWeight.w600),
-                              textColor: MyColors.blackColor,
-                              backgroundColor: MyColors.whiteColor,
-                              enabled: !hideResend,
-                              onPressed: () {
-                                resetTimer();
-                                startTimer();
-                                myState(() {
-                                  hideResend = true;
-                                });
-                              },
+                            SizedBox(
+                              width: double.infinity,
+                              child: PrimaryButton(
+                                title: Constants.resendLabel,
+                                titleStyle: MyTextStyle.buttonTitle
+                                    .copyWith(fontWeight: FontWeight.w600),
+                                textColor: MyColors.blackColor,
+                                backgroundColor: MyColors.whiteColor,
+                                enabled: !hideResend,
+                                onPressed: () async {
+                                  await context
+                                      .read<RecoverPasswordProvider>()
+                                      .resetPassword(
+                                          context: context,
+                                          email: context
+                                              .read<RegisterProvider>()
+                                              .email);
+                                  resetTimer();
+                                  startTimer();
+                                  myState(() {
+                                    hideResend = true;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
                           const SizedBox(
                             height: 50.0,
                           ),

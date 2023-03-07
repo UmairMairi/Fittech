@@ -626,7 +626,8 @@ class _TrainingCompletedScreenState extends State<TrainingCompletedScreen> {
                   borderColor: MyColors.blackColor,
                   enabled: isEnabled,
                   onPressed: () {
-                    Navigator.pushNamed(context, DashboardScreen.tag);
+                    Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag, (route) => false);
+                    // Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag);
                   },
                 );
               }),

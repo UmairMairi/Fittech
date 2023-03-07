@@ -310,7 +310,7 @@ class _SubscribePlanScreenState extends State<SubscribePlanScreen> {
                                   textColor: MyColors.whiteColor,
                                   backgroundColor: MyColors.redColor,
                                   onPressed: () {
-                                    Navigator.pushNamed(context, DashboardScreen.tag);
+                                    Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag, (route) => false);
                                   },
                                 ),
                               ),

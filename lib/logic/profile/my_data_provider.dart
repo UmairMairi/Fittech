@@ -7,11 +7,14 @@ import 'package:fit_tech/data/models/profile_models/my_data_screen_model.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
 import 'package:fit_tech/data/repositories/profile_repository/profile_repository.dart';
 import 'package:fit_tech/logic/login_provider.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/utils/api_constants.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/extentions/context_extentions.dart';
 import 'package:fit_tech/utils/global_states.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_utils.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -61,15 +64,19 @@ class MyDataProvider extends ChangeNotifier {
         notifyListeners();
         onSuccess(model.data);
       } else if (model is Map) {
-        showMessage(msg: "${model["message"]}", context: context);
+        MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
       } else {
-        showMessage(msg: "something went wrong", context: context);
+        MyUtils.showMessage(msg: "something went wrong", context: context);
       }
     } catch (e) {
       isLoading = false;
       notifyListeners();
-
-      showMessage(msg: "something went wrong", context: context);
+      MyUtils.showMessage(msg: "something went wrong", context: context);
     }
   }
 
@@ -102,6 +109,11 @@ class MyDataProvider extends ChangeNotifier {
         onSuccess(model.data);
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
       } else {
         MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }

@@ -8,6 +8,7 @@ import 'package:fit_tech/utils/constants.dart';
 import 'package:fit_tech/utils/extentions/context_extentions.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
 import 'package:fit_tech/utils/my_utils.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:flutter/material.dart';
 
 class RegisterProvider extends ChangeNotifier {
@@ -66,7 +67,7 @@ class RegisterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setUserRegisterModel({required BuildContext context,}) async {
+  Future<void> createAccount({required BuildContext context,}) async {
     try {
       isLoading = true;
       notifyListeners();
@@ -86,7 +87,12 @@ class RegisterProvider extends ChangeNotifier {
         if(!context.mounted) return;
         Navigator.pushNamed(context, OTPScreen.tag);
       }else if(model is Map){
-        showMessage(msg: "${model["message"]}", context: context);
+        MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
       }else{
         MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }
@@ -112,6 +118,13 @@ class RegisterProvider extends ChangeNotifier {
         return model;
       } else if (model is Map) {
         MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
+
+
       } else {
         MyUtils.showMessage(msg: ErrorMessages.somethingWrong, context: context);
       }

@@ -1,5 +1,8 @@
 import 'package:fit_tech/data/models/TermsCondtions.dart';
 import 'package:fit_tech/data/repositories/policies/policies_repository.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
+import 'package:fit_tech/utils/extentions/context_extentions.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../data/models/DataPolicy.dart';
@@ -25,6 +28,12 @@ class FaqProvider extends ChangeNotifier {
         faqCategoriesLoading = false;
         notifyListeners();
         MyUtils.showMessage(context: context, msg: response['message'], success: false);
+        if(response.containsKey("detail") && response["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
+
         return null;
       } else {
         faqCategoriesModel = response;
@@ -50,6 +59,11 @@ class FaqProvider extends ChangeNotifier {
         faqQuestionsLoading = false;
         notifyListeners();
         MyUtils.showMessage(context: context, msg: response['message'], success: false);
+        if(response.containsKey("detail") && response["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
         return null;
       } else {
         faqQuestionsModel = response;

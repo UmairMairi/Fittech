@@ -1,7 +1,11 @@
 import 'package:fit_tech/data/models/SuccessResponseGeeneric.dart';
 import 'package:fit_tech/data/repositories/onboarding_reposities/onboarding_post_repository.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/utils/api_constants.dart';
+import 'package:fit_tech/utils/extentions/context_extentions.dart';
 import 'package:fit_tech/utils/helper_funtions.dart';
+import 'package:fit_tech/utils/my_utils.dart';
+import 'package:fit_tech/utils/pref_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../presentation/screens/onBoarding/login_welcome_screen.dart';
@@ -39,9 +43,15 @@ class OTPProvider extends ChangeNotifier {
         notifyListeners();
         onSuccess();
       } else if (model is Map) {
-        showMessage(msg: "${model["message"]}", context: context);
+        MyUtils.showMessage(msg: "${model["message"]}", context: context);
+        if(model.containsKey("detail") && model["detail"] == "Invalid token."){
+          if(!context.mounted) return;
+          PrefUtils.clear();
+          Navigator.pushNamedAndRemoveUntil(context, LoginScreen.tag, (route) => false);
+        }
+
       } else {
-        showMessage(msg: "something went wrong", context: context);
+        MyUtils.showMessage(msg: "something went wrong", context: context);
       }
     }
      catch (e) {

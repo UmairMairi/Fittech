@@ -819,3 +819,8 @@ class Contacts {
   static const String instagram = "https://m.instagram.com/";
   static const String facebook = "https://m.facebook.com/";
 }
+
+class NavigationResults {
+  static const String passwordUpdated = "password-updated";
+}
+

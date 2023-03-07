@@ -1,6 +1,7 @@
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/recover_password_screen.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -123,7 +124,9 @@ class LoginScreen extends StatelessWidget {
                         if (bloc.isLoading == true) {
                           return const LoadingButton();
                         }
-                        if ((isEmail(bloc.email) && bloc.password.length >= 6) || Singleton.isDev) {
+                        if ((isEmail(bloc.email) &&
+                                bloc.password.length >= 6) ||
+                            Singleton.isDev) {
                           isEnabled = true;
                         }
                         return PrimaryButton(
@@ -132,7 +135,8 @@ class LoginScreen extends StatelessWidget {
                           backgroundColor: MyColors.blackColor,
                           enabled: isEnabled,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() && isEnabled) {
+                            if (_formKey.currentState!.validate() &&
+                                isEnabled) {
                               await bloc.login(
                                   context: context,
                                   email: emailController.text,
@@ -152,50 +156,57 @@ class LoginScreen extends StatelessWidget {
                         textColor: MyColors.blackColor,
                         backgroundColor: MyColors.whiteColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, CreateAccountScreen.tag);
+                          Navigator.pushNamed(context, RegisterScreen.tag);
+                          // Navigator.pushNamed(context, CreateAccountScreen.tag);
                         },
                       ),
                     ),
                     const SizedBox(
                       height: 30.0,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                            child: Container(
-                          height: 1,
-                          color: Colors.black,
-                        )),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            Constants.or,
-                            style: TextStyle(
-                                color: MyColors.blackColor, fontSize: 15.0),
+                    if (false)
+                      Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                  child: Container(
+                                height: 1,
+                                color: Colors.black,
+                              )),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  Constants.or,
+                                  style: TextStyle(
+                                      color: MyColors.blackColor,
+                                      fontSize: 15.0),
+                                ),
+                              ),
+                              Expanded(
+                                  child: Container(
+                                height: 1,
+                                color: Colors.black,
+                              )),
+                            ],
                           ),
-                        ),
-                        Expanded(
-                            child: Container(
-                          height: 1,
-                          color: Colors.black,
-                        )),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    const SizedBox(
-                      width: double.infinity,
-                      child: SecondaryButton(
-                        title: Constants.loginWithGoogle,
-                        image: 'assets/images/icon_google.png',
-                        textColor: MyColors.blackColor,
+                          const SizedBox(
+                            height: 30.0,
+                          ),
+                          const SizedBox(
+                            width: double.infinity,
+                            child: SecondaryButton(
+                              title: Constants.loginWithGoogle,
+                              image: 'assets/images/icon_google.png',
+                              textColor: MyColors.blackColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 40.0,
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 40.0,
-                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, RecoverPasswordScreen.tag);

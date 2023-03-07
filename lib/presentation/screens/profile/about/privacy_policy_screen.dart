@@ -29,23 +29,25 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               title: Constants.privacyPolicyScreenTitle,
             ),
             Expanded(
-              child: Builder(builder: (context) {
-                var provider = context.watch<PoliciesProvider>();
-                if (provider.policyLoading) {
-                  return Shimmer.fromColors(
-                      highlightColor: MyColors.shimmerHighlightColor,
-                      baseColor: MyColors.shimmerBaseColor2,
-                      child: const Text(
-                        Constants.dummyText,
-                        style: TextStyle(height: 1.5,backgroundColor: MyColors.whiteColor,),
-                      )
+              child: SingleChildScrollView(
+                child: Builder(builder: (context) {
+                  var provider = context.watch<PoliciesProvider>();
+                  if (provider.policyLoading) {
+                    return Shimmer.fromColors(
+                        highlightColor: MyColors.shimmerHighlightColor,
+                        baseColor: MyColors.shimmerBaseColor2,
+                        child: const Text(
+                          Constants.dummyText,
+                          style: TextStyle(height: 1.5,backgroundColor: MyColors.whiteColor,),
+                        )
+                    );
+                  }
+                  return Html(
+                    data: provider.dataPolicyModel?.data?.description ?? "",
+                    tagsList: Html.tags,
                   );
-                }
-                return Html(
-                  data: provider.dataPolicyModel?.data?.description ?? "",
-                  tagsList: Html.tags..addAll(["bird", "flutter"]),
-                );
-              }),
+                }),
+              ),
             ),
           ],
         ),
@@ -56,7 +58,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<PoliciesProvider>().getPolicyData(context: context);
+    Future.delayed(Duration.zero,()async{
+      context.read<PoliciesProvider>().getPolicyData(context: context);
+    });
   }
 
 }

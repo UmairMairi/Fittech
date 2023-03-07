@@ -17,25 +17,35 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProfileDialogue extends StatelessWidget {
+class ProfileDialogue extends StatefulWidget {
   final Profile category;
   final String inputText;
   final Function(String)? onChange;
 
-  const ProfileDialogue(
+  ProfileDialogue(
       {super.key,
       this.category = Profile.name,
       this.inputText = "",
       this.onChange});
 
   @override
+  State<ProfileDialogue> createState() => _ProfileDialogueState();
+}
+
+class _ProfileDialogueState extends State<ProfileDialogue> {
+  final TextEditingController controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    controller.text = widget.inputText;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController controller =
-        TextEditingController(text: inputText);
     var selected = 0;
 
-    if (category == Profile.gender) {
-      if (inputText == "Hombre") {
+    if (widget.category == Profile.gender) {
+      if (widget.inputText.toLowerCase() == "hombre") {
         selected = 0;
       } else {
         selected = 1;
@@ -52,7 +62,7 @@ class ProfileDialogue extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  getName(category),
+                  getName(widget.category),
                   textAlign: TextAlign.start,
                   style:
                       MyTextStyle.heading3.copyWith(color: MyColors.blackColor),
@@ -75,20 +85,20 @@ class ProfileDialogue extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          category != Profile.gender
-              ? category == Profile.deleteAccount
+          widget.category != Profile.gender
+              ? widget.category == Profile.deleteAccount
                   ? const Text(
                       Constants.deleteAccountDialogueInfo,
                       style: MyTextStyle.paragraph1,
                     )
-                  : category == Profile.logout
+                  : widget.category == Profile.logout
                       ? const Text(
                           Constants.closeSessionDialogueInfo,
                           style: MyTextStyle.paragraph1,
                         )
                       : TextFieldPrimary(
                           isLabelRequired: true,
-                          title: getName(category),
+                          title: getName(widget.category),
                           isObscure: false,
                           controller: controller,
                           validator: (value) {
@@ -107,8 +117,8 @@ class ProfileDialogue extends StatelessWidget {
                                 selected = 0;
                               });
                               (selected == 0)
-                                  ? onChange!("Hombre")
-                                  : onChange!("Mujer");
+                                  ? widget.onChange!("Hombre")
+                                  : widget.onChange!("Mujer");
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -186,8 +196,8 @@ class ProfileDialogue extends StatelessWidget {
             children: [
               Expanded(
                 child: PrimaryButton(
-                  title: ((category != Profile.deleteAccount) &&
-                          (category != Profile.logout))
+                  title: ((widget.category != Profile.deleteAccount) &&
+                          (widget.category != Profile.logout))
                       ? Constants.ProfileDialogueButtonCancel
                       : Constants.deleteAccountDialogueButtonLabel1,
                   backgroundColor: MyColors.whiteColor,
@@ -195,8 +205,8 @@ class ProfileDialogue extends StatelessWidget {
                   borderColor: MyColors.blackColor,
                   enabled: true,
                   onPressed: () {
-                    if ((category != Profile.deleteAccount) &&
-                        (category != Profile.logout)) {
+                    if ((widget.category != Profile.deleteAccount) &&
+                        (widget.category != Profile.logout)) {
                       Navigator.pop(context);
                     }
                   },
@@ -217,8 +227,8 @@ class ProfileDialogue extends StatelessWidget {
                     return const LoadingButton();
                   }
                   return PrimaryButton(
-                      title: ((category != Profile.deleteAccount) &&
-                              (category != Profile.logout))
+                      title: ((widget.category != Profile.deleteAccount) &&
+                              (widget.category != Profile.logout))
                           ? Constants.ProfileDialogueButtonSave
                           : Constants.deleteAccountDialogueButtonLabel2,
                       backgroundColor: MyColors.blackColor,
@@ -226,13 +236,11 @@ class ProfileDialogue extends StatelessWidget {
                       borderColor: MyColors.blackColor,
                       enabled: true,
                       onPressed: () async {
-                        if (category == Profile.deleteAccount) {
+                        if (widget.category == Profile.deleteAccount) {
                           await context
                               .read<DeleteAccountProvider>()
-                              .deleteAccount(
-                                  context: context, token: Singleton.userToken!)
-                              .whenComplete(() => Navigator.pop(context));
-                        } else if (category == Profile.logout) {
+                              .deleteAccount(context: context, token: Singleton.userToken!);
+                        } else if (widget.category == Profile.logout) {
                           var model = await context
                               .read<RegisterProvider>()
                               .logoutUser(context: context);
@@ -242,16 +250,16 @@ class ProfileDialogue extends StatelessWidget {
                             Navigator.pushNamedAndRemoveUntil(
                                 context, WelcomeScreen.tag, (route) => false);
                           }
-                        } else if ((category != Profile.deleteAccount) &&
-                            (category != Profile.logout) &&
-                            onChange != null) {
+                        } else if ((widget.category != Profile.deleteAccount) &&
+                            (widget.category != Profile.logout) &&
+                            widget.onChange != null) {
                           // if (category == Profile.gender) {
                           //   (selected == 0)
                           //       ? onChange!("Hombre")
                           //       : onChange!("Mujer");
                           // }
                           // else {
-                          switch (category) {
+                          switch (widget.category) {
                             case Profile.name:
                               {
                                 await context
@@ -309,8 +317,7 @@ class ProfileDialogue extends StatelessWidget {
                                     .read<MyDataProvider>()
                                     .updateProfileData(
                                         context: context,
-                                        gender:
-                                            (selected == 0) ? "Male" : "Female",
+                                        gender: (selected == 0) ? "Hombre" : "Mujer",
                                         onSuccess: (val) {
                                           if (val != null) {
                                             Provider.of<LoginProvider>(context,
@@ -324,7 +331,7 @@ class ProfileDialogue extends StatelessWidget {
                             default:
                               {}
                           }
-                          onChange!(controller.text.toString());
+                          widget.onChange!(controller.text.toString());
                         }
                       });
                 }),

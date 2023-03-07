@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fit_tech/logic/login_provider.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
+import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/privacy_policy_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/about/terms_conditions_screen.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
@@ -52,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Singleton.userModel = result;
           context.read<LoginProvider>().loginModel = Singleton.userModel;
           _controller.dispose();
-          Navigator.pushReplacementNamed(context, DashboardScreen.tag);
+          Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag, (route) => false);
         }
       }
     });
@@ -90,8 +91,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: double.infinity,
                       child: PrimaryButton(
                           onPressed: () {
-                            Navigator.pushNamed(
-                                context, CreateAccountScreen.tag);
+                            _controller.dispose();
+                            Navigator.pushNamed(context, RegisterScreen.tag).then((value){
+                              _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
+                              _controller.addListener(() {
+                                setState(() {});
+                              });
+                              _controller.setLooping(true);
+                              _controller.initialize().then((_) => setState(() {}));
+                              _controller.play();
+                            });
                           },
                           title: Constants.createAccount),
                     ),
@@ -102,7 +111,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       width: double.infinity,
                       child: PrimaryButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(context, LoginScreen.tag);
+                          _controller.dispose();
+                          Navigator.pushNamed(context, LoginScreen.tag).then((value){
+                            _controller = VideoPlayerController.asset(Images.welcomeBackgroundVideo);
+                            _controller.addListener(() {
+                              setState(() {});
+                            });
+                            _controller.setLooping(true);
+                            _controller.initialize().then((_) => setState(() {}));
+                            _controller.play();
+                          });
                         },
                         title: Constants.login,
                         backgroundColor: MyColors.blackColor,
