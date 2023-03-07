@@ -23,17 +23,28 @@ class RecipeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  addQuantity(index) {
+    selectedFood[index].quantity = ++selectedFood[index].quantity;
+    notifyListeners();
+  }
+
+  minusQuantity(index) {
+    selectedFood[index].quantity = --selectedFood[index].quantity;
+    notifyListeners();
+  }
+
   sumCalculator() {
     kcal = 0.0;
     p = 0.0;
     c = 0.0;
     g = 0.0;
     for (var item in selectedFood) {
-      kcal += item.calorie;
-      p += item.protien;
-      c += item.carbs;
-      g += item.fat;
+      kcal += (item.calorie * item.quantity);
+      p += (item.protien * item.quantity);
+      c += (item.carbs * item.quantity);
+      g += (item.fat * item.quantity);
     }
+    notifyListeners();
   }
 
   Future<void> getRecipe({required BuildContext context}) async {
@@ -42,7 +53,7 @@ class RecipeProvider extends ChangeNotifier {
       notifyListeners();
       getRecipeListModel = await RecipeRepository.getRecipeList(
           context: context, url: ApiConstants.getRecipeList);
-          print(getRecipeListModel);
+      print(getRecipeListModel);
       isLoading = false;
       notifyListeners();
     } catch (e) {
@@ -75,7 +86,7 @@ class RecipeProvider extends ChangeNotifier {
           context: context, url: ApiConstants.addRecipe, body: body);
       isLoading = false;
       notifyListeners();
-     return response;
+      return response;
     } catch (e) {
       showMessage(
           msg: "check yours internet connection ${e.toString()}",

@@ -124,6 +124,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                                                 CounterWidget(
                                                   counter: food.quantity,                                                    
                                                   showUnit: false,
+                                                  index:index
                                                 )
                                               ],
                                             ),
