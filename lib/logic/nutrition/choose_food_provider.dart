@@ -18,8 +18,8 @@ class ChooseFoodProvider extends ChangeNotifier {
       notifyListeners();  
       getFoodModel = await NutritionRepository.getFoods(
           context: context, url: ApiConstants.getFood);
-      notifyListeners();
       isLoading = false;
+      notifyListeners();
     } catch (e) {
       showMessage(
           msg: "check yours internet connection ${e.toString()}",

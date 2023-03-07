@@ -839,17 +839,22 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
               if (widget.type == MeasurementsType.addNew)
                 Builder(builder: (context) {
                   var provider = context.watch<AddMeasurementsProviders>();
+                  var isValid =
+                      provider.validationChecker(context, isEnable: false);
+
                   return provider.isLoading
-                      ? const Center(child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child:  LoadingButton(),
-                        ),
-                      )
+                      ? const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.0),
+                            child: LoadingButton(),
+                          ),
+                        )
                       : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: PrimaryButton(
                             title: Constants.measurementsScreenLabel3,
                             backgroundColor: MyColors.blackColor,
+                            enabled: isValid == null ? false : isValid,
                             textColor: MyColors.whiteColor,
                             borderColor: MyColors.blackColor,
                             onPressed: () async {

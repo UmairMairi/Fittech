@@ -130,6 +130,7 @@ class _FoodDialogueState extends State<FoodDialogue> {
               
 
               if (!isFind) {
+                // print(widget.food.toJson());
                 provider.addSelectedFood(widget.food);
               }
 

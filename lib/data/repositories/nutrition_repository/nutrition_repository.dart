@@ -12,6 +12,7 @@ class NutritionRepository {
       if (response.statusCode == 200 &&
           jsonDecode(response.body)["success"] == true) {
         var result = ChooseFoodModel.fromJson(jsonDecode(response.body));
+        // print(result.toJson());
         return result;
       } else {
         showMessage(

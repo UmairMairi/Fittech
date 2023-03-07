@@ -82,12 +82,13 @@ class AddMeasurementsProviders extends ChangeNotifier {
   }
 
   setChest({required String val}) {
+    print(val + "=====================================");
     chestTest = val;
     notifyListeners();
   }
 
-  dataExtractor(data){
-    return data.replaceAll(RegExp(r'[^0-9]'),'');
+  dataExtractor(data) {
+    return data.replaceAll(RegExp(r'[^0-9]'), '');
   }
 
   setData() {
@@ -250,17 +251,17 @@ class AddMeasurementsProviders extends ChangeNotifier {
       }
       if (data != null) {
         isLoading = true;
-      notifyListeners();
+        notifyListeners();
         var response = await ApiServices.postMultiPartJson(
             url: ApiConstants.addNutrition,
             body: body,
             filePath: data,
             token: Singleton.userToken);
         print(response.body);
-          isLoading = false;
-      notifyListeners();
+        isLoading = false;
+        notifyListeners();
         return jsonDecode(response.body);
-      }    
+      }
     } catch (e) {
       showMessage(
           msg: "check yours internet connection ${e.toString()}",
@@ -270,52 +271,78 @@ class AddMeasurementsProviders extends ChangeNotifier {
     }
   }
 
-
-  validationChecker(context){
-    bool isValid = false;
-      if(frontImage == null){
+  validationChecker(context, {isEnable = true}) {
+    // bool isValid = false;
+    if (frontImage == null) {
+      if (isEnable) {
         showMessage(context: context, msg: "Please! Enter frontImage");
       }
-    else if(sideImage == null){
-      showMessage(context: context, msg: "Please! Enter sideImage");
-    }
-    else if(backImage == null){
-      showMessage(context: context, msg: "Please! Enter backImage");
-    }
-    else if(imageFile == null){
-      showMessage(context: context, msg: "Please! Enter imageFile");
-    }
-    else if(weightTest == null){
-      showMessage(context: context, msg: "Please! Enter weight");
-    }
-    else if(heightTest == null){
-      showMessage(context: context, msg: "Please! Enter height");
-    }
-    else if(minWaistTest == null){
-      showMessage(context: context, msg: "Please! Enter minWaist");
-    }
-    else if(maxWaistTest == null){
-      showMessage(context: context, msg: "Please! Enter maxWaist");
-    }
-    else if(hipTest == null){
-      showMessage(context: context, msg: "Please! Enter hip");
-    }
-    else if(neckTest == null){
-      showMessage(context: context, msg: "Please! Enter neck");
-    }
-    else if(middleThighTest == null){
-      showMessage(context: context, msg: "Please! Enter middleThigh");
-    }
-    else if(armTest == null){
-      showMessage(context: context, msg: "Please! Enter arm");
-    }
-    else if(chestTest == null){
-      showMessage(context: context, msg: "Please! Enter chest");
-    }else{
-      isValid = true;
+      return false;
+    } else if (sideImage == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter sideImage");
+      }
+      return false;
+    } else if (backImage == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter backImage");
+      }
+      return false;
+    } else if (imageFile == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter imageFile");
+      }
+      return false;
+    } else if (weightTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter weight");
+      }
+      return false;
+    } else if (heightTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter height");
+      }
+      return false;
+    } else if (minWaistTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter minWaist");
+      }
+      return false;
+    } else if (maxWaistTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter maxWaist");
+      }
+      return false;
+    } else if (hipTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter hip");
+      }
+      return false;
+    } else if (neckTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter neck");
+      }
+      return false;
+    } else if (middleThighTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter middleThigh");
+      }
+      return false;
+    } else if (armTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter arm");
+      }
+      return false;
+    } else if (chestTest == null) {
+      if (isEnable) {
+        showMessage(context: context, msg: "Please! Enter chest");
+      }
+    } else {
+      // isValid = true;
+      return true;
     }
 
-    return isValid;
+    // return isValid;
   }
 }
 

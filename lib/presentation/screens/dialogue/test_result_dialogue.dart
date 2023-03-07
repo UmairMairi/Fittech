@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fit_tech/presentation/screens/profile/my_data_screen.dart';
 import 'package:fit_tech/presentation/screens/profile/testResults/measurements_screen.dart';
 import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
@@ -39,11 +41,14 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
     } else {
       unit = "cm";
     }
-    controller.text = widget.initialValue??"";
+    controller.text = widget.initialValue ?? "";
+    selected = widget.selectedUnit;
+    // debugger();
   }
+
+  var selected;
   @override
   Widget build(BuildContext context) {
-    var selected = widget.selectedUnit;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(color: MyColors.whiteColor),
@@ -101,6 +106,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                       title: getName(widget.category),
                       isObscure: false,
                       controller: controller,
+                      onChanged: (val) {
+                        setState(() {});
+                      },
                       validator: (value) {
                         if (value == null || value.isEmpty) {}
                         return null;
@@ -152,8 +160,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                                   selected = 1;
                                   if (widget.onChange != null) {
                                     widget.onChange!("lb");
-                                    unit = "lb";
                                   }
+                                  unit = "lb";
+                                  // debugger();
                                 });
                                 // Navigator.pop(context);
                               },
@@ -219,7 +228,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                             InkWell(
                               onTap: () {
                                 myState(() {
-                                  unit = (widget.category == TestResult.height) ? 'ft' : 'in';
+                                  unit = (widget.category == TestResult.height)
+                                      ? 'ft'
+                                      : 'in';
                                   selected = 1;
 
                                   if (widget.onChange != null) {
@@ -278,6 +289,7 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
               ),
               Expanded(
                 child: PrimaryButton(
+                  enabled: controller.text.isNotEmpty,
                   title: Constants.ProfileDialogueButtonSave,
                   backgroundColor: MyColors.blackColor,
                   textColor: MyColors.whiteColor,

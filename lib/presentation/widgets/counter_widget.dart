@@ -10,6 +10,7 @@ class CounterWidget extends StatefulWidget {
   final bool showUnit;
   final bool isEditable;
   final String unit;
+  final int counter;
   final ValueChanged<int>? onChange;
 
   const CounterWidget(
@@ -19,6 +20,7 @@ class CounterWidget extends StatefulWidget {
       this.isEditable = true,
       this.unit = "gr.",
       this.onChange,
+      this.counter = 1,
       Key? key})
       : super(key: key);
 
@@ -33,6 +35,7 @@ class _CounterWidgetState extends State<CounterWidget> {
   @override
   void initState() {
     super.initState();
+    count = widget.counter;
     textController.text = "$count";
   }
 
@@ -47,7 +50,7 @@ class _CounterWidgetState extends State<CounterWidget> {
           InkWell(
             onTap: () {
               setState(() {
-                if (count > 0) {
+                if (count > 1) {
                   count--;
                   textController.text = "$count";
                   if (widget.onChange != null) {
