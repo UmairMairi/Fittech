@@ -240,7 +240,8 @@ class _ProfileDialogueState extends State<ProfileDialogue> {
                           await context
                               .read<DeleteAccountProvider>()
                               .deleteAccount(context: context, token: Singleton.userToken!);
-                        } else if (widget.category == Profile.logout) {
+                        }
+                        else if (widget.category == Profile.logout) {
                           var model = await context
                               .read<RegisterProvider>()
                               .logoutUser(context: context);
@@ -250,9 +251,8 @@ class _ProfileDialogueState extends State<ProfileDialogue> {
                             Navigator.pushNamedAndRemoveUntil(
                                 context, WelcomeScreen.tag, (route) => false);
                           }
-                        } else if ((widget.category != Profile.deleteAccount) &&
-                            (widget.category != Profile.logout) &&
-                            widget.onChange != null) {
+                        }
+                        else if ((widget.category != Profile.deleteAccount) && (widget.category != Profile.logout) && widget.onChange != null) {
                           // if (category == Profile.gender) {
                           //   (selected == 0)
                           //       ? onChange!("Hombre")
@@ -269,12 +269,10 @@ class _ProfileDialogueState extends State<ProfileDialogue> {
                                         firstName: controller.text.toString(),
                                         onSuccess: (val) {
                                           if (val != null) {
-                                            Provider.of<LoginProvider>(context,
-                                                    listen: false)
-                                                .setLoginModel(model: val);
+                                            Provider.of<LoginProvider>(context, listen: false).setLoginModel(model: val);
+                                            Navigator.pop(context);
                                           }
-                                        })
-                                    .whenComplete(() => Navigator.pop(context));
+                                        });
                                 break;
                               }
                             case Profile.lastName:
@@ -289,9 +287,9 @@ class _ProfileDialogueState extends State<ProfileDialogue> {
                                             Provider.of<LoginProvider>(context,
                                                     listen: false)
                                                 .setLoginModel(model: val);
+                                            Navigator.pop(context);
                                           }
-                                        })
-                                    .whenComplete(() => Navigator.pop(context));
+                                        });
                                 break;
                               }
                             case Profile.email:
@@ -306,9 +304,9 @@ class _ProfileDialogueState extends State<ProfileDialogue> {
                                             Provider.of<LoginProvider>(context,
                                                     listen: false)
                                                 .setLoginModel(model: val);
+                                            Navigator.pop(context);
                                           }
-                                        })
-                                    .whenComplete(() => Navigator.pop(context));
+                                        });
                                 break;
                               }
                             case Profile.gender:
@@ -323,9 +321,9 @@ class _ProfileDialogueState extends State<ProfileDialogue> {
                                             Provider.of<LoginProvider>(context,
                                                     listen: false)
                                                 .setLoginModel(model: val);
-                                          }
-                                        })
-                                    .whenComplete(() => Navigator.pop(context));
+                                            Navigator.pop(context);
+                                           }
+                                        });
                                 break;
                               }
                             default:

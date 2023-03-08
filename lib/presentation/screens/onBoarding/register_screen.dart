@@ -15,27 +15,41 @@ import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({super.key});
 
   static const String tag = "register_screen";
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController fNameController =
       TextEditingController(text: Singleton.isDev ? "Angel" : "");
+
   final TextEditingController lNameController =
       TextEditingController(text: Singleton.isDev ? "Valverde" : "");
+
   final TextEditingController emailController = TextEditingController(
       text: Singleton.isDev ? "angelvalverde@gmail.com" : "");
+
   final TextEditingController passwordController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
+
   final TextEditingController confirmPasswordController =
       TextEditingController(text: Singleton.isDev ? "123456" : "");
 
   final _formKey = GlobalKey<FormState>();
+
   final _confirmFieldKey = GlobalKey<FormState>();
+
   bool cbState1 = false;
+
   bool cbState2 = false;
+
   bool cbState3 = false;
+
   bool isEnabled = false;
 
   @override
@@ -112,7 +126,9 @@ class RegisterScreen extends StatelessWidget {
                               .setFirstName(val = val);
                         },
                         validator: (value) {
-                          if (value == null || value.isEmpty) {}
+                          if (value == null || value.isEmpty) {
+                            return "Entre com um nombre válido";
+                          }
                           return null;
                         },
                         keyboardType: TextInputType.name),
@@ -130,7 +146,9 @@ class RegisterScreen extends StatelessWidget {
                               .setLastName(val = val);
                         },
                         validator: (value) {
-                          if (value == null || value.isEmpty) {}
+                          if (value == null || value.isEmpty) {
+                            return "Entre com um appellido válido";
+                          }
                           return null;
                         },
                         keyboardType: TextInputType.name),
@@ -281,10 +299,9 @@ class RegisterScreen extends StatelessWidget {
                           title: Constants.continueLabel,
                           textColor: MyColors.whiteColor,
                           backgroundColor: MyColors.blackColor,
-                          enabled: isEnabled,
+                          // enabled: isEnabled,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() &&
-                                isEnabled) {
+                            if (_formKey.currentState!.validate()) {
                               if (cbState1 && cbState2 && cbState3) {
                                 await bloc.createAccount(
                                   context: context,
@@ -292,7 +309,7 @@ class RegisterScreen extends StatelessWidget {
                               } else {
                                 showMessage(
                                     context: context,
-                                    msg: "Please select the conditions first");
+                                    msg: "Por favor seleccione las condiciones primero.");
                               }
                             }
                           },
