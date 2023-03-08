@@ -6,6 +6,7 @@ import 'package:fit_tech/presentation/widgets/btn_loading.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
+import 'package:fit_tech/utils/extentions/string_extensions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +111,10 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                                 value.length < 6) {
                               return "la longitud de la contraseña no debe ser inferior a 6 caracteres";
                             }
+                            else if (!value.containsLetters) {
+                              return "La contraseña debe tener al menos un carácter";
+                            }
+
                             return null;
                           },
                           keyboardType: TextInputType.name),

@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 extension StringExtension on String {
   // String capitalize() {
   //   return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   // }
+
+  openAsLink() async {
+    if (await canLaunchUrl(Uri.parse(this))) {
+      await launchUrl(
+          Uri.parse(this
+          ),
+          mode: LaunchMode.platformDefault
+      );
+    } else {
+      throw 'There was a problem to open the url: $this';
+    }
+  }
 
   bool isEmail() {
     String p =
@@ -27,6 +40,8 @@ extension StringExtension on String {
   bool get containsUppercase => contains(RegExp(r'[A-Z]'));
 
   bool get containsLowercase => contains(RegExp(r'[a-z]'));
+
+  bool get containsLetters => contains(RegExp('[A-Za-z]'));
 
   bool get containsNumber => contains(RegExp(r'[0-9]'));
 }

@@ -4,7 +4,7 @@ import 'package:fit_tech/presentation/screens/profile/testResults/test_result_sc
 import 'package:fit_tech/utils/assets_paths.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/constants.dart';
-import 'package:fit_tech/utils/extentions/string_extentions.dart';
+import 'package:fit_tech/utils/extentions/string_extensions.dart';
 import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:fit_tech/utils/colors.dart';
 import 'package:fit_tech/utils/my_styles.dart';
-import 'package:fit_tech/utils/string_extensions.dart';
+import 'package:fit_tech/utils/extentions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class MyUtils {

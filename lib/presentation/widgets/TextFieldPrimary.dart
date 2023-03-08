@@ -97,6 +97,7 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
                   fontSize: 15,
                   fontFamily: 'Open Sance',
                   color: MyColors.redColor),
+              errorMaxLines: 2,
               constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
               contentPadding: EdgeInsets.zero,
               fillColor: MyColors.whiteColor,
