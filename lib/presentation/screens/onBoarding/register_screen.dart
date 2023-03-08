@@ -301,7 +301,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           backgroundColor: MyColors.blackColor,
                           // enabled: isEnabled,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate() && _confirmFieldKey.currentState!.validate()) {
                               if (cbState1 && cbState2 && cbState3) {
                                 await bloc.createAccount(
                                   context: context,
