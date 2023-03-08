@@ -53,7 +53,7 @@ class HeartStatusScreen extends StatelessWidget {
         decoration: const BoxDecoration(
             color: MyColors.redColor, shape: BoxShape.circle),
         child: Image.asset(
-          Images.heartStatusScreenHeartIcon,
+         isNutritionTest ? Images.showLevelScreenHeartIcon : Images.heartStatusScreenHeartIcon,
           height: 50,
         ),
       ),

@@ -82,13 +82,12 @@ class AddMeasurementsProviders extends ChangeNotifier {
   }
 
   setChest({required String val}) {
-    print(val + "=====================================");
     chestTest = val;
     notifyListeners();
   }
 
   dataExtractor(data) {
-    return data.replaceAll(RegExp(r'[^0-9]'), '');
+    return data == null ? "" : data.replaceAll(RegExp(r'[^0-9]'), '');
   }
 
   setData() {
@@ -337,6 +336,7 @@ class AddMeasurementsProviders extends ChangeNotifier {
       if (isEnable) {
         showMessage(context: context, msg: "Please! Enter chest");
       }
+      return false;
     } else {
       // isValid = true;
       return true;

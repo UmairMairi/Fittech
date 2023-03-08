@@ -84,7 +84,7 @@ class _RecipeListScreenState extends State<RecipeListScreen>
               child: Builder(builder: (context) {
                 var provider = context.watch<RecipeProvider>();
                 if (provider.isLoading || provider.getRecipeListModel == null) {
-                  return ShimmerRecipeList(size: size,);
+                  return ShimmerRecipeList(size: size);
                 }
                 return provider.getRecipeListModel!.data!.isEmpty
                     ? const Center(

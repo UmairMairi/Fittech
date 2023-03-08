@@ -119,7 +119,7 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                             if (bloc.isLoading && bloc.getFoodModel == null) {
                               return const ShimmerChoiceChips();
                             }
-                            return  Wrap(
+                            return bloc.getFoodModel == null ? Container()  : Wrap(
                                 children:
                                      bloc.getFoodModel!.data.map((Datum item) {
                               var selected = false;
@@ -133,7 +133,9 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                                 selected: selected,
                                 currentValue: (value) {
                                   if (value) {
-                                    GlobalState.nutritionTest!.foodDontLike = item.id;
+                                    setState(() {
+                                    GlobalState.nutritionTest!.foodDontLike = item.id;                                      
+                                    });
                                   }
                                 },
                               );
@@ -145,6 +147,7 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                         height: 50,
                       ),
                       PrimaryButton(
+                        enabled: GlobalState.nutritionTest!.foodDontLike == null ? false : true,
                         title: Constants.chooseTrainingModeContinueLabel,
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,

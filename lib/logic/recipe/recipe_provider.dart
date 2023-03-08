@@ -43,8 +43,7 @@ class RecipeProvider extends ChangeNotifier {
       p += (item.protien * item.quantity);
       c += (item.carbs * item.quantity);
       g += (item.fat * item.quantity);
-    }
-    notifyListeners();
+    }  
   }
 
   Future<void> getRecipe({required BuildContext context}) async {
@@ -72,7 +71,7 @@ class RecipeProvider extends ChangeNotifier {
   }) async {
     List foodRecipe = [];
     for (var item in selectedFood) {
-      foodRecipe.add({"food": item.id, "quantity": 1});
+      foodRecipe.add({"food": item.id, "quantity": item.quantity});
     }
     try {
       isLoading = true;
@@ -82,6 +81,7 @@ class RecipeProvider extends ChangeNotifier {
         "recipie_type": "Brakefast",
         "food_recipie": foodRecipe
       };
+      print(body);
       var response = await RecipeRepository.addRecipe(
           context: context, url: ApiConstants.addRecipe, body: body);
       isLoading = false;

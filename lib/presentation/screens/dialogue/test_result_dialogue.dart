@@ -36,13 +36,26 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
   @override
   void initState() {
     super.initState();
-    if (widget.category == TestResult.weight) {
-      unit = "kg";
-    } else {
-      unit = "cm";
-    }
     controller.text = widget.initialValue ?? "";
     selected = widget.selectedUnit;
+    print(selected);
+    if (widget.category == TestResult.weight ) {
+      if(selected == 0){
+      unit = "kg";
+      }else{
+      unit = "lb";
+      }
+    } else {
+       if(selected == 0){
+      unit = "cm";
+      }else{
+      unit = "in";
+      if(widget.category == TestResult.height){
+      unit = "ft";
+      }
+      }
+      // unit = "cm";
+    }
     // debugger();
   }
 
@@ -126,9 +139,9 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                               onTap: () {
                                 myState(() {
                                   selected = 0;
+                                    unit = "kg";
                                   if (widget.onChange != null) {
-                                    widget.onChange!("Kg");
-                                    unit = "Kg";
+                                    widget.onChange!("kg");
                                   }
                                 });
                                 // Navigator.pop(context);
@@ -158,10 +171,10 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                               onTap: () {
                                 myState(() {
                                   selected = 1;
+                                  unit = "lb";
                                   if (widget.onChange != null) {
                                     widget.onChange!("lb");
                                   }
-                                  unit = "lb";
                                   // debugger();
                                 });
                                 // Navigator.pop(context);
@@ -295,10 +308,12 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                   textColor: MyColors.whiteColor,
                   borderColor: MyColors.blackColor,
                   onPressed: () {
+                    print(unit);
                     if (widget.onSetValue != null) {
                       widget.onSetValue!("${controller.text}$unit");
                       Navigator.pop(context);
                     }
+                    // debugger();
                   },
                 ),
               ),

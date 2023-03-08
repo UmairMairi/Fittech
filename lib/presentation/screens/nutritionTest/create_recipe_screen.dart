@@ -79,6 +79,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                             return ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: provider.selectedFood.length,
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   var food = provider.selectedFood[index];
                                   return provider.selectedFood.isEmpty
