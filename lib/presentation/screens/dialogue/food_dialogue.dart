@@ -97,8 +97,8 @@ class _FoodDialogueState extends State<FoodDialogue> {
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          Constants.label2ValueFoodDialogue,
+                         Text(
+                          widget.food.portion ?? "",
                           style: MyTextStyle.paragraph1,
                         ),
                       ],
@@ -123,14 +123,13 @@ class _FoodDialogueState extends State<FoodDialogue> {
                 for (var data in provider.selectedFood) {
                   if (data.name == widget.food.name) {
                     isFind = true;
-                  //  showMessage(context: context, msg: "Already Added");
+                    // ++data.quantity;
                     break;
                   }
                 }
               
 
               if (!isFind) {
-                // print(widget.food.toJson());
                 provider.addSelectedFood(widget.food);
               }
 

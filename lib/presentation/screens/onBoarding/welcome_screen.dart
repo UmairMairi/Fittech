@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fit_tech/logic/login_provider.dart';
+import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/create_account_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/login_screen.dart';
 import 'package:fit_tech/presentation/screens/onBoarding/register_screen.dart';
@@ -19,6 +20,7 @@ import '../../../data/models/on_boarding_model/login_model.dart';
 import '../../../utils/pref_utils.dart';
 import '../../../utils/singlton.dart';
 import '../dashboard/dashboard_screen.dart';
+import '../nutritionTest/recipe_list_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String tag = "welcome_screen";
@@ -54,6 +56,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           context.read<LoginProvider>().loginModel = Singleton.userModel;
           _controller.dispose();
           Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.tag, (route) => false);
+          // Navigator.pushNamedAndRemoveUntil(context, RecipeListScreen.tag, (route) => false);
         }
       }
     });

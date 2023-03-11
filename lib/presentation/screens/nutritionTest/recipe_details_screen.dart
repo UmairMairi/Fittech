@@ -1,6 +1,5 @@
 import 'package:fit_tech/data/models/nutritions_list_model.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/create_recipe_screen.dart';
-import 'package:fit_tech/presentation/widgets/TextFieldPrimary.dart';
 import 'package:fit_tech/presentation/widgets/btn_primary.dart';
 import 'package:fit_tech/presentation/widgets/my_app_bar.dart';
 import 'package:fit_tech/utils/colors.dart';
@@ -9,17 +8,20 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:fit_tech/utils/singlton.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/models/recipe/recipe_list_model.dart';
+
 class RecipeDetailsScreen extends StatefulWidget {
-  const RecipeDetailsScreen({super.key});
+  const RecipeDetailsScreen({super.key,this.foodRecipe});
 
   static const String tag = "recipe_details_screen";
+  final Data? foodRecipe;
 
   @override
   State<RecipeDetailsScreen> createState() => _MyNutritionDetailsScreenState();
 }
 
 class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
-  List<NutritionListModel> list = [];
+  
   final TextEditingController emailController =
       TextEditingController(text: Singleton.isDev ? "Desayuno ligero" : "");
 
@@ -42,21 +44,7 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextFieldPrimary(
-                isLabelRequired: true,
-                title: Constants.inputTitleRecipeDetailsScreen,
-                isObscure: false,
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (val) {},
-                validator: (val) {
-                  if (val == null && val!.isEmpty) {
-                    return "El correo ingresado no está registrado";
-                  } else {
-                    return null;
-                  }
-                },
-              ),
+              child: Text("${widget.foodRecipe!.name}",style: MyTextStyle.inputTitle,),
             ),
             const SizedBox(
               height: 20,
@@ -99,19 +87,20 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                 Expanded(
                   child: ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: 5,
+                      itemCount: widget.foodRecipe!.foodRecipie!.length,
                       itemBuilder: (context, index) {
+                        FoodRecipie foodItem =  widget.foodRecipe!.foodRecipie![index];
                         return Column(
                           children: [
                             Row(
                               children: [
-                                const Text(
-                                  "Manana",
+                                 Text(
+                                  "${foodItem.food!.name}",
                                   style: MyTextStyle.text1,
                                 ),
                                 Expanded(child: Container()),
-                                const Text(
-                                  "300gr",
+                                 Text(
+                                  "${foodItem.quantity}",
                                   style: MyTextStyle.text1,
                                 ),
                               ],
@@ -148,21 +137,21 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children:  [
                       Expanded(
-                        child: Text("245 kcal", style: MyTextStyle.text1),
+                        child: Text("${widget.foodRecipe!.totalCalorie} kcal", style: MyTextStyle.text1),
                       ),
                       Expanded(
                         child: Text(
-                          "P. 102g",
+                          "P. ${widget.foodRecipe!.totalProtien}g",
                           style: MyTextStyle.text1,
                         ),
                       ),
                       Expanded(
-                        child: Text("C. 27g", style: MyTextStyle.text1),
+                        child: Text("C. ${widget.foodRecipe!.totalCarbs}g", style: MyTextStyle.text1),
                       ),
                       Expanded(
-                        child: Text("G. 21g", style: MyTextStyle.text1),
+                        child: Text("G. ${widget.foodRecipe!.totalFats}g", style: MyTextStyle.text1),
                       ),
                     ],
                   ),
@@ -176,7 +165,7 @@ class _MyNutritionDetailsScreenState extends State<RecipeDetailsScreen> {
                       textColor: MyColors.blackColor,
                       backgroundColor: MyColors.whiteColor,
                       onPressed: () {
-                        Navigator.pushNamed(context, CreateRecipeScreen.tag);
+                        Navigator.pushNamed(context, CreateRecipeScreen.tag,arguments: widget.foodRecipe );
                       },
                     ),
                   ),

@@ -126,7 +126,7 @@ class _RecipeListScreenState extends State<RecipeListScreen>
                                         InkWell(
                                           onTap: () {
                                             Navigator.pushNamed(context,
-                                                RecipeDetailsScreen.tag);
+                                                RecipeDetailsScreen.tag,arguments: data );
                                           },
                                           child: Text(
                                             "Ver receta",

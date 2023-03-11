@@ -28,5 +28,6 @@ class ApiConstants {
 
   static const String getRecipeList="$baseUrl/recipie/get-user-all-recipie";
   static const String addRecipe="$baseUrl/recipie/add-recipie";
+  static const String editRecipe="$baseUrl/recipie/edit-recipie";
 
 }

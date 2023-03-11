@@ -43,9 +43,10 @@ class _MyChipsListState extends State<MyChipsList> {
         ),
         selected: isSelected,
         padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 10.0),
-        onSelected: (bool) {
+        onSelected: (bool bool) {
           setState(() {
             isSelected = bool;
+            print(bool);
             widget.currentValue(bool);
           });
         },

@@ -87,7 +87,7 @@ class AddMeasurementsProviders extends ChangeNotifier {
   }
 
   dataExtractor(data) {
-    return data == null ? "" : data.replaceAll(RegExp(r'[^0-9]'), '');
+    return data == null ? "" : data.replaceAll(RegExp(r'[^0-9.]'), '');
   }
 
   setData() {

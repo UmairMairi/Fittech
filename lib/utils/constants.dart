@@ -742,6 +742,8 @@ class Constants {
   static const String heading1Value2CreateRecipeScreen = "Cantidad (g./ml.)";
   static const String heading2CreateRecipeScreen = "Manzana";
 
+    //EditRecipeScreen
+  static const String titleEditRecipeScreen = "Editar receta";
 
   //FoodListScreen
   static const String titleFoodListScreen = "Buscar alimento";

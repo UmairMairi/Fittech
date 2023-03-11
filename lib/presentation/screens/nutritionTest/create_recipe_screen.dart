@@ -1,3 +1,4 @@
+import 'package:fit_tech/data/models/choose_food_model.dart';
 import 'package:fit_tech/logic/recipe/recipe_provider.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/food_list_screen.dart';
 import 'package:fit_tech/presentation/screens/nutritionTest/recipe_list_screen.dart';
@@ -13,10 +14,13 @@ import 'package:fit_tech/utils/my_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../data/models/recipe/recipe_list_model.dart';
+
 class CreateRecipeScreen extends StatefulWidget {
-  const CreateRecipeScreen({super.key});
+  const CreateRecipeScreen({super.key,this.isEditData});
 
   static const String tag = "create_recipe_screen";
+  final Data? isEditData;
 
   @override
   State<CreateRecipeScreen> createState() => _CreateRecipeScreenState();
@@ -29,6 +33,23 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
   @override
   void initState() {
     super.initState();
+    if(widget.isEditData != null){
+      inputController.text = widget.isEditData!.name!;
+      var provider = context.read<RecipeProvider>();
+      for (var item in widget.isEditData!.foodRecipie!) {
+       var data = Datum.fromJson({
+        "id": item.food!.id,
+        "name": item.food!.name,
+        "protien": item.food!.protien,
+        "carbs": item.food!.carbs,
+        "calorie": item.food!.calorie,
+        "fat": item.food!.fat,              
+        "quantity":item.quantity
+    });
+      provider.selectedFood.add(data);
+      print(provider.selectedFood);
+      }
+    }
   }
 
   @override
@@ -37,8 +58,8 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
       child: Scaffold(
           body: Column(
         children: [
-          const MyAppBar(
-            title: Constants.titleCreateRecipeScreen,
+           MyAppBar(
+            title: widget.isEditData != null ? Constants.titleEditRecipeScreen : Constants.titleCreateRecipeScreen,
           ),
           Expanded(
             child: Container(
@@ -209,7 +230,7 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                           width: double.infinity,
                           child: PrimaryButton(
                             enabled: inputController.text.isNotEmpty,
-                            title: Constants.createAccountTitle,
+                            title: widget.isEditData != null ? Constants.titleEditRecipeScreen : Constants.titleCreateRecipeScreen,
                             textColor: MyColors.whiteColor,
                             backgroundColor: MyColors.redColor,
                             borderColor: MyColors.redColor,
@@ -220,9 +241,21 @@ class _CreateRecipeScreenState extends State<CreateRecipeScreen> {
                                     context: context,
                                     msg: "Please! Enter Recipe Name");
                               } else {
-                                var response = await bloc.addRecipe(
+                                var response;
+                                if(widget.isEditData != null){
+
+                                 response = await bloc.editRecipe(
+                                    context: context,
+                                    name: inputController.text,
+                                    id: 48
+                                    // id: widget.isEditData!.foodRecipie!.isNotEmpty ? widget.isEditData!.foodRecipie![0].id : 0
+                                    );
+                                }else{
+
+                                 response = await bloc.addRecipe(
                                     context: context,
                                     name: inputController.text);
+                                }
                                 if (response != null && response['success']) {
                                   bloc.selectedFood.clear();
                                   showMessage(

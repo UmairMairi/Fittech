@@ -386,7 +386,7 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         ),
                       ),
                       onTap: () {         
-                        print(provider.weightTest! + unitSelector(provider.weightTest).toString()+"arham");             
+                        print(provider.weightTest);
                         showDialogue(
                             context: context,
                             category: TestResult.weight,
@@ -970,6 +970,8 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
     } else {
       return 0;
     }
+    }else{
+      return 0;
     }
    
   }

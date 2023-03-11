@@ -38,7 +38,6 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
     super.initState();
     controller.text = widget.initialValue ?? "";
     selected = widget.selectedUnit;
-    print(selected);
     if (widget.category == TestResult.weight ) {
       if(selected == 0){
       unit = "kg";
@@ -54,9 +53,7 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
       unit = "ft";
       }
       }
-      // unit = "cm";
     }
-    // debugger();
   }
 
   var selected;
@@ -308,12 +305,10 @@ class _TestResultsDialogueState extends State<TestResultsDialogue> {
                   textColor: MyColors.whiteColor,
                   borderColor: MyColors.blackColor,
                   onPressed: () {
-                    print(unit);
                     if (widget.onSetValue != null) {
                       widget.onSetValue!("${controller.text}$unit");
                       Navigator.pop(context);
                     }
-                    // debugger();
                   },
                 ),
               ),

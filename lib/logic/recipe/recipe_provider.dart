@@ -79,11 +79,45 @@ class RecipeProvider extends ChangeNotifier {
       var body = {
         "name": "$name",
         "recipie_type": "Brakefast",
-        "food_recipie": foodRecipe
+        "food_recipie": foodRecipe,
       };
       print(body);
       var response = await RecipeRepository.addRecipe(
           context: context, url: ApiConstants.addRecipe, body: body);
+      isLoading = false;
+      notifyListeners();
+      return response;
+    } catch (e) {
+      showMessage(
+          msg: "check yours internet connection ${e.toString()}",
+          context: context);
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+
+  Future editRecipe({
+    required BuildContext context,
+    name,
+    id
+  }) async {
+    List foodRecipe = [];
+    for (var item in selectedFood) {
+      foodRecipe.add({"food": item.id, "quantity": item.quantity});
+    }
+    try {
+      isLoading = true;
+      notifyListeners();
+      var body = {
+        "name": "$name",
+        "recipie_type": "Brakefast",
+        "food_recipie": foodRecipe,
+        "recipie_id":id
+      };
+      print(body);
+      var response = await RecipeRepository.editRecipe(
+          context: context, url: ApiConstants.editRecipe, body: body);
       isLoading = false;
       notifyListeners();
       return response;

@@ -41,4 +41,21 @@ class RecipeRepository {
     }
     return null;
   }
+
+  static Future editRecipe(
+      {required BuildContext context, required String url,required body}) async {
+    var response = await ApiServices.postJson(url: url,body: body,token: Singleton.userToken);
+    try {
+      if (response.statusCode == 200 &&
+          jsonDecode(response.body)["success"] == true) {
+        return jsonDecode(response.body);
+      } else {
+        showMessage(
+            msg: "${jsonDecode(response.body)["message"]}", context: context);
+      }
+    } catch (e) {
+      showMessage(msg: "Error", context: context);
+    }
+    return null;
+  }
 }

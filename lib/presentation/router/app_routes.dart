@@ -1,4 +1,5 @@
 import 'package:fit_tech/data/models/faqData/FaqCategories.dart';
+import 'package:fit_tech/data/models/recipe/recipe_list_model.dart';
 import 'package:fit_tech/logic/add_measurements_provider.dart';
 import 'package:fit_tech/presentation/screens/break_between_series_screen.dart';
 import 'package:fit_tech/presentation/screens/cardio_equipments_screen.dart';
@@ -385,9 +386,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const RecipeListScreen());
       case CreateRecipeScreen.tag:
+      var isEditData = routeSettings.arguments as Data;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const CreateRecipeScreen());
+                 CreateRecipeScreen(isEditData: isEditData));
       case FoodListScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
@@ -401,9 +403,10 @@ class AppRoute {
             page: (context, animation, secondaryAnimation) =>
                 const SelectRecipeScreen());
       case RecipeDetailsScreen.tag:
+       var data = routeSettings.arguments as Data;
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>
-                const RecipeDetailsScreen());
+                 RecipeDetailsScreen(foodRecipe: data));
       case BodyMassScreen.tag:
         return SlideRightRoute(
             page: (context, animation, secondaryAnimation) =>

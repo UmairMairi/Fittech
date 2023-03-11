@@ -38,6 +38,7 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
 
   getFoods() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      GlobalState.nutritionTest!.foodDontLike.clear();
       var read = context.read<ChooseFoodProvider>();
       read.getFood(context: context);
     });
@@ -61,6 +62,7 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                       size: 24.0,
                     ),
                     onPressed: () {
+                      GlobalState.nutritionTest!.foodDontLike.clear();
                       Navigator.pop(context);
                     },
                   ),
@@ -99,7 +101,7 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [            
+                    children: [
                       const SizedBox(
                         height: 20.0,
                       ),
@@ -119,27 +121,40 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                             if (bloc.isLoading && bloc.getFoodModel == null) {
                               return const ShimmerChoiceChips();
                             }
-                            return bloc.getFoodModel == null ? Container()  : Wrap(
-                                children:
-                                     bloc.getFoodModel!.data.map((Datum item) {
-                              var selected = false;
-                              if (selectedIndex == index) {
-                                selected = true;
-                              } else {
-                                selected = false;
-                              }                         
-                              return MyChipsList(
-                                item: item.name,
-                                selected: selected,
-                                currentValue: (value) {
-                                  if (value) {
-                                    setState(() {
-                                    GlobalState.nutritionTest!.foodDontLike = item.id;                                      
-                                    });
-                                  }
-                                },
-                              );
-                            }).toList());
+                            return bloc.getFoodModel == null
+                                ? Container()
+                                : Wrap(
+                                    children: bloc.getFoodModel!.data
+                                        .map((Datum item) {
+                                    var selected = false;
+
+                                    // if (selected &&
+                                    //     !GlobalState.nutritionTest!.foodDontLike
+                                    //         .contains(item.id)) {
+                                    // } else {
+                                    // }
+
+                                    return itemFilter(item.type)
+                                        ? Container()
+                                        : MyChipsList(
+                                            item: item.name,
+                                            selected: selected,
+                                            currentValue: (value) {                                              
+                                                setState(() {
+                                                  if (!GlobalState.nutritionTest!.foodDontLike.contains(item.id)) {
+                                                    GlobalState.nutritionTest!
+                                                        .foodDontLike
+                                                        .add(item.id);
+                                                  } else {
+                                                    GlobalState.nutritionTest!
+                                                        .foodDontLike
+                                                        .remove(item.id);
+                                                  }
+                                                });
+                                              
+                                            },
+                                          );
+                                  }).toList());
                           }),
                         ],
                       ),
@@ -147,7 +162,6 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
                         height: 50,
                       ),
                       PrimaryButton(
-                        enabled: GlobalState.nutritionTest!.foodDontLike == null ? false : true,
                         title: Constants.chooseTrainingModeContinueLabel,
                         backgroundColor: MyColors.blackColor,
                         textColor: MyColors.whiteColor,
@@ -167,5 +181,14 @@ class _ChooseFoodScreenState extends State<ChooseFoodScreen> {
         ),
       ),
     );
+  }
+
+  itemFilter(item) {
+    var itemType = GlobalState.nutritionTest!.nutritionLine!.toLowerCase();
+    if (itemType == "como de todo") {
+      return false;
+    } else {
+      return item != itemType;
+    }
   }
 }
